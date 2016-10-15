@@ -20,7 +20,7 @@ class HelperFunctions {
         
         textField.resignFirstResponder()
         textField.text = ""
-        PostButtonsView.hidden = true
+        PostButtonsView.isHidden = true
         ButtonViewHeight.constant = 0
         TopViewHeight.constant = 65
         
@@ -30,9 +30,9 @@ class HelperFunctions {
     
     func returnCurrentDateinString() -> String {
         let currentDate = NSDate()
-        let dateformatter = NSDateFormatter()
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let currentDateToString = dateformatter.stringFromDate(currentDate)
+        let currentDateToString = dateformatter.string(from: currentDate as Date)
         return currentDateToString
     }
     
@@ -41,41 +41,43 @@ class HelperFunctions {
         
         
         let currDate = NSDate()
-        let dateformatter = NSDateFormatter()
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let formattedCurrentDate =  dateformatter.stringFromDate(currDate)
-        let firstDate = dateformatter.dateFromString(postDate)
-        let secondDate = dateformatter.dateFromString(formattedCurrentDate)
-        return compareDates(firstDate!, curDate: secondDate!)
+        let formattedCurrentDate =  dateformatter.string(from: currDate as Date)
+        let firstDate = dateformatter.date(from: postDate)
+        let secondDate = dateformatter.date(from: formattedCurrentDate)
+        return compareDates(pDate: firstDate! as NSDate, curDate: secondDate! as NSDate)
         
         
     }
     
     func compareDates (pDate:NSDate , curDate:NSDate) ->String {
         var dateString:String?
-        let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: pDate, toDate: curDate, options: NSCalendarOptions.init(rawValue: 0))
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = DateFormatter.Style.medium
+        let calendar = NSCalendar.current
+        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour, .minute, .second])
+        let diffDateComponents = calendar.dateComponents(unitFlags, from: pDate as Date,  to: curDate as Date)
         
         if(diffDateComponents.year != 0){
-            dateString = dateformatter.stringFromDate(pDate)
+            dateString = dateformatter.string(from: pDate as Date)
         }
         else if (diffDateComponents.month != 0){
-            dateString = dateformatter.stringFromDate(pDate)
+            dateString = dateformatter.string(from: pDate as Date)
         }
             
         else if (diffDateComponents.day != 0){
-            dateString = String(diffDateComponents.day) + " days ago"
+            dateString = String(describing: diffDateComponents.day!) + " days ago"
         }
             
         else if(diffDateComponents.hour != 0 ){
-            dateString = String(diffDateComponents.hour) + " hrs ago"
+            dateString = String(describing: diffDateComponents.hour!) + " hrs ago"
         }
         else if(diffDateComponents.minute != 0){
-            dateString = String(diffDateComponents.minute) + " mins ago"
+            dateString = String(describing: diffDateComponents.minute!) + " mins ago"
         }
         else if(diffDateComponents.second != 0){
-            dateString = String(diffDateComponents.second) + " s ago"
+            dateString = String(describing: diffDateComponents.second!) + " s ago"
         }
         else {
             dateString = "now"
@@ -88,9 +90,9 @@ class HelperFunctions {
         
         guard (Reaction == newReaction ) else {
             var reactionsInUser = [String: AnyObject]()
-            reactionsInUser["userReaction"] = newReaction
+            reactionsInUser["userReaction"] = newReaction as AnyObject?
             let postRef =  self.ref.child("Posts").child(postId)
-            postRef.observeSingleEventOfType(FIRDataEventType.Value , withBlock:{ (snapshot) in
+            postRef.observeSingleEvent(of: FIRDataEventType.value , with:{ (snapshot) in
                 let pData = snapshot.value as![String: AnyObject]
                 let reactions = pData["reactionsData"]as![String: AnyObject]
                 
@@ -186,7 +188,7 @@ class HelperFunctions {
         let uRef = ref.child("Users").child(uid)
         let pRef = ref.child("Posts").child(postId)
         
-        uRef.child("Flag").child(postId).observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        uRef.child("Flag").child(postId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             
             if(snapshot.exists()){
                 let flagVal =  snapshot.value as! [String:Int]
@@ -194,7 +196,7 @@ class HelperFunctions {
                 if(fCount == 1 ){
                     flagsInUser["userFlag"] = 0
                     uRef.child("Flag").child(postId).setValue(flagsInUser)
-                    pRef.child("flags").observeSingleEventOfType(FIRDataEventType.Value, withBlock:  { (snapshot) in
+                    pRef.child("flags").observeSingleEvent(of: FIRDataEventType.value, with:  { (snapshot) in
                         let flags = snapshot.value as! [String: Int]
                         var flagCount: Int = flags["flagCount"]!
                         flagCount -= 1
@@ -204,7 +206,7 @@ class HelperFunctions {
                 else if(fCount == 0 ){
                     flagsInUser["userFlag"] = 1
                     uRef.child("Flag").child(postId).setValue(flagsInUser)
-                    pRef.child("flags").observeSingleEventOfType(FIRDataEventType.Value, withBlock:  { (snapshot) in
+                    pRef.child("flags").observeSingleEvent(of: FIRDataEventType.value, with:  { (snapshot) in
                         let flags = snapshot.value as! [String: Int]
                         var flagCount: Int = flags["flagCount"]!
                         flagCount += 1
@@ -217,7 +219,7 @@ class HelperFunctions {
             else {
                 flagsInUser["userFlag"] = 1
                 uRef.child("Flag").child(postId).setValue(flagsInUser)
-                pRef.child("flags").observeSingleEventOfType(FIRDataEventType.Value, withBlock:  { (snapshot) in
+                pRef.child("flags").observeSingleEvent(of: FIRDataEventType.value, with:  { (snapshot) in
                     let flags = snapshot.value as! [String: Int]
                     var flagCount: Int = flags["flagCount"]!
                     flagCount += 1

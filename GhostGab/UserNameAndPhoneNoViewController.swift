@@ -14,7 +14,7 @@ import FirebaseDatabase
 import SinchVerification
 import FBSDKCoreKit
 import FBSDKLoginKit
-import SCLAlertView
+//import SCLAlertView
 
 
 class UserNameAndPhoneNoViewController: UIViewController {
@@ -30,16 +30,16 @@ class UserNameAndPhoneNoViewController: UIViewController {
         super.viewDidLoad()
         
         let greenColorGreen = Color.green
-        userName.layer.borderColor = greenColorGreen.getColor().CGColor
+        userName.layer.borderColor = greenColorGreen.getColor().cgColor
         userName.layer.borderWidth = 1
-        phoneNumber.layer.borderColor = greenColorGreen.getColor().CGColor
+        phoneNumber.layer.borderColor = greenColorGreen.getColor().cgColor
         phoneNumber.layer.borderWidth = 1
-        phoneNumber.addTarget(self, action: #selector(UserNameAndPhoneNoViewController.formatPhoneNumber(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        phoneNumber.addTarget(self, action: #selector(UserNameAndPhoneNoViewController.formatPhoneNumber(sender:)), for: UIControlEvents.editingChanged)
         
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
        
 
     }
@@ -53,91 +53,91 @@ class UserNameAndPhoneNoViewController: UIViewController {
     func formatPhoneNumber(sender:UITextField!) {
         
         var phNum = self.phoneNumber.text
-        phNum = phNum!.stringByReplacingOccurrencesOfString("(", withString: "")
-            .stringByReplacingOccurrencesOfString(")", withString: "")
-            .stringByReplacingOccurrencesOfString("-", withString: "")
-            .stringByReplacingOccurrencesOfString(" ", withString: "")
+        phNum = phNum!.replacingOccurrences(of:"(", with: "")
+            .replacingOccurrences(of:")", with: "")
+            .replacingOccurrences(of:"-", with: "")
+            .replacingOccurrences(of:" ", with: "")
         let characterCount :Int  = (phNum?.characters.count)!
         
-        switch  characterCount {
-        case 4...6 :
-            
-            let formattedPhnumber = String(format: "(%@) %@",
-                                           phNum!.substringWithRange(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
-                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.endIndex.advancedBy(-1)))
-            self.phoneNumber.text = formattedPhnumber
-            break
-        case 7...10 :
-            
-            
-            let formattedPhnumber = String(format: "(%@) %@-%@",
-                                           phNum!.substringWithRange(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
-                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.startIndex.advancedBy(5)),
-                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(6) ... phNum!.endIndex.advancedBy(-1)))
-            self.phoneNumber.text = formattedPhnumber
-            break
-        case 11...1000 :
-            
-            
-            let formattedPhnumber = String(format: "(%@) %@-%@",
-                                           phNum!.substringWithRange(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
-                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.startIndex.advancedBy(5)),
-                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(6) ... phNum!.startIndex.advancedBy(9)))
-            self.phoneNumber.text = formattedPhnumber
-            break
-            
-        default:
-            self.phoneNumber.text = phNum
-            
-            
-        }
+//        switch  characterCount {
+//        case 4...6 :
+//            
+//            let formattedPhnumber = String(format: "(%@) %@",
+//                                           phNum!.substringWith(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
+//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.endIndex.advancedBy(-1)))
+//            self.phoneNumber.text = formattedPhnumber
+//            break
+//        case 7...10 :
+//            
+//            
+//            let formattedPhnumber = String(format: "(%@) %@-%@",
+//                                           phNum!.substringWithRange(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
+//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.startIndex.advancedBy(5)),
+//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(6) ... phNum!.endIndex.advancedBy(-1)))
+//            self.phoneNumber.text = formattedPhnumber
+//            break
+//        case 11...1000 :
+//            
+//            
+//            let formattedPhnumber = String(format: "(%@) %@-%@",
+//                                           phNum!.substringWithRange(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
+//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.startIndex.advancedBy(5)),
+//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(6) ... phNum!.startIndex.advancedBy(9)))
+//            self.phoneNumber.text = formattedPhnumber
+//            break
+//            
+//        default:
+//            self.phoneNumber.text = phNum
+//            
+//            
+//        }
         
         
     }
     
-    @IBAction func Continue(sender: AnyObject) {
+    @IBAction func Continue(_ sender: AnyObject) {
         let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
        
         var phNum = self.phoneNumber.text
-        phNum = phNum!.stringByReplacingOccurrencesOfString("(", withString: "")
-            .stringByReplacingOccurrencesOfString(")", withString: "")
-            .stringByReplacingOccurrencesOfString("-", withString: "")
-            .stringByReplacingOccurrencesOfString(" ", withString: "")
+        phNum = phNum!.replacingOccurrences(of:"(", with: "")
+            .replacingOccurrences(of:")", with: "")
+            .replacingOccurrences(of:"-", with: "")
+            .replacingOccurrences(of:" ", with: "")
         
         let characterCount :Int  = (phNum?.characters.count)!
         print(self.userName.text)
         
         if ((self.userName.text == nil || self.userName.text == "")   || (self.phoneNumber.text == nil || self.phoneNumber.text == "")  ) {
             
-            
-             SCLAlertView().showError("Oops !!", subTitle: "Please enter both username and phone number", circleIconImage:errorAletViewImage)
+//            
+//             SCLAlertView().showError("Oops !!", subTitle: "Please enter both username and phone number", circleIconImage:errorAletViewImage)
         }
         else if (characterCount < 10) {
             
-            SCLAlertView().showError("Oops !!", subTitle: "Phone number should be atleast 10 digits", circleIconImage:errorAletViewImage)
+//            SCLAlertView().showError("Oops !!", subTitle: "Phone number should be atleast 10 digits", circleIconImage:errorAletViewImage)
             
         }
         else {
             phNum =   "+1"+phNum!
             var spinner:loadingAnimation = loadingAnimation(overlayView:overlayView, senderView:self.view)
-            spinner.showOverlay(1)
-            verifiction = SMSVerification(applicationKey: applicationKey, phoneNumber: phNum!)
-            verifiction.initiate { (Success:Bool, Error:NSError?) ->Void in
+            spinner.showOverlay(alphaValue: 1)
+            verifiction = SMSVerification(applicationKey, phoneNumber: phNum!)
+            verifiction.initiate { (Success:Bool, Error:Error?) ->(Void) in
                 if(Success){
                     let firebaseDBreference = FIRDatabase.database().reference()
                   
-                   let alertViewResponder: SCLAlertViewResponder = SCLAlertView().showError("Hello World", subTitle: "This is a more descriptive text.")
-                    alertViewResponder.setTitle("New Title") // Rename title
-                    alertViewResponder.setSubTitle("New description") // Rename subtitle
-                    alertViewResponder.close()
-                    let uid =  NSUserDefaults.standardUserDefaults().objectForKey(fireBaseUid) as! String
+//                   let alertViewResponder: SCLAlertViewResponder = SCLAlertView().showError("Hello World", subTitle: "This is a more descriptive text.")
+//                    alertViewResponder.setTitle("New Title") // Rename title
+//                    alertViewResponder.setSubTitle("New description") // Rename subtitle
+//                    alertViewResponder.close()
+                    let uid =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
                     firebaseDBreference.child("Users").child(uid).child("userName").setValue(self.userName.text)
                     firebaseDBreference.child("Users").child(uid).child("phoneNumber").setValue(self.phoneNumber.text)
                    print(self.verifiction)
                     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let verifyController = storyBoard.instantiateViewControllerWithIdentifier("VerifyPhoneNo") as! VerificationViewController
+                    let verifyController = storyBoard.instantiateViewController(withIdentifier: "VerifyPhoneNo") as! VerificationViewController
                     verifyController.verifiction = self.verifiction
-                    self.presentViewController(verifyController, animated: true, completion: nil)
+                    self.present(verifyController, animated: true, completion: nil)
                 
                 }
                 else{

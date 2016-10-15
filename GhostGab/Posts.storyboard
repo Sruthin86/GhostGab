@@ -166,7 +166,7 @@
                                                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tQ-hO-xN9" userLabel="ReactionsContent">
                                                                     <frame key="frameInset" width="600" height="76"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1Jb-2J-tIA">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1Jb-2J-tIA">
                                                                             <frame key="frameInset" width="383" height="76"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sbQ-yX-pBm">
@@ -263,7 +263,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pWK-Mr-juV">
-                                                                                    <frame key="frameInset" minX="192" width="63" height="76"/>
+                                                                                    <frame key="frameInset" minX="192" width="64" height="76"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNa-Oa-vIL">
                                                                                             <frame key="frameInset" minX="38" minY="8" width="25" height="33"/>
@@ -294,7 +294,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgW-fE-isV">
-                                                                                    <frame key="frameInset" minX="255" width="64" height="76"/>
+                                                                                    <frame key="frameInset" minX="256" width="64" height="76"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w9Y-er-1xU">
                                                                                             <frame key="frameInset" minX="38" minY="8" width="25" height="33"/>
@@ -414,7 +414,7 @@
                                                                         <constraint firstAttribute="width" constant="30" id="uOa-1o-yBw"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRY-bE-1G1">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRY-bE-1G1">
                                                                     <frame key="frameInset" minX="12" minY="68" width="100" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="100" id="WHg-Ip-2mp"/>
@@ -450,8 +450,11 @@
                                                                 <constraint firstItem="QRY-bE-1G1" firstAttribute="leading" secondItem="mLm-Km-fls" secondAttribute="leading" constant="12" id="DoR-PG-f52"/>
                                                                 <constraint firstItem="5vo-0g-OVT" firstAttribute="top" secondItem="mLm-Km-fls" secondAttribute="top" constant="30" id="Mda-Mw-nJ0"/>
                                                                 <constraint firstItem="lfz-Ui-hNg" firstAttribute="leading" secondItem="QRY-bE-1G1" secondAttribute="trailing" constant="30" id="SUZ-Ho-lQG"/>
+                                                                <constraint firstAttribute="bottom" secondItem="QRY-bE-1G1" secondAttribute="bottom" constant="5" id="YIw-qx-8S0"/>
                                                                 <constraint firstAttribute="trailing" secondItem="5vo-0g-OVT" secondAttribute="trailing" constant="10" id="abX-cE-OrD"/>
                                                                 <constraint firstItem="LPa-BR-XhH" firstAttribute="leading" secondItem="lfz-Ui-hNg" secondAttribute="trailing" constant="1" id="qBK-8r-2Qg"/>
+                                                                <constraint firstAttribute="bottom" secondItem="lfz-Ui-hNg" secondAttribute="bottom" constant="2" id="tpl-CE-caM"/>
+                                                                <constraint firstAttribute="bottom" secondItem="LPa-BR-XhH" secondAttribute="bottom" constant="5" id="xIw-ih-kzi"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>

@@ -24,17 +24,17 @@ struct UICostomization {
     
     func addBorder(object:AnyObject){
         object.layer.borderWidth = self.width
-        object.layer.borderColor = self.color.CGColor
+        object.layer.borderColor = self.color.cgColor
     }
     
     func addBackground(object:AnyObject){
-        object.layer.backgroundColor = self.color.CGColor
+        object.layer.backgroundColor = self.color.cgColor
     }
     
     func addRoundedBorder (object:UIImageView) -> Void {
         
       object.layer.cornerRadius  = object.frame.width/2
       object.clipsToBounds = true;
-      addBorder(object)
+      addBorder(object: object)
     }
 }

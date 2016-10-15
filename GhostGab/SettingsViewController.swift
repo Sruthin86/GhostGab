@@ -26,13 +26,15 @@ class SettingsViewController: UIViewController {
     }
     
 
-    @IBAction func logoutfortesting(sender: AnyObject) {
-        
+    @IBAction func logout(_ sender: AnyObject) {
         try! FIRAuth.auth()!.signOut()
-        FBSDKAccessToken.setCurrentAccessToken(nil)
+        FBSDKAccessToken.setCurrent(nil)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainScreenViewController = storyboard.instantiateViewControllerWithIdentifier("mainScreen") as! ViewController
-        self.presentViewController(mainScreenViewController, animated: true, completion: nil)
+        let mainScreenViewController = storyboard.instantiateViewController(withIdentifier: "mainScreen") as! ViewController
+        self.present(mainScreenViewController, animated: true, completion: nil)
+        
+        
     }
+  
 
 }

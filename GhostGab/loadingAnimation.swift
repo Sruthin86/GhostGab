@@ -43,7 +43,7 @@ struct loadingAnimation {
         
         
         imageView.frame = CGRect(x: 0, y: 0, width: 36, height: 48)
-        imageView.center = CGPointMake(senderView.bounds.width / 2, senderView.bounds.height / 2)
+        imageView.center = CGPoint(x:senderView.bounds.width / 2, y:senderView.bounds.height / 2)
         
         senderView.addSubview(overlayView)
         senderView.addSubview(imageView)

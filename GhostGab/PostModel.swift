@@ -14,7 +14,7 @@ import FirebaseDatabase
 struct postModel {
     
     var posts: FIRDataSnapshot?
-    let uid = NSUserDefaults.standardUserDefaults().objectForKey(fireBaseUid)
+    let uid = UserDefaults.standard.object(forKey: fireBaseUid)
     var postsArray = [String : AnyObject]()
     var postKeys = [String]()
     let ref = FIRDatabase.database().reference()
@@ -35,9 +35,9 @@ struct postModel {
             let currentuserUid =  self.uid as! String
             for (key , val ) in postData {
                 
-                let postUid = val.valueForKey("useruid")! as! String
+                let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
                 if (postUid == currentuserUid  ){ // entire logic needs to be re written once friends functionality is implemented
-                    self.postsArray[key as! String] = val
+                    self.postsArray[key as! String] = val as AnyObject?
                     self.postKeys.append(key as! String)
                     
                 }
@@ -45,7 +45,7 @@ struct postModel {
             
         
         
-        return postsArray
+        return postsArray as NSDictionary
         
         
     }

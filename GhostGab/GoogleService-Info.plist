@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>328580791806-83ujo58pbbc2di41g15nndg4cfsq9r0o.apps.googleusercontent.com</string>
+	<string>328580791806-53mvnoumj6bl896058v7jeuf4hfh4urj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.328580791806-83ujo58pbbc2di41g15nndg4cfsq9r0o</string>
+	<string>com.googleusercontent.apps.328580791806-53mvnoumj6bl896058v7jeuf4hfh4urj</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDWvZNVSAdqVQpqtJT-WkItWj46LvUazwM</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>dfsdvds</string>
+	<string>com.ghostgossip.GhostGab</string>
 	<key>PROJECT_ID</key>
 	<string>ghost-gab</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,7 +25,7 @@
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:328580791806:ios:22fa890b82392987</string>
+	<string>1:328580791806:ios:f3b80938b28b96dd</string>
 	<key>DATABASE_URL</key>
 	<string>https://ghost-gab.firebaseio.com</string>
 </dict>

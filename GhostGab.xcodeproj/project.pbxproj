@@ -7,14 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36A3AB2E048F65A7CAE39D20 /* Pods_GhostGab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1292A27126F3A03111A1B89D /* Pods_GhostGab.framework */; };
-		560DA08A1D9FF31300AA3703 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0831D9FF31300AA3703 /* Dashboard.storyboard */; };
-		560DA08B1D9FF31300AA3703 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0841D9FF31300AA3703 /* Friends.storyboard */; };
-		560DA08D1D9FF31300AA3703 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0861D9FF31300AA3703 /* Main.storyboard */; };
-		560DA08E1D9FF31300AA3703 /* Posts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0871D9FF31300AA3703 /* Posts.storyboard */; };
-		560DA08F1D9FF31300AA3703 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0881D9FF31300AA3703 /* Profile.storyboard */; };
-		560DA0901D9FF31300AA3703 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0891D9FF31300AA3703 /* Search.storyboard */; };
-		560DA0921D9FF34F00AA3703 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0911D9FF34F00AA3703 /* Assets.xcassets */; };
 		560DA0A61D9FF37100AA3703 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DA0931D9FF37100AA3703 /* Color.swift */; };
 		560DA0A71D9FF37100AA3703 /* FBLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DA0941D9FF37100AA3703 /* FBLoadingViewController.swift */; };
 		560DA0A81D9FF37100AA3703 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DA0951D9FF37100AA3703 /* FriendsTableViewCell.swift */; };
@@ -34,20 +26,35 @@
 		560DA0B61D9FF37100AA3703 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DA0A31D9FF37100AA3703 /* UserModel.swift */; };
 		560DA0B71D9FF37100AA3703 /* UserNameAndPhoneNoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DA0A41D9FF37100AA3703 /* UserNameAndPhoneNoViewController.swift */; };
 		560DA0B81D9FF37100AA3703 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DA0A51D9FF37100AA3703 /* VerificationViewController.swift */; };
-		560DA0BA1D9FF3DD00AA3703 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0B91D9FF3DD00AA3703 /* UIKit.framework */; };
-		560DA0BC1D9FF3E500AA3703 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0BB1D9FF3E500AA3703 /* Foundation.framework */; };
-		560DA0BE1D9FF3ED00AA3703 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0BD1D9FF3ED00AA3703 /* CoreFoundation.framework */; };
-		560DA0C01D9FF3F600AA3703 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0BF1D9FF3F600AA3703 /* Security.framework */; };
-		560DA0C21D9FF40C00AA3703 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0C11D9FF40C00AA3703 /* SafariServices.framework */; };
+		560DA0BE1D9FF3ED00AA3703 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0BD1D9FF3ED00AA3703 /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		560DA0C51D9FF42400AA3703 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0C31D9FF42400AA3703 /* FBSDKCoreKit.framework */; };
-		560DA0C61D9FF42400AA3703 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0C41D9FF42400AA3703 /* FBSDKLoginKit.framework */; };
 		560DA0C81D9FF43600AA3703 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0C71D9FF43600AA3703 /* Bolts.framework */; };
+		560DA0CC1D9FF91400AA3703 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0CB1D9FF91400AA3703 /* SystemConfiguration.framework */; };
+		560DA0CE1D9FF92200AA3703 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0CD1D9FF92200AA3703 /* libc++.tbd */; };
+		560DA0D01D9FF92C00AA3703 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0CF1D9FF92C00AA3703 /* libicucore.tbd */; };
+		5641A9271DB19D3A00827395 /* SinchVerification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566312E01DAEBEF6008CBB08 /* SinchVerification.framework */; };
+		5641A9281DB19D3A00827395 /* SinchVerification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 566312E01DAEBEF6008CBB08 /* SinchVerification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		566312DB1DADB3AA008CBB08 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566312DA1DADB3AA008CBB08 /* GoogleService-Info.plist */; };
+		566312E11DAEBEF6008CBB08 /* SinchVerification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566312E01DAEBEF6008CBB08 /* SinchVerification.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		568DFA651D9FF035006CCF26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA641D9FF035006CCF26 /* AppDelegate.swift */; };
 		568DFA671D9FF035006CCF26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA661D9FF035006CCF26 /* ViewController.swift */; };
-		568DFA6F1D9FF035006CCF26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568DFA6D1D9FF035006CCF26 /* LaunchScreen.storyboard */; };
 		568DFA7A1D9FF035006CCF26 /* GhostGabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA791D9FF035006CCF26 /* GhostGabTests.swift */; };
 		568DFA851D9FF035006CCF26 /* GhostGabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA841D9FF035006CCF26 /* GhostGabUITests.swift */; };
-		568DFA931D9FF04E006CCF26 /* GoogleService-Info-4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 568DFA921D9FF04E006CCF26 /* GoogleService-Info-4.plist */; };
+		569FFC871DA1A02100E3A236 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0C11D9FF40C00AA3703 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		569FFC891DA1A02100E3A236 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0BF1D9FF3F600AA3703 /* Security.framework */; };
+		569FFC911DA1A02100E3A236 /* Pods_GhostGab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1292A27126F3A03111A1B89D /* Pods_GhostGab.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		569FFC9A1DA1A7A200E3A236 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0C41D9FF42400AA3703 /* FBSDKLoginKit.framework */; };
+		569FFC9E1DA1A7A200E3A236 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0BB1D9FF3E500AA3703 /* Foundation.framework */; };
+		569FFCA01DA1A7A200E3A236 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DA0B91D9FF3DD00AA3703 /* UIKit.framework */; };
+		569FFCA51DA1ABF300E3A236 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0831D9FF31300AA3703 /* Dashboard.storyboard */; };
+		569FFCA61DA1ABF300E3A236 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0841D9FF31300AA3703 /* Friends.storyboard */; };
+		569FFCA71DA1ABF300E3A236 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0861D9FF31300AA3703 /* Main.storyboard */; };
+		569FFCA81DA1ABF300E3A236 /* Posts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0871D9FF31300AA3703 /* Posts.storyboard */; };
+		569FFCA91DA1ABF300E3A236 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0881D9FF31300AA3703 /* Profile.storyboard */; };
+		569FFCAA1DA1ABF300E3A236 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0891D9FF31300AA3703 /* Search.storyboard */; };
+		569FFCAB1DA1ABFA00E3A236 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560DA0911D9FF34F00AA3703 /* Assets.xcassets */; };
+		569FFCAC1DA1ABFA00E3A236 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568DFA6D1D9FF035006CCF26 /* LaunchScreen.storyboard */; };
+		569FFCAD1DA1AC9F00E3A236 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 568DFA701D9FF035006CCF26 /* Info.plist */; };
 		5F6AB52CD9CE728112F8E470 /* Pods_GhostGabUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F0359C3078910721097A9B /* Pods_GhostGabUITests.framework */; };
 		B3C15CF06C4300958C281C7D /* Pods_GhostGabTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772F34AF980F6EE9F85752ED /* Pods_GhostGabTests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +75,20 @@
 			remoteInfo = GhostGab;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5641A9291DB19D3B00827395 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5641A9281DB19D3A00827395 /* SinchVerification.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1292A27126F3A03111A1B89D /* Pods_GhostGab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GhostGab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +126,11 @@
 		560DA0C31D9FF42400AA3703 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-4/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		560DA0C41D9FF42400AA3703 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-4/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		560DA0C71D9FF43600AA3703 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-4/Bolts.framework"; sourceTree = "<group>"; };
+		560DA0CB1D9FF91400AA3703 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		560DA0CD1D9FF92200AA3703 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		560DA0CF1D9FF92C00AA3703 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		566312DA1DADB3AA008CBB08 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		566312E01DAEBEF6008CBB08 /* SinchVerification.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinchVerification.framework; path = "FacebookSDKs-iOS-4/SinchVerification.framework"; sourceTree = "<group>"; };
 		568DFA611D9FF035006CCF26 /* GhostGab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostGab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568DFA641D9FF035006CCF26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		568DFA661D9FF035006CCF26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,7 +142,7 @@
 		568DFA801D9FF035006CCF26 /* GhostGabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhostGabUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		568DFA841D9FF035006CCF26 /* GhostGabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostGabUITests.swift; sourceTree = "<group>"; };
 		568DFA861D9FF035006CCF26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		568DFA921D9FF04E006CCF26 /* GoogleService-Info-4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-4.plist"; sourceTree = "<group>"; };
+		569FFC971DA1A4CE00E3A236 /* GhostGab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GhostGab.entitlements; sourceTree = "<group>"; };
 		63F0359C3078910721097A9B /* Pods_GhostGabUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GhostGabUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67EB7954FD98414355E43E66 /* Pods-GhostGabUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GhostGabUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GhostGabUITests/Pods-GhostGabUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		772F34AF980F6EE9F85752ED /* Pods_GhostGabTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GhostGabTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,15 +158,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				560DA0D01D9FF92C00AA3703 /* libicucore.tbd in Frameworks */,
+				569FFCA01DA1A7A200E3A236 /* UIKit.framework in Frameworks */,
+				560DA0CE1D9FF92200AA3703 /* libc++.tbd in Frameworks */,
+				569FFC9E1DA1A7A200E3A236 /* Foundation.framework in Frameworks */,
+				569FFC9A1DA1A7A200E3A236 /* FBSDKLoginKit.framework in Frameworks */,
+				566312E11DAEBEF6008CBB08 /* SinchVerification.framework in Frameworks */,
+				560DA0CC1D9FF91400AA3703 /* SystemConfiguration.framework in Frameworks */,
 				560DA0C81D9FF43600AA3703 /* Bolts.framework in Frameworks */,
 				560DA0C51D9FF42400AA3703 /* FBSDKCoreKit.framework in Frameworks */,
-				560DA0C61D9FF42400AA3703 /* FBSDKLoginKit.framework in Frameworks */,
-				560DA0C21D9FF40C00AA3703 /* SafariServices.framework in Frameworks */,
-				560DA0C01D9FF3F600AA3703 /* Security.framework in Frameworks */,
+				569FFC891DA1A02100E3A236 /* Security.framework in Frameworks */,
+				569FFC871DA1A02100E3A236 /* SafariServices.framework in Frameworks */,
+				569FFC911DA1A02100E3A236 /* Pods_GhostGab.framework in Frameworks */,
 				560DA0BE1D9FF3ED00AA3703 /* CoreFoundation.framework in Frameworks */,
-				560DA0BC1D9FF3E500AA3703 /* Foundation.framework in Frameworks */,
-				560DA0BA1D9FF3DD00AA3703 /* UIKit.framework in Frameworks */,
-				36A3AB2E048F65A7CAE39D20 /* Pods_GhostGab.framework in Frameworks */,
+				5641A9271DB19D3A00827395 /* SinchVerification.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,8 +232,9 @@
 		568DFA631D9FF035006CCF26 /* GhostGab */ = {
 			isa = PBXGroup;
 			children = (
-				568DFA921D9FF04E006CCF26 /* GoogleService-Info-4.plist */,
+				569FFC971DA1A4CE00E3A236 /* GhostGab.entitlements */,
 				568DFA701D9FF035006CCF26 /* Info.plist */,
+				566312DA1DADB3AA008CBB08 /* GoogleService-Info.plist */,
 				560DA0831D9FF31300AA3703 /* Dashboard.storyboard */,
 				560DA0841D9FF31300AA3703 /* Friends.storyboard */,
 				560DA0861D9FF31300AA3703 /* Main.storyboard */,
@@ -257,6 +289,10 @@
 		D93A103B87723B1DBF0781F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				560DA0CF1D9FF92C00AA3703 /* libicucore.tbd */,
+				560DA0CD1D9FF92200AA3703 /* libc++.tbd */,
+				566312E01DAEBEF6008CBB08 /* SinchVerification.framework */,
+				560DA0CB1D9FF91400AA3703 /* SystemConfiguration.framework */,
 				560DA0C71D9FF43600AA3703 /* Bolts.framework */,
 				560DA0C31D9FF42400AA3703 /* FBSDKCoreKit.framework */,
 				560DA0C41D9FF42400AA3703 /* FBSDKLoginKit.framework */,
@@ -285,6 +321,7 @@
 				568DFA5F1D9FF034006CCF26 /* Resources */,
 				E52306611AA2BFE2D5D11F48 /* [CP] Embed Pods Frameworks */,
 				F1588B7D2D3B1F41B615264D /* [CP] Copy Pods Resources */,
+				5641A9291DB19D3B00827395 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -350,6 +387,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 7Z67VMB4ND;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					568DFA741D9FF035006CCF26 = {
 						CreatedOnToolsVersion = 8.0;
@@ -388,15 +430,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				560DA08B1D9FF31300AA3703 /* Friends.storyboard in Resources */,
-				568DFA931D9FF04E006CCF26 /* GoogleService-Info-4.plist in Resources */,
-				560DA08F1D9FF31300AA3703 /* Profile.storyboard in Resources */,
-				560DA08A1D9FF31300AA3703 /* Dashboard.storyboard in Resources */,
-				560DA08D1D9FF31300AA3703 /* Main.storyboard in Resources */,
-				568DFA6F1D9FF035006CCF26 /* LaunchScreen.storyboard in Resources */,
-				560DA0901D9FF31300AA3703 /* Search.storyboard in Resources */,
-				560DA0921D9FF34F00AA3703 /* Assets.xcassets in Resources */,
-				560DA08E1D9FF31300AA3703 /* Posts.storyboard in Resources */,
+				569FFCAD1DA1AC9F00E3A236 /* Info.plist in Resources */,
+				566312DB1DADB3AA008CBB08 /* GoogleService-Info.plist in Resources */,
+				569FFCAB1DA1ABFA00E3A236 /* Assets.xcassets in Resources */,
+				569FFCAC1DA1ABFA00E3A236 /* LaunchScreen.storyboard in Resources */,
+				569FFCA51DA1ABF300E3A236 /* Dashboard.storyboard in Resources */,
+				569FFCA61DA1ABF300E3A236 /* Friends.storyboard in Resources */,
+				569FFCA71DA1ABF300E3A236 /* Main.storyboard in Resources */,
+				569FFCA81DA1ABF300E3A236 /* Posts.storyboard in Resources */,
+				569FFCA91DA1ABF300E3A236 /* Profile.storyboard in Resources */,
+				569FFCAA1DA1ABF300E3A236 /* Search.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,17 +751,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8DA8FAE2BC3C345A645B424B /* Pods-GhostGab.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GhostGab/GhostGab.entitlements;
 				DEVELOPMENT_TEAM = 7Z67VMB4ND;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SinchVerification/swift",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				INFOPLIST_FILE = GhostGab/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -726,17 +776,25 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F51CA3A073C6B311589EDCF6 /* Pods-GhostGab.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GhostGab/GhostGab.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7Z67VMB4ND;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SinchVerification/swift",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				INFOPLIST_FILE = GhostGab/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

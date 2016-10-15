@@ -23,7 +23,7 @@ class R_STableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -31,12 +31,12 @@ class R_STableViewCell: UITableViewCell {
     
     func setImageData (photoUrl: String) -> Void {
         let fileUrl = NSURL(string: photoUrl)
-        let profilePicUrl = NSData(contentsOfURL:  fileUrl!)
-        self.r_s_imageView.image = UIImage(data: profilePicUrl!)
+        let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
+        self.r_s_imageView.image = UIImage(data: profilePicUrl! as Data)
         self.r_s_imageView.layer.cornerRadius  = self.r_s_imageView.frame.width/2
         self.r_s_imageView.clipsToBounds = true;
         let costomization:UICostomization =  UICostomization(color: green.getColor(), width:1)
-        costomization.addRoundedBorder(self.r_s_imageView)
+        costomization.addRoundedBorder(object: self.r_s_imageView)
     }
     
     

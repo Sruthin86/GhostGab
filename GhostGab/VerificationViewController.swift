@@ -8,7 +8,7 @@
 
 import UIKit
 import SinchVerification
-import SCLAlertView
+//import SCLAlertView
 
 class VerificationViewController: UIViewController {
 
@@ -18,7 +18,7 @@ class VerificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let greenColorEnum = Color.green
-        VerifyCodeTextField.layer.borderColor = greenColorEnum.getColor().CGColor
+        VerifyCodeTextField.layer.borderColor = greenColorEnum.getColor().cgColor
         VerifyCodeTextField.layer.borderWidth = 1;
         // Do any additional setup after loading the view.
     }
@@ -28,17 +28,17 @@ class VerificationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func VerifyButton(sender: AnyObject) {
+    @IBAction func VerifyButton(_ sender: AnyObject) {
         let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
-        verifiction.verify(self.VerifyCodeTextField.text!) { (success:Bool, error:NSError?)  ->Void in
+        verifiction.verify(self.VerifyCodeTextField.text!) {  (success:Bool, error:Error?) -> (Void)   in
             if(success){
                 let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-                let mainTabBarView  = storybaord.instantiateViewControllerWithIdentifier("MainTabView") as! MainTabBarViewController
-                self.presentViewController(mainTabBarView, animated: true, completion: nil)
+                let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+                self.present(mainTabBarView, animated: true, completion: nil)
             }
             else {
                 
-               SCLAlertView().showError("Oops !!", subTitle: "Please enter the correct verification code!!", circleIconImage:errorAletViewImage)
+//               SCLAlertView().showError("Oops !!", subTitle: "Please enter the correct verification code!!", circleIconImage:errorAletViewImage)
             }
         }
         

@@ -26,17 +26,17 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     override func viewDidLoad() {
-        uid = NSUserDefaults.standardUserDefaults().objectForKey(fireBaseUid) as? String
+        uid = UserDefaults.standard.object(forKey: fireBaseUid) as? String
         let databaseRef = FIRDatabase.database().reference()
         profileImage.layer.cornerRadius  = self.profileImage.frame.width/2
         profileImage.clipsToBounds = true;
-        databaseRef.child("Users").child(uid!).observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        databaseRef.child("Users").child(uid!).observe(FIRDataEventType.value, with: { (snapshot) in
             
           let userDetails = snapshot.value as! [String: AnyObject]
             self.fullName.text =  userDetails["displayName"] as? String;
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
-            let profilePicUrl = NSData(contentsOfURL:  fileUrl!)
-            self.profileImage.image = UIImage(data: profilePicUrl!)
+            let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
+            self.profileImage.image = UIImage(data: profilePicUrl! as Data)
             
         })
         
@@ -50,26 +50,26 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let myFeedCell = tableView.dequeueReusableCellWithIdentifier("MyFeedCell", forIndexPath: indexPath) as! MyFeedTableViewCell
-        myFeedCell.ReactionsContent.hidden = true
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myFeedCell = tableView.dequeueReusableCell(withIdentifier: "MyFeedCell", for: indexPath as IndexPath) as! MyFeedTableViewCell
+        myFeedCell.ReactionsContent.isHidden = true
         myFeedCell.reactButton.tag = indexPath.row
-        myFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), forControlEvents: .TouchUpInside)
+        myFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
         guard self.selectedInxexPath != nil else {
             
             return myFeedCell
         }
-        if (self.selectedInxexPath! == indexPath){
-            myFeedCell.ReactionsContent.hidden = false
+        if (self.selectedInxexPath! as IndexPath == indexPath){
+            myFeedCell.ReactionsContent.isHidden = false
         }
         return myFeedCell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selIndex = selectedInxexPath?.row {
             if(selIndex == indexPath.row){
                 return KopenHeight
@@ -83,13 +83,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
     }
     
     func reactionsActions(sender: AnyObject) -> Void {
-        let selectedCellIndexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
+        let selectedCellIndexPath = NSIndexPath(row: sender.tag, section: 0)
         selectedInxexPathsArray.removeAll()
         if (selectedInxexPath != nil) {
             let previousSelectedPath :NSIndexPath = selectedInxexPath!
@@ -104,8 +104,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             selectedInxexPath = selectedCellIndexPath
             selectedInxexPathsArray.append(selectedInxexPath!)
-            self.tableView.reloadRowsAtIndexPaths(selectedInxexPathsArray, withRowAnimation: UITableViewRowAnimation.Fade)
-            let cell = tableView.cellForRowAtIndexPath(selectedCellIndexPath) as! MyFeedTableViewCell
+            self.tableView.reloadRows(at: selectedInxexPathsArray as [IndexPath], with: UITableViewRowAnimation.fade)
+            let cell = tableView.cellForRow(at: selectedCellIndexPath as IndexPath) as! MyFeedTableViewCell
             cell.openReactionsView()
             return
             
@@ -114,9 +114,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if selectedInxexPath!.row != selectedCellIndexPath.row{
             selectedInxexPath = selectedCellIndexPath
             selectedInxexPathsArray.append(selectedInxexPath!)
-            self.tableView.reloadRowsAtIndexPaths(selectedInxexPathsArray, withRowAnimation: UITableViewRowAnimation.Fade)
+            self.tableView.reloadRows(at: selectedInxexPathsArray as [IndexPath], with: UITableViewRowAnimation.fade)
             self.tableView.beginUpdates()
-            let cell = tableView.cellForRowAtIndexPath(selectedCellIndexPath) as! MyFeedTableViewCell
+            let cell = tableView.cellForRow(at: selectedCellIndexPath as IndexPath) as! MyFeedTableViewCell
             cell.openReactionsView()
             self.tableView.endUpdates()
             
@@ -124,10 +124,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         else if (selectedInxexPath!.row == selectedCellIndexPath.row){
             selectedInxexPathsArray.append(selectedInxexPath!)
             self.selectedInxexPath = nil
-            let cell = tableView.cellForRowAtIndexPath(selectedCellIndexPath) as! MyFeedTableViewCell
+            let cell = tableView.cellForRow(at: selectedCellIndexPath as IndexPath) as! MyFeedTableViewCell
             cell.closeReactionsView()
             self.tableView.beginUpdates()
-            self.tableView.reloadRowsAtIndexPaths(selectedInxexPathsArray, withRowAnimation: UITableViewRowAnimation.Fade)
+            self.tableView.reloadRows(at: selectedInxexPathsArray as [IndexPath], with: UITableViewRowAnimation.fade)
             self.tableView.endUpdates()
             selectedInxexPathsArray.removeAll()
             

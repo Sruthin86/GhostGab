@@ -21,19 +21,19 @@ class MyFeedTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         let verylightGrey : Color = Color.verylightGrey
         let customization: UICostomization = UICostomization (color: verylightGrey.getColor(), width:width)
-        customization.addBackground(self)
-        customization.addBorder(ReactionsView)
-        customization.addBorder(FeedView)
+        customization.addBackground(object: self)
+        customization.addBorder(object: ReactionsView)
+        //customization.addBorder(object: FeedView)
         super.awakeFromNib()
         reactionsViewHeight.constant = 0
-        self.ReactionsContent.hidden = true
-        self.ReactionsView.hidden = true
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.ReactionsContent.isHidden = true
+        self.ReactionsView.isHidden = true
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -42,14 +42,14 @@ class MyFeedTableViewCell: UITableViewCell {
     func openReactionsView(){
         
         reactionsViewHeight.constant = 76
-        self.ReactionsContent.hidden = false
-        self.ReactionsView.hidden = false
+        self.ReactionsContent.isHidden = false
+        self.ReactionsView.isHidden = false
         
     }
     func closeReactionsView(){
         reactionsViewHeight.constant = 0
-        self.ReactionsContent.hidden = true
-        self.ReactionsView.hidden = true
+        self.ReactionsContent.isHidden = true
+        self.ReactionsView.isHidden = true
         
     }
     

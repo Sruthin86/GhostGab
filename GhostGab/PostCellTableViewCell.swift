@@ -60,7 +60,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     var helperClass : HelperFunctions = HelperFunctions()
     
-    let uid = NSUserDefaults.standardUserDefaults().objectForKey(fireBaseUid)
+    let uid = UserDefaults.standard.object(forKey: fireBaseUid)
     
     let verylightGrey : Color = Color.verylightGrey
     
@@ -74,18 +74,18 @@ class PostCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         let customization: UICostomization = UICostomization (color: verylightGrey.getColor(), width:width)
-        customization.addBackground(self)
-        customization.addBorder(ReactionsView)
-        customization.addBorder(FeedView)
+        customization.addBackground(object: self)
+        customization.addBorder(object: ReactionsView)
+        //customization.addBorder(object: FeedView)
         super.awakeFromNib()
         reactionsViewHeight.constant = 0
-        self.ReactionsContent.hidden = true
-        self.ReactionsView.hidden = true
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.ReactionsContent.isHidden = true
+        self.ReactionsView.isHidden = true
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -94,21 +94,21 @@ class PostCellTableViewCell: UITableViewCell {
     func openReactionsView(){
         
         reactionsViewHeight.constant = 76
-        self.ReactionsContent.hidden = false
-        self.ReactionsView.hidden = false
+        self.ReactionsContent.isHidden = false
+        self.ReactionsView.isHidden = false
         
     }
     func closeReactionsView(){
         reactionsViewHeight.constant = 0
-        self.ReactionsContent.hidden = true
-        self.ReactionsView.hidden = true
+        self.ReactionsContent.isHidden = true
+        self.ReactionsView.isHidden = true
         
     }
     
     @IBAction func ReactionButton(sender: AnyObject) {
         
         
-        animateButton(self.reaction1, reaction:1)
+        animateButton(animationObject: self.reaction1, reaction:1)
         
         
         
@@ -117,7 +117,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBAction func Reaction2Button(sender: AnyObject) {
         
-        animateButton(self.reaction2,reaction:2)
+        animateButton(animationObject: self.reaction2,reaction:2)
         
         
         
@@ -125,7 +125,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBAction func Reaction3Button(sender: AnyObject) {
         
-        animateButton(self.reaction3,reaction:3)
+        animateButton(animationObject: self.reaction3,reaction:3)
         
         
         
@@ -134,7 +134,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBAction func Reaction4Button(sender: AnyObject) {
         
-        animateButton(self.reaction4, reaction:4)
+        animateButton(animationObject: self.reaction4, reaction:4)
         
         
         
@@ -144,7 +144,7 @@ class PostCellTableViewCell: UITableViewCell {
     @IBAction func Reaction5Button(sender: AnyObject) {
         
         
-        animateButton(self.reaction5, reaction:5)
+        animateButton(animationObject: self.reaction5, reaction:5)
         
         
     }
@@ -152,32 +152,32 @@ class PostCellTableViewCell: UITableViewCell {
     @IBAction func Reaction6Button(sender: AnyObject) {
         
         
-        animateButton(self.reaction6, reaction:6)
+        animateButton(animationObject: self.reaction6, reaction:6)
         
         
     }
     
     
     @IBAction func FlagButton(sender: AnyObject) {
-        helperClass.updatePostFlag(self.postId!, uid: self.uid as! String)
+        helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
         
     }
     
     func animateButton(animationObject: UIButton, reaction:Int) {
-        UIView.animateWithDuration(0.3, delay:0.1, options:[], animations: {
-            animationObject.transform = CGAffineTransformMakeScale(2, 2)
+        UIView.animate(withDuration: 0.3, delay:0.1, options:[], animations: {
+            animationObject.transform = CGAffineTransform(scaleX: 2, y: 2)
             }, completion: {_ in
                 
-                UIView.animateWithDuration(0.3, delay:0.1, options:[], animations: {
-                    animationObject.transform = CGAffineTransformMakeScale(0.5, 0.5)
-                    animationObject.transform = CGAffineTransformRotate(animationObject.transform, CGFloat(M_PI))
+                UIView.animate(withDuration: 0.3, delay:0.1, options:[], animations: {
+                    animationObject.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                    animationObject.transform = animationObject.transform.rotated(by: CGFloat(M_PI))
                     animationObject.alpha = 0.5
                     }, completion: {_ in
-                        UIView.animateWithDuration(0.4, delay:0.0, options:[], animations: {
-                            animationObject.transform = CGAffineTransformMakeScale(1, 1)
+                        UIView.animate(withDuration: 0.4, delay:0.0, options:[], animations: {
+                            animationObject.transform = CGAffineTransform(scaleX: 1, y: 1)
                             animationObject.alpha = 1
                             }, completion: {_ in
-                                self.myReaction(reaction)
+                                self.myReaction(reaction: reaction)
                         })
                 })
         })
@@ -189,7 +189,7 @@ class PostCellTableViewCell: UITableViewCell {
         switch  postType {
             
         case 1:
-            self.getImage(postUid)
+            self.getImage(postUid: postUid)
         case 2:
             self.cellImage.image = UIImage(named:  "Logo")
         default:
@@ -199,13 +199,13 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     func getImage(postUid: String) {
-        ref.child("Users").child(postUid).observeSingleEventOfType(FIRDataEventType.Value, withBlock:{ (snapshot) in
+        ref.child("Users").child(postUid).observeSingleEvent(of: FIRDataEventType.value, with:{ (snapshot) in
             let userDetails = snapshot.value as! [String: AnyObject]
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
-            let profilePicUrl = NSData(contentsOfURL:  fileUrl!)
-            self.cellImage.image = UIImage(data: profilePicUrl!)
+            let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
+            self.cellImage.image = UIImage(data: profilePicUrl! as Data)
             let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 2 )
-            customization.addBorder(self.cellImage)
+            customization.addBorder(object: self.cellImage)
             self.cellImage.layer.cornerRadius  = self.cellImage.frame.width/2
             self.cellImage.clipsToBounds = true;
             
@@ -218,11 +218,11 @@ class PostCellTableViewCell: UITableViewCell {
     func configureImage(postId: String)  {
         var userUid : String?
         var postTypeId : Int?
-        self.ref.child("Posts").child(postId).observeSingleEventOfType(FIRDataEventType.Value,  withBlock: { (snapshot)in
+        self.ref.child("Posts").child(postId).observeSingleEvent(of: FIRDataEventType.value,  with: { (snapshot)in
             let pData = snapshot.value as! [String : AnyObject]
             userUid  = pData["useruid"] as? String
             postTypeId = pData["postType"] as? Int
-            self.assignImage(postTypeId!, postUid: userUid!)
+            self.assignImage(postType: postTypeId!, postUid: userUid!)
             
         })
         
@@ -231,9 +231,9 @@ class PostCellTableViewCell: UITableViewCell {
     
     
     func setReactionCount(postId: String) {
-        self.ref.child("Posts").child(postId).child("reactionsData").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        self.ref.child("Posts").child(postId).child("reactionsData").observe(FIRDataEventType.value, with: { (snapshot) in
             let reactionsData = snapshot.value as! [String : Int]
-            self.ref.child("Users").child(self.uid as! String).child("Reactions").child(self.postId!).observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            self.ref.child("Users").child(self.uid as! String).child("Reactions").child(self.postId!).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                 self.reaction1Label.text = String(reactionsData["Reaction1"]!)
                 self.reaction1Label.textColor = self.grey.getColor()
                 self.reaction2Label.text = String(reactionsData["Reaction2"]!)
@@ -290,12 +290,12 @@ class PostCellTableViewCell: UITableViewCell {
     
     
     func setFlagCount(postId: String) {
-        self.ref.child("Posts").child(postId).child("flags").observeSingleEventOfType(FIRDataEventType.Value, withBlock:{ (snapshot) in
+        self.ref.child("Posts").child(postId).child("flags").observeSingleEvent(of: FIRDataEventType.value, with:{ (snapshot) in
             let flagsData = snapshot.value as! [String : Int]
             let flagCount: Int =  flagsData["flagCount"]!
             self.flagLabel.text = String(flagCount)
             self.flagLabel.textColor = self.grey.getColor()
-            self.ref.child("Users").child(self.uid as! String).child("Flag").child(self.postId!).child("userFlag").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            self.ref.child("Users").child(self.uid as! String).child("Flag").child(self.postId!).child("userFlag").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                 
                 if(snapshot.exists()){
                     let val =  snapshot.value as!Int
@@ -312,16 +312,16 @@ class PostCellTableViewCell: UITableViewCell {
     func myReaction (reaction: Int) {
         
         
-        self.ref.child("Users").child(self.uid! as! String).child("Reactions").child(self.postId!).observeSingleEventOfType(FIRDataEventType.Value, withBlock :  { (snapshot) in
+        self.ref.child("Users").child(self.uid! as! String).child("Reactions").child(self.postId!).observeSingleEvent(of: FIRDataEventType.value, with :  { (snapshot) in
             if(snapshot.exists()){
                 let rData =  snapshot.value as! [String : AnyObject]
                 let existingReaction = rData["userReaction"]
                 
-                self.helperClass.updateReactions(self.postId!, uid: self.uid! as! String, Reaction: existingReaction as! Int, newReaction: reaction)
+                self.helperClass.updateReactions(postId: self.postId!, uid: self.uid! as! String, Reaction: existingReaction as! Int, newReaction: reaction)
                 
             }
             else {
-                self.helperClass.updateReactions(self.postId!, uid: self.uid! as! String, Reaction: 0, newReaction: reaction)
+                self.helperClass.updateReactions(postId: self.postId!, uid: self.uid! as! String, Reaction: 0, newReaction: reaction)
             }
             
             

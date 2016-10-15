@@ -20,6 +20,34 @@
                ReferencedContainer = "container:GhostGab.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "568DFA741D9FF035006CCF26"
+               BuildableName = "GhostGabTests.xctest"
+               BlueprintName = "GhostGabTests"
+               ReferencedContainer = "container:GhostGab.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "568DFA7F1D9FF035006CCF26"
+               BuildableName = "GhostGabUITests.xctest"
+               BlueprintName = "GhostGabUITests"
+               ReferencedContainer = "container:GhostGab.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,26 +56,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "568DFA741D9FF035006CCF26"
-               BuildableName = "GhostGabTests.xctest"
-               BlueprintName = "GhostGabTests"
-               ReferencedContainer = "container:GhostGab.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "568DFA7F1D9FF035006CCF26"
-               BuildableName = "GhostGabUITests.xctest"
-               BlueprintName = "GhostGabUITests"
-               ReferencedContainer = "container:GhostGab.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

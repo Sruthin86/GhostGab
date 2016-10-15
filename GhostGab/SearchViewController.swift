@@ -38,9 +38,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         let lightgrey :Color = Color.lightGrey
         let customization : UICostomization = UICostomization(color: lightgrey.getColor(), width: width )
-        customization.addBorder(self.searchUserbtn)
-        customization.addBorder(self.requestsBtn)
-        customization.addBorder(self.suggestionsBtn)
+        customization.addBorder(object: self.searchUserbtn)
+        customization.addBorder(object: self.requestsBtn)
+        customization.addBorder(object: self.suggestionsBtn)
         
         // Do any additional setup after loading the view.
     }
@@ -50,7 +50,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.suggestionsFlag){
             if let suggestionsLength : Int = suggestionsArray.count{
                 return suggestionsLength
@@ -64,14 +64,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : R_STableViewCell = self.tableView.dequeueReusableCellWithIdentifier("R_SCell") as! R_STableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell : R_STableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "R_SCell") as! R_STableViewCell
         
         if (self.suggestionsFlag){
             
-            print(self.suggestionsArray[indexPath.row]!.valueForKey("image")! as! String)
-            cell.setImageData(self.suggestionsArray[indexPath.row]!.valueForKey("image")! as! String)
-            cell.r_s_label.text = self.suggestionsArray[indexPath.row]!.valueForKey("suggestionsName")! as? String
+            print(self.suggestionsArray[indexPath.row]!.value(forKey: "image") as! String)
+            cell.setImageData(photoUrl: self.suggestionsArray[indexPath.row]!.value(forKey :"image")! as! String)
+            cell.r_s_label.text = self.suggestionsArray[indexPath.row]!.value(forKey :"suggestionsName")! as? String
         }
         
         return cell
@@ -80,13 +80,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func suggestions(sender: AnyObject) {
         suggestionsFlag = true
-        switch CNContactStore.authorizationStatusForEntityType(.Contacts){
-        case .Authorized:
+        switch CNContactStore.authorizationStatus(for: .contacts){
+        case .authorized:
             self.fetchContacts()
             print("Authorized")
         // This is the method we will create
-        case .NotDetermined:
-            contactStore.requestAccessForEntityType(.Contacts){succeeded, err in
+        case .notDetermined:
+            contactStore.requestAccess(for: .contacts){succeeded, err in
                 guard err == nil && succeeded else{
                     return
                 }
@@ -104,33 +104,33 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fetchContacts() {
         var iteratorKey: Int = 0
         let toFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
-        let request = CNContactFetchRequest(keysToFetch: toFetch)
+        let request = CNContactFetchRequest(keysToFetch: toFetch as [CNKeyDescriptor])
         do{
-            try contactStore.enumerateContactsWithFetchRequest(request) {
+            try contactStore.enumerateContacts(with: request) {
                 contact, stop in
                 
-                for numbers: CNLabeledValue in contact.phoneNumbers{
-                    var MobNumVar  = (numbers.value as! CNPhoneNumber).valueForKey("digits") as? String
-                    MobNumVar! = String(format:"%@",  MobNumVar!.substringWithRange(MobNumVar!.endIndex.advancedBy(-10)..<MobNumVar!.endIndex ))
-                    MobNumVar! = String(format: "(%@) %@-%@",
-                                        MobNumVar!.substringWithRange(MobNumVar!.startIndex ... MobNumVar!.startIndex.advancedBy(2)),
-                                        MobNumVar!.substringWithRange(MobNumVar!.startIndex.advancedBy(3) ... MobNumVar!.startIndex.advancedBy(5)),
-                                        MobNumVar!.substringWithRange(MobNumVar!.startIndex.advancedBy(6) ... MobNumVar!.startIndex.advancedBy(9)))
-                    print(MobNumVar!)
-                    self.ref.child("Users").queryOrderedByChild("phoneNumber").queryStartingAtValue(MobNumVar!).queryEndingAtValue(MobNumVar!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
-                        for user in snapshot.children{
-                            let suggestionsData : [String: AnyObject] = ["suggestionsUid" :user.key , "suggestionsName": (user.value?["displayName"])!, "image": (user.value?["highResPhoto"])! ]
-                            self.suggestionsArray[iteratorKey] = suggestionsData
-                            self.phNumbersForSuggestions.append(MobNumVar!)
-                            print(self.phNumbersForSuggestions)
-                            print(self.suggestionsArray)
-                            iteratorKey += 1
-                        }
-                            self.tableView.reloadData()
-
-                    })
-                    
-                }
+//                for numbers: CNLabeledValue in contact.phoneNumbers{
+//                    var MobNumVar  = (numbers.value as! CNPhoneNumber).value(forKey: "digits") as? String
+//                    MobNumVar! = String(format:"%@",  MobNumVar!.substring(with: MobNumVar!.index((MobNumVar?.endIndex)!, offsetBy: -10)..<MobNumVar!.endIndex ))
+//                    MobNumVar! = String(format: "(%@) %@-%@",
+//                                        MobNumVar!.substringWith(MobNumVar!.startIndex ... MobNumVar!.index(after: 2)),
+//                                        MobNumVar!.substringWithRange(MobNumVar!.index(after: 3) ... MobNumVar!.index(after: 5)),
+//                                        MobNumVar!.substringWithRange(MobNumVar!.index(after: 6) ... MobNumVar!.index(after: 9)))
+//                    print(MobNumVar!)
+//                    self.ref.child("Users").queryOrdered(byChild: "phoneNumber").queryStarting(atValue: MobNumVar!).queryEnding(atValue: MobNumVar!+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+//                        for user:AnyObject in snapshot.children  {
+//                            let suggestionsData : [String: AnyObject] = ["suggestionsUid" :(user as AnyObject).key , "suggestionsName": (user.value?["displayName"])!, "image": (user.value?["highResPhoto"])! ]
+//                            self.suggestionsArray[iteratorKey] = suggestionsData as AnyObject?
+//                            self.phNumbersForSuggestions.append(MobNumVar!)
+//                            print(self.phNumbersForSuggestions)
+//                            print(self.suggestionsArray)
+//                            iteratorKey += 1
+//                        }
+//                            self.tableView.reloadData()
+//
+//                    })
+//                    
+//                }
             }
            
             

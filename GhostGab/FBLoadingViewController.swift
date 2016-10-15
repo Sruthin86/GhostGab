@@ -18,19 +18,19 @@ class FBLoadingViewController: UIViewController {
     
     var overlayView = UIView()
     
-    
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         var spinner:loadingAnimation = loadingAnimation(overlayView: overlayView, senderView: self.view)
-        spinner.showOverlay(0)
-        let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(FBLoadingViewController.LoginWithFacebook(_:)), userInfo: nil, repeats: false)
+        spinner.showOverlay(alphaValue: 0)
+        let myTimer : Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(FBLoadingViewController.LoginWithFacebook(timer:)), userInfo: nil, repeats: false)
         
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
                 
         
         
@@ -43,45 +43,51 @@ class FBLoadingViewController: UIViewController {
     
 
     
-    func LoginWithFacebook(timer : NSTimer) {
+    func LoginWithFacebook(timer : Timer) {
         
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         //fbLoginManager.loginBehavior = FBSDKLoginBehavior.Browser
+       
         
-        fbLoginManager.logInWithReadPermissions(["public_profile", "email", "user_friends"], handler: { (result, error) -> Void in
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: {
+            (facebookResult, facebookError) -> Void in
             
-            if (error == nil){
-                let fbloginresult : FBSDKLoginManagerLoginResult = result
+            if (facebookError == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = facebookResult!
                 print("result")
 
                 if(fbloginresult.isCancelled) {
                     //Show Cancel alert
                 } else if(fbloginresult.grantedPermissions.contains("email")) {
                     var highResImagePicUrl : String?
-                    if((FBSDKAccessToken.currentAccessToken()) != nil){
-                        FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":500 , "width":500 , "redirect":false ]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                    if((FBSDKAccessToken.current()) != nil){
+                        FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":500 , "width":500 , "redirect":false ]).start(completionHandler: { (connection, result, error) -> Void in
                             if (error == nil){
                                 print(result)
                                 let largeImageDict  =  result as! NSDictionary
-                                let largeImgData = largeImageDict.objectForKey("data")
-                                highResImagePicUrl = largeImgData?.objectForKey("url") as? String
+                                print("largeImageDict")
+                                print(largeImageDict)
+                                let largeImgData = largeImageDict.object(forKey: "data")
+                                print("largeImgData")
+                                print(largeImgData)
+                                highResImagePicUrl = (largeImgData as! NSDictionary).object(forKey:"url") as? String
                             }
                         })
                     }
                     
                     
-                    let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-                    FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                    let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                    FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                         if let user = FIRAuth.auth()?.currentUser {
                             let databaseRef = FIRDatabase.database().reference()
                             let uModel =  UserModel(name: user.displayName, userName: "", email: user.email, photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
-                            NSUserDefaults.standardUserDefaults().setObject(user.uid, forKey: fireBaseUid)
-                            let postUserData : [String : AnyObject] = ["displayName": user.displayName!,"photo": (user.photoURL?.absoluteString)!, "highResPhoto": highResImagePicUrl!,  "email":user.email!, "userName":user.uid,  "phoneNumber": "","isVerified":false  ]
+                            UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
+                            let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject  ]
                             databaseRef.child("Users").child(user.uid).setValue(postUserData)
-                            dispatch_async(dispatch_get_main_queue(), {
+                            DispatchQueue.main.async (execute: {
                                 let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                let vc = storyboard.instantiateViewControllerWithIdentifier("userNameandPh") as! UserNameAndPhoneNoViewController
-                                self.presentViewController(vc, animated:true, completion:nil)
+                                let vc = storyboard.instantiateViewController(withIdentifier: "userNameandPh") as! UserNameAndPhoneNoViewController
+                                self.present(vc, animated:true, completion:nil)
                                 
                             })
                             
@@ -92,9 +98,8 @@ class FBLoadingViewController: UIViewController {
             }
             
             else {
-                print(error.description)
-                print(error.code)
-                print(error.userInfo)
+                print(facebookError)
+                
                 
             }
         })

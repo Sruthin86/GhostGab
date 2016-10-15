@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,8 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upl-yz-7tU">
-                                <frame key="frameInset" minX="128" minY="424" width="345" height="55"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upl-yz-7tU">
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="upl-yz-7tU" secondAttribute="height" multiplier="69:11" id="8Af-7G-bnF"/>
                                     <constraint firstAttribute="width" constant="345" id="pCo-Kx-cwR"/>
@@ -28,7 +26,7 @@
                                 </constraints>
                                 <state key="normal" image="LogoutBtn@1x"/>
                                 <connections>
-                                    <action selector="logoutfortesting:" destination="ZSv-0O-NpA" eventType="touchUpInside" id="sRG-9k-iGA"/>
+                                    <action selector="logout:" destination="ZSv-0O-NpA" eventType="touchUpInside" id="MKR-Sw-Ps9"/>
                                 </connections>
                             </button>
                         </subviews>
