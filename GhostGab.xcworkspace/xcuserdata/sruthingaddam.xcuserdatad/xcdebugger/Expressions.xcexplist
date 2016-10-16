@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "HelperFunctions.compareDates(pDate : NSDate, curDate : NSDate) -&gt; String:HelperFunctions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "diffDateComponents.year">
+            </PersistentString>
+            <PersistentString
+               value = "diffDateComponents.minute">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PostViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:PostViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.postsArray.keys.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PostViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:PostViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.openedPostCellKey">
+            </PersistentString>
+            <PersistentString
+               value = " self.postsArray.keys.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PostViewController.reactionsActions(sender : AnyObject) -&gt; ():PostViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedCellIndexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "selectedInxexPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

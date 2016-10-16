@@ -107,7 +107,7 @@ class PostCellTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func ReactionButton(sender: AnyObject) {
+    @IBAction func ReactionButton(_ sender: AnyObject) {
         
         
         animateButton(animationObject: self.reaction1, reaction:1)
@@ -117,7 +117,7 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     
-    @IBAction func Reaction2Button(sender: AnyObject) {
+    @IBAction func Reaction2Button(_ sender: AnyObject) {
         
         animateButton(animationObject: self.reaction2,reaction:2)
         
@@ -125,7 +125,7 @@ class PostCellTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func Reaction3Button(sender: AnyObject) {
+    @IBAction func Reaction3Button(_ sender: AnyObject) {
         
         animateButton(animationObject: self.reaction3,reaction:3)
         
@@ -134,7 +134,7 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     
-    @IBAction func Reaction4Button(sender: AnyObject) {
+    @IBAction func Reaction4Button(_ sender: AnyObject) {
         
         animateButton(animationObject: self.reaction4, reaction:4)
         
@@ -143,7 +143,7 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     
-    @IBAction func Reaction5Button(sender: AnyObject) {
+    @IBAction func Reaction5Button(_ sender: AnyObject) {
         
         
         animateButton(animationObject: self.reaction5, reaction:5)
@@ -151,7 +151,7 @@ class PostCellTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func Reaction6Button(sender: AnyObject) {
+    @IBAction func Reaction6Button(_ sender: AnyObject) {
         
         
         animateButton(animationObject: self.reaction6, reaction:6)
@@ -160,7 +160,7 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     
-    @IBAction func FlagButton(sender: AnyObject) {
+    @IBAction func FlagButton(_ sender: AnyObject) {
         helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
         
     }

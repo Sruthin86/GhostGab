@@ -25,11 +25,9 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sd-Oz-ksT" userLabel="TopView">
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mn5-6k-kyH" userLabel="TextView">
-                                                <frame key="frameInset" width="600" height="65"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mn5-6k-kyH" userLabel="TextView">
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's the buzz around here " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hdK-q4-7ti">
-                                                        <frame key="frameInset" width="600" height="65"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's the buzz around here " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hdK-q4-7ti">
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="Vt8-au-ZOb"/>
                                                         </constraints>
@@ -47,8 +45,7 @@
                                                     <constraint firstAttribute="height" constant="65" id="sgT-PL-xJ3"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2xQ-Yj-zqB" userLabel="PostButtonsView">
-                                                <frame key="frameInset" minY="65" width="600" height="40"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xQ-Yj-zqB" userLabel="PostButtonsView">
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0Ps-RG-Bo7">
                                                         <subviews>
@@ -166,7 +163,7 @@
                                                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tQ-hO-xN9" userLabel="ReactionsContent">
                                                                     <frame key="frameInset" width="600" height="76"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1Jb-2J-tIA">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1Jb-2J-tIA">
                                                                             <frame key="frameInset" width="383" height="76"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sbQ-yX-pBm">
@@ -508,16 +505,14 @@
                                     <constraint firstItem="5Sd-Oz-ksT" firstAttribute="top" secondItem="KZE-m8-Wag" secondAttribute="top" id="2O8-fj-8IB"/>
                                 </constraints>
                             </stackView>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pdr-A2-JA8">
-                                <frame key="frameInset" width="600" height="65"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pdr-A2-JA8">
                                 <color key="backgroundColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="t8r-Fq-5mR"/>
                                 </constraints>
                                 <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Z7X-ia-T59">
-                                <frame key="frameInset" minX="281" minY="20" width="39" height="41"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Z7X-ia-T59">
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Z7X-ia-T59" secondAttribute="height" multiplier="39:41" id="0sc-TV-aLR"/>
                                     <constraint firstAttribute="height" constant="41" id="6SQ-mt-jyS"/>

@@ -11,7 +11,7 @@
         <!--Search-->
         <scene sceneID="v5q-Ts-JbD">
             <objects>
-                <viewController id="YjF-Hx-2t6" customClass="SearchViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YjF-Hx-2t6" customClass="RequestsSuggestionsViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvE-OX-d2h"/>
                         <viewControllerLayoutGuide type="bottom" id="HCA-Qr-fCb"/>
@@ -20,27 +20,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKj-pb-fUI">
-                                <frame key="frameInset" width="600" height="65"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KKj-pb-fUI">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="MXM-lp-YVE"/>
                                 </constraints>
                                 <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="NKz-kx-mdx">
-                                <frame key="frameInset" minX="281" minY="20" width="39" height="41"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="NKz-kx-mdx">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="5Xy-Er-J2a"/>
                                     <constraint firstAttribute="width" constant="39" id="9pK-Ck-QBo"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9ru-Sf-6QH">
-                                <frame key="frameInset" minY="65" width="383" height="110"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9ru-Sf-6QH">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5C5-8m-Jsh">
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-za-pXh">
-                                                <frame key="frameInset" width="600" height="55"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-za-pXh">
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="f6T-42-nmf"/>
                                                 </constraints>
@@ -60,8 +56,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YL-kk-iGo">
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBL-aH-vyC">
-                                                        <frame key="frameInset" width="300" height="55"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBL-aH-vyC">
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Requests"/>
                                                     </button>
@@ -76,13 +71,9 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZZ-Kr-LAr">
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-gR-Um3">
-                                                        <frame key="frameInset" width="300" height="55"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-gR-Um3">
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Suggestions"/>
-                                                        <connections>
-                                                            <action selector="suggestions:" destination="YjF-Hx-2t6" eventType="touchUpInside" id="ian-8e-7s2"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -100,15 +91,14 @@
                                     <constraint firstAttribute="height" constant="110" id="SwV-Ia-hgo"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sz5-Qo-eoY">
-                                <frame key="frameInset" minY="175" width="600" height="376"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sz5-Qo-eoY">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="R_SCell" rowHeight="75" id="BnC-ut-Jsl" customClass="R_STableViewCell" customModule="GhostGossip">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="75"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="rsCell" rowHeight="75" id="BnC-ut-Jsl" customClass="RequestSuggestionTableViewCell" customModule="GhostGab" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="383" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BnC-ut-Jsl" id="N8z-mj-xM1">
-                                            <frame key="frameInset" width="600" height="74"/>
+                                            <frame key="frameInset" width="383" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dir-Td-Ihl">
@@ -155,14 +145,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="r_s_imageView" destination="Dir-Td-Ihl" id="7Li-Pd-FJc"/>
-                                            <outlet property="r_s_label" destination="T2l-Dx-5FA" id="eYe-Jf-lE3"/>
+                                            <outlet property="rsImageView" destination="Dir-Td-Ihl" id="0MQ-9H-ayA"/>
+                                            <outlet property="rsLabel" destination="T2l-Dx-5FA" id="i7x-fk-21n"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="YjF-Hx-2t6" id="wS0-Yt-9BF"/>
-                                    <outlet property="delegate" destination="YjF-Hx-2t6" id="7Jf-8f-4wS"/>
+                                    <outlet property="dataSource" destination="YjF-Hx-2t6" id="g07-CU-P1D"/>
+                                    <outlet property="delegate" destination="YjF-Hx-2t6" id="Jhc-Qf-5wb"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -189,10 +179,10 @@
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </simulatedTabBarMetrics>
                     <connections>
-                        <outlet property="requestsBtn" destination="mBL-aH-vyC" id="dQ5-Tk-Yw5"/>
-                        <outlet property="searchUserbtn" destination="dIq-za-pXh" id="mAs-Nn-DY9"/>
-                        <outlet property="suggestionsBtn" destination="fg1-gR-Um3" id="P3L-81-Wgy"/>
-                        <outlet property="tableView" destination="sz5-Qo-eoY" id="iWf-Oo-qeP"/>
+                        <outlet property="requestsBtn" destination="mBL-aH-vyC" id="vGZ-iU-OuP"/>
+                        <outlet property="searchUserbtn" destination="dIq-za-pXh" id="cs6-HM-4H5"/>
+                        <outlet property="suggestionsBtn" destination="fg1-gR-Um3" id="uba-zi-cDY"/>
+                        <outlet property="tableView" destination="sz5-Qo-eoY" id="AgZ-Bz-e0X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N5A-9N-wVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
