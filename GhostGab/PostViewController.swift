@@ -67,7 +67,6 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     let helperClass : HelperFunctions = HelperFunctions()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let lightGrey:Color = Color.lightGrey
@@ -82,6 +81,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         self.TopViewHeight.constant = 65
         refreshControl.addTarget(self, action: #selector(PostViewController.uiRefreshActionControl), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         getPosts()
         
         // Do any additional setup after loading the view.
@@ -144,7 +144,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         postFeedCell.dateString.text = helperClass.getDifferenceInDates(postDate: (postFeed["date"]as? String)!)
         postFeedCell.setReactionCount(postId: self.postKeys[indexPath.row])
         postFeedCell.setFlagCount(postId: self.postKeys[indexPath.row])
-        postFeedCell.configureImage(postId: self.postKeys[indexPath.row])
+        postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String  )
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){
@@ -185,6 +185,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
             return KclosedHeight
         }
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -267,6 +268,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         self.refreshControl.endRefreshing()
     }
     
+
     
     func getPosts(){
         
@@ -281,21 +283,17 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                 self.postKeys = self.postKeys.sorted{ $0 > $1 }
                 self.tableView.reloadData()
                 if( self.oldPostKeysCount == 0) {
-                    print("zero")
                     return
                 }
                 else if (self.oldPostKeysCount ==  self.postKeys.count){
-                    print("Equal")
                     return
                 }
                 else if (self.oldPostKeysCount < self.postKeys.count){
-                    print("diff")
                     let diff : Int = (self.postKeys.count - self.oldPostKeysCount)
                     self.updateScrollPosition(diff: diff)
                     return
                 }
                 else {
-                    print("Notttt")
                     return
                 }
             }
@@ -333,10 +331,11 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         ref.child("Users").child(uid).observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
             let userData =  snapshot.value as! [String:AnyObject]
             let displayName = userData["displayName"]
+            let picUrl = userData["photo"]
             let reactionsData: [String:Int] = ["Reaction1": 0, "Reaction2": 0, "Reaction3": 0, "Reaction4": 0, "Reaction5": 0, "Reaction6": 0]
             let flags: [String : Int] = ["flagCount": 0]
             let postMetrics: [String:Int] = ["flag":0, "correctGuess":0, "wrongGuess":0]
-            let postData : [String: AnyObject] = ["post":post as AnyObject , "useruid": uid as AnyObject, "displayName":displayName!, "postType":postType as AnyObject,  "reactionsData":reactionsData as AnyObject, "flags":flags as AnyObject, "postMetrics":postMetrics as AnyObject,"date":currentDateToString as AnyObject]
+            let postData : [String: AnyObject] = ["post":post as AnyObject , "useruid": uid as AnyObject, "displayName":displayName!, "userPicUrl" : picUrl!, "postType":postType as AnyObject,  "reactionsData":reactionsData as AnyObject, "flags":flags as AnyObject, "postMetrics":postMetrics as AnyObject,"date":currentDateToString as AnyObject]
             
             let postDataRef = self.ref.child("Posts").childByAutoId()
             postDataRef.setValue(postData)

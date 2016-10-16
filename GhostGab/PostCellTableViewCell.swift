@@ -69,6 +69,8 @@ class PostCellTableViewCell: UITableViewCell {
     let grey :Color = Color.grey
     
     let green : Color = Color.green
+    
+    var imageCache = NSCache<NSString, UIImage>();
     //@IBOutlet weak var reaction1: UIButton!
     
     override func awakeFromNib() {
@@ -184,12 +186,24 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     
-    func assignImage(postType:Int, postUid: String  ) {
+    func assignImage(postType:Int, userUid: String, userPicUrl: String  ) {
         
         switch  postType {
             
         case 1:
-            self.getImage(postUid: postUid)
+                
+                
+                if let profileImage :UIImage = (imageCache.object(forKey: userUid as NSString)){
+                    self.cellImage.image = profileImage
+                }
+                else {
+                    self.cellImage.image = UIImage(named:  "PlaceHolder")
+                    //DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+                        self.getImage(userUid: userUid, userPicUrl: userPicUrl)
+                    //})
+                }
+
+            
         case 2:
             self.cellImage.image = UIImage(named:  "Logo")
         default:
@@ -198,33 +212,26 @@ class PostCellTableViewCell: UITableViewCell {
         
     }
     
-    func getImage(postUid: String) {
-        ref.child("Users").child(postUid).observeSingleEvent(of: FIRDataEventType.value, with:{ (snapshot) in
-            let userDetails = snapshot.value as! [String: AnyObject]
-            let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
+    func getImage(userUid: String, userPicUrl:String) {
+        
+            let fileUrl = NSURL(string: userPicUrl)
             let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
             self.cellImage.image = UIImage(data: profilePicUrl! as Data)
-            let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 2 )
-            customization.addBorder(object: self.cellImage)
-            self.cellImage.layer.cornerRadius  = self.cellImage.frame.width/2
-            self.cellImage.clipsToBounds = true;
-            
-            
-        })
+        
+                let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 2 )
+                customization.addBorder(object: self.cellImage)
+                imageCache.setObject(UIImage(data: profilePicUrl! as Data)!, forKey: userUid as NSString)
+                self.cellImage.layer.cornerRadius  = self.cellImage.frame.width/2
+                self.cellImage.clipsToBounds = true;
+        
         
     }
     
     
-    func configureImage(postId: String)  {
-        var userUid : String?
-        var postTypeId : Int?
-        self.ref.child("Posts").child(postId).observeSingleEvent(of: FIRDataEventType.value,  with: { (snapshot)in
-            let pData = snapshot.value as! [String : AnyObject]
-            userUid  = pData["useruid"] as? String
-            postTypeId = pData["postType"] as? Int
-            self.assignImage(postType: postTypeId!, postUid: userUid!)
-            
-        })
+    func configureImage(_ userUid: String, postType: Int, userPicUrl: String)  {
+        
+            self.assignImage(postType: postType, userUid: userUid , userPicUrl:userPicUrl)
+        
         
         
     }

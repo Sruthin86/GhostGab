@@ -24,12 +24,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var selectedInxexPath: NSIndexPath?
     var selectedInxexPathsArray :[NSIndexPath] = []
     
+    let green : Color = Color.green
     
     override func viewDidLoad() {
         uid = UserDefaults.standard.object(forKey: fireBaseUid) as? String
         let databaseRef = FIRDatabase.database().reference()
-        profileImage.layer.cornerRadius  = self.profileImage.frame.width/2
-        profileImage.clipsToBounds = true;
         databaseRef.child("Users").child(uid!).observe(FIRDataEventType.value, with: { (snapshot) in
             
           let userDetails = snapshot.value as! [String: AnyObject]
@@ -37,6 +36,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
             let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
             self.profileImage.image = UIImage(data: profilePicUrl! as Data)
+            self.profileImage.layer.cornerRadius  = self.profileImage.frame.width/2
+            self.profileImage.clipsToBounds = true;
+            let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 5 )
+            customization.addBorder(object: self.profileImage)
+
             
         })
         

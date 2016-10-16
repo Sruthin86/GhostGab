@@ -57,25 +57,28 @@ class UserNameAndPhoneNoViewController: UIViewController {
             .replacingOccurrences(of:")", with: "")
             .replacingOccurrences(of:"-", with: "")
             .replacingOccurrences(of:" ", with: "")
-        let characterCount :Int  = (phNum?.characters.count)!
+        var characterCount :Int  = (phNum?.characters.count)!
+        //let third =  stri.index(stri.startIndex, offsetBy: 2)
         
-//        switch  characterCount {
-//        case 4...6 :
-//            
-//            let formattedPhnumber = String(format: "(%@) %@",
-//                                           phNum!.substringWith(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
-//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.endIndex.advancedBy(-1)))
-//            self.phoneNumber.text = formattedPhnumber
-//            break
-//        case 7...10 :
-//            
-//            
-//            let formattedPhnumber = String(format: "(%@) %@-%@",
-//                                           phNum!.substringWithRange(phNum!.startIndex ... phNum!.startIndex.advancedBy(2)),
-//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(3) ... phNum!.startIndex.advancedBy(5)),
-//                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(6) ... phNum!.endIndex.advancedBy(-1)))
-//            self.phoneNumber.text = formattedPhnumber
-//            break
+        switch  characterCount {
+        case 4...6 :
+            
+            let formattedPhnumber = String(format: "(%@) %@",
+                                           phNum!.substring(with: phNum!.startIndex ..< phNum!.index(phNum!.startIndex, offsetBy: 3)),
+                                           phNum!.substring(with: phNum!.index(phNum!.startIndex, offsetBy: 3) ..< phNum!.index(phNum!.startIndex, offsetBy: characterCount)))
+            self.phoneNumber.text = formattedPhnumber
+            break
+        case 7...10000 :
+            
+            if (characterCount > 10){
+                 characterCount = 10
+            }
+            let formattedPhnumber = String(format: "(%@) %@-%@",
+                                           phNum!.substring(with: phNum!.startIndex ..< phNum!.index(phNum!.startIndex, offsetBy: 3)),
+                                           phNum!.substring(with: phNum!.index(phNum!.startIndex, offsetBy: 3) ..< phNum!.index(phNum!.startIndex, offsetBy: 6)),
+                                           phNum!.substring(with: phNum!.index(phNum!.startIndex, offsetBy: 6) ..< phNum!.index(phNum!.startIndex, offsetBy: characterCount)))
+            self.phoneNumber.text = formattedPhnumber
+            break
 //        case 11...1000 :
 //            
 //            
@@ -85,12 +88,12 @@ class UserNameAndPhoneNoViewController: UIViewController {
 //                                           phNum!.substringWithRange(phNum!.startIndex.advancedBy(6) ... phNum!.startIndex.advancedBy(9)))
 //            self.phoneNumber.text = formattedPhnumber
 //            break
-//            
-//        default:
-//            self.phoneNumber.text = phNum
-//            
-//            
-//        }
+            
+        default:
+            self.phoneNumber.text = phNum
+            
+            
+        }
         
         
     }
