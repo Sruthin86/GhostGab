@@ -3,21 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "HelperFunctions.compareDates(pDate : NSDate, curDate : NSDate) -&gt; String:HelperFunctions.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "diffDateComponents.year">
-            </PersistentString>
-            <PersistentString
-               value = "diffDateComponents.minute">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "PostViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:PostViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.postsArray.keys.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RequestsSuggestionsViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:RequestsSuggestionsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.suggestionsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PostViewController.reactionsActions(sender : AnyObject) -&gt; ():PostViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedCellIndexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "selectedInxexPath">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,15 +41,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PostViewController.reactionsActions(sender : AnyObject) -&gt; ():PostViewController.swift">
+         contextName = "HelperFunctions.compareDates(pDate : NSDate, curDate : NSDate) -&gt; String:HelperFunctions.swift">
          <PersistentStrings>
             <PersistentString
-               value = "selectedCellIndexPath.row">
+               value = "diffDateComponents.year">
             </PersistentString>
             <PersistentString
-               value = "selectedInxexPath">
+               value = "diffDateComponents.minute">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RequestsSuggestionsViewController.(fetchContacts() -&gt; ()).(closure #1).(closure #1):RequestsSuggestionsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.suggestionsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SearchViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:SearchViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

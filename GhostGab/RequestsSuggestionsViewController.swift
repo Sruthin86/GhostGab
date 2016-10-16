@@ -28,11 +28,13 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     var phNumbersForSuggestions = [String]()
     
-    var suggestionsArray = [Int: AnyObject]()
+    var suggestionsArray = [String: AnyObject]()
+    var suggestionsArrayKey = [String]()
     
     let ref = FIRDatabase.database().reference()
     
     var suggestionsFlag:Bool =  false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,25 +73,27 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         
         if (self.suggestionsFlag){
             
-            print(self.suggestionsArray[indexPath.row]!.value(forKey: "image") as! String)
-            cell.setImageData(photoUrl: self.suggestionsArray[indexPath.row]!.value(forKey :"image")! as! String)
-            cell.rsLabel.text = self.suggestionsArray[indexPath.row]!.value(forKey :"suggestionsName")! as? String
+            cell.setImageData(photoUrl: self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
+            cell.rsLabel.text = self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
         }
         
         return cell
     }
     
     
-    @IBAction func suggestions(sender: AnyObject) {
-        suggestionsFlag = true
-        switch CNContactStore.authorizationStatus(for: .contacts){
+    @IBAction func suggestions(_ sender: AnyObject) {
+        
+        switch CNContactStore.authorizationStatus(for: CNEntityType.contacts){
         case .authorized:
+            suggestionsFlag = true
             self.fetchContacts()
-            print("Authorized")
+            self.tableView.reloadData()
+            
         // This is the method we will create
         case .notDetermined:
             contactStore.requestAccess(for: .contacts){succeeded, err in
                 guard err == nil && succeeded else{
+                    let notAuthorizedMessage = "Please Allow Ghost Gossip to access contacts . You can do it in Setting->Privacy->Contacts"
                     return
                 }
                 
@@ -111,34 +115,45 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             try contactStore.enumerateContacts(with: request) {
                 contact, stop in
                 
-                //                for numbers: CNLabeledValue in contact.phoneNumbers{
-                //                    var MobNumVar  = (numbers.value as! CNPhoneNumber).value(forKey: "digits") as? String
-                //                    MobNumVar! = String(format:"%@",  MobNumVar!.substring(with: MobNumVar!.index((MobNumVar?.endIndex)!, offsetBy: -10)..<MobNumVar!.endIndex ))
-                //                    MobNumVar! = String(format: "(%@) %@-%@",
-                //                                        MobNumVar!.substringWith(MobNumVar!.startIndex ... MobNumVar!.index(after: 2)),
-                //                                        MobNumVar!.substringWithRange(MobNumVar!.index(after: 3) ... MobNumVar!.index(after: 5)),
-                //                                        MobNumVar!.substringWithRange(MobNumVar!.index(after: 6) ... MobNumVar!.index(after: 9)))
-                //                    print(MobNumVar!)
-                //                    self.ref.child("Users").queryOrdered(byChild: "phoneNumber").queryStarting(atValue: MobNumVar!).queryEnding(atValue: MobNumVar!+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
-                //                        for user:AnyObject in snapshot.children  {
-                //                            let suggestionsData : [String: AnyObject] = ["suggestionsUid" :(user as AnyObject).key , "suggestionsName": (user.value?["displayName"])!, "image": (user.value?["highResPhoto"])! ]
-                //                            self.suggestionsArray[iteratorKey] = suggestionsData as AnyObject?
-                //                            self.phNumbersForSuggestions.append(MobNumVar!)
-                //                            print(self.phNumbersForSuggestions)
-                //                            print(self.suggestionsArray)
-                //                            iteratorKey += 1
-                //                        }
-                //                            self.tableView.reloadData()
-                //
-                //                    })
-                //                    
-                //                }
+                                for numbers: CNLabeledValue in contact.phoneNumbers{
+                                    var MobNumVar  = (numbers.value as! CNPhoneNumber).value(forKey: "digits") as? String
+                                    MobNumVar! = String(format:"%@",  MobNumVar!.substring(with: MobNumVar!.index((MobNumVar?.endIndex)!, offsetBy: -10)..<MobNumVar!.endIndex ))
+                                    MobNumVar! = String(format: "(%@) %@-%@",
+                                                        MobNumVar!.substring(with: MobNumVar!.startIndex ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3)),
+                                                        MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6)),
+                                                        MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 10)))
+                                    print(MobNumVar!)
+                                    self.ref.child("Users").queryOrdered(byChild: "phoneNumber").queryStarting(atValue: MobNumVar!).queryEnding(atValue: MobNumVar!).observeSingleEvent(of: .value, with: { snapshot in
+                                        
+                                        if(snapshot.childrenCount > 0 ){
+
+                                        
+                                            let data:NSDictionary  = snapshot.value as! NSDictionary
+                                        
+                                            for suggestionsData in data{
+                                               
+                                                self.suggestionsArrayKey.append(suggestionsData.key as! String)
+                                                self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
+                                            }
+                                        
+                                        
+
+                                           self.tableView.reloadData()
+                                           
+                                        }
+                
+                                    })
+                                    
+                                    
+                                }
+                
             }
             
             
         } catch let err{
             print(err)
         }
+        
     }
     
 }
