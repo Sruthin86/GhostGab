@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		568771E81DE0B53C00129401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E71DE0B53C00129401 /* AppDelegate.swift */; };
+		568771EA1DE0B53C00129401 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E91DE0B53C00129401 /* ViewController.swift */; };
+		568771ED1DE0B53C00129401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568771EB1DE0B53C00129401 /* Main.storyboard */; };
+		568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 568771EE1DE0B53C00129401 /* Assets.xcassets */; };
+		568771F21DE0B53C00129401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568771F01DE0B53C00129401 /* LaunchScreen.storyboard */; };
+		568771FD1DE0B53D00129401 /* GhostGabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771FC1DE0B53D00129401 /* GhostGabTests.swift */; };
+		568772081DE0B53D00129401 /* GhostGabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568772071DE0B53D00129401 /* GhostGabUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		568771F91DE0B53D00129401 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 568771DC1DE0B53C00129401 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 568771E31DE0B53C00129401;
+			remoteInfo = GhostGab;
+		};
+		568772041DE0B53D00129401 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 568771DC1DE0B53C00129401 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 568771E31DE0B53C00129401;
+			remoteInfo = GhostGab;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		568771E41DE0B53C00129401 /* GhostGab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostGab.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		568771E71DE0B53C00129401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		568771E91DE0B53C00129401 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		568771EC1DE0B53C00129401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		568771EE1DE0B53C00129401 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		568771F11DE0B53C00129401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		568771F31DE0B53C00129401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		568771F81DE0B53D00129401 /* GhostGabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhostGabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		568771FC1DE0B53D00129401 /* GhostGabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostGabTests.swift; sourceTree = "<group>"; };
+		568771FE1DE0B53D00129401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		568772031DE0B53D00129401 /* GhostGabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhostGabUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		568772071DE0B53D00129401 /* GhostGabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostGabUITests.swift; sourceTree = "<group>"; };
+		568772091DE0B53D00129401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		568771E11DE0B53C00129401 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568771F51DE0B53D00129401 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568772001DE0B53D00129401 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		568771DB1DE0B53C00129401 = {
+			isa = PBXGroup;
+			children = (
+				568771E61DE0B53C00129401 /* GhostGab */,
+				568771FB1DE0B53D00129401 /* GhostGabTests */,
+				568772061DE0B53D00129401 /* GhostGabUITests */,
+				568771E51DE0B53C00129401 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		568771E51DE0B53C00129401 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				568771E41DE0B53C00129401 /* GhostGab.app */,
+				568771F81DE0B53D00129401 /* GhostGabTests.xctest */,
+				568772031DE0B53D00129401 /* GhostGabUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		568771E61DE0B53C00129401 /* GhostGab */ = {
+			isa = PBXGroup;
+			children = (
+				568771E71DE0B53C00129401 /* AppDelegate.swift */,
+				568771E91DE0B53C00129401 /* ViewController.swift */,
+				568771EB1DE0B53C00129401 /* Main.storyboard */,
+				568771EE1DE0B53C00129401 /* Assets.xcassets */,
+				568771F01DE0B53C00129401 /* LaunchScreen.storyboard */,
+				568771F31DE0B53C00129401 /* Info.plist */,
+			);
+			path = GhostGab;
+			sourceTree = "<group>";
+		};
+		568771FB1DE0B53D00129401 /* GhostGabTests */ = {
+			isa = PBXGroup;
+			children = (
+				568771FC1DE0B53D00129401 /* GhostGabTests.swift */,
+				568771FE1DE0B53D00129401 /* Info.plist */,
+			);
+			path = GhostGabTests;
+			sourceTree = "<group>";
+		};
+		568772061DE0B53D00129401 /* GhostGabUITests */ = {
+			isa = PBXGroup;
+			children = (
+				568772071DE0B53D00129401 /* GhostGabUITests.swift */,
+				568772091DE0B53D00129401 /* Info.plist */,
+			);
+			path = GhostGabUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		568771E31DE0B53C00129401 /* GhostGab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5687720C1DE0B53D00129401 /* Build configuration list for PBXNativeTarget "GhostGab" */;
+			buildPhases = (
+				568771E01DE0B53C00129401 /* Sources */,
+				568771E11DE0B53C00129401 /* Frameworks */,
+				568771E21DE0B53C00129401 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GhostGab;
+			productName = GhostGab;
+			productReference = 568771E41DE0B53C00129401 /* GhostGab.app */;
+			productType = "com.apple.product-type.application";
+		};
+		568771F71DE0B53D00129401 /* GhostGabTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5687720F1DE0B53D00129401 /* Build configuration list for PBXNativeTarget "GhostGabTests" */;
+			buildPhases = (
+				568771F41DE0B53D00129401 /* Sources */,
+				568771F51DE0B53D00129401 /* Frameworks */,
+				568771F61DE0B53D00129401 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				568771FA1DE0B53D00129401 /* PBXTargetDependency */,
+			);
+			name = GhostGabTests;
+			productName = GhostGabTests;
+			productReference = 568771F81DE0B53D00129401 /* GhostGabTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		568772021DE0B53D00129401 /* GhostGabUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 568772121DE0B53D00129401 /* Build configuration list for PBXNativeTarget "GhostGabUITests" */;
+			buildPhases = (
+				568771FF1DE0B53D00129401 /* Sources */,
+				568772001DE0B53D00129401 /* Frameworks */,
+				568772011DE0B53D00129401 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				568772051DE0B53D00129401 /* PBXTargetDependency */,
+			);
+			name = GhostGabUITests;
+			productName = GhostGabUITests;
+			productReference = 568772031DE0B53D00129401 /* GhostGabUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		568771DC1DE0B53C00129401 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Sruthin Gaddam";
+				TargetAttributes = {
+					568771E31DE0B53C00129401 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					568771F71DE0B53D00129401 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 568771E31DE0B53C00129401;
+					};
+					568772021DE0B53D00129401 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 568771E31DE0B53C00129401;
+					};
+				};
+			};
+			buildConfigurationList = 568771DF1DE0B53C00129401 /* Build configuration list for PBXProject "GhostGab" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 568771DB1DE0B53C00129401;
+			productRefGroup = 568771E51DE0B53C00129401 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				568771E31DE0B53C00129401 /* GhostGab */,
+				568771F71DE0B53D00129401 /* GhostGabTests */,
+				568772021DE0B53D00129401 /* GhostGabUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		568771E21DE0B53C00129401 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				568771F21DE0B53C00129401 /* LaunchScreen.storyboard in Resources */,
+				568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */,
+				568771ED1DE0B53C00129401 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568771F61DE0B53D00129401 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568772011DE0B53D00129401 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		568771E01DE0B53C00129401 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				568771EA1DE0B53C00129401 /* ViewController.swift in Sources */,
+				568771E81DE0B53C00129401 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568771F41DE0B53D00129401 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				568771FD1DE0B53D00129401 /* GhostGabTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568771FF1DE0B53D00129401 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				568772081DE0B53D00129401 /* GhostGabUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		568771FA1DE0B53D00129401 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 568771E31DE0B53C00129401 /* GhostGab */;
+			targetProxy = 568771F91DE0B53D00129401 /* PBXContainerItemProxy */;
+		};
+		568772051DE0B53D00129401 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 568771E31DE0B53C00129401 /* GhostGab */;
+			targetProxy = 568772041DE0B53D00129401 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		568771EB1DE0B53C00129401 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				568771EC1DE0B53C00129401 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		568771F01DE0B53C00129401 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				568771F11DE0B53C00129401 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5687720A1DE0B53D00129401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5687720B1DE0B53D00129401 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5687720D1DE0B53D00129401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GhostGab/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		5687720E1DE0B53D00129401 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GhostGab/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		568772101DE0B53D00129401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GhostGabTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGabTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GhostGab.app/GhostGab";
+			};
+			name = Debug;
+		};
+		568772111DE0B53D00129401 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GhostGabTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGabTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GhostGab.app/GhostGab";
+			};
+			name = Release;
+		};
+		568772131DE0B53D00129401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = GhostGabUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGabUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GhostGab;
+			};
+			name = Debug;
+		};
+		568772141DE0B53D00129401 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = GhostGabUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGabUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GhostGab;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		568771DF1DE0B53C00129401 /* Build configuration list for PBXProject "GhostGab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5687720A1DE0B53D00129401 /* Debug */,
+				5687720B1DE0B53D00129401 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5687720C1DE0B53D00129401 /* Build configuration list for PBXNativeTarget "GhostGab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5687720D1DE0B53D00129401 /* Debug */,
+				5687720E1DE0B53D00129401 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5687720F1DE0B53D00129401 /* Build configuration list for PBXNativeTarget "GhostGabTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				568772101DE0B53D00129401 /* Debug */,
+				568772111DE0B53D00129401 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		568772121DE0B53D00129401 /* Build configuration list for PBXNativeTarget "GhostGabUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				568772131DE0B53D00129401 /* Debug */,
+				568772141DE0B53D00129401 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 568771DC1DE0B53C00129401 /* Project object */;
+}
