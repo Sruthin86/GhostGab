@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GaB-Ra-cWj">
-                                <rect key="frame" x="-286" y="0.0" width="886" height="65"/>
+                                <rect key="frame" x="-507" y="0.0" width="886" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="9Xx-qO-TDh"/>
                                     <constraint firstAttribute="height" constant="65" id="gK5-zd-ekN"/>
@@ -49,7 +49,7 @@
                                 </textAttributes>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHX-pR-niI">
-                                <rect key="frame" x="28" y="406" width="544" height="82"/>
+                                <rect key="frame" x="24" y="506" width="327" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MHX-pR-niI" secondAttribute="height" multiplier="359:54" id="quu-da-i4B"/>
                                 </constraints>
@@ -59,7 +59,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="owG-ma-dPc">
-                                <rect key="frame" x="234" y="105" width="132" height="137"/>
+                                <rect key="frame" x="121.5" y="105" width="132" height="137"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="owG-ma-dPc" secondAttribute="height" multiplier="26:27" id="Jom-Zk-bgH"/>
                                     <constraint firstAttribute="width" secondItem="owG-ma-dPc" secondAttribute="height" multiplier="26:27" id="VOn-Mx-B5I"/>
@@ -100,7 +100,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNN-PV-l3J">
-                                <rect key="frame" x="-143" y="0.0" width="886" height="65"/>
+                                <rect key="frame" x="-255.5" y="0.0" width="886" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QNN-PV-l3J" secondAttribute="height" multiplier="150:11" id="53e-Vz-Wql"/>
                                     <constraint firstAttribute="height" constant="65" id="c2C-gh-8GC"/>
@@ -108,7 +108,7 @@
                                 <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We are working in the background!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMm-x2-HEx">
-                                <rect key="frame" x="183" y="113" width="235" height="58"/>
+                                <rect key="frame" x="70" y="113" width="235" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pMm-x2-HEx" secondAttribute="height" multiplier="235:58" id="bpo-mO-ubF"/>
                                     <constraint firstAttribute="height" constant="58" id="d9b-ng-zaF"/>
@@ -145,7 +145,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NLO-HQ-l1P">
-                                <rect key="frame" x="-143" y="0.0" width="886" height="65"/>
+                                <rect key="frame" x="-255.5" y="0.0" width="886" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="YI1-cX-I7p"/>
                                     <constraint firstAttribute="height" constant="65" id="r5j-mw-Cqa"/>
@@ -157,7 +157,7 @@
                                 </textAttributes>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="hbg-Mj-gbA">
-                                <rect key="frame" x="281" y="20" width="39" height="41"/>
+                                <rect key="frame" x="168" y="20" width="39" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hbg-Mj-gbA" secondAttribute="height" multiplier="39:41" id="Bxj-hx-xi9"/>
                                     <constraint firstAttribute="width" constant="39" id="fZ0-5F-ERx"/>
@@ -165,7 +165,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  UserName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I3O-Z7-f9g">
-                                <rect key="frame" x="152" y="132" width="297" height="48"/>
+                                <rect key="frame" x="39" y="132" width="297" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="297" id="a45-oI-N21"/>
                                     <constraint firstAttribute="height" constant="48" id="dV8-wZ-4g0"/>
@@ -183,7 +183,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Ph # for Verification" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tRI-Fu-1RT">
-                                <rect key="frame" x="152" y="212" width="297" height="48"/>
+                                <rect key="frame" x="39" y="212" width="297" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="bOU-K2-e3U"/>
                                     <constraint firstAttribute="width" constant="297" id="vlI-wP-Ih2"/>
@@ -201,7 +201,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M59-zG-ngH">
-                                <rect key="frame" x="135" y="335" width="330" height="55"/>
+                                <rect key="frame" x="22.5" y="335" width="330" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="M59-zG-ngH" secondAttribute="height" multiplier="6:1" id="CQ2-Ml-zRQ"/>
                                     <constraint firstAttribute="height" constant="55" id="bNb-he-tke"/>
@@ -295,7 +295,7 @@
                                     <constraint firstAttribute="height" constant="48" id="jW0-H6-xNF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -12,14 +12,17 @@ import FBSDKCoreKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import OneSignal
 
 class ViewController: UIViewController  {
     
     
     
     override func viewDidLoad() {
+        var oneSignalId:String?
         super.viewDidLoad()
         
+        //OneSignal.postNotification(["contents": ["en": "Test Message"], "include_player_ids": [oneSignalId]])
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if let  user = user {
                 let uid = user.uid

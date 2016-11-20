@@ -114,6 +114,7 @@
 		568772511DE0BB3300129401 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		568772531DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameAndPhoneNoViewController.swift; sourceTree = "<group>"; };
 		568772551DE0BB6500129401 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
+		568772571DE0CAC100129401 /* GhostGab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GhostGab.entitlements; sourceTree = "<group>"; };
 		665ADA904700493FA7B1AE5E /* Pods_Shared_GhostGabTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_GhostGabTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42D5AF563E681DA40E491BD /* Pods_Shared_GhostGab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_GhostGab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A905C15B82F9A9BE35B07BA4 /* Pods-Shared-GhostGabTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-GhostGabTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-GhostGabTests/Pods-Shared-GhostGabTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +197,7 @@
 		568771E61DE0B53C00129401 /* GhostGab */ = {
 			isa = PBXGroup;
 			children = (
+				568772571DE0CAC100129401 /* GhostGab.entitlements */,
 				568772151DE0B75400129401 /* GoogleService-Info.plist */,
 				568771F31DE0B53C00129401 /* Info.plist */,
 				568772191DE0B78900129401 /* Dashboard.storyboard */,
@@ -336,6 +338,14 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 7Z67VMB4ND;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					568771F71DE0B53D00129401 = {
 						CreatedOnToolsVersion = 8.1;
@@ -665,6 +675,7 @@
 			baseConfigurationReference = B4D68C04AB0CE78A9BB36BB3 /* Pods-Shared-GhostGab.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GhostGab/GhostGab.entitlements;
 				DEVELOPMENT_TEAM = 7Z67VMB4ND;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -672,7 +683,7 @@
 				);
 				INFOPLIST_FILE = GhostGab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGab;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -683,6 +694,7 @@
 			baseConfigurationReference = 1520A6E34369BF95543446F9 /* Pods-Shared-GhostGab.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GhostGab/GhostGab.entitlements;
 				DEVELOPMENT_TEAM = 7Z67VMB4ND;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -690,7 +702,7 @@
 				);
 				INFOPLIST_FILE = GhostGab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab.GhostGab;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

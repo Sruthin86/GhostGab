@@ -14,6 +14,9 @@ class RequestSuggestionTableViewCell: UITableViewCell {
     @IBOutlet weak var rsImageView: UIImageView!
     
     @IBOutlet weak var rsLabel: UILabel!
+    
+    @IBOutlet weak var sendRequestBtn: UIButton!
+    
     let green: Color = Color.green
     
     let width: Int = 1
@@ -38,7 +41,6 @@ class RequestSuggestionTableViewCell: UITableViewCell {
         let costomization:UICostomization =  UICostomization(color: green.getColor(), width:1)
         costomization.addRoundedBorder(object: self.rsImageView)
     }
-    
     
     
     

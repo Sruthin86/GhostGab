@@ -11,6 +11,7 @@ import Contacts
 import ContactsUI
 import Firebase
 import FirebaseDatabase
+import OneSignal
 
 class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
@@ -75,11 +76,23 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             
             cell.setImageData(photoUrl: self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
             cell.rsLabel.text = self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
+            cell.sendRequestBtn.tag = indexPath.row
+            cell.sendRequestBtn.addTarget(self, action: #selector(self.sendRequest), for: .touchUpInside)
         }
         
         return cell
     }
     
+    
+    
+    func sendRequest(sender: AnyObject) -> Void {
+        let currentUser =  UserDefaults.standard.object(forKey: displayName) as! String
+        let OnesignalIndexPath = NSIndexPath(row: sender.tag, section: 0)
+        let reqOneSignalId = self.suggestionsArray[self.suggestionsArrayKey[OnesignalIndexPath.row]]!.value(forKey :"oneSignalId")
+       
+        let notificationText: String = currentUser + " sent you a friend request"
+        OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [reqOneSignalId]])
+        }
     
     @IBAction func suggestions(_ sender: AnyObject) {
         

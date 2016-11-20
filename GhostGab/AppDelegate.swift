@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import OneSignal
 
 var fireBaseUid: String = "fireBaseUid"
+var displayName: String = "displayName"
 
 
 @UIApplicationMain
@@ -26,24 +27,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        application.registerForRemoteNotifications()
         
-        OneSignal.initWithLaunchOptions(launchOptions, appId: "fd63a2a8-1d1e-464f-844d-5822b1602f7e") { (result) in
-            
-            // This block gets called when the user reacts to a notification received
-            
+        
+        OneSignal.initWithLaunchOptions(launchOptions, appId: "fd63a2a8-1d1e-464f-844d-5822b1602f7e", handleNotificationReceived: nil, handleNotificationAction: {
+            (result) in
+            // Do Something with Notification Result
             let payload = result?.notification.payload
+            let displayType = result?.notification.displayType
             let messageTitle = "OneSignal Example"
             var fullMessage = payload?.title
             
-            //Try to fetch the action selected
-            if let additionalData = payload?.additionalData, let actionSelected = additionalData["actionSelected"] as? String {
-                fullMessage =  fullMessage! + "\nPressed ButtonId:\(actionSelected)"
-            }
-            
-            let alertView = UIAlertView(title: messageTitle, message: fullMessage, delegate: nil, cancelButtonTitle: "Close")
-            alertView.show()
-        }
-        
+            print("title")
+            print(fullMessage)
+        }, settings: [kOSSettingsKeyInFocusDisplayOption : OSNotificationDisplayType.notification.rawValue])
         
         
         return true
@@ -60,6 +61,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return facebookDidHandle
     }
     
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        var state: UIApplicationState = application.applicationState
+        // user tapped notification while app was in background
+        if state == .inactive || state == .background {
+            // go to screen relevant to Notification content
+        }
+        else {
+            print("running")
+            // App is in UIApplicationStateActive (running in foreground)
+            // perhaps show an UIAlertView
+        }
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

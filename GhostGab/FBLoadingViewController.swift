@@ -13,15 +13,24 @@ import FBAudienceNetwork
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import OneSignal
 
 class FBLoadingViewController: UIViewController {
     
     var overlayView = UIView()
-    
+    var oneSignalId:String?
     
     
     
     override func viewDidLoad() {
+        OneSignal.idsAvailable({ (userId, pushToken) in
+            self.oneSignalId = userId!
+            print("UserId:%@", userId)
+            if (pushToken != nil) {
+                print("pushToken:%@", pushToken)
+            }
+        })
+
         super.viewDidLoad()
         var spinner:loadingAnimation = loadingAnimation(overlayView: overlayView, senderView: self.view)
         spinner.showOverlay(alphaValue: 0)
@@ -82,7 +91,8 @@ class FBLoadingViewController: UIViewController {
                             let databaseRef = FIRDatabase.database().reference()
                             let uModel =  UserModel(name: user.displayName, userName: "", email: user.email, photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
                             UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
-                            let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject  ]
+                            UserDefaults.standard.set(user.displayName, forKey: displayName)
+                            let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject  ]
                             databaseRef.child("Users").child(user.uid).setValue(postUserData)
                             DispatchQueue.main.async (execute: {
                                 let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

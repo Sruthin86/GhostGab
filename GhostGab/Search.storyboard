@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YjF-Hx-2t6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YjF-Hx-2t6">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,22 +24,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KKj-pb-fUI">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="MXM-lp-YVE"/>
                                 </constraints>
                                 <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="NKz-kx-mdx">
+                                <rect key="frame" x="168" y="20" width="39" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="5Xy-Er-J2a"/>
                                     <constraint firstAttribute="width" constant="39" id="9pK-Ck-QBo"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9ru-Sf-6QH">
+                                <rect key="frame" x="-4" y="65" width="383" height="110"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5C5-8m-Jsh">
+                                        <rect key="frame" x="0.0" y="0.0" width="383" height="55"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-za-pXh">
+                                                <rect key="frame" x="0.0" y="0.0" width="383" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="f6T-42-nmf"/>
                                                 </constraints>
@@ -53,10 +61,13 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5Sc-mu-rPR">
+                                        <rect key="frame" x="0.0" y="55" width="383" height="55"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YL-kk-iGo">
+                                                <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBL-aH-vyC">
+                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Requests"/>
                                                     </button>
@@ -70,8 +81,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZZ-Kr-LAr">
+                                                <rect key="frame" x="191.5" y="0.0" width="191.5" height="55"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-gR-Um3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Suggestions"/>
                                                         <connections>
@@ -95,16 +108,18 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sz5-Qo-eoY">
+                                <rect key="frame" x="-4" y="175" width="383" height="443"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="rsCell" rowHeight="75" id="BnC-ut-Jsl" customClass="RequestSuggestionTableViewCell" customModule="GhostGab" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="383" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BnC-ut-Jsl" id="N8z-mj-xM1">
-                                            <frame key="frameInset" width="383" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dir-Td-Ihl">
+                                                    <rect key="frame" x="28" y="14" width="53" height="53"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="53" id="WuE-22-oDq"/>
                                                         <constraint firstAttribute="width" secondItem="Dir-Td-Ihl" secondAttribute="height" multiplier="1:1" id="g2T-hD-aZa"/>
@@ -112,6 +127,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2l-Dx-5FA">
+                                                    <rect key="frame" x="103" y="28" width="150" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="pJ5-YY-1HX"/>
                                                     </constraints>
@@ -120,6 +136,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbb-bZ-6ds">
+                                                    <rect key="frame" x="286" y="23" width="33" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="33" id="CRd-ug-d3V"/>
                                                         <constraint firstAttribute="width" secondItem="Qbb-bZ-6ds" secondAttribute="height" multiplier="1:1" id="Kra-ho-mmD"/>
@@ -128,6 +145,7 @@
                                                     <state key="normal" title="Button" image="Check"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcE-mA-0It">
+                                                    <rect key="frame" x="327" y="23" width="33" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="TB5-0s-YOc"/>
                                                         <constraint firstAttribute="width" constant="33" id="dNL-0I-Eq6"/>
@@ -150,6 +168,7 @@
                                         <connections>
                                             <outlet property="rsImageView" destination="Dir-Td-Ihl" id="0MQ-9H-ayA"/>
                                             <outlet property="rsLabel" destination="T2l-Dx-5FA" id="i7x-fk-21n"/>
+                                            <outlet property="sendRequestBtn" destination="Qbb-bZ-6ds" id="V9j-dJ-Pef"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
