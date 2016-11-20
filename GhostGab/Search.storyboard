@@ -70,6 +70,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Requests"/>
+                                                        <connections>
+                                                            <action selector="showRequests:" destination="YjF-Hx-2t6" eventType="touchUpInside" id="DHv-Y9-NcD"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

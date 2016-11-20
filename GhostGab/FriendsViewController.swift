@@ -6,13 +6,24 @@
 //  Copyright © 2016 Sruthin Gaddam. All rights reserved.
 //
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var friendsArray = [String: AnyObject]()
+    
+    var friendsArrayKey = [String]()
+    
+     let currentUserId =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
+    
+     let ref = FIRDatabase.database().reference()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getFriends()
         
         // Do any additional setup after loading the view.
     }
@@ -23,14 +34,96 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        let imageName = "loading_00003.png"
+        let labelText = "you will find your friends soon!!! "
+        if let friendsLength : Int = friendsArray.count{
+            if (friendsLength > 0){
+                self.tableView.backgroundView = .none
+                self.tableView.separatorStyle = .singleLine
+                return friendsLength
+            }
+            else {
+                displyNoDataLabel(imageName:imageName, labelText:labelText)
+                return 0
+
+            }
+        }
+        
+        else {
+           
+            displyNoDataLabel(imageName:imageName, labelText:labelText)
+            return 0
+
+        }
+
+        
+    }
+    
+    func displyNoDataLabel(imageName: String, labelText: String) -> Void {
+        
+        let image : UIImage = UIImage(named: imageName)!
+        let imageView :UIImageView = UIImageView(image: image)
+        imageView.frame = CGRect(x:self.tableView.frame.width/2 - 37.5, y:self.tableView.frame.height/3, width:75, height:99)
+        let textColor: Color = Color.grey
+        let noDataAvailableLabel: UILabel = UILabel(frame: CGRect(x:0, y:self.tableView.frame.height/4, width:self.tableView.frame.width, height:self.tableView.frame.height) )
+        
+        noDataAvailableLabel.text =  labelText
+        noDataAvailableLabel.textAlignment = .center
+        noDataAvailableLabel.textColor =  textColor.getColor()
+        noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:14.0)
+        self.tableView.separatorStyle = .none
+        var noFriendsView : UIView = UIView( frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height))
+        noFriendsView.addSubview(imageView)
+        noFriendsView.addSubview(noDataAvailableLabel)
+        self.tableView.backgroundView = noFriendsView
+       
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let friendsCell :UITableViewCell =  tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsTableViewCell
-        
+        let friendsCell :FriendsTableViewCell =  tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsTableViewCell
+
+        friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
+        friendsCell.displayName.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
         return friendsCell
     }
     
+    
+    func getFriends() -> Void {
+        
+        ref.child("Users").child(currentUserId).child("Friends").observe(FIRDataEventType.value, with: {(snapshot) in
+            
+            if (!snapshot.exists()){
+                self.friendsArray.removeAll()
+                self.friendsArrayKey.removeAll()
+                self.tableView.reloadData()
+            }
+            else {
+                self.friendsArray.removeAll()
+                self.friendsArrayKey.removeAll()
+                let friendData = snapshot.value as! [String:String] as [String : AnyObject]
+                for (key,value) in friendData {
+                    
+                    self.ref.child("Users").child(key).observeSingleEvent(of: .value, with: { snapshot in
+                        if(snapshot.childrenCount > 0 ){
+                            let data:NSDictionary  = snapshot.value as! NSDictionary
+                            self.friendsArrayKey.append(key as! String)
+                            self.friendsArray[key as! String] = data as AnyObject?
+                            self.tableView.reloadData()
+                        }
+                            
+                        else {
+                            
+                            
+                        }
+                    })
+                    
+                    
+                }
+                
+            }
+        
+        })
+    }
     
 }
