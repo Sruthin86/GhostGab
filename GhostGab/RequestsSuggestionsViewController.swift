@@ -45,7 +45,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     let lightgrey :Color = Color.lightGrey
     
-     let grey :Color = Color.grey
+    let grey :Color = Color.grey
     
     let green :Color = Color.green
     
@@ -101,7 +101,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                     return requestsLength
                 }
                 else {
-                   
+                    
                     displyNoDataLabel(imageName:imageName, labelText:labelText)
                     return 0
                 }
@@ -109,7 +109,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             else{
                 displyNoDataLabel(imageName:imageName, labelText:labelText)
                 return 0
-
+                
             }
         }
         else {
@@ -164,7 +164,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     func AcceptButton(sender: AnyObject) -> Void {
         let OnesignalIndexPath = NSIndexPath(row: sender.tag, section: 0)
         if(suggestionsFlag){
-           sendRequest(OnesignalIndexPath: OnesignalIndexPath)
+            sendRequest(OnesignalIndexPath: OnesignalIndexPath)
         }
         else if(requestsFlag){
             conformRequest(OnesignalIndexPath: OnesignalIndexPath)
@@ -177,6 +177,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         ref.child("Users").child(requestedUserUid).child("Requests").child(currentUserId).setValue(currentUser)
         let notificationText: String = currentUser + " sent you a friend request"
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [reqOneSignalId]])
+        self.fetchContacts()
     }
     
     func conformRequest(OnesignalIndexPath: NSIndexPath) -> Void {
@@ -184,13 +185,13 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         let friendOneSignalId = self.requestsArray[self.requestsArrayKey[OnesignalIndexPath.row]]!.value(forKey :"oneSignalId")
         let requestedUserUid = self.requestsArrayKey[OnesignalIndexPath.row]
         let friendDisplayName = self.requestsArray[self.requestsArrayKey[OnesignalIndexPath.row]]!.value(forKey :"displayName")
-        ref.child("Users").child(requestedUserUid).child("Friends").child(friendUid).setValue(friendDisplayName)
+        ref.child("Users").child(requestedUserUid).child("Friends").child(currentUserId).setValue(currentUser)
         ref.child("Users").child(currentUserId).child("Friends").child(friendUid).setValue(friendDisplayName)
         ref.child("Users").child(currentUserId).child("Requests").child(requestedUserUid).removeValue()
         let notificationText: String = currentUser + " Accepted you a friend request"
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [friendOneSignalId]])
     }
-
+    
     
     
     
@@ -209,39 +210,39 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             
             if (!snapshot.exists()){
                 
-               self.requestsArray.removeAll()
-               self.requestsArrayKey.removeAll()
-               self.tableView.reloadData()
+                self.requestsArray.removeAll()
+                self.requestsArrayKey.removeAll()
+                self.tableView.reloadData()
             }
-            
-            
+                
+                
             else {
-               self.requestsArray.removeAll()
-               self.requestsArrayKey.removeAll()
-               let reqData = snapshot.value  as! [String : AnyObject]
-             
+                self.requestsArray.removeAll()
+                self.requestsArrayKey.removeAll()
+                let reqData = snapshot.value  as! [String : AnyObject]
+                
                 for (key,value) in reqData {
                     
                     self.ref.child("Users").child(key).observeSingleEvent(of: .value, with: { snapshot in
-                         if(snapshot.childrenCount > 0 ){
+                        if(snapshot.childrenCount > 0 ){
                             let data:NSDictionary  = snapshot.value as! NSDictionary
-                                self.requestsArrayKey.append(key as! String)
-                                self.requestsArray[key as! String] = data as AnyObject?
-                                self.tableView.reloadData()
+                            self.requestsArrayKey.append(key as! String)
+                            self.requestsArray[key as! String] = data as AnyObject?
+                            self.tableView.reloadData()
                         }
-                        
-                         else {
-                           print("Inside else ")
+                            
+                        else {
+                            print("Inside else ")
                             
                         }
-                     })
-                   
-                   
+                    })
+                    
+                    
                 }
-                    return
-                }
-                          
-            })
+                return
+            }
+            
+        })
         self.tableView.reloadData()
     }
     
@@ -298,7 +299,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                         MobNumVar!.substring(with: MobNumVar!.startIndex ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3)),
                                         MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6)),
                                         MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 10)))
-                   
+                    
                     self.ref.child("Users").queryOrdered(byChild: "phoneNumber").queryStarting(atValue: MobNumVar!).queryEnding(atValue: MobNumVar!).observeSingleEvent(of: .value, with: { snapshot in
                         
                         if(snapshot.exists()){
@@ -306,15 +307,44 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                             
                             let data:NSDictionary  = snapshot.value as! NSDictionary
                             
-                            for suggestionsData in data{
+                            self.suggestionsArrayKey.removeAll()
+                            self.suggestionsArray.removeAll()
+                            
+                            self.ref.child("Users").child(self.currentUserId).observeSingleEvent(of: .value, with: { snapshot in
+                                if(snapshot.exists()){
+                                    for suggestionsData in data{
+                                        
+                                        var  requestsExists:Bool = false
+                                        var  FriendsExists:Bool = false
+                                        
+                                        let uData = snapshot.value  as! NSDictionary
+                                        print(uData)
+                                        
+                                        if(uData["Requests"] != nil){
+                                            var req  = uData["Requests"] as! NSDictionary
+                                            if(req[suggestionsData.key ] != nil) {
+                                                requestsExists = true
+                                            }
+                                        }
+                                        if(uData["Friends"] != nil){
+                                            var frnd = uData["Friends"] as! NSDictionary
+                                            if(frnd[suggestionsData.key ] != nil){
+                                                FriendsExists = true
+                                            }
+                                        }
+                                        
+                                        if(!requestsExists && !FriendsExists && self.currentUserId != suggestionsData.key as! String){
+                                            self.suggestionsArrayKey.append(suggestionsData.key as! String)
+                                            self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
+                                        }
+                                        
+                                        self.tableView.reloadData()
+                                        
+                                    }
+                                    
+                                }
                                 
-                                self.suggestionsArrayKey.append(suggestionsData.key as! String)
-                                self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
-                            }
-                            
-                            
-                            
-                            self.tableView.reloadData()
+                            })
                             
                         }
                         else {
