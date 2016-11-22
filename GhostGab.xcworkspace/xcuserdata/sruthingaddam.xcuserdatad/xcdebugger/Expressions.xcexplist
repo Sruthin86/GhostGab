@@ -13,5 +13,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "postModel.returnPostsForArray(friendsArray : [AnyObject]) -&gt; NSDictionary:postModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "friendsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

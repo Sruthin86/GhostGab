@@ -174,6 +174,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     func sendRequest(OnesignalIndexPath: NSIndexPath) -> Void {
         let reqOneSignalId = self.suggestionsArray[self.suggestionsArrayKey[OnesignalIndexPath.row]]!.value(forKey :"oneSignalId")
         let requestedUserUid = self.suggestionsArrayKey[OnesignalIndexPath.row]
+        let requestedDisplayName = self.suggestionsArray[self.suggestionsArrayKey[OnesignalIndexPath.row]]!.value(forKey :"displayName")
+        ref.child("Users").child(currentUserId).child("RequestsSent").child(requestedUserUid).setValue(requestedDisplayName)
         ref.child("Users").child(requestedUserUid).child("Requests").child(currentUserId).setValue(currentUser)
         let notificationText: String = currentUser + " sent you a friend request"
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [reqOneSignalId]])
@@ -315,10 +317,18 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                     for suggestionsData in data{
                                         
                                         var  requestsExists:Bool = false
+                                        var  requestsSentExists:Bool = false
                                         var  FriendsExists:Bool = false
                                         
                                         let uData = snapshot.value  as! NSDictionary
                                         print(uData)
+                                        
+                                        if(uData["RequestsSent"] != nil){
+                                            var reqSent  = uData["RequestsSent"] as! NSDictionary
+                                            if(reqSent[suggestionsData.key ] != nil) {
+                                                requestsSentExists = true
+                                            }
+                                        }
                                         
                                         if(uData["Requests"] != nil){
                                             var req  = uData["Requests"] as! NSDictionary
@@ -333,7 +343,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                             }
                                         }
                                         
-                                        if(!requestsExists && !FriendsExists && self.currentUserId != suggestionsData.key as! String){
+                                        if(!requestsExists && !FriendsExists && !requestsSentExists && self.currentUserId != suggestionsData.key as! String){
                                             self.suggestionsArrayKey.append(suggestionsData.key as! String)
                                             self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
                                         }

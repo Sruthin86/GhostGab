@@ -30,18 +30,35 @@ struct postModel {
     //
     //    }
     
-    mutating func returnPostsForArray()  -> NSDictionary {
+    mutating func returnPostsForArray(friendsArray:Set<String>)  -> NSDictionary {
         
         let postData  = posts!.value as! NSDictionary
         let currentuserUid =  self.uid as! String
         for (key , val ) in postData {
             
             let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
-            if (postUid == currentuserUid  ){ // entire logic needs to be re written once friends functionality is implemented
-                self.postsArray[key as! String] = val as AnyObject?
-                self.postKeys.append(key as! String)
+            if(friendsArray.count > 0){
+                for fUid in friendsArray{
+                    var frinedUID :String = fUid as! String
+                    if (postUid == currentuserUid ||  postUid == frinedUID ){ //  logic to get self and friends posts
+                        self.postsArray[key as! String] = val as AnyObject?
+                        self.postKeys.append(key as! String)
+                        
+                    }
+                }
+                
                 
             }
+            else {
+                if (postUid == currentuserUid  ){ // logic if the user doesn't have any friends 
+                    self.postsArray[key as! String] = val as AnyObject?
+                    self.postKeys.append(key as! String)
+                    
+                }
+                
+            }
+            
+           
         }
         
         
@@ -50,6 +67,7 @@ struct postModel {
         
         
     }
+    
     
     func returnPostKeys() -> [String]{
         return self.postKeys

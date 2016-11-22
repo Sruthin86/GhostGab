@@ -63,6 +63,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     var postKeys = [String]()
     
+    var friendsUidArray = Set<String>()
+    
     var oldPostKeysCount : Int = 0
     
     let helperClass : HelperFunctions = HelperFunctions()
@@ -82,7 +84,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         refreshControl.addTarget(self, action: #selector(PostViewController.uiRefreshActionControl), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        getPosts()
+        getFriends()
         
         // Do any additional setup after loading the view.
     }
@@ -134,7 +136,6 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("intable")
         let postFeedCell = tableView.dequeueReusableCell(withIdentifier: "PostViewCell", for: indexPath) as! PostCellTableViewCell
         postFeedCell.ReactionsContent.isHidden = true
         postFeedCell.reactButton.tag = indexPath.row
@@ -148,8 +149,6 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){
-                print("openpostkey")
-                print(self.openedPostCellKey)
                 self.selectedInxexPath = indexPath as NSIndexPath?
             }
         }
@@ -159,8 +158,6 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         }
         if (self.selectedInxexPath! as IndexPath == indexPath){
             if(self.postKeys[indexPath.row] ==  self.openedPostCellKey){
-                print(self.selectedInxexPath?.row)
-                print("opennnnnnnnnnnn")
                 postFeedCell.openReactionsView()
             }
         }
@@ -197,7 +194,6 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         selectedInxexPathsArray.removeAll()
         if (selectedInxexPath != nil) {
             let previousSelectedPath :NSIndexPath = selectedInxexPath!
-            print(previousSelectedPath.row)
             selectedInxexPathsArray.append(previousSelectedPath)
         }
         
@@ -247,6 +243,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     
     func animateTable() {
+        getFriends()
         self.tableView.reloadData()
         let cells = self.tableView.visibleCells
         
@@ -270,6 +267,30 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     
     
+    func getFriends() {
+        ref.child("Users").child(uid as! String).observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
+            let snapData =  snapshot.value as! [String:AnyObject]
+            if(snapData["Friends"] != nil){
+                for friendsUid in snapData["Friends"] as! NSDictionary{
+                    if(!self.friendsUidArray.contains(friendsUid.key as! String )){
+                        self.friendsUidArray.insert(friendsUid.key as! String)
+                    }
+
+                }
+            }
+            self.getPosts()
+            // ...
+        })
+        
+    }
+    
+    
+    
+
+    
+    
+    
+    
     func getPosts(){
         
         ref.child("Posts").queryOrdered(byChild: "TS").observe(FIRDataEventType.value, with: { (snapshot) in
@@ -278,7 +299,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                 
                 var pModel = postModel(posts: snapshot)
                 self.oldPostKeysCount = self.postKeys.count
-                self.postsArray = pModel.returnPostsForArray() as! [String : AnyObject]
+                self.postsArray = pModel.returnPostsForArray(friendsArray:self.friendsUidArray) as! [String : AnyObject]
                 self.postKeys = pModel.returnPostKeys()
                 self.postKeys = self.postKeys.sorted{ $0 > $1 }
                 self.tableView.reloadData()
@@ -303,7 +324,6 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         
     }
-    
     
     
     func updateScrollPosition(diff: Int){
