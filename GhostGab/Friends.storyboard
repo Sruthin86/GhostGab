@@ -99,6 +99,7 @@
                                         <connections>
                                             <outlet property="displayName" destination="aji-ef-rvn" id="TVL-b2-nVX"/>
                                             <outlet property="friendsImageView" destination="WGN-z2-Pto" id="CQ1-EP-QvG"/>
+                                            <outlet property="removeFriend" destination="wes-iB-4bG" id="mZc-iF-Vzj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

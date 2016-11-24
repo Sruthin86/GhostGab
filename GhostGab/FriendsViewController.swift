@@ -85,9 +85,23 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
         friendsCell.displayName.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
+        friendsCell.removeFriend.tag = indexPath.row
+        friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
+        friendsCell.setBackground(colorValue: "white")
         return friendsCell
     }
     
+    func removeFriend(sender: AnyObject){
+        let removeIndexPath = NSIndexPath(row: sender.tag, section: 0)
+        let highLightedCell : FriendsTableViewCell = self.tableView.cellForRow(at: removeIndexPath as IndexPath) as! FriendsTableViewCell
+        highLightedCell.setBackground(colorValue: "lightRed")
+        let friendUid = self.friendsArrayKey[removeIndexPath.row]
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (timer) in
+            self.ref.child("Users").child(self.currentUserId).child("Friends").child(friendUid).removeValue()
+            self.ref.child("Users").child(friendUid).child("Friends").child(self.currentUserId).removeValue()
+        }
+        
+    }
     
     func getFriends() -> Void {
         

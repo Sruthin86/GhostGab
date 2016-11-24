@@ -63,7 +63,6 @@ class FBLoadingViewController: UIViewController {
             
             if (facebookError == nil){
                 let fbloginresult : FBSDKLoginManagerLoginResult = facebookResult!
-                print("result")
                 
                 if(fbloginresult.isCancelled) {
                     //Show Cancel alert
@@ -72,13 +71,9 @@ class FBLoadingViewController: UIViewController {
                     if((FBSDKAccessToken.current()) != nil){
                         FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":500 , "width":500 , "redirect":false ]).start(completionHandler: { (connection, result, error) -> Void in
                             if (error == nil){
-                                print(result)
+                               
                                 let largeImageDict  =  result as! NSDictionary
-                                print("largeImageDict")
-                                print(largeImageDict)
                                 let largeImgData = largeImageDict.object(forKey: "data")
-                                print("largeImgData")
-                                print(largeImgData)
                                 highResImagePicUrl = (largeImgData as! NSDictionary).object(forKey:"url") as? String
                             }
                         })

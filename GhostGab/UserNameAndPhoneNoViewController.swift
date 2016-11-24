@@ -108,7 +108,6 @@ class UserNameAndPhoneNoViewController: UIViewController {
             .replacingOccurrences(of:" ", with: "")
         
         let characterCount :Int  = (phNum?.characters.count)!
-        print(self.userName.text)
         
         if ((self.userName.text == nil || self.userName.text == "")   || (self.phoneNumber.text == nil || self.phoneNumber.text == "")  ) {
             
@@ -136,7 +135,6 @@ class UserNameAndPhoneNoViewController: UIViewController {
                     let uid =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
                     firebaseDBreference.child("Users").child(uid).child("userName").setValue(self.userName.text)
                     firebaseDBreference.child("Users").child(uid).child("phoneNumber").setValue(self.phoneNumber.text)
-                    print(self.verifiction)
                     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let verifyController = storyBoard.instantiateViewController(withIdentifier: "VerifyPhoneNo") as! VerificationViewController
                     verifyController.verifiction = self.verifiction

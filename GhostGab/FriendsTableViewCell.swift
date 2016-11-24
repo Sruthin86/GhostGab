@@ -16,7 +16,15 @@ class FriendsTableViewCell: UITableViewCell {
     
     let green: Color = Color.green
     
+    let white: Color = Color.white
+    
+    let lightGreen: Color = Color.lightGreen
+    
+    let lightRed: Color = Color.lightRed
+    
     let width: Int = 1
+   
+    @IBOutlet weak var removeFriend: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,5 +47,20 @@ class FriendsTableViewCell: UITableViewCell {
         costomization.addRoundedBorder(object: self.friendsImageView)
     }
 
+    func setBackground(colorValue:String){
+        switch colorValue {
+        case "lightGreen":
+            let customization: UICostomization = UICostomization (color: lightGreen.getColor(), width:CGFloat(width))
+            customization.addBackground(object: self)
+        case "lightRed":
+            let customization: UICostomization = UICostomization (color: lightRed.getColor(), width:CGFloat(width))
+            customization.addBackground(object: self)
+            
+        default:
+            let customization: UICostomization = UICostomization (color: white.getColor(), width:CGFloat(width))
+            customization.addBackground(object: self)
+            
+        }
+    }
 
 }

@@ -51,6 +51,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     let white :Color = Color.white
     
+    let lighrGreen :Color = Color.lightGreen
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -140,7 +142,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: RequestSuggestionTableViewCell = tableView.dequeueReusableCell(withIdentifier: "rsCell", for: indexPath) as! RequestSuggestionTableViewCell
-        
+         cell.setBackground(colorValue: "white")
         
         if (self.suggestionsFlag){
             
@@ -148,13 +150,16 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             cell.rsLabel.text = self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             cell.sendRequestBtn.tag = indexPath.row
             cell.sendRequestBtn.addTarget(self, action: #selector(self.AcceptButton), for: .touchUpInside)
+            
         }
         else if (self.requestsFlag){
             
             cell.setImageData(photoUrl: self.requestsArray[self.requestsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
             cell.rsLabel.text = self.requestsArray[self.requestsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             cell.sendRequestBtn.tag = indexPath.row
+            cell.cancelBtn.tag = indexPath.row
             cell.sendRequestBtn.addTarget(self, action: #selector(self.AcceptButton), for: .touchUpInside)
+            cell.cancelBtn.addTarget(self, action: #selector(self.CancelButton), for: .touchUpInside)
         }
         
         return cell
@@ -163,15 +168,42 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     func AcceptButton(sender: AnyObject) -> Void {
         let OnesignalIndexPath = NSIndexPath(row: sender.tag, section: 0)
+        let highLightedCell : RequestSuggestionTableViewCell = self.tableView.cellForRow(at: OnesignalIndexPath as IndexPath) as! RequestSuggestionTableViewCell
+        highLightedCell.setBackground(colorValue: "lightGreen")
+            if(suggestionsFlag){
+                sendRequest(OnesignalIndexPath: OnesignalIndexPath)
+            }
+            else if(requestsFlag){
+                conformRequest(OnesignalIndexPath: OnesignalIndexPath)
+            }
+        
+        
+    }
+    
+    func CancelButton(sender: AnyObject){
+        let cancelIndexPath = NSIndexPath(row: sender.tag, section: 0)
+        let highLightedCell : RequestSuggestionTableViewCell = self.tableView.cellForRow(at: cancelIndexPath as IndexPath) as! RequestSuggestionTableViewCell
+        highLightedCell.setBackground(colorValue: "lightRed")
         if(suggestionsFlag){
-            sendRequest(OnesignalIndexPath: OnesignalIndexPath)
+            
         }
         else if(requestsFlag){
-            conformRequest(OnesignalIndexPath: OnesignalIndexPath)
+            cancelRequest(cancelIndexPath: cancelIndexPath)
         }
     }
     
+    func cancelRequest(cancelIndexPath: NSIndexPath){
+       
+        let requestedUserUid = self.requestsArrayKey[cancelIndexPath.row]
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (timer) in
+            self.ref.child("Users").child(self.currentUserId).child("Requests").child(requestedUserUid).removeValue()
+            self.ref.child("Users").child(requestedUserUid).child("RequestsSent").child(self.currentUserId).removeValue()
+        }
+       
+        
+    }
     func sendRequest(OnesignalIndexPath: NSIndexPath) -> Void {
+        
         let reqOneSignalId = self.suggestionsArray[self.suggestionsArrayKey[OnesignalIndexPath.row]]!.value(forKey :"oneSignalId")
         let requestedUserUid = self.suggestionsArrayKey[OnesignalIndexPath.row]
         let requestedDisplayName = self.suggestionsArray[self.suggestionsArrayKey[OnesignalIndexPath.row]]!.value(forKey :"displayName")
@@ -321,8 +353,6 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                         var  FriendsExists:Bool = false
                                         
                                         let uData = snapshot.value  as! NSDictionary
-                                        print(uData)
-                                        
                                         if(uData["RequestsSent"] != nil){
                                             var reqSent  = uData["RequestsSent"] as! NSDictionary
                                             if(reqSent[suggestionsData.key ] != nil) {

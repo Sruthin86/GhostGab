@@ -41,9 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let displayType = result?.notification.displayType
             let messageTitle = "OneSignal Example"
             var fullMessage = payload?.title
-            
-            print("title")
-            print(fullMessage)
         }, settings: [kOSSettingsKeyInFocusDisplayOption : OSNotificationDisplayType.notification.rawValue])
         
         
@@ -69,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // go to screen relevant to Notification content
         }
         else {
-            print("running")
             // App is in UIApplicationStateActive (running in foreground)
             // perhaps show an UIAlertView
         }
