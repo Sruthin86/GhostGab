@@ -14,7 +14,7 @@
         <!--Search-->
         <scene sceneID="v5q-Ts-JbD">
             <objects>
-                <viewController id="YjF-Hx-2t6" customClass="RequestsSuggestionsViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestAndSuggest" id="YjF-Hx-2t6" customClass="RequestsSuggestionsViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvE-OX-d2h"/>
                         <viewControllerLayoutGuide type="bottom" id="HCA-Qr-fCb"/>
@@ -50,6 +50,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                 <state key="normal" title="Search User"/>
+                                                <connections>
+                                                    <action selector="Search:" destination="YjF-Hx-2t6" eventType="touchUpInside" id="11b-DY-ZaS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -215,10 +218,10 @@
             </objects>
             <point key="canvasLocation" x="4672" y="-647"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Friends View Controller-->
         <scene sceneID="Ud2-ri-kdI">
             <objects>
-                <viewController id="rbG-0Y-gJk" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchUser" id="rbG-0Y-gJk" customClass="SearchFriendsViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A4F-7k-4pF"/>
                         <viewControllerLayoutGuide type="bottom" id="zuD-ra-YCq"/>
@@ -237,6 +240,9 @@
                                     <navigationItem id="2RQ-io-jCw">
                                         <barButtonItem key="leftBarButtonItem" image="BackButton" style="done" id="0ap-0o-WJN">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="Back:" destination="rbG-0Y-gJk" id="uSA-2I-IZl"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -249,20 +255,20 @@
                                     <constraint firstAttribute="width" constant="39" id="lZp-Ii-B6C"/>
                                 </constraints>
                             </imageView>
-                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" placeholder="Search using username or Ph#" translatesAutoresizingMaskIntoConstraints="NO" id="Evh-na-Vn5">
+                            <searchBar contentMode="redraw" placeholder="Search using username or Ph#" translatesAutoresizingMaskIntoConstraints="NO" id="Evh-na-Vn5">
                                 <rect key="frame" x="0.0" y="65" width="375" height="44"/>
                                 <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uQU-dK-lz4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uQU-dK-lz4">
                                 <rect key="frame" x="0.0" y="109" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="DI9-na-Fv3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchUsers" rowHeight="65" id="DI9-na-Fv3" customClass="SearchUsersTableViewCell" customModule="GhostGab" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DI9-na-Fv3" id="2KB-5K-dww">
@@ -276,7 +282,7 @@
                                                         <constraint firstAttribute="width" constant="53" id="uLl-Oq-xcP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-Lp-DF5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-Lp-DF5">
                                                     <rect key="frame" x="93" y="23" width="186" height="28"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                                     <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -290,6 +296,7 @@
                                                         <constraint firstAttribute="width" secondItem="cjq-lh-Ruw" secondAttribute="height" multiplier="1:1" id="r9o-Hb-voD"/>
                                                     </constraints>
                                                     <state key="normal" image="Plus"/>
+                                                    <state key="disabled" image="GreyCheck"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -298,20 +305,34 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="cjq-lh-Ruw" secondAttribute="bottom" constant="7" id="8Er-ZU-EXc"/>
                                                 <constraint firstItem="Qrf-Lp-DF5" firstAttribute="top" secondItem="2KB-5K-dww" secondAttribute="topMargin" constant="15" id="EF2-ag-spD"/>
                                                 <constraint firstItem="m24-Xf-Wgp" firstAttribute="leading" secondItem="2KB-5K-dww" secondAttribute="leading" constant="20" id="FD8-DF-egA"/>
+                                                <constraint firstItem="cjq-lh-Ruw" firstAttribute="leading" secondItem="Qrf-Lp-DF5" secondAttribute="trailing" constant="41" id="JXe-7e-kB7"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="cjq-lh-Ruw" secondAttribute="trailing" constant="14" id="lV0-bW-K70"/>
                                                 <constraint firstItem="m24-Xf-Wgp" firstAttribute="top" secondItem="2KB-5K-dww" secondAttribute="top" constant="6" id="pYy-M7-UNt"/>
                                                 <constraint firstItem="cjq-lh-Ruw" firstAttribute="top" secondItem="2KB-5K-dww" secondAttribute="topMargin" constant="8" id="qPZ-R0-oC1"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addFriend" destination="cjq-lh-Ruw" id="qiB-cG-R15"/>
+                                            <outlet property="displayName" destination="Qrf-Lp-DF5" id="RG3-vb-ufJ"/>
+                                            <outlet property="searchFriendsImageView" destination="m24-Xf-Wgp" id="VAU-r7-sw8"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rbG-0Y-gJk" id="Mvb-B4-skc"/>
+                                    <outlet property="delegate" destination="rbG-0Y-gJk" id="IBq-4z-7J6"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Evh-na-Vn5" firstAttribute="leading" secondItem="MEA-y2-KR0" secondAttribute="leading" id="7fF-k0-lH8"/>
+                            <constraint firstItem="uQU-dK-lz4" firstAttribute="bottom" secondItem="zuD-ra-YCq" secondAttribute="top" id="BEt-Bs-1f6"/>
                             <constraint firstItem="MEA-y2-KR0" firstAttribute="top" secondItem="7rP-JL-yXR" secondAttribute="top" id="BJq-HI-Iqs"/>
                             <constraint firstItem="uQU-dK-lz4" firstAttribute="leading" secondItem="7rP-JL-yXR" secondAttribute="leading" id="BQ4-eM-ZZo"/>
+                            <constraint firstItem="Evh-na-Vn5" firstAttribute="trailing" secondItem="MEA-y2-KR0" secondAttribute="trailing" id="C77-qM-8lm"/>
                             <constraint firstAttribute="trailing" secondItem="MEA-y2-KR0" secondAttribute="trailing" id="aDo-Sa-8hf"/>
+                            <constraint firstItem="Evh-na-Vn5" firstAttribute="top" secondItem="MEA-y2-KR0" secondAttribute="bottom" id="arJ-T6-TrC"/>
                             <constraint firstItem="MEA-y2-KR0" firstAttribute="leading" secondItem="7rP-JL-yXR" secondAttribute="leading" id="ghb-3r-FOP"/>
                             <constraint firstItem="msV-b6-KZY" firstAttribute="top" secondItem="7rP-JL-yXR" secondAttribute="topMargin" constant="20" id="hfF-iF-TPF"/>
                             <constraint firstItem="uQU-dK-lz4" firstAttribute="top" secondItem="Evh-na-Vn5" secondAttribute="bottom" id="k9d-XU-bL4"/>
@@ -321,18 +342,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchDisplayController" destination="Oyg-0V-9UX" id="UCY-eU-PhS"/>
+                        <outlet property="searchBar" destination="Evh-na-Vn5" id="GTU-9l-XLo"/>
+                        <outlet property="tableView" destination="uQU-dK-lz4" id="o9B-oH-LWX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0W-ve-S1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="Oyg-0V-9UX">
-                    <connections>
-                        <outlet property="delegate" destination="rbG-0Y-gJk" id="Wly-6z-XaW"/>
-                        <outlet property="searchContentsController" destination="rbG-0Y-gJk" id="qNT-Bj-60t"/>
-                        <outlet property="searchResultsDataSource" destination="rbG-0Y-gJk" id="g3T-6i-kZI"/>
-                        <outlet property="searchResultsDelegate" destination="rbG-0Y-gJk" id="C2m-CA-J7o"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="5733.6000000000004" y="-643.62818590704649"/>
         </scene>
@@ -340,6 +354,7 @@
     <resources>
         <image name="BackButton" width="12" height="23"/>
         <image name="Check" width="33" height="33"/>
+        <image name="GreyCheck" width="19" height="14"/>
         <image name="Logo" width="132" height="136"/>
         <image name="Plus" width="33" height="33"/>
         <image name="Remove Button" width="33" height="33"/>

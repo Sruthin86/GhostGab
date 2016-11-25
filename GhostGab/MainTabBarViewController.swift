@@ -10,9 +10,13 @@ import UIKit
 
 class MainTabBarViewController: UITabBarController {
 
+    var selectIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if(self.selectIndex != nil){
+            self.selectedIndex = selectIndex!
+        }
         // Do any additional setup after loading the view.
     }
 

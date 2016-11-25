@@ -406,4 +406,12 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         
     }
     
+    
+    @IBAction func Search(_ sender: Any) {
+        
+        let storybaord: UIStoryboard = UIStoryboard(name: "Search", bundle: nil)
+        let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "SearchUser") as! SearchFriendsViewController
+        self.present(mainTabBarView, animated: true, completion: nil)
+    }
+    
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A03E882BA4099E954645909 /* Pods_Shared_GhostGabTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665ADA904700493FA7B1AE5E /* Pods_Shared_GhostGabTests.framework */; };
 		529C0420E9A96159F028A2EF /* Pods_Shared_GhostGab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42D5AF563E681DA40E491BD /* Pods_Shared_GhostGab.framework */; };
+		561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5411DE77AC100CB266C /* SearchFriendsViewController.swift */; };
+		561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */; };
 		568771E81DE0B53C00129401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E71DE0B53C00129401 /* AppDelegate.swift */; };
 		568771EA1DE0B53C00129401 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E91DE0B53C00129401 /* ViewController.swift */; };
 		568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 568771EE1DE0B53C00129401 /* Assets.xcassets */; };
@@ -69,6 +71,8 @@
 
 /* Begin PBXFileReference section */
 		1520A6E34369BF95543446F9 /* Pods-Shared-GhostGab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-GhostGab.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-GhostGab/Pods-Shared-GhostGab.release.xcconfig"; sourceTree = "<group>"; };
+		561BD5411DE77AC100CB266C /* SearchFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendsViewController.swift; sourceTree = "<group>"; };
+		561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersTableViewCell.swift; sourceTree = "<group>"; };
 		568771E41DE0B53C00129401 /* GhostGab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostGab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568771E71DE0B53C00129401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		568771E91DE0B53C00129401 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +225,8 @@
 				568772471DE0BAAC00129401 /* ProfileViewController.swift */,
 				568772491DE0BAC500129401 /* RequestsSuggestionsViewController.swift */,
 				5687724B1DE0BAE200129401 /* RequestSuggestionTableViewCell.swift */,
+				561BD5411DE77AC100CB266C /* SearchFriendsViewController.swift */,
+				561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */,
 				5687724D1DE0BB0B00129401 /* SettingsViewController.swift */,
 				5687724F1DE0BB2000129401 /* UICostomization.swift */,
 				568772511DE0BB3300129401 /* UserModel.swift */,
@@ -528,6 +534,8 @@
 				568772541DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift in Sources */,
 				568772381DE0B9A000129401 /* FriendsViewController.swift in Sources */,
 				568772521DE0BB3300129401 /* UserModel.swift in Sources */,
+				561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */,
+				561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */,
 				568772501DE0BB2000129401 /* UICostomization.swift in Sources */,
 				568772321DE0B95800129401 /* Color.swift in Sources */,
 				5687723C1DE0B9F300129401 /* loadingAnimation.swift in Sources */,
