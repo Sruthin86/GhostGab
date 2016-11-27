@@ -14,7 +14,7 @@ import FirebaseDatabase
 import SinchVerification
 import FBSDKCoreKit
 import FBSDKLoginKit
-//import SCLAlertView
+import SCLAlertView
 
 
 class UserNameAndPhoneNoViewController: UIViewController {
@@ -111,12 +111,11 @@ class UserNameAndPhoneNoViewController: UIViewController {
         
         if ((self.userName.text == nil || self.userName.text == "")   || (self.phoneNumber.text == nil || self.phoneNumber.text == "")  ) {
             
-            //
-            //             SCLAlertView().showError("Oops !!", subTitle: "Please enter both username and phone number", circleIconImage:errorAletViewImage)
+                SCLAlertView().showError("Oops !!", subTitle: "Please enter both username and phone number", circleIconImage:errorAletViewImage)
         }
         else if (characterCount < 10) {
             
-            //            SCLAlertView().showError("Oops !!", subTitle: "Phone number should be atleast 10 digits", circleIconImage:errorAletViewImage)
+           SCLAlertView().showError("Oops !!", subTitle: "Phone number should be atleast 10 digits", circleIconImage:errorAletViewImage)
             
         }
         else {

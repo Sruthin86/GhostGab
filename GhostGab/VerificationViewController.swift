@@ -10,8 +10,7 @@ import UIKit
 import SinchVerification
 import Firebase
 import FirebaseDatabase
-
-//import SCLAlertView
+import SCLAlertView
 
 class VerificationViewController: UIViewController {
     
@@ -46,7 +45,7 @@ class VerificationViewController: UIViewController {
             }
             else {
                 
-                //               SCLAlertView().showError("Oops !!", subTitle: "Please enter the correct verification code!!", circleIconImage:errorAletViewImage)
+                               SCLAlertView().showError("Oops !!", subTitle: "Please enter the correct verification code!!", circleIconImage:errorAletViewImage)
             }
         }
         

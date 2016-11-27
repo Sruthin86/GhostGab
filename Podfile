@@ -13,6 +13,7 @@ use_frameworks!
  pod 'Firebase/Storage'
  pod 'OneSignal'
  pod 'SinchVerification-Swift'
+ pod 'SCLAlertView'
 
 target 'GhostGab'
 target 'GhostGabTests'

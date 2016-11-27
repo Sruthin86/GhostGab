@@ -45,6 +45,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
   - GTMSessionFetcher/Core (1.1.7)
   - OneSignal (2.2.0)
+  - SCLAlertView (0.7.0)
   - SinchVerification-Swift (2.0.2)
 
 DEPENDENCIES:
@@ -53,6 +54,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - OneSignal
+  - SCLAlertView
   - SinchVerification-Swift
 
 SPEC CHECKSUMS:
@@ -68,8 +70,9 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   OneSignal: 689099c1af05d1635a01190c3d9c6b0016971fd5
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SinchVerification-Swift: d71f4195a84e20baecd393cd7b10a4772c759dac
 
-PODFILE CHECKSUM: 2cc6681fed01f40ce100d854a6d040ec331bf9a2
+PODFILE CHECKSUM: 2104a886ec632054b3bcbd871303056013276154
 
 COCOAPODS: 1.1.1
