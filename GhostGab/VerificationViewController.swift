@@ -8,6 +8,9 @@
 
 import UIKit
 import SinchVerification
+import Firebase
+import FirebaseDatabase
+
 //import SCLAlertView
 
 class VerificationViewController: UIViewController {
@@ -15,6 +18,10 @@ class VerificationViewController: UIViewController {
     @IBOutlet weak var VerifyCodeTextField: UITextField!
     var verifiction:Verification!
     let applicationKey = "bf8eb31b-9519-4b73-82dc-3a3fa8b79d5e"
+    
+    let currentUserId =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
+     let ref = FIRDatabase.database().reference()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let greenColorEnum = Color.green
@@ -32,6 +39,7 @@ class VerificationViewController: UIViewController {
         let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
         verifiction.verify(self.VerifyCodeTextField.text!) {  (success:Bool, error:Error?) -> (Void)   in
             if(success){
+                self.ref.child("Users").child(self.currentUserId).child("isVerified").setValue(true)
                 let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
                 let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
                 self.present(mainTabBarView, animated: true, completion: nil)

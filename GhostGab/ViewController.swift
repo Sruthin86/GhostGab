@@ -21,7 +21,7 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         var oneSignalId:String?
         super.viewDidLoad()
-        
+        let ref = FIRDatabase.database().reference()
         //OneSignal.postNotification(["contents": ["en": "Test Message"], "include_player_ids": [oneSignalId]])
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if let  user = user {
@@ -29,7 +29,26 @@ class ViewController: UIViewController  {
                 UserDefaults.standard.set(uid, forKey: fireBaseUid)
                 let storyboard : UIStoryboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
                 let tabViewController :UIViewController =  storyboard.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
-                self.present(tabViewController, animated: true, completion: nil)
+                ref.child("Users").child(uid).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                    if(snapshot.exists()){
+                        let userData = snapshot.value as! [String: AnyObject]
+                        if((userData["isVerified"]) != nil){
+                            var verified: Bool = userData["isVerified"] as! Bool
+                            if(verified){
+                                  self.present(tabViewController, animated: true, completion: nil)
+                            }
+                            else {
+                                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                let vc = storyboard.instantiateViewController(withIdentifier: "userNameandPh") as! UserNameAndPhoneNoViewController
+                                self.present(vc, animated:true, completion:nil)
+
+                            }
+                        }
+                        
+                        
+                    }
+                })
+              
                 
                 
                 

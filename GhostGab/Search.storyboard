@@ -117,7 +117,7 @@
                                 <rect key="frame" x="-4" y="175" width="383" height="443"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="rsCell" rowHeight="75" id="BnC-ut-Jsl" customClass="RequestSuggestionTableViewCell" customModule="GhostGab" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="rsCell" rowHeight="75" id="BnC-ut-Jsl" customClass="RequestSuggestionTableViewCell" customModule="GhostGab" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="383" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BnC-ut-Jsl" id="N8z-mj-xM1">
@@ -255,7 +255,7 @@
                                     <constraint firstAttribute="width" constant="39" id="lZp-Ii-B6C"/>
                                 </constraints>
                             </imageView>
-                            <searchBar contentMode="redraw" placeholder="Search using username or Ph#" translatesAutoresizingMaskIntoConstraints="NO" id="Evh-na-Vn5">
+                            <searchBar contentMode="redraw" placeholder="Search using Ph#" translatesAutoresizingMaskIntoConstraints="NO" id="Evh-na-Vn5">
                                 <rect key="frame" x="0.0" y="65" width="375" height="44"/>
                                 <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -268,7 +268,7 @@
                                 <rect key="frame" x="0.0" y="109" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchUsers" rowHeight="65" id="DI9-na-Fv3" customClass="SearchUsersTableViewCell" customModule="GhostGab" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="searchUsers" rowHeight="65" id="DI9-na-Fv3" customClass="SearchUsersTableViewCell" customModule="GhostGab" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DI9-na-Fv3" id="2KB-5K-dww">

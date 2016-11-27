@@ -268,6 +268,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     
     func getFriends() {
+        self.friendsUidArray.removeAll()
         ref.child("Users").child(uid as! String).observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
             let snapData =  snapshot.value as! [String:AnyObject]
             if(snapData["Friends"] != nil){

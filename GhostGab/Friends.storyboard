@@ -54,7 +54,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendsCell" rowHeight="75" id="NgL-cY-te1" customClass="FriendsTableViewCell" customModule="GhostGab" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendsCell" rowHeight="75" id="NgL-cY-te1" customClass="FriendsTableViewCell" customModule="GhostGab" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="383" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NgL-cY-te1" id="lpB-86-Atg">
@@ -68,12 +68,12 @@
                                                         <constraint firstAttribute="width" secondItem="WGN-z2-Pto" secondAttribute="height" multiplier="1:1" id="oV5-DT-Bmt"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aji-ef-rvn">
-                                                    <rect key="frame" x="101" y="30" width="200" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aji-ef-rvn">
+                                                    <rect key="frame" x="101" y="30" width="200" height="19.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="TCt-am-kff"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

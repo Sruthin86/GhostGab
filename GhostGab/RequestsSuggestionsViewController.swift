@@ -222,6 +222,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         ref.child("Users").child(requestedUserUid).child("Friends").child(currentUserId).setValue(currentUser)
         ref.child("Users").child(currentUserId).child("Friends").child(friendUid).setValue(friendDisplayName)
         ref.child("Users").child(currentUserId).child("Requests").child(requestedUserUid).removeValue()
+        ref.child("Users").child(requestedUserUid).child("RequestsSent").child(currentUserId).removeValue()
         let notificationText: String = currentUser + " Accepted you a friend request"
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [friendOneSignalId]])
     }
