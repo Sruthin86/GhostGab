@@ -65,6 +65,10 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var cashCountNumber: Int = 0
     
+    var correctGuessCounter: Int = 0
+    
+    var wrongGuessCounter: Int = 0
+    
     var correctGuess:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +77,12 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.postLabel.text = guessPostArray["post"] as! String?
         self.dateLable.text = helperClass.getDifferenceInDates(postDate: (guessPostArray["date"]as? String)!)
         var flagCountObj: AnyObject = guessPostArray["flags"]!
+        var postMetrics: AnyObject = guessPostArray["postMetrics"]!
+        self.flagLabel.text =  String(describing: flagCountObj["flagCount"] as AnyObject)
+        self.rightLable.text = String(describing: postMetrics["correctGuess"] as AnyObject)
+        self.wrongLabel.text = String(describing: postMetrics["wrongGuess"] as AnyObject)
+        self.correctGuessCounter = Int((postMetrics["correctGuess"] as AnyObject) as! NSNumber)
+        self.wrongGuessCounter = Int((postMetrics["wrongGuess"] as AnyObject) as! NSNumber)
         self.cashButton.isEnabled = false
         getCashCount()
         
@@ -184,10 +194,16 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if(self.filteredFriendsArray[selectedIndexRow] == guessPostArray["useruid"] as! String ){
                 self.incrementCashCount(count:10)
                 guessCell.setBackground(colorValue: "lightGreen")
+                self.correctGuessCounter += 1
+                self.rightLable.text = String(self.correctGuessCounter)
+                self.ref.child("Posts").child(self.postId).child("postMetrics").child("correctGuess").setValue(correctGuessCounter)
             }
             else {
                 self.decrementCashCount(count:5)
                 guessCell.setBackground(colorValue: "lightRed")
+                self.wrongGuessCounter += 1
+                self.wrongLabel.text = String(self.wrongGuessCounter)
+                self.ref.child("Posts").child(self.postId).child("postMetrics").child("wrongGuess").setValue(wrongGuessCounter)
                 
             }
             let friendsList: [String:String] = ["friend1": self.filteredFriendsArray[0], "friend2": self.filteredFriendsArray[1], "friend3": self.filteredFriendsArray[2]]
@@ -240,7 +256,10 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.ref.child("Users").child(self.currentUserId).child("cash").setValue(cashCountString)
                 }
             }
+            
         }
+        
+        
         
         if(self.cashCountNumber>=15){
             self.messageLable.text = "You've already guessed once. \nIt'll cost you 10 points in cash to guess again"
@@ -373,6 +392,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             ref.child("Users").child(currentUserId).child("cash").setValue(newCashVal)
             ref.child("Users").child(currentUserId).child("guess").child(postId).removeValue()
             self.alreadyGuessed = false
+            self.justGuessed = false
             self.checkPost()
         }
         
