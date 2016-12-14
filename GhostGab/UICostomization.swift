@@ -28,6 +28,10 @@ struct UICostomization {
         object.layer.backgroundColor = self.color.cgColor
     }
     
+    func addBackgroundTocell(cell:UITableViewCell){
+        cell.backgroundColor = self.color
+    }
+    
     func addRoundedBorder (object:UIImageView) -> Void {
         
         object.layer.cornerRadius  = object.frame.width/2

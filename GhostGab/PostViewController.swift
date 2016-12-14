@@ -67,6 +67,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     var oldPostKeysCount : Int = 0
     
+    var postIdToPass:String!
+    
     let helperClass : HelperFunctions = HelperFunctions()
     
     override func viewDidLoad() {
@@ -108,11 +110,13 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
     }
     
-    @IBAction func CancelEditing(sender: AnyObject) {
-        
+    @IBAction func cancelEditing(_ sender: Any) {
         helperClass.returnFromTextField(textField: self.PostText, PostButtonsView: PostButtonsView, ButtonViewHeight: ButtonViewHeight, TopViewHeight: TopViewHeight)
         userIsEditing = !userIsEditing
+
     }
+    
+   
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -169,6 +173,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         return postFeedCell
     }
     
+   
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selIndex = selectedInxexPath?.row {
             if(selIndex == indexPath.row){
@@ -185,9 +191,22 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let currIndexPath = tableView.indexPathForSelectedRow!
+        var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[currIndexPath.row]]! as! [String : AnyObject]
+
+
+        if(postFeed["postType"] as! Int == 3){
+            postIdToPass =  self.postKeys[currIndexPath.row]
+            let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
+            let guessView  = storybaord.instantiateViewController(withIdentifier: "guessController") as! GuessViewController
+            guessView.postId = postIdToPass
+            guessView.guessPostArray = postFeed
+            self.present(guessView, animated: true, completion: nil)
+
+        }
         
     }
+    
     
     func reactionsActions(sender: AnyObject) -> Void {
         let selectedCellIndexPath = NSIndexPath(row: sender.tag, section: 0)

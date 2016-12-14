@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ViewController.(viewDidLoad() -&gt; ()).(closure #1).(closure #1):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "userData">
+            </PersistentString>
+            <PersistentString
+               value = "uid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "RequestsSuggestionsViewController.sendRequest(sender : AnyObject) -&gt; ():RequestsSuggestionsViewController.swift">
          <PersistentStrings>
             <PersistentString

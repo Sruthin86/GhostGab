@@ -25,9 +25,9 @@ class FBLoadingViewController: UIViewController {
     override func viewDidLoad() {
         OneSignal.idsAvailable({ (userId, pushToken) in
             self.oneSignalId = userId!
-            print("UserId:%@", userId)
+            
             if (pushToken != nil) {
-                print("pushToken:%@", pushToken)
+                
             }
         })
 
@@ -84,17 +84,55 @@ class FBLoadingViewController: UIViewController {
                     FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                         if let user = FIRAuth.auth()?.currentUser {
                             let databaseRef = FIRDatabase.database().reference()
-                            let uModel =  UserModel(name: user.displayName, userName: "", email: user.email, photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
-                            UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
-                            UserDefaults.standard.set(user.displayName, forKey: displayName)
-                            let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject  ]
-                            databaseRef.child("Users").child(user.uid).setValue(postUserData)
-                            DispatchQueue.main.async (execute: {
-                                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                let vc = storyboard.instantiateViewController(withIdentifier: "userNameandPh") as! UserNameAndPhoneNoViewController
-                                self.present(vc, animated:true, completion:nil)
-                                
+                            
+                            databaseRef.child("Users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                                if(snapshot.exists()){
+                                    let comparingData = snapshot.value as! [String: AnyObject]
+                                    let verified = comparingData["isVerified"] as! Bool
+                                  
+                                        if((verified != nil)){
+                                            
+                                            if(!verified){
+                                                let uModel =  UserModel(name: user.displayName, userName: "", email: user.email, photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
+                                                UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
+                                                UserDefaults.standard.set(user.displayName, forKey: displayName)
+                                                let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":0 as! AnyObject   ]
+                                                databaseRef.child("Users").child(user.uid).setValue(postUserData)
+                                                DispatchQueue.main.async (execute: {
+                                                    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                                    let vc = storyboard.instantiateViewController(withIdentifier: "userNameandPh") as! UserNameAndPhoneNoViewController
+                                                    self.present(vc, animated:true, completion:nil)
+                                                    
+                                                })
+                                            }
+                                            else {
+                                                let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+                                                let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+                                                mainTabBarView.selectedIndex = 0
+                                                self.present(mainTabBarView, animated: true, completion: nil)
+                                            }
+                                        }
+                                        else {
+                                            
+                                    }
+                                    
+                                }
+                                else {
+                                    let uModel =  UserModel(name: user.displayName, userName: "", email: user.email, photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
+                                    UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
+                                    UserDefaults.standard.set(user.displayName, forKey: displayName)
+                                    let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":0 as! AnyObject  ]
+                                    databaseRef.child("Users").child(user.uid).setValue(postUserData)
+                                    DispatchQueue.main.async (execute: {
+                                        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: "userNameandPh") as! UserNameAndPhoneNoViewController
+                                        self.present(vc, animated:true, completion:nil)
+                                        
+                                    })
+                                }
                             })
+                            
+                            
                             
                         }
                         
@@ -112,6 +150,8 @@ class FBLoadingViewController: UIViewController {
     }
     
     
+    
+  
     
     
 }

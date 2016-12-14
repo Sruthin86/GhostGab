@@ -56,6 +56,8 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var flagLabel: UILabel!
     
+    @IBOutlet weak var flagButton: UIButton!
+    
     var postId: String?
     
     var helperClass : HelperFunctions = HelperFunctions()
@@ -161,6 +163,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     
     @IBAction func FlagButton(_ sender: AnyObject) {
+        animateButton(animationObject: self.flagButton, reaction:7)
         helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
         
     }
@@ -179,7 +182,9 @@ class PostCellTableViewCell: UITableViewCell {
                     animationObject.transform = CGAffineTransform(scaleX: 1, y: 1)
                     animationObject.alpha = 1
                 }, completion: {_ in
-                    self.myReaction(reaction: reaction)
+                    if(reaction != 7){
+                        self.myReaction(reaction: reaction)
+                    }
                 })
             })
         })

@@ -213,11 +213,9 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
             
             
             ref.child("Users").queryOrdered(byChild: "phoneNumber").queryEqual(toValue: searchPhNum).observeSingleEvent(of: .value, with: { (snapshot) -> Void in
-                print(snapshot.value)
+              
                 if(snapshot.exists()){
                     let searchData = snapshot.value as! NSDictionary
-                    print("searchData")
-                    print(searchData)
                     for sData in searchData{
                         self.searchKeyArray.append(sData.key as! String)
                         self.searchArray[sData.key as! String] = sData.value as AnyObject?

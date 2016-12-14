@@ -16,8 +16,6 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-    <key>NSContactsUsageDescription</key>
-    <string>This app requires contacts access to function properly.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -28,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>6</string>
 	<key>FacebookAppID</key>
 	<string>1698516270471819</string>
 	<key>FacebookDisplayName</key>
@@ -42,6 +40,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires contacts access to function properly.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

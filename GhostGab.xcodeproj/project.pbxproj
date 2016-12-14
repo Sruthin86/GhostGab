@@ -11,6 +11,8 @@
 		529C0420E9A96159F028A2EF /* Pods_Shared_GhostGab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42D5AF563E681DA40E491BD /* Pods_Shared_GhostGab.framework */; };
 		561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5411DE77AC100CB266C /* SearchFriendsViewController.swift */; };
 		561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */; };
+		561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5451DEBA4D000CB266C /* GuessViewController.swift */; };
+		561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */; };
 		568771E81DE0B53C00129401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E71DE0B53C00129401 /* AppDelegate.swift */; };
 		568771EA1DE0B53C00129401 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E91DE0B53C00129401 /* ViewController.swift */; };
 		568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 568771EE1DE0B53C00129401 /* Assets.xcassets */; };
@@ -73,6 +75,8 @@
 		1520A6E34369BF95543446F9 /* Pods-Shared-GhostGab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-GhostGab.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-GhostGab/Pods-Shared-GhostGab.release.xcconfig"; sourceTree = "<group>"; };
 		561BD5411DE77AC100CB266C /* SearchFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendsViewController.swift; sourceTree = "<group>"; };
 		561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersTableViewCell.swift; sourceTree = "<group>"; };
+		561BD5451DEBA4D000CB266C /* GuessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessViewController.swift; sourceTree = "<group>"; };
+		561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessTableViewCell.swift; sourceTree = "<group>"; };
 		568771E41DE0B53C00129401 /* GhostGab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostGab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568771E71DE0B53C00129401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		568771E91DE0B53C00129401 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +219,8 @@
 				568772331DE0B97200129401 /* FBLoadingViewController.swift */,
 				568772351DE0B99000129401 /* FriendsTableViewCell.swift */,
 				568772371DE0B9A000129401 /* FriendsViewController.swift */,
+				561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */,
+				561BD5451DEBA4D000CB266C /* GuessViewController.swift */,
 				568772391DE0B9D500129401 /* HelperFunctions.swift */,
 				5687723B1DE0B9F300129401 /* loadingAnimation.swift */,
 				5687723D1DE0BA2000129401 /* MainTabBarViewController.swift */,
@@ -534,10 +540,12 @@
 				568772541DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift in Sources */,
 				568772381DE0B9A000129401 /* FriendsViewController.swift in Sources */,
 				568772521DE0BB3300129401 /* UserModel.swift in Sources */,
+				561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */,
 				561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */,
 				561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */,
 				568772501DE0BB2000129401 /* UICostomization.swift in Sources */,
 				568772321DE0B95800129401 /* Color.swift in Sources */,
+				561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */,
 				5687723C1DE0B9F300129401 /* loadingAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,6 +671,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -672,7 +681,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

@@ -11,12 +11,15 @@ import UIKit
 class MainTabBarViewController: UITabBarController {
 
     var selectIndex: Int?
-    
+    let lightGreen:Color = Color.lightGreen
     override func viewDidLoad() {
         super.viewDidLoad()
         if(self.selectIndex != nil){
             self.selectedIndex = selectIndex!
         }
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: lightGreen.getColor()], for:.normal)
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.selected)
         // Do any additional setup after loading the view.
     }
 

@@ -27,6 +27,7 @@ class ViewController: UIViewController  {
             if let  user = user {
                 let uid = user.uid
                 UserDefaults.standard.set(uid, forKey: fireBaseUid)
+                UserDefaults.standard.set(user.displayName, forKey: displayName)
                 let storyboard : UIStoryboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
                 let tabViewController :UIViewController =  storyboard.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
                 ref.child("Users").child(uid).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
@@ -35,7 +36,10 @@ class ViewController: UIViewController  {
                         if((userData["isVerified"]) != nil){
                             var verified: Bool = userData["isVerified"] as! Bool
                             if(verified){
-                                  self.present(tabViewController, animated: true, completion: nil)
+                                let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+                                let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+                                mainTabBarView.selectedIndex = 0
+                                self.present(mainTabBarView, animated: true, completion: nil)
                             }
                             else {
                                 let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

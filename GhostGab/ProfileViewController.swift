@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var fullName: UILabel!
+    @IBOutlet weak var cashCount: UILabel!
     
     let KclosedHeight : CGFloat = 144
     let KopenHeight :CGFloat = 220
@@ -45,6 +46,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             let userDetails = snapshot.value as! [String: AnyObject]
             self.fullName.text =  userDetails["displayName"] as? String;
+            self.cashCount.text = userDetails["cash"] as? String;
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
             let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
             self.profileImage.image = UIImage(data: profilePicUrl! as Data)

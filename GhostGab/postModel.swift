@@ -41,8 +41,10 @@ struct postModel {
                 for fUid in friendsArray{
                     var frinedUID :String = fUid as! String
                     if (postUid == currentuserUid ||  postUid == frinedUID ){ //  logic to get self and friends posts
-                        self.postsArray[key as! String] = val as AnyObject?
-                        self.postKeys.append(key as! String)
+                        if(!self.postKeys.contains(key as! String)){
+                            self.postsArray[key as! String] = val as AnyObject?
+                            self.postKeys.append(key as! String)
+                        }
                         
                     }
                 }
