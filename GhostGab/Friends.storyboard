@@ -69,9 +69,9 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aji-ef-rvn">
-                                                    <rect key="frame" x="101" y="30" width="200" height="19.5"/>
+                                                    <rect key="frame" x="101" y="30" width="150" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="TCt-am-kff"/>
+                                                        <constraint firstAttribute="width" constant="150" id="TCt-am-kff"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,17 +86,40 @@
                                                     </constraints>
                                                     <state key="normal" image="Remove Button"/>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cash" translatesAutoresizingMaskIntoConstraints="NO" id="Y52-NM-zEi">
+                                                    <rect key="frame" x="256" y="25" width="26" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Y52-NM-zEi" secondAttribute="height" multiplier="26:31" id="VMi-Nw-RkU"/>
+                                                        <constraint firstAttribute="height" constant="31" id="VOz-ez-Lbu"/>
+                                                        <constraint firstAttribute="width" constant="26" id="fAJ-1I-nfA"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhF-iq-lFQ">
+                                                    <rect key="frame" x="287" y="30.5" width="39" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="VRM-iJ-Y9K"/>
+                                                        <constraint firstAttribute="width" constant="39" id="iUh-f2-18x"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="aji-ef-rvn" firstAttribute="top" secondItem="lpB-86-Atg" secondAttribute="topMargin" constant="22" id="InY-Uy-xJk"/>
                                                 <constraint firstItem="wes-iB-4bG" firstAttribute="top" secondItem="lpB-86-Atg" secondAttribute="topMargin" constant="15" id="QKo-XA-j5S"/>
+                                                <constraint firstItem="OhF-iq-lFQ" firstAttribute="leading" secondItem="Y52-NM-zEi" secondAttribute="trailing" constant="5" id="Rlz-Rf-sXu"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="wes-iB-4bG" secondAttribute="trailing" constant="15" id="T6E-ZC-pln"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Y52-NM-zEi" secondAttribute="bottom" constant="10" id="VBy-Ou-VAe"/>
                                                 <constraint firstItem="WGN-z2-Pto" firstAttribute="leading" secondItem="lpB-86-Atg" secondAttribute="leadingMargin" constant="20" id="cAi-yD-hPG"/>
                                                 <constraint firstItem="WGN-z2-Pto" firstAttribute="top" secondItem="lpB-86-Atg" secondAttribute="topMargin" constant="6" id="dKQ-Ba-qAu"/>
+                                                <constraint firstItem="Y52-NM-zEi" firstAttribute="leading" secondItem="aji-ef-rvn" secondAttribute="trailing" constant="5" id="rK2-xo-8UV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="OhF-iq-lFQ" secondAttribute="bottom" constant="15" id="xqI-qP-22Q"/>
                                                 <constraint firstItem="aji-ef-rvn" firstAttribute="leading" secondItem="WGN-z2-Pto" secondAttribute="trailing" constant="20" id="yts-B4-H7c"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cashLabel" destination="OhF-iq-lFQ" id="1lR-5Y-nkp"/>
                                             <outlet property="displayName" destination="aji-ef-rvn" id="TVL-b2-nVX"/>
                                             <outlet property="friendsImageView" destination="WGN-z2-Pto" id="CQ1-EP-QvG"/>
                                             <outlet property="removeFriend" destination="wes-iB-4bG" id="mZc-iF-Vzj"/>
@@ -134,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eDG-O6-x8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4290" y="829"/>
+            <point key="canvasLocation" x="4288.8000000000002" y="828.93553223388312"/>
         </scene>
     </scenes>
     <resources>
@@ -142,6 +165,7 @@
         <image name="FriendsIcon_inactive@1x" width="18" height="27"/>
         <image name="Logo" width="132" height="136"/>
         <image name="Remove Button" width="33" height="33"/>
+        <image name="cash" width="28" height="33"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

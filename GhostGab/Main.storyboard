@@ -36,11 +36,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launcLogo@1x" translatesAutoresizingMaskIntoConstraints="NO" id="G1b-35-f76">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchLogo@1x" translatesAutoresizingMaskIntoConstraints="NO" id="G1b-35-f76">
                                 <rect key="frame" x="109.5" y="251.5" width="156" height="164"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="G1b-35-f76" firstAttribute="centerY" secondItem="hMu-fn-L63" secondAttribute="centerY" id="9fu-6M-WbS"/>
                             <constraint firstItem="G1b-35-f76" firstAttribute="centerX" secondItem="hMu-fn-L63" secondAttribute="centerX" id="BXO-3x-omc"/>
@@ -362,7 +362,7 @@
         <image name="Logo" width="132" height="136"/>
         <image name="Sign in with Facebook1X" width="359" height="54"/>
         <image name="VerifyBtn@1x" width="345" height="55"/>
-        <image name="launcLogo@1x" width="156" height="164"/>
+        <image name="launchLogo@1x" width="156" height="164"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

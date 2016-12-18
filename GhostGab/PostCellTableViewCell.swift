@@ -20,6 +20,7 @@ class PostCellTableViewCell: UITableViewCell {
     @IBOutlet weak var ReactionsView: UIView!
     
     var cellSelected: Bool = false
+    
     var width:CGFloat = 0.4
     
     @IBOutlet weak var reaction1: UIButton!

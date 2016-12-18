@@ -14,6 +14,8 @@ class FriendsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var displayName: UILabel!
     
+    @IBOutlet weak var cashLabel: UILabel!
+    
     let green: Color = Color.green
     
     let white: Color = Color.white

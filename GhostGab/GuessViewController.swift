@@ -99,9 +99,9 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
            selfPostFalg = true
         }
         else {
-            if(self.oriFrinendsKeyArray.count>3){
+            if(self.oriFrinendsKeyArray.count>=3){
                  shuffleOriginalArray ()
-                checkPost()
+                
             }
             else{
                 self.notenoughFriendsFlag = true
@@ -241,14 +241,14 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-  
-    @IBAction func backButton(_ sender: Any) {
-        
+    @IBAction func back(_ sender: Any) {
         let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
         mainTabBarView.selectedIndex = 0
         self.present(mainTabBarView, animated: true, completion: nil)
     }
+  
+    
     
     
     func incrementCashCount(count:Int) {
@@ -311,9 +311,11 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             // Swap two array elements
             // Notice '&' required as swap uses 'inout' parameters
-            swap(&self.oriFrinendsKeyArray[index], &self.oriFrinendsKeyArray[j])
+            if(j != index){
+                swap(&self.oriFrinendsKeyArray[index], &self.oriFrinendsKeyArray[j])
+            }
         }
-        
+        checkPost()
     }
    
     func shuffleArray() {

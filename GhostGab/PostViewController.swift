@@ -199,10 +199,10 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currIndexPath = tableView.indexPathForSelectedRow!
         var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[currIndexPath.row]]! as! [String : AnyObject]
+        postIdToPass =  self.postKeys[currIndexPath.row]
 
 
         if(postFeed["postType"] as! Int == 3){
-            postIdToPass =  self.postKeys[currIndexPath.row]
             let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
             let guessView  = storybaord.instantiateViewController(withIdentifier: "guessController") as! GuessViewController
             guessView.postId = postIdToPass
@@ -210,6 +210,15 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
             guessView.oriFrinendsKeyArray = Array(self.friendsUidArray)
             self.present(guessView, animated: true, completion: nil)
 
+        }
+        
+        if(postFeed["postType"] as! Int == 1){
+            let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
+            let friendPostView  = storybaord.instantiateViewController(withIdentifier: "friendPostController") as! FriendPostViewController
+            friendPostView.postId = postIdToPass
+            friendPostView.friendPostArray = postFeed
+             self.present(friendPostView, animated: true, completion: nil)
+            
         }
         
     }
