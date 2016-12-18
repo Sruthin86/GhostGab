@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,6 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upl-yz-7tU">
+                                <rect key="frame" x="15" y="494" width="345" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="upl-yz-7tU" secondAttribute="height" multiplier="69:11" id="8Af-7G-bnF"/>
                                     <constraint firstAttribute="width" constant="345" id="pCo-Kx-cwR"/>
@@ -36,7 +41,7 @@
                             <constraint firstItem="KwT-mz-jQo" firstAttribute="top" secondItem="upl-yz-7tU" secondAttribute="bottom" constant="69" id="kOR-pO-zoR"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="5" title="Settings" image="SettingsIcon@1x" selectedImage="SettingsIcon@1x" id="dzX-yw-m5z"/>
+                    <tabBarItem key="tabBarItem" tag="5" title="Settings" image="SettingsIcon@1x" selectedImage="SettingsIcon_inactive@1x" id="dzX-yw-m5z"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYx-zB-kzD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,7 +112,8 @@
     </scenes>
     <resources>
         <image name="LogoutBtn@1x" width="345" height="55"/>
-        <image name="SettingsIcon@1x" width="24" height="23"/>
+        <image name="SettingsIcon@1x" width="27" height="26"/>
+        <image name="SettingsIcon_inactive@1x" width="27" height="26"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

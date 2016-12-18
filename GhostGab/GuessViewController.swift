@@ -41,6 +41,8 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var guessPostArray = [String:AnyObject]()
     
+    var oriFrinendsKeyArray = [String]()
+    
     var friendsArray = [String: AnyObject]()
     
     var friendsArrayKey = [String]()
@@ -63,6 +65,8 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var correctUid:String = ""
     
+    var displayName:String = ""
+    
     var cashCountNumber: Int = 0
     
     var correctGuessCounter: Int = 0
@@ -70,6 +74,10 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var wrongGuessCounter: Int = 0
     
     var correctGuess:Bool = false
+    
+    var notenoughFriendsFlag:Bool = false
+    
+    var loaded:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
@@ -83,6 +91,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.wrongLabel.text = String(describing: postMetrics["wrongGuess"] as AnyObject)
         self.correctGuessCounter = Int((postMetrics["correctGuess"] as AnyObject) as! NSNumber)
         self.wrongGuessCounter = Int((postMetrics["wrongGuess"] as AnyObject) as! NSNumber)
+        self.displayName = guessPostArray["displayName"]! as! String
         self.cashButton.isEnabled = false
         getCashCount()
         
@@ -90,7 +99,14 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
            selfPostFalg = true
         }
         else {
-            checkPost()
+            if(self.oriFrinendsKeyArray.count>3){
+                 shuffleOriginalArray ()
+                checkPost()
+            }
+            else{
+                self.notenoughFriendsFlag = true
+                
+            }
         }
         
         // Do any additional setup after loading the view.
@@ -103,7 +119,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(selfPostFalg){
-            let imageName = "loading_00001.png"
+            let imageName = "Reaction3_lg.png"
             let labelText = "This is your post duh!!! "
             displyNoDataLabel(imageName:imageName, labelText:labelText)
             return 0
@@ -111,10 +127,14 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         else if(isShuffled || alreadyGuessed ){
             return self.filteredFriendsArray.count
         }
-        else if (selfPostFalg){
-            let imageName = "loading_00003.png"
-            let labelText = "you dont have enough friends to guess!! "
-            displyNoDataLabel(imageName:imageName, labelText:labelText)
+        else if (notenoughFriendsFlag){
+            let imageName = "Reaction2_lg.png"
+            let labelText = "you dont have enough friends \nto guess!! "
+            delay(0.75)  //Here you put time you want to delay
+            {
+
+                self.displyNoDataLabel(imageName:imageName, labelText:labelText)
+            }
             return 0
         }
         else {
@@ -125,22 +145,24 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func displyNoDataLabel(imageName: String, labelText: String) -> Void {
-        
-        let image : UIImage = UIImage(named: imageName)!
-        let imageView :UIImageView = UIImageView(image: image)
-        imageView.frame = CGRect(x:self.tableView.frame.width/2 - 37.5, y:self.tableView.frame.height/3, width:75, height:99)
-        let textColor: Color = Color.grey
-        let noDataAvailableLabel: UILabel = UILabel(frame: CGRect(x:0, y:self.tableView.frame.height/4, width:self.tableView.frame.width, height:self.tableView.frame.height) )
-        
-        noDataAvailableLabel.text =  labelText
-        noDataAvailableLabel.textAlignment = .center
-        noDataAvailableLabel.textColor =  textColor.getColor()
-        noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:14.0)
-        self.tableView.separatorStyle = .none
-        var noFriendsView : UIView = UIView( frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height))
-        noFriendsView.addSubview(imageView)
-        noFriendsView.addSubview(noDataAvailableLabel)
-        self.tableView.backgroundView = noFriendsView
+        if(!self.loaded){
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+            let image : UIImage = UIImage(named: imageName)!
+            let imageView :UIImageView = UIImageView(image: image)
+            imageView.frame = CGRect(x:self.tableView.frame.width/2 - 37.5, y:self.tableView.frame.height/3, width:75, height:99)
+            let textColor: Color = Color.grey
+            let noDataAvailableLabel: UILabel = UILabel(frame: CGRect(x:0, y:self.tableView.frame.height/4, width:self.tableView.frame.width, height:self.tableView.frame.height) )
+            
+            noDataAvailableLabel.text =  labelText
+            noDataAvailableLabel.textAlignment = .center
+            noDataAvailableLabel.textColor =  textColor.getColor()
+            noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:14.0)
+            self.tableView.separatorStyle = .none
+            var noFriendsView : UIView = UIView( frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height))
+            noFriendsView.addSubview(imageView)
+            noFriendsView.addSubview(noDataAvailableLabel)
+            self.tableView.backgroundView = noFriendsView
+        }
         
     }
     
@@ -149,6 +171,9 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         if(isShuffled){
+            self.loaded =  true;
+            self.tableView.backgroundView = .none
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
             guessCell.setImageData(photoUrl: self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"photo")! as! String)
             guessCell.displayName.text = self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"displayName")! as? String
             guessCell.setBackground(colorValue: "white")
@@ -210,6 +235,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let guessData : [String : AnyObject] = ["postID": postId as AnyObject,"friendsList": friendsList as AnyObject, "seledtedUid": self.filteredFriendsArray[selectedIndexRow] as AnyObject, "postUid" : guessPostArray["useruid"] as AnyObject ]
             let guessPostData : [String : AnyObject] = [postId as String: guessData as AnyObject]
             ref.child("Users").child(self.uid as! String).child("guess").child(postId).setValue(guessData)
+            ref.child("Posts").child(self.postId).child("guessedUsers").child(self.uid as! String).setValue(self.displayName)
             self.justGuessed = true
         }
         
@@ -272,9 +298,30 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
 
+    
+    
+    
+    func shuffleOriginalArray() {
+        
+        var count = self.oriFrinendsKeyArray.count
+        for index in ((0 + 1)...self.oriFrinendsKeyArray.count - 1).reversed()
+        {
+            // Random int from 0 to index-1
+            var j = Int(arc4random_uniform(UInt32(count-1)))
+            
+            // Swap two array elements
+            // Notice '&' required as swap uses 'inout' parameters
+            swap(&self.oriFrinendsKeyArray[index], &self.oriFrinendsKeyArray[j])
+        }
+        
+    }
    
     func shuffleArray() {
         self.filteredFriendsArray = self.friendsArrayKey
+        if(!self.filteredFriendsArray.contains(guessPostArray["useruid"] as! String)){
+            self.filteredFriendsArray.removeLast()
+            self.filteredFriendsArray.append(guessPostArray["useruid"] as! String)
+        }
         var count = self.filteredFriendsArray.count
         for index in ((0 + 1)...self.filteredFriendsArray.count - 1).reversed()
         {
@@ -305,26 +352,21 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     func getFriends() -> Void {
         
-        ref.child("Users").child(currentUserId).child("Friends").observe(FIRDataEventType.value, with: {(snapshot) in
+        
             
-            if (!snapshot.exists()){
+        
                 self.friendsArray.removeAll()
                 self.friendsArrayKey.removeAll()
-                self.tableView.reloadData()
-            }
-            else {
-                self.friendsArray.removeAll()
-                self.friendsArrayKey.removeAll()
-                let friendData = snapshot.value as! [String:String] as [String : AnyObject]
-                for (key,value) in friendData {
+                let friendData = self.oriFrinendsKeyArray
+                for (value) in friendData {
                     
-                    self.ref.child("Users").child(key).observeSingleEvent(of: .value, with: { snapshot in
+                    self.ref.child("Users").child(value).observeSingleEvent(of: .value, with: { snapshot in
                         if(snapshot.childrenCount > 0 ){
                             let data:NSDictionary  = snapshot.value as! NSDictionary
-                            self.friendsArrayKey.append(key as! String)
-                            self.friendsArray[key as! String] = data as AnyObject?
-                            
+                            self.friendsArrayKey.append(value as! String)
+                            self.friendsArray[value as! String] = data as AnyObject?
                             if(self.friendsArrayKey.count == 3){
+                                self.notenoughFriendsFlag = false
                                 if(self.alreadyGuessed){
                                     self.isShuffled=true
                                     self.tableView.reloadData()
@@ -342,8 +384,12 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     self.shuffleArray()
                                 }
                             }
-                            
-                            
+                            else if(self.friendsArrayKey.count < 3){
+                                self.isShuffled = false
+                                self.notenoughFriendsFlag = true
+                                self.tableView.reloadData()
+                            }
+
                         }
                             
                         else {
@@ -355,9 +401,9 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                 }
                 
-            }
+        
             
-        })
+       
     }
 
     func checkPost(){

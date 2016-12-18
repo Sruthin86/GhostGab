@@ -154,11 +154,25 @@
                                                                     </constraints>
                                                                     <state key="normal" image="Flag"/>
                                                                 </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PR3-K3-kX9">
+                                                                    <rect key="frame" x="217" y="59" width="20" height="22"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="20" id="QeA-cq-Oto"/>
+                                                                        <constraint firstAttribute="height" constant="22" id="acX-xL-8ej"/>
+                                                                        <constraint firstAttribute="width" secondItem="PR3-K3-kX9" secondAttribute="height" multiplier="10:11" id="gDY-kX-WHl"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="delete@1x"/>
+                                                                    <connections>
+                                                                        <action selector="deletePost:" destination="0w5-Bs-z2O" eventType="touchUpInside" id="zhB-1b-obd"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="tk3-z9-hC5" secondAttribute="bottom" constant="12" id="5rj-q1-ErI"/>
                                                                 <constraint firstItem="RBk-E2-sQ4" firstAttribute="leading" secondItem="nJQ-Dc-oeW" secondAttribute="trailing" constant="20" id="7IM-3S-NjY"/>
+                                                                <constraint firstAttribute="bottom" secondItem="PR3-K3-kX9" secondAttribute="bottom" constant="9" id="8PQ-I1-lgu"/>
+                                                                <constraint firstItem="PR3-K3-kX9" firstAttribute="top" secondItem="nJQ-Dc-oeW" secondAttribute="bottom" constant="14.5" id="Dsm-eP-cih"/>
                                                                 <constraint firstItem="nJQ-Dc-oeW" firstAttribute="leading" secondItem="MIo-sk-eoR" secondAttribute="leading" constant="12" id="EJq-B6-Y0D"/>
                                                                 <constraint firstItem="tk3-z9-hC5" firstAttribute="leading" secondItem="D9T-Ua-Aai" secondAttribute="trailing" constant="10" id="GdH-ds-1J5"/>
                                                                 <constraint firstItem="D9T-Ua-Aai" firstAttribute="leading" secondItem="6Fm-Ab-Bye" secondAttribute="trailing" constant="40" id="HfQ-r1-fFg"/>
@@ -170,6 +184,7 @@
                                                                 <constraint firstAttribute="bottom" secondItem="6Fm-Ab-Bye" secondAttribute="bottom" constant="12" id="mF9-sv-eCc"/>
                                                                 <constraint firstItem="nJQ-Dc-oeW" firstAttribute="top" secondItem="MIo-sk-eoR" secondAttribute="top" constant="6" id="o30-Hd-1fz"/>
                                                                 <constraint firstAttribute="trailing" secondItem="RBk-E2-sQ4" secondAttribute="trailing" constant="10" id="wOh-ak-HS6"/>
+                                                                <constraint firstItem="PR3-K3-kX9" firstAttribute="leading" secondItem="tk3-z9-hC5" secondAttribute="trailing" constant="42.5" id="zFK-0F-2J8"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wwG-2I-KWi" userLabel="ReactionsView">
@@ -423,7 +438,7 @@
                             <constraint firstItem="RE7-eq-twU" firstAttribute="top" secondItem="raq-i8-Dw9" secondAttribute="bottom" id="hyn-gO-bLz"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Profile" image="ProfileIcon@1x" selectedImage="ProfileIcon@1x" id="3qR-ej-s49"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Profile" image="ProfileIcon@1x" selectedImage="ProfileIcon_inactive@1x" id="3qR-ej-s49"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -443,7 +458,8 @@
     <resources>
         <image name="Flag" width="11" height="15"/>
         <image name="Logo" width="132" height="136"/>
-        <image name="ProfileIcon@1x" width="12" height="23"/>
+        <image name="ProfileIcon@1x" width="14" height="27"/>
+        <image name="ProfileIcon_inactive@1x" width="14" height="27"/>
         <image name="ReactClose@1x" width="375" height="37"/>
         <image name="Reaction1@1x" width="25" height="33"/>
         <image name="Reaction2@1x" width="25" height="33"/>
@@ -452,6 +468,7 @@
         <image name="Reaction5@1x" width="25" height="33"/>
         <image name="Reaction6@1x" width="25" height="34"/>
         <image name="cash" width="28" height="33"/>
+        <image name="delete@1x" width="20" height="19"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

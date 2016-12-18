@@ -123,7 +123,7 @@
                             <constraint firstItem="vNU-0t-8Zt" firstAttribute="top" secondItem="Wrx-n5-WYm" secondAttribute="bottom" id="qjK-dG-3ZK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="4" title="Friends" image="FriendsIcon@1x" selectedImage="FriendsIcon@1x" id="OOH-H9-cer"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="Friends" image="FriendsIcon@1x" selectedImage="FriendsIcon_inactive@1x" id="OOH-H9-cer"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -138,7 +138,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FriendsIcon@1x" width="16" height="24"/>
+        <image name="FriendsIcon@1x" width="18" height="27"/>
+        <image name="FriendsIcon_inactive@1x" width="18" height="27"/>
         <image name="Logo" width="132" height="136"/>
         <image name="Remove Button" width="33" height="33"/>
     </resources>

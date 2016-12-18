@@ -188,6 +188,7 @@ class HelperFunctions {
         let uRef = ref.child("Users").child(uid)
         let pRef = ref.child("Posts").child(postId)
         
+        pRef.child("FlaggedUsers").child(uid).setValue(uid)
         uRef.child("Flag").child(postId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             
             if(snapshot.exists()){

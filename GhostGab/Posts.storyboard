@@ -78,7 +78,7 @@
                                                                 <rect key="frame" x="96" y="0.0" width="95.5" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrY-RB-D9D">
-                                                                        <rect key="frame" x="17.5" y="5" width="59" height="29"/>
+                                                                        <rect key="frame" x="18" y="5" width="59" height="29"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="59" id="BYb-dh-749"/>
                                                                         </constraints>
@@ -98,7 +98,7 @@
                                                                 <rect key="frame" x="191.5" y="0.0" width="96" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUt-ye-1sv">
-                                                                        <rect key="frame" x="7" y="5" width="82" height="29"/>
+                                                                        <rect key="frame" x="6.5" y="5" width="82" height="29"/>
                                                                         <state key="normal" image="PostAndGuess"/>
                                                                         <connections>
                                                                             <action selector="postAndGuess:" destination="Ixt-VC-lw6" eventType="touchUpInside" id="MFr-EW-rEE"/>
@@ -549,7 +549,7 @@
                             <constraint firstItem="Z7X-ia-T59" firstAttribute="centerX" secondItem="cMs-aO-cFO" secondAttribute="centerX" id="fKM-ib-Cjh"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="Feed" image="SoundHornIcon@1x" selectedImage="SoundHornIcon@1x" id="fr2-xc-VfW"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Feed" image="SoundHornIcon@1x" selectedImage="SoundHornIcon_inactive" id="fr2-xc-VfW"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -736,7 +736,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P30-WR-755" id="QtN-w7-btT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7AC-F5-nLf">
@@ -834,7 +834,8 @@ Choose Wisely!! Correct guess wins you 10 points</string>
         <image name="Reaction4@1x" width="25" height="33"/>
         <image name="Reaction5@1x" width="25" height="33"/>
         <image name="Reaction6@1x" width="25" height="34"/>
-        <image name="SoundHornIcon@1x" width="29" height="25"/>
+        <image name="SoundHornIcon@1x" width="31" height="27"/>
+        <image name="SoundHornIcon_inactive" width="31" height="27"/>
         <image name="cash" width="28" height="33"/>
         <image name="cash_inactive" width="28" height="33"/>
     </resources>

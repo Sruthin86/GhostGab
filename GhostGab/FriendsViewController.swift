@@ -17,9 +17,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var friendsArrayKey = [String]()
     
-     let currentUserId =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
+    var freindsSearchArray = [String: AnyObject]()
     
-     let ref = FIRDatabase.database().reference()
+    var friendsSearchKeyArray = [String]()
+    
+    var searching: Bool = false
+    
+    let currentUserId =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
+    
+    let ref = FIRDatabase.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +41,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let imageName = "loading_00003.png"
+        let imageName = "Reaction1_lg.png"
         let labelText = "you will find your friends soon!!! "
         if let friendsLength : Int = friendsArray.count{
             if (friendsLength > 0){
@@ -83,11 +89,16 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let friendsCell :FriendsTableViewCell =  tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsTableViewCell
 
-        friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
-        friendsCell.displayName.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
-        friendsCell.removeFriend.tag = indexPath.row
-        friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
-        friendsCell.setBackground(colorValue: "white")
+        if(searching){
+            
+        }
+        else {
+            friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
+            friendsCell.displayName.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
+            friendsCell.removeFriend.tag = indexPath.row
+            friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
+            friendsCell.setBackground(colorValue: "white")
+        }
         return friendsCell
     }
     
@@ -138,6 +149,29 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         
         })
+    }
+    
+    
+    func searchFriends() {
+        
+        if(self.friendsArray.count>0){
+            var searchString:String = "abc"
+            print("abc")
+            for (key,val) in self.friendsArray {
+                var compareString:String  = val["displayName"] as!String
+                if(compareString.contains(searchString)){
+                    self.freindsSearchArray[key as! String] = val as AnyObject?
+                    self.friendsSearchKeyArray.append(key as! String)
+                }
+                
+            }
+            
+            if (freindsSearchArray.count>0){
+                searching = true
+                tableView.reloadData()
+            }
+            
+        }
     }
     
 }

@@ -73,6 +73,8 @@ class PostCellTableViewCell: UITableViewCell {
     let green : Color = Color.green
     
     var imageCache = NSCache<NSString, UIImage>();
+    
+    var redflag : UIImage = UIImage(named: "Flag_red@1x")!
     //@IBOutlet weak var reaction1: UIButton!
     
     override func awakeFromNib() {
@@ -244,55 +246,57 @@ class PostCellTableViewCell: UITableViewCell {
     
     func setReactionCount(postId: String) {
         self.ref.child("Posts").child(postId).child("reactionsData").observe(FIRDataEventType.value, with: { (snapshot) in
-            let reactionsData = snapshot.value as! [String : Int]
-            self.ref.child("Users").child(self.uid as! String).child("Reactions").child(self.postId!).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                self.reaction1Label.text = String(reactionsData["Reaction1"]!)
-                self.reaction1Label.textColor = self.grey.getColor()
-                self.reaction2Label.text = String(reactionsData["Reaction2"]!)
-                self.reaction2Label.textColor = self.grey.getColor()
-                self.reaction3Label.text = String(reactionsData["Reaction3"]!)
-                self.reaction3Label.textColor = self.grey.getColor()
-                self.reaction4Label.text = String(reactionsData["Reaction4"]!)
-                self.reaction4Label.textColor = self.grey.getColor()
-                self.reaction5Label.text = String(reactionsData["Reaction5"]!)
-                self.reaction5Label.textColor = self.grey.getColor()
-                self.reaction6Label.text = String(reactionsData["Reaction6"]!)
-                self.reaction6Label.textColor = self.grey.getColor()
-                
-                guard(!snapshot.exists()) else {
-                    let rData = snapshot.value as! [String:Int]
-                    let userReaction: Int = rData["userReaction"]!
+            
+             if(snapshot.exists()){
+                let reactionsData = snapshot.value as! [String : Int]
+                self.ref.child("Users").child(self.uid as! String).child("Reactions").child(self.postId!).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                    self.reaction1Label.text = String(reactionsData["Reaction1"]!)
+                    self.reaction1Label.textColor = self.grey.getColor()
+                    self.reaction2Label.text = String(reactionsData["Reaction2"]!)
+                    self.reaction2Label.textColor = self.grey.getColor()
+                    self.reaction3Label.text = String(reactionsData["Reaction3"]!)
+                    self.reaction3Label.textColor = self.grey.getColor()
+                    self.reaction4Label.text = String(reactionsData["Reaction4"]!)
+                    self.reaction4Label.textColor = self.grey.getColor()
+                    self.reaction5Label.text = String(reactionsData["Reaction5"]!)
+                    self.reaction5Label.textColor = self.grey.getColor()
+                    self.reaction6Label.text = String(reactionsData["Reaction6"]!)
+                    self.reaction6Label.textColor = self.grey.getColor()
                     
-                    
-                    switch userReaction{
-                    case 1 :
-                        self.reaction1Label.textColor = self.green.getColor()
-                        break
-                    case 2 :
-                        self.reaction2Label.textColor = self.green.getColor()
-                        break
-                    case 3 :
-                        self.reaction3Label.textColor = self.green.getColor()
-                        break
-                    case 4 :
-                        self.reaction4Label.textColor = self.green.getColor()
-                        break
-                    case 5 :
-                        self.reaction5Label.textColor = self.green.getColor()
-                        break
-                    case 6 :
-                        self.reaction6Label.textColor = self.green.getColor()
-                        break
-                    default:
-                        break
+                    guard(!snapshot.exists()) else {
+                        let rData = snapshot.value as! [String:Int]
+                        let userReaction: Int = rData["userReaction"]!
                         
+                        
+                        switch userReaction{
+                        case 1 :
+                            self.reaction1Label.textColor = self.green.getColor()
+                            break
+                        case 2 :
+                            self.reaction2Label.textColor = self.green.getColor()
+                            break
+                        case 3 :
+                            self.reaction3Label.textColor = self.green.getColor()
+                            break
+                        case 4 :
+                            self.reaction4Label.textColor = self.green.getColor()
+                            break
+                        case 5 :
+                            self.reaction5Label.textColor = self.green.getColor()
+                            break
+                        case 6 :
+                            self.reaction6Label.textColor = self.green.getColor()
+                            break
+                        default:
+                            break
+                            
+                        }
+                        return
                     }
-                    return
-                }
+                    
+                })
                 
-            })
-            
-            
+            }
             
             
         })
@@ -302,28 +306,32 @@ class PostCellTableViewCell: UITableViewCell {
     
     
     func setFlagCount(postId: String) {
+      
         self.ref.child("Posts").child(postId).child("flags").observeSingleEvent(of: FIRDataEventType.value, with:{ (snapshot) in
-            let flagsData = snapshot.value as! [String : Int]
-            let flagCount: Int =  flagsData["flagCount"]!
-            self.flagLabel.text = String(flagCount)
-            self.flagLabel.textColor = self.grey.getColor()
-            self.ref.child("Users").child(self.uid as! String).child("Flag").child(self.postId!).child("userFlag").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                
-                if(snapshot.exists()){
-                    let val =  snapshot.value as!Int
-                    if (val == 1){
-                        self.flagLabel.textColor = self.red.getColor()
-                    }
-                }
-            })
-            
-            
+            if(snapshot.exists()){
+                    let flagsData = snapshot.value as! [String : Int]
+                    var flagCount: Int =  flagsData["flagCount"]!
+                    self.flagLabel.text = String(flagCount)
+                    self.flagLabel.textColor = self.grey.getColor()
+                    
+
+                    self.ref.child("Users").child(self.uid as! String).child("Flag").child(self.postId!).child("userFlag").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                        
+                        if(snapshot.exists()){
+                            let val =  snapshot.value as!Int
+                            if (val == 1){
+                                self.flagLabel.textColor = self.red.getColor()
+                            }
+                        }
+                    })
+            }
         })
+        
     }
     
     func myReaction (reaction: Int) {
         
-        
+        self.ref.child("Posts").child(self.postId!).child("ReactedUsers").child(self.uid! as! String).setValue(self.uid! as! String)
         self.ref.child("Users").child(self.uid! as! String).child("Reactions").child(self.postId!).observeSingleEvent(of: FIRDataEventType.value, with :  { (snapshot) in
             if(snapshot.exists()){
                 let rData =  snapshot.value as! [String : AnyObject]

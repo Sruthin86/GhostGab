@@ -12,6 +12,11 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
+
+extension Notification.Name {
+    static let reloadposts = Notification.Name("reloadposts")
+}
+
 class PostViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var PostText: UITextField!
@@ -87,6 +92,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         self.tableView.addSubview(refreshControl)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         getFriends()
+         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData(_:)), name: .reloadposts, object: nil)
         
         // Do any additional setup after loading the view.
     }
@@ -201,6 +207,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
             let guessView  = storybaord.instantiateViewController(withIdentifier: "guessController") as! GuessViewController
             guessView.postId = postIdToPass
             guessView.guessPostArray = postFeed
+            guessView.oriFrinendsKeyArray = Array(self.friendsUidArray)
             self.present(guessView, animated: true, completion: nil)
 
         }
@@ -315,7 +322,12 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         ref.child("Posts").queryOrdered(byChild: "TS").observe(FIRDataEventType.value, with: { (snapshot) in
             
-            guard !snapshot.exists() else {
+            if( !snapshot.exists()){
+                self.postsArray.removeAll()
+                self.postKeys.removeAll()
+                self.tableView.reloadData()
+                
+            }else {
                 
                 var pModel = postModel(posts: snapshot)
                 self.oldPostKeysCount = self.postKeys.count
@@ -421,5 +433,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         }
     }
     
+    func reloadTableData(_ notification: Notification) {
+        self.getFriends()
+    }
     
 }

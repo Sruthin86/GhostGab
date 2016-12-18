@@ -72,8 +72,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.suggestionsFlag){
-            let imageName = "loading_00001.png"
-            let labelText = "Sorry , we couldn't find any one that you might know!!!"
+            let imageName = "Reaction2_lg.png"
+            let labelText = "Sorry , we couldn't find any one \nthat you might know!!!"
             if let suggestionsLength : Int = suggestionsArray.count{
                 if (suggestionsLength > 0){
                     self.tableView.backgroundView = .none
@@ -93,7 +93,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         }
             
         else if (self.requestsFlag){
-            let imageName = "loading_00002.png"
+            let imageName = "Reaction4_lg.png"
             let labelText = "somebody will show you some love soon!!!"
             if let requestsLength : Int = requestsArray.count{
                 

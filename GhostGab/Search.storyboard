@@ -67,10 +67,10 @@
                                         <rect key="frame" x="0.0" y="55" width="383" height="55"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YL-kk-iGo">
-                                                <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="55"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBL-aH-vyC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Requests"/>
                                                         <connections>
@@ -87,10 +87,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZZ-Kr-LAr">
-                                                <rect key="frame" x="191.5" y="0.0" width="191.5" height="55"/>
+                                                <rect key="frame" x="192" y="0.0" width="191" height="55"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-gR-Um3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="191" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Suggestions"/>
                                                         <connections>
@@ -202,7 +202,7 @@
                             <constraint firstItem="KKj-pb-fUI" firstAttribute="leading" secondItem="4ic-qo-snu" secondAttribute="leadingMargin" constant="-20" id="zLS-Rt-dEp"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Search" image="SearchFriendsIcon@1x" selectedImage="SearchFriendsIcon@1x" id="vhi-uT-TEM"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Search" image="SearchFriendsIcon@1x" selectedImage="SearchFriendsIcon_inactive@1x" id="vhi-uT-TEM"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -271,24 +271,24 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="searchUsers" rowHeight="65" id="DI9-na-Fv3" customClass="SearchUsersTableViewCell" customModule="GhostGab" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DI9-na-Fv3" id="2KB-5K-dww">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="DI9-na-Fv3" id="2KB-5K-dww">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m24-Xf-Wgp">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m24-Xf-Wgp">
                                                     <rect key="frame" x="20" y="6" width="53" height="53"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="53" id="0f1-1F-2ZQ"/>
                                                         <constraint firstAttribute="width" constant="53" id="uLl-Oq-xcP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-Lp-DF5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-Lp-DF5">
                                                     <rect key="frame" x="93" y="23" width="186" height="28"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                                     <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjq-lh-Ruw">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjq-lh-Ruw">
                                                     <rect key="frame" x="320" y="16" width="33" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="J7z-Ox-g5c"/>
@@ -358,7 +358,8 @@
         <image name="Logo" width="132" height="136"/>
         <image name="Plus" width="33" height="33"/>
         <image name="Remove Button" width="33" height="33"/>
-        <image name="SearchFriendsIcon@1x" width="15" height="26"/>
+        <image name="SearchFriendsIcon@1x" width="17" height="28"/>
+        <image name="SearchFriendsIcon_inactive@1x" width="17" height="28"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

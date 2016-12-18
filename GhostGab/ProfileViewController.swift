@@ -12,6 +12,10 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
+
+extension Notification.Name {
+    static let reload = Notification.Name("reload")
+}
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -48,13 +52,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.fullName.text =  userDetails["displayName"] as? String;
             self.cashCount.text = userDetails["cash"] as? String;
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
+            print(fileUrl)
             let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
             self.profileImage.image = UIImage(data: profilePicUrl! as Data)
             self.profileImage.layer.cornerRadius  = self.profileImage.frame.width/2
             self.profileImage.clipsToBounds = true;
             let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 5 )
             customization.addBorder(object: self.profileImage)
-            
+            NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData(_:)), name: .reload, object: nil)
             
         })
         self.getPosts()
@@ -196,7 +201,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         ref.child("Posts").queryOrdered(byChild: "TS").observe(FIRDataEventType.value, with: { (snapshot) in
             
-            guard !snapshot.exists() else {
+            if( !snapshot.exists()){
+                 self.postsArray.removeAll()
+                self.postKeys.removeAll()
+                self.tableView.reloadData()
+            }else {
                 
                 var pModel = postModel(posts: snapshot)
                 self.oldPostKeysCount = self.postKeys.count
@@ -243,6 +252,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.tableView.contentOffset.y = contentOffset.y + (144 * CGFloat(diff))
         }
         
+    }
+    
+    
+    func reloadTableData(_ notification: Notification) {
+        self.getPosts()
     }
     
     
