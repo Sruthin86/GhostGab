@@ -14,6 +14,8 @@ use_frameworks!
  pod 'OneSignal'
  pod 'SinchVerification-Swift'
  pod 'SCLAlertView'
+ pod 'Fabric'
+ pod 'Crashlytics'
 
 target 'GhostGab'
 target 'GhostGabTests'

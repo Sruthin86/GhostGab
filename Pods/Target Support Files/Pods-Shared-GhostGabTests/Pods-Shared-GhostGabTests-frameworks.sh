@@ -87,11 +87,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
-  install_framework "${PODS_ROOT}/SinchVerification-Swift/swift/SinchVerification.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SinchVerification-Swift/SinchVerification.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
-  install_framework "${PODS_ROOT}/SinchVerification-Swift/swift/SinchVerification.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SinchVerification-Swift/SinchVerification.framework"
 fi

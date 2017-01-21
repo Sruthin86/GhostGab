@@ -284,32 +284,33 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     
     @IBAction func suggestions(_ sender: AnyObject) {
+        requestsFlag = false;
+        suggestionsFlag = true
         let greenGustomization : UICostomization = UICostomization(color: green.getColor(), width: width )
         greenGustomization.addBackground(object: self.suggestionsBtn)
         self.suggestionsBtn.tintColor = white.getColor()
         let whiteGustomization : UICostomization = UICostomization(color: white.getColor(), width: width )
         whiteGustomization.addBackground(object: self.requestsBtn)
         self.requestsBtn.tintColor = grey.getColor()
-        
-        switch CNContactStore.authorizationStatus(for: CNEntityType.contacts){
-        case .authorized:
-            requestsFlag = false;
-            suggestionsFlag = true
-            self.fetchContacts()
-            self.tableView.reloadData()
-            
-        // This is the method we will create
-        case .notDetermined:
-            contactStore.requestAccess(for: .contacts){succeeded, err in
-                guard err == nil && succeeded else{
-                    let notAuthorizedMessage = "Please Allow Ghost Gossip to access contacts . You can do it in Setting->Privacy->Contacts"
-                    return
-                }
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            switch CNContactStore.authorizationStatus(for: CNEntityType.contacts){
+            case .authorized:
+                self.fetchContacts()
+                self.tableView.reloadData()
                 
+            // This is the method we will create
+            case .notDetermined:
+                self.contactStore.requestAccess(for: .contacts){succeeded, err in
+                    guard err == nil && succeeded else{
+                        let notAuthorizedMessage = "Please Allow Ghost Gossip to access contacts . You can do it in Setting->Privacy->Contacts"
+                        return
+                    }
+                    
+                }
+            default:
+                
+                let notAuthorizedMessage = "Please Allow Ghost Gossip to access contacts . You can do it in Setting->Privacy->Contacts"
             }
-        default:
-            
-            let notAuthorizedMessage = "Please Allow Ghost Gossip to access contacts . You can do it in Setting->Privacy->Contacts"
         }
     }
     
