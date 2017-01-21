@@ -95,7 +95,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchUserCell: SearchUsersTableViewCell = tableView.dequeueReusableCell(withIdentifier: "searchUsers", for: indexPath) as! SearchUsersTableViewCell
-        searchUserCell.setImageData(photoUrl: self.searchArray[self.searchKeyArray[indexPath.row]]!.value(forKey :"photo")! as! String)
+        searchUserCell.setImageData(photoUrl: self.searchArray[self.searchKeyArray[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
         searchUserCell.displayName.text = self.searchArray[self.searchKeyArray[indexPath.row]]!.value(forKey :"displayName")! as? String
         if(self.friendsUidArray.contains(self.searchKeyArray[indexPath.row]) || self.sentRequestsUidArray.contains(self.searchKeyArray[indexPath.row])){
             searchUserCell.addFriend.isEnabled = false
@@ -119,11 +119,12 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         let friendOneSignalId = self.searchArray[self.searchKeyArray[addIndexPath.row]]!.value(forKey :"oneSignalId")
         let friendDisplayName = self.searchArray[self.searchKeyArray[addIndexPath.row]]!.value(forKey :"displayName")
 
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (timer) in
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
             self.ref.child("Users").child(self.currentUserId).child("RequestsSent").child(friendUid).setValue(friendDisplayName)
             self.ref.child("Users").child(friendUid).child("Requests").child(self.currentUserId).setValue(self.currentUser)
             let notificationText: String = self.currentUser + " sent you a friend request"
             OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [friendOneSignalId]])
+            highLightedCell.addFriend.isEnabled = false
             self.getSentRequests()
             self.tableView.reloadData()
         }

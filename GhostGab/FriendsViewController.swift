@@ -93,7 +93,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         }
         else {
-            friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
+            friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             friendsCell.displayName.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             friendsCell.cashLabel.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"cash")! as? String
 

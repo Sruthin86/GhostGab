@@ -392,7 +392,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         ref.child("Users").child(uid).observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
             let userData =  snapshot.value as! [String:AnyObject]
             let displayName = userData["displayName"]
-            let picUrl = userData["photo"]
+            let picUrl = userData["highResPhoto"]
             let reactionsData: [String:Int] = ["Reaction1": 0, "Reaction2": 0, "Reaction3": 0, "Reaction4": 0, "Reaction5": 0, "Reaction6": 0]
             let flags: [String : Int] = ["flagCount": 0]
             let postMetrics: [String:Int] = ["flag":0, "correctGuess":0, "wrongGuess":0]

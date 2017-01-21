@@ -142,11 +142,10 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: RequestSuggestionTableViewCell = tableView.dequeueReusableCell(withIdentifier: "rsCell", for: indexPath) as! RequestSuggestionTableViewCell
-         cell.setBackground(colorValue: "white")
+        cell.setBackground(colorValue: "white")
         
         if (self.suggestionsFlag){
-            
-            cell.setImageData(photoUrl: self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
+            cell.setImageData(photoUrl: self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             cell.rsLabel.text = self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             cell.sendRequestBtn.tag = indexPath.row
             cell.sendRequestBtn.addTarget(self, action: #selector(self.AcceptButton), for: .touchUpInside)
@@ -154,7 +153,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         }
         else if (self.requestsFlag){
             
-            cell.setImageData(photoUrl: self.requestsArray[self.requestsArrayKey[indexPath.row]]!.value(forKey :"photo")! as! String)
+            cell.setImageData(photoUrl: self.requestsArray[self.requestsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             cell.rsLabel.text = self.requestsArray[self.requestsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             cell.sendRequestBtn.tag = indexPath.row
             cell.cancelBtn.tag = indexPath.row
@@ -170,12 +169,12 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         let OnesignalIndexPath = NSIndexPath(row: sender.tag, section: 0)
         let highLightedCell : RequestSuggestionTableViewCell = self.tableView.cellForRow(at: OnesignalIndexPath as IndexPath) as! RequestSuggestionTableViewCell
         highLightedCell.setBackground(colorValue: "lightGreen")
-            if(suggestionsFlag){
-                sendRequest(OnesignalIndexPath: OnesignalIndexPath)
-            }
-            else if(requestsFlag){
-                conformRequest(OnesignalIndexPath: OnesignalIndexPath)
-            }
+        if(suggestionsFlag){
+            sendRequest(OnesignalIndexPath: OnesignalIndexPath)
+        }
+        else if(requestsFlag){
+            conformRequest(OnesignalIndexPath: OnesignalIndexPath)
+        }
         
         
     }
@@ -193,13 +192,13 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     }
     
     func cancelRequest(cancelIndexPath: NSIndexPath){
-       
+        
         let requestedUserUid = self.requestsArrayKey[cancelIndexPath.row]
         let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (timer) in
             self.ref.child("Users").child(self.currentUserId).child("Requests").child(requestedUserUid).removeValue()
             self.ref.child("Users").child(requestedUserUid).child("RequestsSent").child(self.currentUserId).removeValue()
         }
-       
+        
         
     }
     func sendRequest(OnesignalIndexPath: NSIndexPath) -> Void {
@@ -330,72 +329,74 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                 
                 for numbers: CNLabeledValue in contact.phoneNumbers{
                     var MobNumVar  = (numbers.value as! CNPhoneNumber).value(forKey: "digits") as? String
-                    MobNumVar! = String(format:"%@",  MobNumVar!.substring(with: MobNumVar!.index((MobNumVar?.endIndex)!, offsetBy: -10)..<MobNumVar!.endIndex ))
-                    MobNumVar! = String(format: "(%@) %@-%@",
-                                        MobNumVar!.substring(with: MobNumVar!.startIndex ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3)),
-                                        MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6)),
-                                        MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 10)))
-                    
-                    self.ref.child("Users").queryOrdered(byChild: "phoneNumber").queryStarting(atValue: MobNumVar!).queryEnding(atValue: MobNumVar!).observeSingleEvent(of: .value, with: { snapshot in
+                    if(MobNumVar != nil && (MobNumVar?.characters.count)!>=10 ){
+                        MobNumVar! = String(format:"%@",  MobNumVar!.substring(with: MobNumVar!.index((MobNumVar?.endIndex)!, offsetBy: -10)..<MobNumVar!.endIndex ))
+                        MobNumVar! = String(format: "(%@) %@-%@",
+                                            MobNumVar!.substring(with: MobNumVar!.startIndex ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3)),
+                                            MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 3) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6)),
+                                            MobNumVar!.substring(with: MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 6) ..< MobNumVar!.index(MobNumVar!.startIndex, offsetBy: 10)))
                         
-                        if(snapshot.exists()){
+                        self.ref.child("Users").queryOrdered(byChild: "phoneNumber").queryStarting(atValue: MobNumVar!).queryEnding(atValue: MobNumVar!).observeSingleEvent(of: .value, with: { snapshot in
                             
-                            
-                            let data:NSDictionary  = snapshot.value as! NSDictionary
-                            
-                            self.suggestionsArrayKey.removeAll()
-                            self.suggestionsArray.removeAll()
-                            
-                            self.ref.child("Users").child(self.currentUserId).observeSingleEvent(of: .value, with: { snapshot in
-                                if(snapshot.exists()){
-                                    for suggestionsData in data{
-                                        
-                                        var  requestsExists:Bool = false
-                                        var  requestsSentExists:Bool = false
-                                        var  FriendsExists:Bool = false
-                                        
-                                        let uData = snapshot.value  as! NSDictionary
-                                        if(uData["RequestsSent"] != nil){
-                                            var reqSent  = uData["RequestsSent"] as! NSDictionary
-                                            if(reqSent[suggestionsData.key ] != nil) {
-                                                requestsSentExists = true
+                            if(snapshot.exists()){
+                                
+                                
+                                let data:NSDictionary  = snapshot.value as! NSDictionary
+                                
+                                self.suggestionsArrayKey.removeAll()
+                                self.suggestionsArray.removeAll()
+                                
+                                self.ref.child("Users").child(self.currentUserId).observeSingleEvent(of: .value, with: { snapshot in
+                                    if(snapshot.exists()){
+                                        for suggestionsData in data{
+                                            
+                                            var  requestsExists:Bool = false
+                                            var  requestsSentExists:Bool = false
+                                            var  FriendsExists:Bool = false
+                                            
+                                            let uData = snapshot.value  as! NSDictionary
+                                            if(uData["RequestsSent"] != nil){
+                                                var reqSent  = uData["RequestsSent"] as! NSDictionary
+                                                if(reqSent[suggestionsData.key ] != nil) {
+                                                    requestsSentExists = true
+                                                }
                                             }
-                                        }
-                                        
-                                        if(uData["Requests"] != nil){
-                                            var req  = uData["Requests"] as! NSDictionary
-                                            if(req[suggestionsData.key ] != nil) {
-                                                requestsExists = true
+                                            
+                                            if(uData["Requests"] != nil){
+                                                var req  = uData["Requests"] as! NSDictionary
+                                                if(req[suggestionsData.key ] != nil) {
+                                                    requestsExists = true
+                                                }
                                             }
-                                        }
-                                        if(uData["Friends"] != nil){
-                                            var frnd = uData["Friends"] as! NSDictionary
-                                            if(frnd[suggestionsData.key ] != nil){
-                                                FriendsExists = true
+                                            if(uData["Friends"] != nil){
+                                                var frnd = uData["Friends"] as! NSDictionary
+                                                if(frnd[suggestionsData.key ] != nil){
+                                                    FriendsExists = true
+                                                }
                                             }
+                                            
+                                            ""
+                                            if(!requestsExists && !FriendsExists && !requestsSentExists && self.currentUserId != suggestionsData.key as! String){
+                                                self.suggestionsArrayKey.append(suggestionsData.key as! String)
+                                                self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
+                                            }
+                                            
+                                            self.tableView.reloadData()
+                                            
                                         }
-                                        
-                                        if(!requestsExists && !FriendsExists && !requestsSentExists && self.currentUserId != suggestionsData.key as! String){
-                                            self.suggestionsArrayKey.append(suggestionsData.key as! String)
-                                            self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
-                                        }
-                                        
-                                        self.tableView.reloadData()
                                         
                                     }
                                     
-                                }
+                                })
                                 
-                            })
+                            }
+                            else {
+                                
+                                
+                            }
                             
-                        }
-                        else {
-                            
-                            
-                        }
-                        
-                    })
-                    
+                        })
+                    }
                     
                 }
                 

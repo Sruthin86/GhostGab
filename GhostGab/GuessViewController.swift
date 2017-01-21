@@ -174,7 +174,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.loaded =  true;
             self.tableView.backgroundView = .none
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-            guessCell.setImageData(photoUrl: self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"photo")! as! String)
+            guessCell.setImageData(photoUrl: self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             guessCell.displayName.text = self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"displayName")! as? String
             guessCell.setBackground(colorValue: "white")
             if(self.alreadyGuessed){

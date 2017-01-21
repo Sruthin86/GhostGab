@@ -34,7 +34,7 @@ class InitialViewController: UIViewController {
                             if(verified){
                                 let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
                                 let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
-                                mainTabBarView.selectedIndex = 0
+                                mainTabBarView.selectedIndex = 2
                                 self.present(mainTabBarView, animated: true, completion: nil)
                             }
                             else {
