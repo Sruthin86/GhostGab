@@ -32,6 +32,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        searchBar.tintColor = UIColor.white
         getFriends()
         
         // Do any additional setup after loading the view.
@@ -44,26 +46,53 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let imageName = "Reaction1_lg.png"
-        let labelText = "you will find your friends soon!!! "
-        if let friendsLength : Int = friendsArray.count{
-            if (friendsLength > 0){
-                self.tableView.backgroundView = .none
-                self.tableView.separatorStyle = .singleLine
-                return friendsLength
+        var imageName = "Reaction1_lg.png"
+        var labelText = "you will find your friends soon!!! "
+        
+        if(searching){
+            if let friendsLength : Int = self.freindsSearchArray.count{
+                if (friendsLength > 0){
+                    self.tableView.backgroundView = .none
+                    self.tableView.separatorStyle = .singleLine
+                    return friendsLength
+                }
+                else {
+                    imageName = "Reaction3_lg.png"
+                    labelText = "No Results Found!!! "
+                    displyNoDataLabel(imageName:imageName, labelText:labelText)
+                    return 0
+                    
+                }
             }
+                
             else {
+                
                 displyNoDataLabel(imageName:imageName, labelText:labelText)
                 return 0
                 
             }
+            
         }
-            
         else {
-            
-            displyNoDataLabel(imageName:imageName, labelText:labelText)
-            return 0
-            
+            if let friendsLength : Int = friendsArray.count{
+                if (friendsLength > 0){
+                    self.tableView.backgroundView = .none
+                    self.tableView.separatorStyle = .singleLine
+                    return friendsLength
+                }
+                else {
+                    displyNoDataLabel(imageName:imageName, labelText:labelText)
+                    return 0
+                    
+                }
+            }
+                
+            else {
+                
+                displyNoDataLabel(imageName:imageName, labelText:labelText)
+                return 0
+                
+            }
         }
         
         
@@ -75,7 +104,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let imageView :UIImageView = UIImageView(image: image)
         imageView.frame = CGRect(x:self.tableView.frame.width/2 - 37.5, y:self.tableView.frame.height/3, width:75, height:99)
         let textColor: Color = Color.grey
-        let noDataAvailableLabel: UILabel = UILabel(frame: CGRect(x:0, y:self.tableView.frame.height/4, width:self.tableView.frame.width, height:self.tableView.frame.height) )
+        let noDataAvailableLabel: UILabel = UILabel(frame: CGRect(x:0, y:self.tableView.frame.height/8, width:self.tableView.frame.width, height:self.tableView.frame.height) )
         
         noDataAvailableLabel.text =  labelText
         noDataAvailableLabel.textAlignment = .center
@@ -100,7 +129,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             friendsCell.removeFriend.tag = indexPath.row
             friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
             friendsCell.setBackground(colorValue: "white")
-
+            
         }
         else {
             friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
@@ -176,6 +205,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false;
+        self.searchBar.endEditing(true)
+        self.freindsSearchArray.removeAll()
+        self.friendsSearchKeyArray.removeAll()
+        self.searchBar.text = nil
+        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -185,7 +219,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        self.freindsSearchArray.removeAll()
+        self.friendsSearchKeyArray.removeAll()
+        searching = true;
         searchFriends(searchString:searchText)
         
     }
@@ -197,7 +233,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 for (key,val) in self.friendsArray {
                     var compareString:String  = val["displayName"] as!String
-                    if(compareString.contains(searchString)){
+                    if(compareString.lowercased().contains(searchString.lowercased())){
                         self.freindsSearchArray[key as! String] = val as AnyObject?
                         self.friendsSearchKeyArray.append(key as! String)
                     }
@@ -206,14 +242,13 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 if (freindsSearchArray.count>0){
                     searching = true
-                    tableView.reloadData()
+                    
                 }
+                tableView.reloadData()
                 
             }
         }
-        else {
-           searching = false;
-        }
+        
     }
     
 }

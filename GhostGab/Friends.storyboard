@@ -50,7 +50,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="barTintColor" red="0.47450980390000003" green="0.77647058820000003" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="barTintColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
