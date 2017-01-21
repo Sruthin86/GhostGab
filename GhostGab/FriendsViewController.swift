@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,12 +23,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var searching: Bool = false
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     let currentUserId =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
     
     let ref = FIRDatabase.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         getFriends()
         
         // Do any additional setup after loading the view.
@@ -52,17 +55,17 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             else {
                 displyNoDataLabel(imageName:imageName, labelText:labelText)
                 return 0
-
+                
             }
         }
-        
+            
         else {
-           
+            
             displyNoDataLabel(imageName:imageName, labelText:labelText)
             return 0
-
+            
         }
-
+        
         
     }
     
@@ -83,20 +86,27 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         noFriendsView.addSubview(imageView)
         noFriendsView.addSubview(noDataAvailableLabel)
         self.tableView.backgroundView = noFriendsView
-       
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let friendsCell :FriendsTableViewCell =  tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsTableViewCell
-
+        
         if(searching){
+            friendsCell.setImageData(photoUrl: self.freindsSearchArray[self.friendsSearchKeyArray[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
+            friendsCell.displayName.text = self.freindsSearchArray[self.friendsSearchKeyArray[indexPath.row]]!.value(forKey :"displayName")! as? String
+            friendsCell.cashLabel.text = self.freindsSearchArray[self.friendsSearchKeyArray[indexPath.row]]!.value(forKey :"cash")! as? String
             
+            friendsCell.removeFriend.tag = indexPath.row
+            friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
+            friendsCell.setBackground(colorValue: "white")
+
         }
         else {
             friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             friendsCell.displayName.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             friendsCell.cashLabel.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"cash")! as? String
-
+            
             friendsCell.removeFriend.tag = indexPath.row
             friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
             friendsCell.setBackground(colorValue: "white")
@@ -149,30 +159,60 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
                 
             }
-        
+            
         })
     }
     
     
-    func searchFriends() {
+    
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searching = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searching = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searching = false;
+    }
+    
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if(self.friendsArray.count>0){
-            var searchString:String = "abc"
-            print("abc")
-            for (key,val) in self.friendsArray {
-                var compareString:String  = val["displayName"] as!String
-                if(compareString.contains(searchString)){
-                    self.freindsSearchArray[key as! String] = val as AnyObject?
-                    self.friendsSearchKeyArray.append(key as! String)
+        searchFriends(searchString:searchText)
+        
+    }
+    
+    func searchFriends(searchString:String) {
+        
+        if(searchString.characters.count>0){
+            if(self.friendsArray.count>0){
+                
+                for (key,val) in self.friendsArray {
+                    var compareString:String  = val["displayName"] as!String
+                    if(compareString.contains(searchString)){
+                        self.freindsSearchArray[key as! String] = val as AnyObject?
+                        self.friendsSearchKeyArray.append(key as! String)
+                    }
+                    
+                }
+                
+                if (freindsSearchArray.count>0){
+                    searching = true
+                    tableView.reloadData()
                 }
                 
             }
-            
-            if (freindsSearchArray.count>0){
-                searching = true
-                tableView.reloadData()
-            }
-            
+        }
+        else {
+           searching = false;
         }
     }
     

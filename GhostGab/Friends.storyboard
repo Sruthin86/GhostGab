@@ -152,6 +152,7 @@
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </simulatedTabBarMetrics>
                     <connections>
+                        <outlet property="searchBar" destination="31m-pn-HJl" id="RUL-Q1-s7j"/>
                         <outlet property="tableView" destination="vNU-0t-8Zt" id="tsM-Bo-ltY"/>
                     </connections>
                 </viewController>
