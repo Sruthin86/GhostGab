@@ -202,7 +202,7 @@
                             <constraint firstItem="KKj-pb-fUI" firstAttribute="leading" secondItem="4ic-qo-snu" secondAttribute="leadingMargin" constant="-20" id="zLS-Rt-dEp"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Search" image="SearchFriendsIcon@1x" badgeValue="1" selectedImage="SearchFriendsIcon_inactive@1x" id="vhi-uT-TEM"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Search" image="SearchFriendsIcon@1x" selectedImage="SearchFriendsIcon_inactive@1x" id="vhi-uT-TEM"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

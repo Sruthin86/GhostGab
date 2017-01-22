@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ixt-VC-lw6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ixt-VC-lw6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -211,7 +211,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUv-wJ-Lb0">
-                                                                                    <rect key="frame" x="64" y="0.0" width="63.5" height="76"/>
+                                                                                    <rect key="frame" x="64" y="0.0" width="64" height="76"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uk3-al-KZ9">
                                                                                             <rect key="frame" x="38" y="8" width="25" height="33"/>
@@ -242,7 +242,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSK-mM-Prh">
-                                                                                    <rect key="frame" x="127.5" y="0.0" width="64" height="76"/>
+                                                                                    <rect key="frame" x="128" y="0.0" width="64" height="76"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgS-Lh-Kua">
                                                                                             <rect key="frame" x="38" y="8" width="25" height="33"/>
@@ -273,7 +273,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pWK-Mr-juV">
-                                                                                    <rect key="frame" x="191.5" y="0.0" width="64" height="76"/>
+                                                                                    <rect key="frame" x="192" y="0.0" width="63" height="76"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNa-Oa-vIL">
                                                                                             <rect key="frame" x="38" y="8" width="25" height="33"/>
@@ -304,7 +304,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgW-fE-isV">
-                                                                                    <rect key="frame" x="255.5" y="0.0" width="63.5" height="76"/>
+                                                                                    <rect key="frame" x="255" y="0.0" width="64" height="76"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w9Y-er-1xU">
                                                                                             <rect key="frame" x="38" y="8" width="25" height="33"/>
@@ -878,10 +878,10 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pdh-Qf-C7h">
-                                <rect key="frame" x="113" y="294" width="150" height="59"/>
+                                <rect key="frame" x="137.5" y="294" width="100" height="59"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cash" translatesAutoresizingMaskIntoConstraints="NO" id="BSt-HV-QLM">
-                                        <rect key="frame" x="8" y="15" width="26" height="30"/>
+                                        <rect key="frame" x="20" y="15" width="26" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="BSt-HV-QLM" secondAttribute="height" multiplier="13:15" id="2wR-D9-vrJ"/>
                                             <constraint firstAttribute="height" constant="30.5" id="8NC-gE-tYd"/>
@@ -889,7 +889,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345678" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FI-47-7ZO">
-                                        <rect key="frame" x="54" y="20" width="88" height="20"/>
+                                        <rect key="frame" x="51" y="20" width="88" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20.5" id="7xy-6k-WA1"/>
                                             <constraint firstAttribute="width" constant="88" id="a7t-6n-KBX"/>
@@ -901,12 +901,12 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="9FI-47-7ZO" firstAttribute="leading" secondItem="BSt-HV-QLM" secondAttribute="trailing" constant="20" id="cBi-Qb-AkG"/>
-                                    <constraint firstAttribute="width" constant="150" id="duc-Te-yp4"/>
+                                    <constraint firstItem="9FI-47-7ZO" firstAttribute="leading" secondItem="BSt-HV-QLM" secondAttribute="trailing" constant="5" id="cBi-Qb-AkG"/>
+                                    <constraint firstAttribute="width" constant="100" id="duc-Te-yp4"/>
                                     <constraint firstItem="9FI-47-7ZO" firstAttribute="top" secondItem="pdh-Qf-C7h" secondAttribute="top" constant="20" id="gt0-xt-e7I"/>
                                     <constraint firstItem="BSt-HV-QLM" firstAttribute="top" secondItem="pdh-Qf-C7h" secondAttribute="top" constant="15" id="hgm-Fy-NON"/>
                                     <constraint firstAttribute="height" constant="59.5" id="iX5-ru-1Ue"/>
-                                    <constraint firstItem="BSt-HV-QLM" firstAttribute="leading" secondItem="pdh-Qf-C7h" secondAttribute="leading" constant="8" id="tFX-Oj-hki"/>
+                                    <constraint firstItem="BSt-HV-QLM" firstAttribute="leading" secondItem="pdh-Qf-C7h" secondAttribute="leading" constant="20" id="tFX-Oj-hki"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRH-Yn-LqI">
