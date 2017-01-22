@@ -32,6 +32,7 @@ class HelperFunctions {
         let currentDate = NSDate()
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateformatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         let currentDateToString = dateformatter.string(from: currentDate as Date)
         return currentDateToString
     }
@@ -43,6 +44,7 @@ class HelperFunctions {
         let currDate = NSDate()
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateformatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         let formattedCurrentDate =  dateformatter.string(from: currDate as Date)
         let firstDate = dateformatter.date(from: postDate)
         let secondDate = dateformatter.date(from: formattedCurrentDate)

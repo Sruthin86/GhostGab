@@ -181,6 +181,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if(self.selectdUid == guessPostArray["useruid"] as! String){
                     if(self.filteredFriendsArray[indexPath.row] == self.selectdUid ){
                         guessCell.setBackground(colorValue: "lightGreen")
+                        self.messageLable.text = "Congratulations , you got it right!!"
                         correctGuess = true
                     }
                     
@@ -381,6 +382,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             
                                         }
                                     }
+                                   
                                 }
                                 else {
                                     self.shuffleArray()
