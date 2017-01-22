@@ -214,6 +214,10 @@ class HelperFunctions {
                         var flagCount: Int = flags["flagCount"]!
                         flagCount += 1
                         pRef.child("flags").child("flagCount").setValue(flagCount)
+                        if(flagCount>=5){
+                            self.deletePost(postId:postId)
+                        }
+                        
                     })
                 }
                 
@@ -227,8 +231,12 @@ class HelperFunctions {
                     var flagCount: Int = flags["flagCount"]!
                     flagCount += 1
                     pRef.child("flags").child("flagCount").setValue(flagCount)
+                    if(flagCount>=5){
+                       self.deletePost(postId:postId)
+                    }
                 })
-                uRef.child("Flags").child("flagCount")
+                
+                
             }
             
         })
@@ -236,6 +244,55 @@ class HelperFunctions {
         
         
         
+    }
+    
+    func deletePost(postId:String) {
+        
+        self.ref.child("Posts").child(postId).observeSingleEvent(of: .value, with: { (snapshot) in
+            if(snapshot.exists()){
+                var deletePostArray = snapshot.value as! NSDictionary
+                
+                if((deletePostArray["ReactedUsers"]) != nil){
+                    
+                    var reactedUserArray = deletePostArray["ReactedUsers"] as! NSDictionary
+                    for (key,val) in reactedUserArray{
+                        self.ref.child("Users").child(key as! String).child("Reactions").child(postId).removeValue()
+                        
+                    }
+                    
+                }
+                
+                if((deletePostArray["FlaggedUsers"]) != nil){
+                    
+                    var flaggedUserArray = deletePostArray["FlaggedUsers"] as! NSDictionary
+                    for (key,val) in flaggedUserArray{
+                        self.ref.child("Users").child(key as! String).child("Flag").child(postId).removeValue()
+                        
+                    }
+                    
+                }
+                
+                if((deletePostArray["guessedUsers"]) != nil){
+                    
+                    var guessedUsersArray = deletePostArray["guessedUsers"] as! NSDictionary
+                    for (key,val) in guessedUsersArray{
+                        self.ref.child("Users").child(key as! String).child("guess").child(postId).removeValue()
+                        
+                    }
+                    
+                }
+                
+                self.ref.child("Users").child(deletePostArray["useruid"] as! String).child("posts").child(postId).removeValue()
+                self.ref.child("Posts").child(postId).removeValue()
+                NotificationCenter.default.post(name: .reload, object: nil)
+                NotificationCenter.default.post(name: .reloadposts, object: nil)
+                
+            }
+            else {
+                
+            }
+        })
+
     }
     
 }
