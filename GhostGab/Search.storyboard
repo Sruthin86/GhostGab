@@ -28,7 +28,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="MXM-lp-YVE"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="NKz-kx-mdx">
                                 <rect key="frame" x="168" y="20" width="39" height="41"/>
@@ -235,7 +235,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="gWL-nP-OwY"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem id="2RQ-io-jCw">
                                         <barButtonItem key="leftBarButtonItem" image="BackButton" style="done" id="0ap-0o-WJN">

@@ -167,7 +167,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBAction func FlagButton(_ sender: AnyObject) {
         animateButton(animationObject: self.flagButton, reaction:7)
-        helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
+        
         
     }
     
@@ -176,7 +176,7 @@ class PostCellTableViewCell: UITableViewCell {
             animationObject.transform = CGAffineTransform(scaleX: 2, y: 2)
         }, completion: {_ in
             
-            UIView.animate(withDuration: 0.3, delay:0.1, options:[], animations: {
+            UIView.animate(withDuration: 0.4, delay:0.1, options:[], animations: {
                 animationObject.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 animationObject.transform = animationObject.transform.rotated(by: CGFloat(M_PI))
                 animationObject.alpha = 0.5
@@ -187,6 +187,9 @@ class PostCellTableViewCell: UITableViewCell {
                 }, completion: {_ in
                     if(reaction != 7){
                         self.myReaction(reaction: reaction)
+                    }
+                    else if (reaction == 7){
+                        self.helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
                     }
                 })
             })

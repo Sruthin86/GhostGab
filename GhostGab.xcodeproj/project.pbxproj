@@ -54,6 +54,9 @@
 		568772561DE0BB6500129401 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568772551DE0BB6500129401 /* VerificationViewController.swift */; };
 		568FCC891E0431770011F037 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568FCC881E0431770011F037 /* InitialViewController.swift */; };
 		568FCC8B1E07097F0011F037 /* FriendPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */; };
+		56BE945E1E36F4DF0075E8BC /* TermsAndServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */; };
+		56BE94601E36F4F70075E8BC /* PrivacyPolocyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */; };
+		56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE94611E36F5080075E8BC /* HelpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +130,9 @@
 		568772571DE0CAC100129401 /* GhostGab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GhostGab.entitlements; sourceTree = "<group>"; };
 		568FCC881E0431770011F037 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendPostViewController.swift; sourceTree = "<group>"; };
+		56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewController.swift; sourceTree = "<group>"; };
+		56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolocyViewController.swift; sourceTree = "<group>"; };
+		56BE94611E36F5080075E8BC /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		665ADA904700493FA7B1AE5E /* Pods_Shared_GhostGabTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_GhostGabTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42D5AF563E681DA40E491BD /* Pods_Shared_GhostGab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_GhostGab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A905C15B82F9A9BE35B07BA4 /* Pods-Shared-GhostGabTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-GhostGabTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-GhostGabTests/Pods-Shared-GhostGabTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -221,12 +227,13 @@
 				568771E71DE0B53C00129401 /* AppDelegate.swift */,
 				568772311DE0B95800129401 /* Color.swift */,
 				568772331DE0B97200129401 /* FBLoadingViewController.swift */,
+				568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */,
 				568772351DE0B99000129401 /* FriendsTableViewCell.swift */,
 				568772371DE0B9A000129401 /* FriendsViewController.swift */,
-				568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */,
 				561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */,
 				561BD5451DEBA4D000CB266C /* GuessViewController.swift */,
 				568772391DE0B9D500129401 /* HelperFunctions.swift */,
+				56BE94611E36F5080075E8BC /* HelpViewController.swift */,
 				568FCC881E0431770011F037 /* InitialViewController.swift */,
 				5687723B1DE0B9F300129401 /* loadingAnimation.swift */,
 				5687723D1DE0BA2000129401 /* MainTabBarViewController.swift */,
@@ -234,12 +241,14 @@
 				568772411DE0BA5000129401 /* PostCellTableViewCell.swift */,
 				568772431DE0BA6D00129401 /* postModel.swift */,
 				568772451DE0BA8900129401 /* PostViewController.swift */,
+				56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */,
 				568772471DE0BAAC00129401 /* ProfileViewController.swift */,
 				568772491DE0BAC500129401 /* RequestsSuggestionsViewController.swift */,
 				5687724B1DE0BAE200129401 /* RequestSuggestionTableViewCell.swift */,
 				561BD5411DE77AC100CB266C /* SearchFriendsViewController.swift */,
 				561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */,
 				5687724D1DE0BB0B00129401 /* SettingsViewController.swift */,
+				56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */,
 				5687724F1DE0BB2000129401 /* UICostomization.swift */,
 				568772511DE0BB3300129401 /* UserModel.swift */,
 				568772531DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift */,
@@ -547,9 +556,12 @@
 				568772421DE0BA5000129401 /* PostCellTableViewCell.swift in Sources */,
 				568772541DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift in Sources */,
 				568772381DE0B9A000129401 /* FriendsViewController.swift in Sources */,
+				56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */,
 				568772521DE0BB3300129401 /* UserModel.swift in Sources */,
+				56BE945E1E36F4DF0075E8BC /* TermsAndServicesViewController.swift in Sources */,
 				561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */,
 				561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */,
+				56BE94601E36F4F70075E8BC /* PrivacyPolocyViewController.swift in Sources */,
 				561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */,
 				568772501DE0BB2000129401 /* UICostomization.swift in Sources */,
 				568772321DE0B95800129401 /* Color.swift in Sources */,
