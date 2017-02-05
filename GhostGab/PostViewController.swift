@@ -150,12 +150,16 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         postFeedCell.ReactionsContent.isHidden = true
         postFeedCell.reactButton.tag = indexPath.row
         var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[indexPath.row]]! as! [String : AnyObject]
+        print(postFeed)
         postFeedCell.postId = self.postKeys[indexPath.row]
         postFeedCell.postLabel.text  = postFeed["post"] as? String
         postFeedCell.dateString.text = helperClass.getDifferenceInDates(postDate: (postFeed["date"]as? String)!)
         postFeedCell.setReactionCount(postId: self.postKeys[indexPath.row])
         postFeedCell.setFlagCount(postId: self.postKeys[indexPath.row])
-        postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String  )
+        print(postFeed["useruid"] as! String)
+        print(postFeed["postType"] as! Int)
+        print(postFeed["userPicUrl"] as! String)
+        postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String)
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){

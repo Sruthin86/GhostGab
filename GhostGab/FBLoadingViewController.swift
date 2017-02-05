@@ -15,6 +15,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import OneSignal
 
+
 class FBLoadingViewController: UIViewController {
     
     var overlayView = UIView()
@@ -23,6 +24,8 @@ class FBLoadingViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        
+
         OneSignal.idsAvailable({ (userId, pushToken) in
             self.oneSignalId = userId!
             
@@ -30,11 +33,11 @@ class FBLoadingViewController: UIViewController {
                 
             }
         })
-
+        
         super.viewDidLoad()
         var spinner:loadingAnimation = loadingAnimation(overlayView: overlayView, senderView: self.view)
         spinner.showOverlay(alphaValue: 0)
-        let myTimer : Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(FBLoadingViewController.LoginWithFacebook(timer:)), userInfo: nil, repeats: false)
+       let myTimer : Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(FBLoadingViewController.LoginWithFacebook(timer:)), userInfo: nil, repeats: false)
         
         // Do any additional setup after loading the view.
     }
@@ -63,18 +66,25 @@ class FBLoadingViewController: UIViewController {
             
             if (facebookError == nil){
                 let fbloginresult : FBSDKLoginManagerLoginResult = facebookResult!
-                
+                print("facebookResult")
+                print(fbloginresult)
                 if(fbloginresult.isCancelled) {
                     //Show Cancel alert
                 } else if(fbloginresult.grantedPermissions.contains("email")) {
                     var highResImagePicUrl : String?
                     if((FBSDKAccessToken.current()) != nil){
-                        FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":500 , "width":500 , "redirect":false ]).start(completionHandler: { (connection, result, error) -> Void in
+                        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "picture"]).start(completionHandler: { (connection, result, error) -> Void in
                             if (error == nil){
+                                
                                
                                 let largeImageDict  =  result as! NSDictionary
-                                let largeImgData = largeImageDict.object(forKey: "data")
-                                highResImagePicUrl = (largeImgData as! NSDictionary).object(forKey:"url") as? String
+                                print("largeImageDict")
+                                print(largeImageDict)
+                                let largeImgDataID = largeImageDict["id"] as! String
+                                highResImagePicUrl = "https://graph.facebook.com/" + largeImgDataID + "/picture?type=large"
+                                
+                                
+                                
                             }
                         })
                     }
@@ -84,36 +94,36 @@ class FBLoadingViewController: UIViewController {
                     FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                         if let user = FIRAuth.auth()?.currentUser {
                             let databaseRef = FIRDatabase.database().reference()
-                            
+                            print(user)
                             databaseRef.child("Users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                                 if(snapshot.exists()){
                                     let comparingData = snapshot.value as! [String: AnyObject]
                                     let verified = comparingData["isVerified"] as! Bool
-                                  
-                                        if((verified != nil)){
-                                            
-                                            if(!verified){
-                                                let uModel =  UserModel(name: user.displayName, userName: "", email: user.email, photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
-                                                UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
-                                                UserDefaults.standard.set(user.displayName, forKey: displayName)
-                                                let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"0"as! AnyObject   ]
-                                                databaseRef.child("Users").child(user.uid).setValue(postUserData)
-                                                DispatchQueue.main.async (execute: {
-                                                    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                                    let vc = storyboard.instantiateViewController(withIdentifier: "userNameandPh") as! UserNameAndPhoneNoViewController
-                                                    self.present(vc, animated:true, completion:nil)
-                                                    
-                                                })
-                                            }
-                                            else {
-                                                let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-                                                let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
-                                                mainTabBarView.selectedIndex = 0
-                                                self.present(mainTabBarView, animated: true, completion: nil)
-                                            }
+                                    
+                                    if((verified != nil)){
+                                        
+                                        if(!verified){
+                                            let uModel =  UserModel(name: user.displayName, userName: "", email: user.email, photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
+                                            UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
+                                            UserDefaults.standard.set(user.displayName, forKey: displayName)
+                                            let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl! as AnyObject,  "email":user.email! as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"200"as! AnyObject   ]
+                                            databaseRef.child("Users").child(user.uid).setValue(postUserData)
+                                            DispatchQueue.main.async (execute: {
+                                                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                                let vc = storyboard.instantiateViewController(withIdentifier: "userNameandPh") as! UserNameAndPhoneNoViewController
+                                                self.present(vc, animated:true, completion:nil)
+                                                
+                                            })
                                         }
                                         else {
-                                            
+                                            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+                                            let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+                                            mainTabBarView.selectedIndex = 0
+                                            self.present(mainTabBarView, animated: true, completion: nil)
+                                        }
+                                    }
+                                    else {
+                                        
                                     }
                                     
                                 }
@@ -151,7 +161,7 @@ class FBLoadingViewController: UIViewController {
     
     
     
-  
+    
     
     
 }

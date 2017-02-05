@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HbX-hY-P1O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HbX-hY-P1O">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -44,10 +44,10 @@
                                 <rect key="frame" x="-4" y="61" width="383" height="552"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaI-Ml-tNg">
-                                        <rect key="frame" x="0.0" y="0.0" width="383" height="293.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="383" height="294"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-UM-uTg">
-                                                <rect key="frame" x="131.5" y="50" width="120" height="120"/>
+                                                <rect key="frame" x="132" y="50" width="120" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="83h-62-bVk"/>
                                                     <constraint firstAttribute="width" constant="120" id="fdt-3w-Ze7"/>
@@ -55,13 +55,13 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmk-mf-mMC">
-                                                <rect key="frame" x="164" y="190" width="55.5" height="27.5"/>
+                                                <rect key="frame" x="164.5" y="190" width="55.5" height="28"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                                 <color key="textColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhe-TR-6v7">
-                                                <rect key="frame" x="123" y="222" width="136" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mhe-TR-6v7">
+                                                <rect key="frame" x="123" y="222" width="190" height="61"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cash" translatesAutoresizingMaskIntoConstraints="NO" id="40L-B5-kqW">
                                                         <rect key="frame" x="37" y="13" width="26" height="31"/>
@@ -81,16 +81,31 @@
                                                         <color key="textColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IT-M0-vXC">
+                                                        <rect key="frame" x="117" y="18" width="55" height="27"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="55" id="2e3-tx-daR"/>
+                                                            <constraint firstAttribute="width" secondItem="2IT-M0-vXC" secondAttribute="height" multiplier="55:27" id="Bgg-eU-rJh"/>
+                                                            <constraint firstAttribute="height" constant="27" id="mHg-oI-2on"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Share@1x"/>
+                                                        <connections>
+                                                            <action selector="shareToFacebook:" destination="HbX-hY-P1O" eventType="touchUpInside" id="gl9-yt-AoE"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="2IT-M0-vXC" secondAttribute="bottom" constant="16" id="4nD-36-8pr"/>
                                                     <constraint firstAttribute="height" constant="61" id="8an-sI-m2d"/>
-                                                    <constraint firstAttribute="width" constant="136" id="Eqw-Se-sbj"/>
+                                                    <constraint firstAttribute="width" constant="190" id="Eqw-Se-sbj"/>
                                                     <constraint firstItem="Ge3-uW-CMy" firstAttribute="leading" secondItem="40L-B5-kqW" secondAttribute="trailing" constant="8" id="LLT-np-HOA"/>
                                                     <constraint firstItem="40L-B5-kqW" firstAttribute="top" secondItem="mhe-TR-6v7" secondAttribute="top" constant="13" id="RIb-nP-rcR"/>
                                                     <constraint firstItem="40L-B5-kqW" firstAttribute="leading" secondItem="mhe-TR-6v7" secondAttribute="leading" constant="37" id="e1b-qe-LfP"/>
                                                     <constraint firstItem="Ge3-uW-CMy" firstAttribute="top" secondItem="mhe-TR-6v7" secondAttribute="top" constant="23" id="ipf-Rq-8Hs"/>
+                                                    <constraint firstItem="2IT-M0-vXC" firstAttribute="top" secondItem="mhe-TR-6v7" secondAttribute="top" constant="18" id="pHm-xU-H3f"/>
                                                     <constraint firstAttribute="width" secondItem="mhe-TR-6v7" secondAttribute="height" multiplier="136:61" id="rC3-9m-jsA"/>
+                                                    <constraint firstItem="2IT-M0-vXC" firstAttribute="leading" secondItem="Ge3-uW-CMy" secondAttribute="trailing" constant="10" id="yC7-Rp-ePS"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -106,7 +121,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BAv-v4-XWY">
-                                        <rect key="frame" x="0.0" y="293.5" width="383" height="258.5"/>
+                                        <rect key="frame" x="0.0" y="294" width="383" height="258"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyFeedCell" rowHeight="220" id="0w5-Bs-z2O" customClass="MyFeedTableViewCell" customModule="GhostGab" customModuleProvider="target">
@@ -467,6 +482,7 @@
         <image name="Reaction4@1x" width="25" height="33"/>
         <image name="Reaction5@1x" width="25" height="33"/>
         <image name="Reaction6@1x" width="25" height="34"/>
+        <image name="Share@1x" width="55" height="27"/>
         <image name="cash" width="28" height="33"/>
         <image name="delete@1x" width="20" height="19"/>
     </resources>

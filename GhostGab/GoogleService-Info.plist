@@ -7,25 +7,25 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>328580791806-53mvnoumj6bl896058v7jeuf4hfh4urj.apps.googleusercontent.com</string>
+	<string>263854445368-3h1ki2e56qdib1n0nqehfoj7sr13r2od.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.328580791806-53mvnoumj6bl896058v7jeuf4hfh4urj</string>
+	<string>com.googleusercontent.apps.263854445368-3h1ki2e56qdib1n0nqehfoj7sr13r2od</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDWvZNVSAdqVQpqtJT-WkItWj46LvUazwM</string>
+	<string>AIzaSyBDkTs-dXZZAlCoC7bg7JJp5FLGJN7nt-Q</string>
 	<key>GCM_SENDER_ID</key>
-	<string>328580791806</string>
+	<string>263854445368</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.ghostgossip.GhostGab</string>
+	<string>com.codeboaders.GhostGab</string>
 	<key>PROJECT_ID</key>
-	<string>ghost-gab</string>
+	<string>ghostgab-2c6b8</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ghost-gab.appspot.com</string>
+	<string>ghostgab-2c6b8.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:328580791806:ios:f3b80938b28b96dd</string>
+	<string>1:263854445368:ios:db02c77ff118d0a1</string>
 	<key>DATABASE_URL</key>
-	<string>https://ghost-gab.firebaseio.com</string>
+	<string>https://ghostgab-2c6b8.firebaseio.com</string>
 </dict>
 </plist>

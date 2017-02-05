@@ -11,6 +11,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import FBSDKShareKit
 
 
 extension Notification.Name {
@@ -257,6 +258,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func reloadTableData(_ notification: Notification) {
         self.getPosts()
+    }
+    
+   
+    @IBAction func shareToFacebook(_ sender: Any) {
+        shareScoreToFB()
+    }
+    
+    
+    func shareScoreToFB(){
+        let shareString =  "My ghost gab score is " + self.cashCount.text! + " I challenge you to beat me "
+        var content = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "https://www.ghostgab.com")! as URL!
+        content.quote = shareString
+        var dialog = FBSDKShareDialog()
+        dialog.fromViewController = self
+        dialog.shareContent = content
+        dialog.mode = .automatic
+        dialog.show()
     }
     
     

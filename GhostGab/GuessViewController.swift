@@ -11,7 +11,7 @@ import Firebase
 import FirebaseDatabase
 
 class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var postLabel: UILabel!
@@ -96,11 +96,11 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         getCashCount()
         
         if(guessPostArray["useruid"] as! String == uid as! String){
-           selfPostFalg = true
+            selfPostFalg = true
         }
         else {
             if(self.oriFrinendsKeyArray.count>=3){
-                 shuffleOriginalArray ()
+                shuffleOriginalArray ()
                 
             }
             else{
@@ -111,7 +111,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -132,7 +132,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let labelText = "you dont have enough friends \nto guess!! "
             delay(0.75)  //Here you put time you want to delay
             {
-
+                
                 self.displyNoDataLabel(imageName:imageName, labelText:labelText)
             }
             return 0
@@ -171,11 +171,16 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         if(isShuffled){
+            
             self.loaded =  true;
             self.tableView.backgroundView = .none
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+            
+            
             guessCell.setImageData(photoUrl: self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
+            
             guessCell.displayName.text = self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"displayName")! as? String
+            
             guessCell.setBackground(colorValue: "white")
             if(self.alreadyGuessed){
                 if(self.selectdUid == guessPostArray["useruid"] as! String){
@@ -188,7 +193,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 else{
                     if(self.filteredFriendsArray[indexPath.row] == self.selectdUid ){
-                       guessCell.setBackground(colorValue: "lightRed")
+                        guessCell.setBackground(colorValue: "lightRed")
                     }
                     
                 }
@@ -248,7 +253,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mainTabBarView.selectedIndex = 0
         self.present(mainTabBarView, animated: true, completion: nil)
     }
-  
+    
     
     
     
@@ -298,7 +303,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
     }
-
+    
     
     
     
@@ -318,9 +323,15 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         checkPost()
     }
-   
+    
     func shuffleArray() {
-        self.filteredFriendsArray = self.friendsArrayKey
+        
+        if(self.filteredFriendsArray.count > 0 ){
+            self.filteredFriendsArray.removeAll()
+        }
+        self.filteredFriendsArray.append(self.friendsArrayKey[0])
+        self.filteredFriendsArray.append(self.friendsArrayKey[1])
+        self.filteredFriendsArray.append(self.friendsArrayKey[2])
         if(!self.filteredFriendsArray.contains(guessPostArray["useruid"] as! String)){
             self.filteredFriendsArray.removeLast()
             self.filteredFriendsArray.append(guessPostArray["useruid"] as! String)
@@ -336,8 +347,10 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             swap(&self.filteredFriendsArray[index], &self.filteredFriendsArray[j])
         }
         isShuffled=true
-       
-       
+        
+        
+        
+        
         self.tableView.reloadData()
     }
     
@@ -356,19 +369,26 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func getFriends() -> Void {
         
         
-            
         
-                self.friendsArray.removeAll()
-                self.friendsArrayKey.removeAll()
-                let friendData = self.oriFrinendsKeyArray
-                for (value) in friendData {
-                    
-                    self.ref.child("Users").child(value).observeSingleEvent(of: .value, with: { snapshot in
-                        if(snapshot.childrenCount > 0 ){
-                            let data:NSDictionary  = snapshot.value as! NSDictionary
-                            self.friendsArrayKey.append(value as! String)
-                            self.friendsArray[value as! String] = data as AnyObject?
-                            if(self.friendsArrayKey.count == 3){
+        
+        self.friendsArray.removeAll()
+        self.friendsArrayKey.removeAll()
+        let friendData = self.oriFrinendsKeyArray
+        for (value) in friendData {
+            
+            self.ref.child("Users").child(value).observeSingleEvent(of: .value, with: { snapshot in
+                if(snapshot.childrenCount > 0 ){
+                    let data:NSDictionary  = snapshot.value as! NSDictionary
+                    if (value != self.guessPostArray["useruid"] as! String){
+                        self.friendsArrayKey.append(value as! String)
+                        self.friendsArray[value as! String] = data as AnyObject?
+                    }
+                    if(self.friendsArrayKey.count == 2){
+                        self.ref.child("Users").child( self.guessPostArray["useruid"] as! String).observeSingleEvent(of: .value, with: { snapshot in
+                            if(snapshot.childrenCount > 0 ){
+                                let correctdata:NSDictionary  = snapshot.value as! NSDictionary
+                                self.friendsArrayKey.append( self.guessPostArray["useruid"] as! String)
+                                self.friendsArray[ self.guessPostArray["useruid"] as! String] = correctdata as AnyObject?
                                 self.notenoughFriendsFlag = false
                                 if(self.alreadyGuessed){
                                     self.isShuffled=true
@@ -382,45 +402,52 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             
                                         }
                                     }
-                                   
+                                    
                                 }
                                 else {
+                                    
                                     self.shuffleArray()
+                                    
+                                    
                                 }
                             }
-                            else if(self.friendsArrayKey.count < 3){
-                                self.isShuffled = false
-                                self.notenoughFriendsFlag = true
-                                self.tableView.reloadData()
-                            }
-
-                        }
-                            
-                        else {
-                            
-                            
-                        }
-                    })
+                        })
+                        
+                    }
+                    else if(self.friendsArrayKey.count < 3){
+                        
+                        self.isShuffled = false
+                        self.notenoughFriendsFlag = true
+                        //self.tableView.reloadData()
+                    }
+                    
+                }
+                    
+                else {
                     
                     
                 }
-                
-        
+            })
             
-       
+            
+        }
+        
+        
+        
+        
     }
-
+    
     func checkPost(){
         self.ref.child("Users").child(self.uid! as! String).child("guess").child(self.postId).observeSingleEvent(of: FIRDataEventType.value, with :  { (snapshot) in
             if(snapshot.exists()){
                 let gData =  snapshot.value as! [String : AnyObject]
                 for (key,value) in gData["friendsList"]  as! NSDictionary{
-                   self.filteredFriendsArray.append(value as! String)
+                    self.filteredFriendsArray.append(value as! String)
                 }
                 self.selectdUid = (gData["seledtedUid"] as! String?)!
                 self.correctUid = (gData["postUid"] as! String?)!
                 self.alreadyGuessed = true
-                self.messageLable.text = "You've already guessed once. \nIt'll cost you 10 points in cash to guess again"
+                self.messageLable.text = "You've already guessed once. \nIt'll cost you 15 points in cash to guess again"
                 self.getFriends()
                 
             }
@@ -434,7 +461,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-
+    
     @IBAction func spendCash(_ sender: Any) {
         if(cashCountNumber>=15){
             self.decrementCashCount(count:15)
@@ -453,5 +480,5 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         DispatchQueue.main.asyncAfter(
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
-
+    
 }

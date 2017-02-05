@@ -16,7 +16,7 @@ class VerificationViewController: UIViewController {
     
     @IBOutlet weak var VerifyCodeTextField: UITextField!
     var verifiction:Verification!
-    let applicationKey = "bf8eb31b-9519-4b73-82dc-3a3fa8b79d5e"
+    let applicationKey = "bba57591-11c0-49a5-b3e0-52c2fc9af5ee"
     
     let currentUserId =  UserDefaults.standard.object(forKey: fireBaseUid) as! String
      let ref = FIRDatabase.database().reference()

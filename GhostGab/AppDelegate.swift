@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         
-        OneSignal.initWithLaunchOptions(launchOptions, appId: "fd63a2a8-1d1e-464f-844d-5822b1602f7e", handleNotificationReceived: nil, handleNotificationAction: {
+        OneSignal.initWithLaunchOptions(launchOptions, appId: "4f88b1b6-4639-450b-9170-c24bba4f5afd", handleNotificationReceived: nil, handleNotificationAction: {
             (result) in
             // Do Something with Notification Result
             let payload = result?.notification.payload

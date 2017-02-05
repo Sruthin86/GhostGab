@@ -19,7 +19,6 @@
 		568771F21DE0B53C00129401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568771F01DE0B53C00129401 /* LaunchScreen.storyboard */; };
 		568771FD1DE0B53D00129401 /* GhostGabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771FC1DE0B53D00129401 /* GhostGabTests.swift */; };
 		568772081DE0B53D00129401 /* GhostGabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568772071DE0B53D00129401 /* GhostGabUITests.swift */; };
-		568772161DE0B75400129401 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 568772151DE0B75400129401 /* GoogleService-Info.plist */; };
 		568772181DE0B77D00129401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568772171DE0B77D00129401 /* Main.storyboard */; };
 		5687721A1DE0B78900129401 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568772191DE0B78900129401 /* Dashboard.storyboard */; };
 		5687721C1DE0B79200129401 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5687721B1DE0B79200129401 /* Profile.storyboard */; };
@@ -57,6 +56,8 @@
 		56BE945E1E36F4DF0075E8BC /* TermsAndServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */; };
 		56BE94601E36F4F70075E8BC /* PrivacyPolocyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */; };
 		56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE94611E36F5080075E8BC /* HelpViewController.swift */; };
+		56BE94641E3BA2A10075E8BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */; };
+		56DCC95A1E46C91600D3B10E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +95,6 @@
 		568772031DE0B53D00129401 /* GhostGabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhostGabUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		568772071DE0B53D00129401 /* GhostGabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostGabUITests.swift; sourceTree = "<group>"; };
 		568772091DE0B53D00129401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		568772151DE0B75400129401 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		568772171DE0B77D00129401 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		568772191DE0B78900129401 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		5687721B1DE0B79200129401 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -133,6 +133,8 @@
 		56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewController.swift; sourceTree = "<group>"; };
 		56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolocyViewController.swift; sourceTree = "<group>"; };
 		56BE94611E36F5080075E8BC /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		665ADA904700493FA7B1AE5E /* Pods_Shared_GhostGabTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_GhostGabTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42D5AF563E681DA40E491BD /* Pods_Shared_GhostGab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_GhostGab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A905C15B82F9A9BE35B07BA4 /* Pods-Shared-GhostGabTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-GhostGabTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-GhostGabTests/Pods-Shared-GhostGabTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56DCC95A1E46C91600D3B10E /* FBSDKShareKit.framework in Frameworks */,
 				5687722F1DE0B90C00129401 /* FBSDKCoreKit.framework in Frameworks */,
 				568772301DE0B90C00129401 /* FBSDKLoginKit.framework in Frameworks */,
 				5687722C1DE0B8FC00129401 /* UIKit.framework in Frameworks */,
@@ -177,6 +180,7 @@
 		20C3D9668C804113CCCB5AD0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */,
 				5687722D1DE0B90C00129401 /* FBSDKCoreKit.framework */,
 				5687722E1DE0B90C00129401 /* FBSDKLoginKit.framework */,
 				5687722B1DE0B8FC00129401 /* UIKit.framework */,
@@ -216,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				568772571DE0CAC100129401 /* GhostGab.entitlements */,
-				568772151DE0B75400129401 /* GoogleService-Info.plist */,
+				56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */,
 				568771F31DE0B53C00129401 /* Info.plist */,
 				568772191DE0B78900129401 /* Dashboard.storyboard */,
 				5687721F1DE0B7BE00129401 /* Friends.storyboard */,
@@ -363,7 +367,7 @@
 				TargetAttributes = {
 					568771E31DE0B53C00129401 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7Z67VMB4ND;
+						DevelopmentTeam = BND4ZBD5DT;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -413,8 +417,8 @@
 			files = (
 				5687721C1DE0B79200129401 /* Profile.storyboard in Resources */,
 				568771F21DE0B53C00129401 /* LaunchScreen.storyboard in Resources */,
+				56BE94641E3BA2A10075E8BC /* GoogleService-Info.plist in Resources */,
 				5687721A1DE0B78900129401 /* Dashboard.storyboard in Resources */,
-				568772161DE0B75400129401 /* GoogleService-Info.plist in Resources */,
 				568772221DE0B7C600129401 /* Search.storyboard in Resources */,
 				568772201DE0B7BE00129401 /* Friends.storyboard in Resources */,
 				568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */,
@@ -713,14 +717,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GhostGab/GhostGab.entitlements;
-				DEVELOPMENT_TEAM = 7Z67VMB4ND;
+				DEVELOPMENT_TEAM = BND4ZBD5DT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
 				);
 				INFOPLIST_FILE = GhostGab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeboaders.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -732,14 +736,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GhostGab/GhostGab.entitlements;
-				DEVELOPMENT_TEAM = 7Z67VMB4ND;
+				DEVELOPMENT_TEAM = BND4ZBD5DT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
 				);
 				INFOPLIST_FILE = GhostGab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ghostgossip.GhostGab;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeboaders.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
