@@ -26,9 +26,11 @@ class InitialViewController: UIViewController {
                 let uid = user.uid
                 UserDefaults.standard.set(uid, forKey: fireBaseUid)
                 UserDefaults.standard.set(user.displayName, forKey: displayName)
+                
                 ref.child("Users").child(uid).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                     if(snapshot.exists()){
                         let userData = snapshot.value as! [String: AnyObject]
+                        UserDefaults.standard.set(userData["isUsingFB"], forKey: "isUsingFb")
                         if((userData["isVerified"]) != nil){
                             var verified: Bool = userData["isVerified"] as! Bool
                             if(verified){

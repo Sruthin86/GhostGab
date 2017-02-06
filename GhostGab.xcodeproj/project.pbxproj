@@ -13,6 +13,7 @@
 		561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */; };
 		561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5451DEBA4D000CB266C /* GuessViewController.swift */; };
 		561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */; };
+		566C81231E477F7B004700BD /* twitterLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C81221E477F7B004700BD /* twitterLoadingViewController.swift */; };
 		568771E81DE0B53C00129401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E71DE0B53C00129401 /* AppDelegate.swift */; };
 		568771EA1DE0B53C00129401 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E91DE0B53C00129401 /* ViewController.swift */; };
 		568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 568771EE1DE0B53C00129401 /* Assets.xcassets */; };
@@ -83,6 +84,7 @@
 		561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersTableViewCell.swift; sourceTree = "<group>"; };
 		561BD5451DEBA4D000CB266C /* GuessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessViewController.swift; sourceTree = "<group>"; };
 		561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessTableViewCell.swift; sourceTree = "<group>"; };
+		566C81221E477F7B004700BD /* twitterLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twitterLoadingViewController.swift; sourceTree = "<group>"; };
 		568771E41DE0B53C00129401 /* GhostGab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostGab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568771E71DE0B53C00129401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		568771E91DE0B53C00129401 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */,
 				5687724D1DE0BB0B00129401 /* SettingsViewController.swift */,
 				56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */,
+				566C81221E477F7B004700BD /* twitterLoadingViewController.swift */,
 				5687724F1DE0BB2000129401 /* UICostomization.swift */,
 				568772511DE0BB3300129401 /* UserModel.swift */,
 				568772531DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift */,
@@ -306,6 +309,7 @@
 				568771E21DE0B53C00129401 /* Resources */,
 				4B427A8EB64E302A71187498 /* [CP] Embed Pods Frameworks */,
 				3E3946B72AA7C55742E081C4 /* [CP] Copy Pods Resources */,
+				56999B2C1E47897700A701C9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -474,6 +478,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shared-GhostGab/Pods-Shared-GhostGab-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		56999B2C1E47897700A701C9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2e2d8f9c4cb8c3fb4963aa75e268b786f3a0fabe b10a634be19243958746f119d213b2dbe22ab65ffbcbf2d45a2186fb0a1ea021";
+		};
 		63B1914BE54A3401C1C6A7A3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -546,6 +563,7 @@
 				568772441DE0BA6D00129401 /* postModel.swift in Sources */,
 				568771EA1DE0B53C00129401 /* ViewController.swift in Sources */,
 				5687724C1DE0BAE200129401 /* RequestSuggestionTableViewCell.swift in Sources */,
+				566C81231E477F7B004700BD /* twitterLoadingViewController.swift in Sources */,
 				568772461DE0BA8900129401 /* PostViewController.swift in Sources */,
 				568772481DE0BAAC00129401 /* ProfileViewController.swift in Sources */,
 				568772341DE0B97200129401 /* FBLoadingViewController.swift in Sources */,

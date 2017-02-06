@@ -15,7 +15,7 @@ use_frameworks!
  pod 'SinchVerification-Swift'
  pod 'SCLAlertView'
  pod 'Fabric'
- pod 'Crashlytics'
+ pod 'TwitterKit'
 
 target 'GhostGab'
 target 'GhostGabTests'

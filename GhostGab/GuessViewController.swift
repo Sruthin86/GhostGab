@@ -309,11 +309,11 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func shuffleOriginalArray() {
         
-        var count = self.oriFrinendsKeyArray.count
+        let count = self.oriFrinendsKeyArray.count
         for index in ((0 + 1)...self.oriFrinendsKeyArray.count - 1).reversed()
         {
             // Random int from 0 to index-1
-            var j = Int(arc4random_uniform(UInt32(count-1)))
+            let j = Int(arc4random_uniform(UInt32(count-1)))
             
             // Swap two array elements
             // Notice '&' required as swap uses 'inout' parameters

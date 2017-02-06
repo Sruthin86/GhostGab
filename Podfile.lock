@@ -1,6 +1,4 @@
 PODS:
-  - Crashlytics (3.8.3):
-    - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
   - Firebase/Auth (3.11.0):
     - Firebase/Core
@@ -50,9 +48,12 @@ PODS:
   - OneSignal (2.3.5)
   - SCLAlertView (0.7.0)
   - SinchVerification-Swift (2.0.3)
+  - TwitterCore (2.7.0):
+    - Fabric
+  - TwitterKit (2.7.0):
+    - TwitterCore (= 2.7.0)
 
 DEPENDENCIES:
-  - Crashlytics
   - Fabric
   - Firebase/Auth
   - Firebase/Core
@@ -61,9 +62,9 @@ DEPENDENCIES:
   - OneSignal
   - SCLAlertView
   - SinchVerification-Swift
+  - TwitterKit
 
 SPEC CHECKSUMS:
-  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Firebase: b8134e285eb33201115bc688bc5d7f112923bc1f
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
@@ -79,7 +80,9 @@ SPEC CHECKSUMS:
   OneSignal: 4cb42948ebc141bd5deb54d3fda25105db94f6d4
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SinchVerification-Swift: 567aaf9cb29c55a115faecb6016fea25a7f37688
+  TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
+  TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
 
-PODFILE CHECKSUM: 700caca42695a7c25a9dcc3570e18b82a31fcc51
+PODFILE CHECKSUM: 3d9f83ba1b975165fa2d4e2f1ca98d8daecd7562
 
 COCOAPODS: 1.1.1

@@ -132,7 +132,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         noDataAvailableLabel.textColor =  textColor.getColor()
         noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:14.0)
         self.tableView.separatorStyle = .none
-        var noFriendsView : UIView = UIView( frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height))
+        let noFriendsView : UIView = UIView( frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height))
         noFriendsView.addSubview(imageView)
         noFriendsView.addSubview(noDataAvailableLabel)
         self.tableView.backgroundView = noFriendsView

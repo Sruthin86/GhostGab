@@ -11,9 +11,12 @@ import Firebase
 import FirebaseDatabase
 import FBSDKLoginKit
 import OneSignal
+import Fabric
+import TwitterKit
 
 var fireBaseUid: String = "fireBaseUid"
 var displayName: String = "displayName"
+var isUsingFb: Bool = true
 
 
 @UIApplicationMain
@@ -43,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var fullMessage = payload?.title
         }, settings: [kOSSettingsKeyInFocusDisplayOption : OSNotificationDisplayType.notification.rawValue])
         
-        
+        Fabric.with([Twitter.self])
         return true
     }
     

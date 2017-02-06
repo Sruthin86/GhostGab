@@ -12,8 +12,12 @@ import FirebaseAuth
 import FBSDKCoreKit
 import FBSDKLoginKit
 import MessageUI
+import Fabric
+import TwitterKit
 
 class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
+    
+    let isUsingFbFlag: Bool = (UserDefaults.standard.object(forKey: "isUsingFb") != nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +32,26 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     
     @IBAction func logout(_ sender: AnyObject) {
-        try! FIRAuth.auth()!.signOut()
-        FBSDKAccessToken.setCurrent(nil)
+        
+        if(isUsingFbFlag){
+            try! FIRAuth.auth()!.signOut()
+            FBSDKAccessToken.setCurrent(nil)
+        }
+        else {
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                let store = Twitter.sharedInstance().sessionStore
+                store.logOutUserID((store.session()?.userID)!)
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+            
+        }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainScreenViewController = storyboard.instantiateViewController(withIdentifier: "mainScreen") as! ViewController
         self.present(mainScreenViewController, animated: true, completion: nil)
+        
         
         
     }
@@ -41,7 +60,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         
         sendEmail()
     }
-   
+    
     
     func sendEmail() {
         if MFMailComposeViewController.canSendMail() {

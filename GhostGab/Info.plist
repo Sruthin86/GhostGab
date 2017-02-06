@@ -26,7 +26,26 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>24</string>
+	<string>26</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>2e2d8f9c4cb8c3fb4963aa75e268b786f3a0fabe</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>cR6ybRvpQA6nohXBJWIdiPOND</string>
+					<key>consumerSecret</key>
+					<string>gFNnwx8vDDcwzjLPZWu8NoWHyE10qHgs882urU9tZtol3T9lSW</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>1698516270471819</string>
 	<key>FacebookDisplayName</key>
@@ -57,8 +76,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

@@ -197,7 +197,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1O6-xN-yn7">
-                                <rect key="frame" x="54" y="136" width="282" height="228"/>
+                                <rect key="frame" x="54" y="136" width="282" height="226"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="226" id="CkW-XP-xsU"/>
@@ -211,7 +211,7 @@ If you would like to guess one more time click the green ca$h icon which erases 
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RULES &amp; INFO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQF-6W-fmN">
-                                <rect key="frame" x="62" y="383" width="267" height="35"/>
+                                <rect key="frame" x="62" y="381" width="267" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="CiC-Hg-nVM"/>
                                 </constraints>
@@ -220,12 +220,15 @@ If you would like to guess one more time click the green ca$h icon which erases 
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TwQ-dW-jpW">
-                                <rect key="frame" x="54" y="424" width="282" height="226"/>
+                                <rect key="frame" x="54" y="422" width="282" height="226"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="226" id="GIT-Sz-SZ6"/>
                                 </constraints>
-                                <string key="text">1.Do not post Personal information about others such as their Phone Number, Bank Details, DL details, Adresses  and so on 2.Do not target any individual or Organization by posting offesnive  content about them 3.If your gab is flagged by more than 4 members it will be automatically deleted. 4.Do not post spams</string>
+                                <string key="text">1.Do not post Personal information about others such as their Phone Number, Bank Details, DL details, Adresses  and so on 
+2.Do not target any individual or Organization by posting offesnive  content about them 
+3.If your gab is flagged by more than 4 members it will be automatically deleted. 
+4.Do not post spams</string>
                                 <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -318,8 +321,8 @@ If you would like to guess one more time click the green ca$h icon which erases 
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HH3-FE-PKy" secondAttribute="height" multiplier="281:448" id="Dem-hg-L0E"/>
                                 </constraints>
-                                <string key="text">Last updated: January 24, 2017
-Code Boarders Corporation (&amp;quot;us&amp;quot;, &amp;quot;we&amp;quot;, or &amp;quot;our&amp;quot;) operates the Ghost Gab mobile application (the &amp;quot;Service&amp;quot;).
+                                <mutableString key="text">
+Code Boarders Corporation or  operates the Ghost Gab mobile application (the &amp;quot;Service&amp;quot;).
 This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.
 We will not use or share your information with anyone except as described in this Privacy Policy.
 We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
@@ -395,7 +398,7 @@ We reserve the right to update or change our Privacy Policy at any time and you 
 If we make any material changes to this Privacy Policy, we will notify you either through the email address you have provided us, or by placing a prominent notice on our website.
 Contact Us
 If you have any questions about this Privacy Policy, please contact us.
-</string>
+</mutableString>
                                 <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -481,8 +484,8 @@ If you have any questions about this Privacy Policy, please contact us.
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QXd-gv-hzB" secondAttribute="height" multiplier="312:497" id="sjW-BE-OyJ"/>
                                 </constraints>
-                                <string key="text">Last updated: January 24, 2017
-Please read these Terms of Service (&amp;quot;Terms&amp;quot;, &amp;quot;Terms of Service&amp;quot;) carefully before using the Ghost gab mobile application (the &amp;quot;Service&amp;quot;) operated by Code Boarders Corporation  (&amp;quot;us&amp;quot;, &amp;quot;we&amp;quot;, or &amp;quot;our&amp;quot;).
+                                <mutableString key="text">
+Please read these Terms of Service Terms of Service carefully before using the Ghost gab mobile application (the "Service" operated by Code Boarders Corporation  "us", "we", or "our".
 Your access to and use of the Service is conditioned upon your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who wish to access or use the Service.
 By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you do not have permission to access the Service.
 Communications
@@ -525,7 +528,7 @@ We reserve the right, at our sole discretion, to modify or replace these Terms a
 By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Service.
 Contact Us
 If you have any questions about these Terms, please contact us.
-</string>
+</mutableString>
                                 <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

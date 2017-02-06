@@ -81,31 +81,16 @@
                                                         <color key="textColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IT-M0-vXC">
-                                                        <rect key="frame" x="117" y="18" width="55" height="27"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="55" id="2e3-tx-daR"/>
-                                                            <constraint firstAttribute="width" secondItem="2IT-M0-vXC" secondAttribute="height" multiplier="55:27" id="Bgg-eU-rJh"/>
-                                                            <constraint firstAttribute="height" constant="27" id="mHg-oI-2on"/>
-                                                        </constraints>
-                                                        <state key="normal" image="Share@1x"/>
-                                                        <connections>
-                                                            <action selector="shareToFacebook:" destination="HbX-hY-P1O" eventType="touchUpInside" id="gl9-yt-AoE"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="2IT-M0-vXC" secondAttribute="bottom" constant="16" id="4nD-36-8pr"/>
                                                     <constraint firstAttribute="height" constant="61" id="8an-sI-m2d"/>
                                                     <constraint firstAttribute="width" constant="190" id="Eqw-Se-sbj"/>
                                                     <constraint firstItem="Ge3-uW-CMy" firstAttribute="leading" secondItem="40L-B5-kqW" secondAttribute="trailing" constant="8" id="LLT-np-HOA"/>
                                                     <constraint firstItem="40L-B5-kqW" firstAttribute="top" secondItem="mhe-TR-6v7" secondAttribute="top" constant="13" id="RIb-nP-rcR"/>
                                                     <constraint firstItem="40L-B5-kqW" firstAttribute="leading" secondItem="mhe-TR-6v7" secondAttribute="leading" constant="37" id="e1b-qe-LfP"/>
                                                     <constraint firstItem="Ge3-uW-CMy" firstAttribute="top" secondItem="mhe-TR-6v7" secondAttribute="top" constant="23" id="ipf-Rq-8Hs"/>
-                                                    <constraint firstItem="2IT-M0-vXC" firstAttribute="top" secondItem="mhe-TR-6v7" secondAttribute="top" constant="18" id="pHm-xU-H3f"/>
                                                     <constraint firstAttribute="width" secondItem="mhe-TR-6v7" secondAttribute="height" multiplier="136:61" id="rC3-9m-jsA"/>
-                                                    <constraint firstItem="2IT-M0-vXC" firstAttribute="leading" secondItem="Ge3-uW-CMy" secondAttribute="trailing" constant="10" id="yC7-Rp-ePS"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -482,7 +467,6 @@
         <image name="Reaction4@1x" width="25" height="33"/>
         <image name="Reaction5@1x" width="25" height="33"/>
         <image name="Reaction6@1x" width="25" height="34"/>
-        <image name="Share@1x" width="55" height="27"/>
         <image name="cash" width="28" height="33"/>
         <image name="delete@1x" width="20" height="19"/>
     </resources>
