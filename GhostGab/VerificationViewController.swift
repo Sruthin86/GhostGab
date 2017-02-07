@@ -12,7 +12,7 @@ import Firebase
 import FirebaseDatabase
 import SCLAlertView
 
-class VerificationViewController: UIViewController {
+class VerificationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var VerifyCodeTextField: UITextField!
     var verifiction:Verification!
@@ -26,6 +26,7 @@ class VerificationViewController: UIViewController {
         let greenColorEnum = Color.green
         VerifyCodeTextField.layer.borderColor = greenColorEnum.getColor().cgColor
         VerifyCodeTextField.layer.borderWidth = 1;
+        self.VerifyCodeTextField.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -52,14 +53,13 @@ class VerificationViewController: UIViewController {
         
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.VerifyCodeTextField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
 }

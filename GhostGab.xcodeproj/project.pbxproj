@@ -14,6 +14,10 @@
 		561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5451DEBA4D000CB266C /* GuessViewController.swift */; };
 		561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */; };
 		566C81231E477F7B004700BD /* twitterLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C81221E477F7B004700BD /* twitterLoadingViewController.swift */; };
+		568150FF1E48D5DB000232F7 /* EmailSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568150FE1E48D5DB000232F7 /* EmailSignupViewController.swift */; };
+		568151011E48ECAC000232F7 /* SignUpWithEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568151001E48ECAC000232F7 /* SignUpWithEmailViewController.swift */; };
+		568151031E48ECC2000232F7 /* LoginWithEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568151021E48ECC2000232F7 /* LoginWithEmailViewController.swift */; };
+		568151051E496921000232F7 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568151041E496921000232F7 /* EditViewController.swift */; };
 		568771E81DE0B53C00129401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E71DE0B53C00129401 /* AppDelegate.swift */; };
 		568771EA1DE0B53C00129401 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771E91DE0B53C00129401 /* ViewController.swift */; };
 		568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 568771EE1DE0B53C00129401 /* Assets.xcassets */; };
@@ -85,6 +89,10 @@
 		561BD5451DEBA4D000CB266C /* GuessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessViewController.swift; sourceTree = "<group>"; };
 		561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessTableViewCell.swift; sourceTree = "<group>"; };
 		566C81221E477F7B004700BD /* twitterLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twitterLoadingViewController.swift; sourceTree = "<group>"; };
+		568150FE1E48D5DB000232F7 /* EmailSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSignupViewController.swift; sourceTree = "<group>"; };
+		568151001E48ECAC000232F7 /* SignUpWithEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpWithEmailViewController.swift; sourceTree = "<group>"; };
+		568151021E48ECC2000232F7 /* LoginWithEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithEmailViewController.swift; sourceTree = "<group>"; };
+		568151041E496921000232F7 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		568771E41DE0B53C00129401 /* GhostGab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostGab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568771E71DE0B53C00129401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		568771E91DE0B53C00129401 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +240,8 @@
 				568772211DE0B7C600129401 /* Search.storyboard */,
 				568771E71DE0B53C00129401 /* AppDelegate.swift */,
 				568772311DE0B95800129401 /* Color.swift */,
+				568151041E496921000232F7 /* EditViewController.swift */,
+				568150FE1E48D5DB000232F7 /* EmailSignupViewController.swift */,
 				568772331DE0B97200129401 /* FBLoadingViewController.swift */,
 				568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */,
 				568772351DE0B99000129401 /* FriendsTableViewCell.swift */,
@@ -242,6 +252,7 @@
 				56BE94611E36F5080075E8BC /* HelpViewController.swift */,
 				568FCC881E0431770011F037 /* InitialViewController.swift */,
 				5687723B1DE0B9F300129401 /* loadingAnimation.swift */,
+				568151021E48ECC2000232F7 /* LoginWithEmailViewController.swift */,
 				5687723D1DE0BA2000129401 /* MainTabBarViewController.swift */,
 				5687723F1DE0BA3800129401 /* MyFeedTableViewCell.swift */,
 				568772411DE0BA5000129401 /* PostCellTableViewCell.swift */,
@@ -254,6 +265,7 @@
 				561BD5411DE77AC100CB266C /* SearchFriendsViewController.swift */,
 				561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */,
 				5687724D1DE0BB0B00129401 /* SettingsViewController.swift */,
+				568151001E48ECAC000232F7 /* SignUpWithEmailViewController.swift */,
 				56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */,
 				566C81221E477F7B004700BD /* twitterLoadingViewController.swift */,
 				5687724F1DE0BB2000129401 /* UICostomization.swift */,
@@ -578,17 +590,21 @@
 				568772421DE0BA5000129401 /* PostCellTableViewCell.swift in Sources */,
 				568772541DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift in Sources */,
 				568772381DE0B9A000129401 /* FriendsViewController.swift in Sources */,
+				568151051E496921000232F7 /* EditViewController.swift in Sources */,
 				56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */,
 				568772521DE0BB3300129401 /* UserModel.swift in Sources */,
 				56BE945E1E36F4DF0075E8BC /* TermsAndServicesViewController.swift in Sources */,
+				568150FF1E48D5DB000232F7 /* EmailSignupViewController.swift in Sources */,
 				561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */,
 				561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */,
+				568151011E48ECAC000232F7 /* SignUpWithEmailViewController.swift in Sources */,
 				56BE94601E36F4F70075E8BC /* PrivacyPolocyViewController.swift in Sources */,
 				561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */,
 				568772501DE0BB2000129401 /* UICostomization.swift in Sources */,
 				568772321DE0B95800129401 /* Color.swift in Sources */,
 				561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */,
 				5687723C1DE0B9F300129401 /* loadingAnimation.swift in Sources */,
+				568151031E48ECC2000232F7 /* LoginWithEmailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

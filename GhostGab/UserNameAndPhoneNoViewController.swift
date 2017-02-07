@@ -17,9 +17,10 @@ import FBSDKLoginKit
 import SCLAlertView
 
 
-class UserNameAndPhoneNoViewController: UIViewController {
+class UserNameAndPhoneNoViewController: UIViewController, UITextFieldDelegate {
     
     
+
     @IBOutlet weak var continueButton: UIButton!
     var verifiction:Verification!
     let applicationKey = "bf8eb31b-9519-4b73-82dc-3a3fa8b79d5e"
@@ -28,12 +29,14 @@ class UserNameAndPhoneNoViewController: UIViewController {
     var overlayView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let greenColorGreen = Color.green
         userName.layer.borderColor = greenColorGreen.getColor().cgColor
         userName.layer.borderWidth = 1
         phoneNumber.layer.borderColor = greenColorGreen.getColor().cgColor
         phoneNumber.layer.borderWidth = 1
+        self.userName.delegate = self
+        self.phoneNumber.delegate = self
+        
         phoneNumber.addTarget(self, action: #selector(UserNameAndPhoneNoViewController.formatPhoneNumber(sender:)), for: UIControlEvents.editingChanged)
         
         // Do any additional setup after loading the view.
@@ -158,5 +161,13 @@ class UserNameAndPhoneNoViewController: UIViewController {
      }
      */
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.userName.resignFirstResponder()
+        self.phoneNumber.resignFirstResponder()
+        return true
+    }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

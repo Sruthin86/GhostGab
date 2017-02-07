@@ -16,7 +16,7 @@ import TwitterKit
 
 var fireBaseUid: String = "fireBaseUid"
 var displayName: String = "displayName"
-var isUsingFb: Bool = true
+var isUsing: String = "facebook"
 
 
 @UIApplicationMain

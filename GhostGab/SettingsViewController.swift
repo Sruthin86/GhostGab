@@ -17,11 +17,26 @@ import TwitterKit
 
 class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    let isUsingFbFlag: Bool = (UserDefaults.standard.object(forKey: "isUsingFb") != nil)
+    let isUsingFlag: String = UserDefaults.standard.object(forKey: "isUsing") as! String
+    
+    @IBOutlet weak var game_btn: UIButton!
+    
+    @IBOutlet weak var privacy_btn: UIButton!
+    
+    @IBOutlet weak var terms: UIButton!
+    
+    @IBOutlet weak var contact: UIButton!
+    
+    @IBOutlet weak var edit: UIButton!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.game_btn.adjustsImageWhenHighlighted = false
+        self.privacy_btn.adjustsImageWhenHighlighted = false
+        self.terms.adjustsImageWhenHighlighted = false
+        self.contact.adjustsImageWhenHighlighted = false
+        self.edit.adjustsImageWhenHighlighted = false
         // Do any additional setup after loading the view.
     }
     
@@ -33,11 +48,11 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     @IBAction func logout(_ sender: AnyObject) {
         
-        if(isUsingFbFlag){
+        if(isUsingFlag == "facebook"){
             try! FIRAuth.auth()!.signOut()
             FBSDKAccessToken.setCurrent(nil)
         }
-        else {
+        else if(isUsingFlag == "twitter")  {
             let firebaseAuth = FIRAuth.auth()
             do {
                 try firebaseAuth?.signOut()
@@ -47,6 +62,14 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
                 print ("Error signing out: %@", signOutError)
             }
             
+        }
+        else if ((isUsingFlag == "email")){
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainScreenViewController = storyboard.instantiateViewController(withIdentifier: "mainScreen") as! ViewController

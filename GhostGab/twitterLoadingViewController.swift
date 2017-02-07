@@ -83,8 +83,8 @@ class twitterLoadingViewController: UIViewController {
                                                 let uModel =  UserModel(name: user.displayName, userName: "", email: "", photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
                                                 UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
                                                 UserDefaults.standard.set(user.displayName, forKey: displayName)
-                                                UserDefaults.standard.set(true, forKey: "isUsingFb")
-                                                let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl as AnyObject,  "email":"" as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "isUsingFB":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"200"as! AnyObject   ]
+                                                UserDefaults.standard.set("twitter", forKey: "isUsing")
+                                                let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl as AnyObject,  "email":"" as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "isUsing":"twitter" as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"200"as! AnyObject   ]
                                                 databaseRef.child("Users").child(user.uid).setValue(postUserData)
                                                 DispatchQueue.main.async (execute: {
                                                     let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -109,8 +109,8 @@ class twitterLoadingViewController: UIViewController {
                                         let uModel =  UserModel(name: user.displayName, userName: "", email: "", photoUrl:user.photoURL?.absoluteString , phoneNumber:"" , isVerified: false, uid: user.uid  )
                                         UserDefaults.standard.set(user.uid, forKey: fireBaseUid)
                                         UserDefaults.standard.set(user.displayName, forKey: displayName)
-                                        UserDefaults.standard.set(false, forKey: "isUsingFb")
-                                        let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl as AnyObject,  "email":"" as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject,"isUsingFB":false as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"200" as! AnyObject  ]
+                                        UserDefaults.standard.set("twitter", forKey: "isUsing")
+                                        let postUserData : [String : AnyObject] = ["displayName": user.displayName! as AnyObject,"photo": (user.photoURL?.absoluteString)! as AnyObject, "highResPhoto": highResImagePicUrl as AnyObject,  "email":"" as AnyObject, "userName":user.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject,"isUsing":"twitter" as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"200" as! AnyObject  ]
                                         databaseRef.child("Users").child(user.uid).setValue(postUserData)
                                         DispatchQueue.main.async (execute: {
                                             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

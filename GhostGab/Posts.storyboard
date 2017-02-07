@@ -68,7 +68,7 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="zNW-m1-djG" firstAttribute="centerX" secondItem="arD-6R-5Bs" secondAttribute="centerX" id="pz5-8d-RtJ"/>
                                                                     <constraint firstItem="zNW-m1-djG" firstAttribute="centerY" secondItem="arD-6R-5Bs" secondAttribute="centerY" id="rRm-ph-RRa"/>
@@ -88,7 +88,7 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="qrY-RB-D9D" firstAttribute="centerY" secondItem="lNY-Tn-NQB" secondAttribute="centerY" id="4Yh-OI-3k9"/>
                                                                     <constraint firstItem="qrY-RB-D9D" firstAttribute="centerX" secondItem="lNY-Tn-NQB" secondAttribute="centerX" id="hrP-ff-oVj"/>
@@ -105,7 +105,7 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="HUt-ye-1sv" firstAttribute="centerY" secondItem="bNx-1b-gZb" secondAttribute="centerY" id="9uJ-6H-IbJ"/>
                                                                     <constraint firstItem="HUt-ye-1sv" firstAttribute="centerX" secondItem="bNx-1b-gZb" secondAttribute="centerX" id="ggL-1Y-Cv7"/>
@@ -125,7 +125,7 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="SoU-sU-6ci" firstAttribute="centerY" secondItem="kwF-9W-PuA" secondAttribute="centerY" id="ho3-NM-f9b"/>
                                                                     <constraint firstItem="SoU-sU-6ci" firstAttribute="centerX" secondItem="kwF-9W-PuA" secondAttribute="centerX" id="qwk-KN-HbY"/>
@@ -610,47 +610,47 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B78-mQ-2rP">
-                                <rect key="frame" x="0.0" y="65" width="375" height="239.5"/>
+                                <rect key="frame" x="0.0" y="65" width="375" height="240"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, voluptatibus reprehendunt sit cu reprehendunt sit cu" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp2-V1-m1w">
-                                        <rect key="frame" x="6" y="20" width="363" height="38.5"/>
+                                        <rect key="frame" x="6" y="20" width="363" height="39"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aug 1 2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-fs-06o">
-                                        <rect key="frame" x="8" y="78.5" width="64" height="17"/>
+                                        <rect key="frame" x="8" y="79" width="64" height="17"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSB-wZ-tEB">
-                                        <rect key="frame" x="112" y="78.5" width="31" height="22"/>
+                                        <rect key="frame" x="112" y="79" width="31" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="31" id="Su7-7U-LcL"/>
                                         </constraints>
                                         <state key="normal" image="Flag"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8N-8F-cbc">
-                                        <rect key="frame" x="148" y="78.5" width="28" height="17"/>
+                                        <rect key="frame" x="148" y="79" width="28" height="17"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaL-Au-ObQ">
-                                        <rect key="frame" x="196" y="78.5" width="28" height="17"/>
+                                        <rect key="frame" x="196" y="79" width="28" height="17"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.98431372640000003" green="0.0" blue="0.24705879389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLM-GL-zPo">
-                                        <rect key="frame" x="244" y="78.5" width="28" height="17"/>
+                                        <rect key="frame" x="244" y="79" width="28" height="17"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4w-NT-ev6">
-                                        <rect key="frame" x="25" y="125.5" width="326" height="39"/>
+                                        <rect key="frame" x="25" y="126" width="326" height="39"/>
                                         <string key="text">These are your choices and you only get one guess
 Choose Wisely!! Correct guess wins you 10 points</string>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
@@ -658,7 +658,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="mX0-gs-ia0">
-                                        <rect key="frame" x="11" y="229.5" width="351" height="1"/>
+                                        <rect key="frame" x="11" y="230" width="351" height="1"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="jTs-Fu-yvm"/>
                                             <constraint firstAttribute="width" constant="351" id="naE-mJ-Ois"/>
@@ -666,7 +666,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1U-C4-TRv">
-                                        <rect key="frame" x="136" y="189.5" width="104" height="34"/>
+                                        <rect key="frame" x="136" y="190" width="104" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akQ-fe-mfI">
                                                 <rect key="frame" x="24" y="1" width="34" height="33"/>
@@ -731,7 +731,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iJh-kh-cxm">
-                                <rect key="frame" x="0.0" y="304.5" width="375" height="362.5"/>
+                                <rect key="frame" x="0.0" y="305" width="375" height="362"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GuessCell" rowHeight="65" id="P30-WR-755" customClass="GuessTableViewCell" customModule="GhostGab" customModuleProvider="target">
@@ -742,7 +742,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7AC-F5-nLf">
-                                                    <rect key="frame" x="20" y="6" width="53" height="53"/>
+                                                    <rect key="frame" x="20" y="7" width="53" height="53"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="53" id="Gj5-xw-yhK"/>
                                                         <constraint firstAttribute="height" constant="53" id="dWi-6U-e9i"/>
@@ -750,7 +750,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNn-cQ-cKq">
-                                                    <rect key="frame" x="93" y="18" width="186" height="29"/>
+                                                    <rect key="frame" x="93" y="19" width="186" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="186" id="FWD-bA-qOS"/>
                                                         <constraint firstAttribute="width" secondItem="BNn-cQ-cKq" secondAttribute="height" multiplier="186:29" id="Ziz-Yf-mb4"/>
@@ -878,7 +878,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pdh-Qf-C7h">
-                                <rect key="frame" x="137.5" y="294" width="100" height="59"/>
+                                <rect key="frame" x="138" y="294" width="100" height="59"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cash" translatesAutoresizingMaskIntoConstraints="NO" id="BSt-HV-QLM">
                                         <rect key="frame" x="20" y="15" width="26" height="30"/>
@@ -916,7 +916,7 @@ Choose Wisely!! Correct guess wins you 10 points</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, voluptatibus reprehendunt sit cu" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INT-l5-hvz">
-                                                <rect key="frame" x="10" y="5" width="355" height="38.5"/>
+                                                <rect key="frame" x="10" y="5" width="355" height="39"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                                 <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>

@@ -53,7 +53,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.fullName.text =  userDetails["displayName"] as? String;
             self.cashCount.text = userDetails["cash"] as? String;
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
-            print(fileUrl)
             let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
             self.profileImage.image = UIImage(data: profilePicUrl! as Data)
             self.profileImage.layer.cornerRadius  = self.profileImage.frame.width/2

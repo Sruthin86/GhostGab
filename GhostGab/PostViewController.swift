@@ -11,6 +11,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import SCLAlertView
 
 
 extension Notification.Name {
@@ -75,6 +76,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     var postIdToPass:String!
     
     let helperClass : HelperFunctions = HelperFunctions()
+    
+    let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -444,10 +447,14 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
             self.selfPost = !self.selfPost
             
         }
+        else {
+            SCLAlertView().showError("Oops !!", subTitle: "Gab about something less than 200 characters  ", circleIconImage:self.errorAletViewImage)
+        }
     }
     
     func reloadTableData(_ notification: Notification) {
         self.getFriends()
     }
+    
     
 }
