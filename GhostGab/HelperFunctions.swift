@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseDatabase
+import OneSignal
 
 class HelperFunctions {
     
@@ -293,6 +294,173 @@ class HelperFunctions {
             }
         })
 
+    }
+    
+    
+    func reportPosts(postId: String, userUid:String){
+        var reported: Int = 0
+       
+        self.ref.child("Posts").child(postId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                
+                let postData  = snapshot.value as! NSDictionary
+                let postedUserId = postData["useruid"] as! String
+                let postText = postData["post"] as! String
+                if(postData["Reported"] != nil){
+                    reported = postData["Reported"] as! Int
+                    reported = reported+1
+                    if(reported > 3){
+                        self.ref.child("Users").child(postedUserId).child("oneSignalId").observeSingleEvent(of: FIRDataEventType.value, with: { (snap) in
+                            if(snap.exists()){
+                                var notificationText: String = "your post about ' " + postText + " ' has been reported and deleted"
+                                var postedUseroneSignalId = snap.value as! String
+                                 OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [postedUseroneSignalId]])
+                                 self.deletePost(postId: postId)
+                            }
+                        })
+                      
+                    }
+                    else {
+                       self.ref.child("Posts").child(postId).child("Reported").setValue(reported)
+                       self.ref.child("Posts").child(postId).child("reportedUsers").child(userUid).setValue(userUid)
+                    }
+                }
+                else {
+                    reported = reported+1
+                    self.ref.child("Posts").child(postId).child("Reported").setValue(reported)
+                    self.ref.child("Posts").child(postId).child("reportedUsers").child(userUid).setValue(userUid)
+                }
+                self.hideReportedPostFromTimeline(postId: postId, userUid:userUid)
+                
+                
+                
+            }
+            else {
+               
+            }
+        })
+    }
+    
+    
+    func hideReportedPostFromTimeline(postId: String, userUid:String){
+        self.ref.child("Users").child(userUid).child("reportedGabs").child(userUid).setValue(userUid)
+        NotificationCenter.default.post(name: .reloadposts, object: nil)
+    }
+    
+    
+    func muteUser(_postId: String, userUid: String){
+        self.ref.child("Posts").child(_postId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let postData = snapshot.value as! NSDictionary
+                let postedUserId = postData["useruid"] as! String
+                let postedUserDisplayName = postData["displayName"] as! String
+                self.ref.child("Users").child(userUid).child("mutedUsers").child(postedUserId).setValue(postedUserDisplayName)
+                self.ref.child("Users").child(postedUserId).child("mutedByUsers").child(userUid).setValue(userUid)
+            }
+        })
+    }
+    
+    
+    func blockUser(_postId: String, userUid: String){
+        self.ref.child("Posts").child(_postId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let postData = snapshot.value as! NSDictionary
+                let postedUserId = postData["useruid"] as! String
+                let postedUserDisplayName = postData["displayName"] as! String
+                self.ref.child("Users").child(userUid).child("Friends").child(postedUserId).removeValue()
+                self.ref.child("Users").child(postedUserId).child("Friends").child(userUid).removeValue()
+                self.ref.child("Users").child(userUid).child("blockedUsers").child(postedUserId).setValue(postedUserDisplayName)
+                self.ref.child("Users").child(postedUserId).child("blockedByUsers").child(userUid).setValue(userUid)
+            }
+        })
+        
+    }
+    
+    func muteUserWithuserId(_otherUserUid: String, userUid: String){
+        self.ref.child("Users").child(_otherUserUid).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let otherUserData = snapshot.value as! NSDictionary
+                let otherUserDataDisplayName = otherUserData["displayName"] as! String
+                self.ref.child("Users").child(userUid).child("mutedUsers").child(_otherUserUid).setValue(otherUserDataDisplayName)
+                self.ref.child("Users").child(_otherUserUid).child("mutedByUsers").child(userUid).setValue(userUid)
+            }
+        })
+    }
+    
+    func blockUserWithuserId(_otherUserUid: String, userUid: String){
+        self.ref.child("Users").child(_otherUserUid).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let otherUserData = snapshot.value as! NSDictionary
+                let otherUserDataDisplayName = otherUserData["displayName"] as! String
+                self.ref.child("Users").child(userUid).child("Friends").child(_otherUserUid).removeValue()
+                self.ref.child("Users").child(_otherUserUid).child("Friends").child(userUid).removeValue()
+                self.ref.child("Users").child(userUid).child("blockedUsers").child(_otherUserUid).setValue(otherUserDataDisplayName)
+                self.ref.child("Users").child(_otherUserUid).child("blockedByUsers").child(userUid).setValue(userUid)
+            }
+        })
+    }
+    
+    func reportUser(_postId: String){
+        self.ref.child("Posts").child(_postId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let postData = snapshot.value as! NSDictionary
+                let postedUserId = postData["useruid"] as! String
+                self.ref.child("Users").child(postedUserId).observeSingleEvent(of: FIRDataEventType.value, with: { (snap) in
+                    if(snap.exists()){
+                        var reportedCount:Int = 0
+                        let reportedUserData = snap.value as! NSDictionary
+                        if(reportedUserData["reportedCount"] != nil){
+                            reportedCount = reportedUserData["reportedCount"] as! Int
+                            reportedCount = reportedCount+1
+                            self.ref.child("Users").child(postedUserId).child("reportedCount").setValue(reportedCount)
+                            
+                        }
+                        else {
+                            reportedCount = reportedCount+1
+                            self.ref.child("Users").child(postedUserId).child("reportedCount").setValue(reportedCount)
+                        }
+                    }
+                })
+            }
+        })
+    }
+    
+    
+    func reportUserWithUserId(_rpreportedUserId: String){
+        self.ref.child("Users").child(_rpreportedUserId).observeSingleEvent(of: FIRDataEventType.value, with: { (snap) in
+            if(snap.exists()){
+                var reportedCount:Int = 0
+                let reportedUserData = snap.value as! NSDictionary
+                if(reportedUserData["reportedCount"] != nil){
+                    reportedCount = reportedUserData["reportedCount"] as! Int
+                    reportedCount = reportedCount+1
+                    self.ref.child("Users").child(_rpreportedUserId).child("reportedCount").setValue(reportedCount)
+                    
+                }
+                else {
+                    reportedCount = reportedCount+1
+                    self.ref.child("Users").child(_rpreportedUserId).child("reportedCount").setValue(reportedCount)
+                }
+            }
+        })
+    }
+    
+    func removeAllFriends(_rpreportedUserId: String){
+        self.ref.child("Users").child(_rpreportedUserId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let reportedUserData = snapshot.value as! NSDictionary
+                if( reportedUserData["Friends"] != nil){
+                    let friendData = reportedUserData["Friends"] as! NSDictionary
+                    for friends in friendData{
+                        self.ref.child("Users").child(_rpreportedUserId).child("Friends").child(friends.key as! String).removeValue()
+                        self.ref.child("Users").child(friends.key as! String).child("Friends").child(_rpreportedUserId).removeValue()
+                    }
+                }
+                
+            }
+            
+        })
+        
     }
     
 }

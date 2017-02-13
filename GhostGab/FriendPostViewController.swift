@@ -10,6 +10,8 @@ import UIKit
 import Foundation
 import Firebase
 import FirebaseDatabase
+import SCLAlertView
+import Alamofire
 
 class FriendPostViewController: UIViewController {
     
@@ -78,13 +80,17 @@ class FriendPostViewController: UIViewController {
     
     var width:CGFloat = 1
 
+    @IBOutlet weak var warning_btn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         let customization: UICostomization = UICostomization (color: verylightGrey.getColor(), width:width)
-        customization.addBorder(object: self.reactionsView)
+        //customization.addBorder(object: self.reactionsView)
         customization.addBorder(object: self.feedView)
         self.postLabel.text = friendPostArray["post"] as! String?
         self.origianlPostUserId = (friendPostArray["useruid"]  as! String?)!
+        if(origianlPostUserId == self.uid as! String){
+            self.warning_btn.isHidden = true
+        }
         self.dateLabel.text = helperClass.getDifferenceInDates(postDate: (friendPostArray["date"]as? String)!)
         self.getUserData()
         self.setFlagCount(postId: self.postId)
@@ -105,9 +111,15 @@ class FriendPostViewController: UIViewController {
             self.displayName.text =  userDetails["displayName"] as? String;
             self.csahLabel.text = userDetails["cash"] as? String;
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
-            print(fileUrl)
-            let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
-            self.profileImage.image = UIImage(data: profilePicUrl! as Data)
+            
+            Alamofire.request(userDetails["highResPhoto"] as! String).responseData { response in
+                if let alamofire_image = response.result.value {
+                    let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
+                    self.profileImage.image = UIImage(data: profilePicUrl! as Data)
+                    
+                }
+            }
+            
             self.profileImage.layer.cornerRadius  = self.profileImage.frame.width/2
             self.profileImage.clipsToBounds = true;
             let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 5 )
@@ -122,37 +134,58 @@ class FriendPostViewController: UIViewController {
         let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
         mainTabBarView.selectedIndex = 0
-        self.present(mainTabBarView, animated: true, completion: nil)
+        //trasition from left
+        let transition = CATransition()
+        transition.duration = 0.28
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromLeft
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(mainTabBarView, animated: false, completion: nil)
     }
     
     @IBAction func ReactionButton1(_ sender: Any) {
+        addHapticMedium()
         animateButton(animationObject: self.reaction1, reaction:1)
     }
     @IBAction func ReactionButton2(_ sender: Any) {
+        addHapticMedium()
         animateButton(animationObject: self.reaction2, reaction:2)
     }
     
     @IBAction func ReactionButton3(_ sender: Any) {
+        addHapticMedium()
         animateButton(animationObject: self.reaction3, reaction:3)
     }
     
     @IBAction func ReactionButton4(_ sender: Any) {
+        addHapticMedium()
         animateButton(animationObject: self.reaction4, reaction:4)
     }
     
     @IBAction func ReactionButton5(_ sender: Any) {
+        addHapticMedium()
         animateButton(animationObject: self.reaction5, reaction:5)
     }
     
     @IBAction func ReactionButton6(_ sender: Any) {
+        addHapticMedium()
         animateButton(animationObject: self.reaction6, reaction:6)
     }
     
     @IBAction func Flag(_ sender: Any) {
+        addHapticHeavy()
         animateButton(animationObject: self.flagButton, reaction:7)
         helperClass.updatePostFlag(postId: self.postId, uid: self.uid as! String)
     }
     
+    func addHapticMedium() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    func addHapticHeavy() {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred()
+    }
     
     func animateButton(animationObject: UIButton, reaction:Int) {
         UIView.animate(withDuration: 0.3, delay:0.1, options:[], animations: {
@@ -282,6 +315,96 @@ class FriendPostViewController: UIViewController {
                 })
             }
         })
+        
+    }
+    
+    @IBAction func warningButton(_ sender: Any) {
+        
+        let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Inappropriate Gab", target:self, selector:#selector(FriendPostViewController.reportGab))
+        alertView.addButton("Offensive Gab", target:self, selector:#selector(FriendPostViewController.reportGab))
+        alertView.addButton("Gab is targetting someone", target:self, selector:#selector(FriendPostViewController.reportGab))
+        alertView.addButton("Other", target:self, selector:#selector(FriendPostViewController.reportGab))
+        alertView.addButton("Report this user", target:self, selector:#selector(FriendPostViewController.reportUser))
+        alertView.addButton("Mute this user", target:self, selector:#selector(FriendPostViewController.muteUser))
+        alertView.addButton("Block this user", target:self, selector:#selector(FriendPostViewController.blockUsers))
+        alertView.addButton("Cancel") {
+            
+            print("Second button tapped")
+        }
+        alertView.showSuccess("Report this Gab", subTitle: "" , circleIconImage:errorAletViewImage)
+    }
+    
+    
+    func reportUser(){
+        helperClass.reportUser(_postId: self.postId)
+        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            
+            print("Second button tapped")
+        }
+        alertView.showInfo("Thank you", subTitle: "This user has been reported. We are immediately looking at your concerns" , circleIconImage:checkAletViewImage)
+        
+    }
+    
+    func reportGab(){
+        helperClass.reportPosts(postId: self.postId, userUid: self.uid as! String)
+        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+            let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+            mainTabBarView.selectedIndex = 0
+            //trasition from left
+            let transition = CATransition()
+            transition.duration = 0.28
+            transition.type = kCATransitionMoveIn
+            transition.subtype = kCATransitionFromLeft
+            self.view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+            self.present(mainTabBarView, animated: false, completion: nil)
+           
+        }
+         alertView.showInfo("Thank you", subTitle: "We are immediately looking at your concerns" , circleIconImage:checkAletViewImage)
+    }
+    
+    func muteUser(){
+        helperClass.muteUser(_postId: self.postId, userUid: self.uid as! String)
+        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            
+        }
+        alertView.showInfo("Thank you", subTitle: "This user has been muted . You will not see this user's gabs on your time line. You can unmute them in your settings" , circleIconImage:checkAletViewImage)
+
+    }
+    
+    
+    func blockUsers(){
+        helperClass.blockUser(_postId: self.postId, userUid: self.uid as! String)
+        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            
+        }
+        alertView.showInfo("Thank you", subTitle: "This user has been blocked . You can unblock them in your settings" , circleIconImage:checkAletViewImage)
         
     }
 

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '298E2D501DEB0208FF7C4BF56E8565F1'
+               BlueprintIdentifier = 'E5D45497CA126A99E871E36F6BFF5B2E'
                BlueprintName = 'SCLAlertView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SCLAlertView.framework'>

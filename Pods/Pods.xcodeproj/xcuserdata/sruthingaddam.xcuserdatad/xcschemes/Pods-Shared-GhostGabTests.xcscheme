@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3E3BB2DEA5D846C0623722B3E662ADB"
+               BlueprintIdentifier = "F8E177C5F7E924334F9A0AD2BE55E5FC"
                BuildableName = "Pods_Shared_GhostGabTests.framework"
                BlueprintName = "Pods-Shared-GhostGabTests"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3E3BB2DEA5D846C0623722B3E662ADB"
+            BlueprintIdentifier = "F8E177C5F7E924334F9A0AD2BE55E5FC"
             BuildableName = "Pods_Shared_GhostGabTests.framework"
             BlueprintName = "Pods-Shared-GhostGabTests"
             ReferencedContainer = "container:Pods.xcodeproj">

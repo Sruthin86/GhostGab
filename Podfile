@@ -16,6 +16,8 @@ use_frameworks!
  pod 'SCLAlertView'
  pod 'Fabric'
  pod 'TwitterKit'
+ pod 'Crashlytics'
+ pod 'Alamofire', '~> 4.3'
 
 target 'GhostGab'
 target 'GhostGabTests'

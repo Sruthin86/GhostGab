@@ -78,6 +78,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                 if (suggestionsLength > 0){
                     self.tableView.backgroundView = .none
                     self.tableView.separatorStyle = .singleLine
+                    print("suggestionsLength")
+                    print(suggestionsLength)
                     return suggestionsLength
                 }
                 else {
@@ -145,11 +147,16 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         cell.setBackground(colorValue: "white")
         
         if (self.suggestionsFlag){
+            print("indexPath.row")
+            print(indexPath.row)
+            print("self.suggestionsArrayKey[indexPath.row]")
+            print(self.suggestionsArrayKey[indexPath.row])
             cell.setImageData(photoUrl: self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             cell.rsLabel.text = self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             cell.sendRequestBtn.tag = indexPath.row
+             cell.cancelBtn.tag = indexPath.row
             cell.sendRequestBtn.addTarget(self, action: #selector(self.AcceptButton), for: .touchUpInside)
-            
+            cell.cancelBtn.addTarget(self, action: #selector(self.CancelButton), for: .touchUpInside)
         }
         else if (self.requestsFlag){
             
@@ -184,7 +191,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         let highLightedCell : RequestSuggestionTableViewCell = self.tableView.cellForRow(at: cancelIndexPath as IndexPath) as! RequestSuggestionTableViewCell
         highLightedCell.setBackground(colorValue: "lightRed")
         if(suggestionsFlag){
-            
+            cancelSuggestion(cancelIndexPath: cancelIndexPath)
         }
         else if(requestsFlag){
             cancelRequest(cancelIndexPath: cancelIndexPath)
@@ -199,6 +206,17 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             self.ref.child("Users").child(requestedUserUid).child("RequestsSent").child(self.currentUserId).removeValue()
         }
         
+        
+    }
+    
+    func cancelSuggestion(cancelIndexPath: NSIndexPath){
+        let removesuggestionIndex = cancelIndexPath.row
+        self.ref.child("Users").child(self.currentUserId).child("hideSuggestions").child(self.suggestionsArrayKey[removesuggestionIndex]).setValue(self.suggestionsArrayKey[removesuggestionIndex])
+        self.suggestionsArray.removeValue(forKey: self.suggestionsArrayKey[removesuggestionIndex])
+        self.suggestionsArrayKey.remove(at: removesuggestionIndex)
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (timer) in
+            self.tableView.reloadData()
+        }
         
     }
     func sendRequest(OnesignalIndexPath: NSIndexPath) -> Void {
@@ -266,7 +284,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                         }
                             
                         else {
-                            print("Inside else ")
+                            
                             
                         }
                     })
@@ -320,6 +338,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     // to fetch contacts
     
     func fetchContacts() {
+        self.suggestionsArrayKey.removeAll()
+        self.suggestionsArray.removeAll()
         var iteratorKey: Int = 0
         let toFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
         let request = CNContactFetchRequest(keysToFetch: toFetch as [CNKeyDescriptor])
@@ -343,8 +363,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                 
                                 let data:NSDictionary  = snapshot.value as! NSDictionary
                                 
-                                self.suggestionsArrayKey.removeAll()
-                                self.suggestionsArray.removeAll()
+                                
                                 
                                 self.ref.child("Users").child(self.currentUserId).observeSingleEvent(of: .value, with: { snapshot in
                                     if(snapshot.exists()){
@@ -353,6 +372,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                             var  requestsExists:Bool = false
                                             var  requestsSentExists:Bool = false
                                             var  FriendsExists:Bool = false
+                                            var  blockedUserExists:Bool = false
+                                            var  hideSuggestionUserExists:Bool = false
                                             
                                             let uData = snapshot.value  as! NSDictionary
                                             if(uData["RequestsSent"] != nil){
@@ -374,14 +395,26 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                                     FriendsExists = true
                                                 }
                                             }
+                                            if(uData["blockedUsers"] != nil){
+                                                var blockedUsers = uData["blockedUsers"] as! NSDictionary
+                                                if(blockedUsers[suggestionsData.key ] != nil){
+                                                    blockedUserExists = true
+                                                }
+                                            }
+                                            if(uData["hideSuggestions"] != nil){
+                                                var hideSuggestionsUsers = uData["hideSuggestions"] as! NSDictionary
+                                                if(hideSuggestionsUsers[suggestionsData.key ] != nil){
+                                                    hideSuggestionUserExists = true
+                                                }
+                                            }
                                             
-                                            ""
-                                            if(!requestsExists && !FriendsExists && !requestsSentExists && self.currentUserId != suggestionsData.key as! String){
+                                            
+                                            if(!requestsExists && !FriendsExists && !requestsSentExists && !blockedUserExists && !hideSuggestionUserExists  && self.currentUserId != suggestionsData.key as! String){
                                                 self.suggestionsArrayKey.append(suggestionsData.key as! String)
                                                 self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
                                             }
-                                            
                                             self.tableView.reloadData()
+                                           
                                             
                                         }
                                         
@@ -408,13 +441,19 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         }
         
     }
-    
+   
     
     @IBAction func Search(_ sender: Any) {
         
         let storybaord: UIStoryboard = UIStoryboard(name: "Search", bundle: nil)
-        let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "SearchUser") as! SearchFriendsViewController
-        self.present(mainTabBarView, animated: true, completion: nil)
+        let SearchView  = storybaord.instantiateViewController(withIdentifier: "SearchUser") as! SearchFriendsViewController
+        let transition = CATransition()
+        transition.duration = 0.4
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromRight
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(SearchView, animated: false, completion: nil)
+        
     }
     
 }

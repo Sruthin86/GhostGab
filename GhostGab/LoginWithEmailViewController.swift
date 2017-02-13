@@ -102,6 +102,14 @@ class LoginWithEmailViewController: UIViewController, UITextFieldDelegate {
                         UserDefaults.standard.set(userData["displayName"], forKey: displayName)
                         if((userData["isVerified"]) != nil){
                             var verified: Bool = userData["isVerified"] as! Bool
+                            if(userData["reportedCount"] != nil){
+                                var rportedCount = userData["reportedCount"] as! Int
+                                if(rportedCount >= 5){
+                                    let storybaord: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let lockedView  = storybaord.instantiateViewController(withIdentifier: "locked_view") as! LockedViewController
+                                    self.present(lockedView, animated: true, completion: nil)
+                                }
+                            }
                             if(verified){
                                 let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
                                 let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController

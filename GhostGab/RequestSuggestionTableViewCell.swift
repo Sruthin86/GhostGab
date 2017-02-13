@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class RequestSuggestionTableViewCell: UITableViewCell {
     
@@ -42,12 +43,21 @@ class RequestSuggestionTableViewCell: UITableViewCell {
     
     func setImageData (photoUrl: String) -> Void {
         let fileUrl = NSURL(string: photoUrl)
-        let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
-        self.rsImageView.image = UIImage(data: profilePicUrl! as Data)
-        self.rsImageView.layer.cornerRadius  = self.rsImageView.frame.width/2
-        self.rsImageView.clipsToBounds = true;
-        let costomization:UICostomization =  UICostomization(color: green.getColor(), width:1)
-        costomization.addRoundedBorder(object: self.rsImageView)
+        Alamofire.request(photoUrl).responseData { response in
+            if let alamofire_image = response.result.value {
+                
+                self.rsImageView.image = UIImage(data: alamofire_image as Data)
+                self.rsImageView.layer.cornerRadius  = self.rsImageView.frame.width/2
+                self.rsImageView.clipsToBounds = true;
+                let costomization:UICostomization =  UICostomization(color: self.green.getColor(), width:1)
+                costomization.addRoundedBorder(object: self.rsImageView)
+            }
+        }
+        
+        
+        
+        
+       
     }
     
     func setBackground(colorValue:String){

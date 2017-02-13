@@ -141,7 +141,12 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
         mainTabBarView.selectedIndex = 3
-        self.present(mainTabBarView, animated: true, completion: nil)
+        let transition = CATransition()
+        transition.duration = 0.4
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromLeft
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(mainTabBarView, animated: false, completion: nil)
        
 
     }
@@ -218,8 +223,28 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
                 if(snapshot.exists()){
                     let searchData = snapshot.value as! NSDictionary
                     for sData in searchData{
-                        self.searchKeyArray.append(sData.key as! String)
-                        self.searchArray[sData.key as! String] = sData.value as AnyObject?
+                        
+                        let searchUserData =  sData.value as! NSDictionary
+                        if (searchUserData ["blockedByUsers"] != nil){
+                           let blockedByUsersData = searchUserData ["blockedByUsers"] as! NSDictionary
+                            if(blockedByUsersData[self.uid] == nil &&  self.uid as! String != sData.key as? String){
+                                self.searchKeyArray.append(sData.key as! String)
+                                self.searchArray[sData.key as! String] = sData.value as AnyObject?
+                            }
+                            
+                        }
+                        if (searchUserData ["blockedUsers"] != nil){
+                            let blockedUsersData = searchUserData ["blockedUsers"] as! NSDictionary
+                            if(blockedUsersData[self.uid] == nil &&  self.uid as! String != sData.key as? String){
+                                self.searchKeyArray.append(sData.key as! String)
+                                self.searchArray[sData.key as! String] = sData.value as AnyObject?
+                            }
+                            
+                        }
+                        else if(self.uid as! String != sData.key as? String)  {
+                            self.searchKeyArray.append(sData.key as! String)
+                            self.searchArray[sData.key as! String] = sData.value as AnyObject?
+                        }
                     }
                     self.tableView.reloadData()
                 }

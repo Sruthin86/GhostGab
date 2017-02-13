@@ -33,22 +33,32 @@ class ViewController: UIViewController  {
     
     @IBAction func FbLoginPressed(_ sender: AnyObject) {
         
+        
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FBLoginLoading") as! FBLoadingViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "eula_aggrement") as! EULAViewController
+        vc.logInType = "facebook"
         self.present(vc, animated:true, completion:nil)
+       
+        
     }
     
     @IBAction func twitterLogin(_ sender: Any) {
+        
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "TwitterLoginLoading") as! twitterLoadingViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "eula_aggrement") as! EULAViewController
+        vc.logInType = "twitter"
         self.present(vc, animated:true, completion:nil)
+        
+        
         
     }
     
     @IBAction func emailLogin(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "email_screen") as! EmailSignupViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "eula_aggrement") as! EULAViewController
+        vc.logInType = "email"
         self.present(vc, animated:true, completion:nil)
+        
         
     }
     

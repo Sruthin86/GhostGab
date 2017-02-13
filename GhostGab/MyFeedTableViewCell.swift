@@ -58,6 +58,7 @@ class MyFeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var reaction6: UIButton!
     
+    @IBOutlet weak var flag_btn: UIButton!
     var cellSelected: Bool = false
     
     var width:CGFloat = 0.4
@@ -118,7 +119,7 @@ class MyFeedTableViewCell: UITableViewCell {
     
     @IBAction func ReactionButton(_ sender: AnyObject) {
         
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction1, reaction:1)
         
         
@@ -127,7 +128,7 @@ class MyFeedTableViewCell: UITableViewCell {
     
     
     @IBAction func Reaction2Button(_ sender: AnyObject) {
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction2,reaction:2)
         
         
@@ -135,7 +136,7 @@ class MyFeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func Reaction3Button(_ sender: AnyObject) {
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction3,reaction:3)
         
         
@@ -144,7 +145,7 @@ class MyFeedTableViewCell: UITableViewCell {
     
     
     @IBAction func Reaction4Button(_ sender: AnyObject) {
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction4, reaction:4)
         
         
@@ -154,7 +155,7 @@ class MyFeedTableViewCell: UITableViewCell {
     
     @IBAction func Reaction5Button(_ sender: AnyObject) {
         
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction5, reaction:5)
         
         
@@ -162,7 +163,7 @@ class MyFeedTableViewCell: UITableViewCell {
     
     @IBAction func Reaction6Button(_ sender: AnyObject) {
         
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction6, reaction:6)
         
         
@@ -170,16 +171,28 @@ class MyFeedTableViewCell: UITableViewCell {
     
     
     @IBAction func FlagButton(_ sender: AnyObject) {
-        helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
+        addHapticHeavy()
+        animateButton(animationObject: self.flag_btn, reaction:7)
         
     }
+    
+    func addHapticMedium() {
+        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    func addHapticHeavy() {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred()
+    }
+
     
     func animateButton(animationObject: UIButton, reaction:Int) {
         UIView.animate(withDuration: 0.3, delay:0.1, options:[], animations: {
             animationObject.transform = CGAffineTransform(scaleX: 2, y: 2)
         }, completion: {_ in
             
-            UIView.animate(withDuration: 0.3, delay:0.1, options:[], animations: {
+            UIView.animate(withDuration: 0.4, delay:0.1, options:[], animations: {
                 animationObject.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 animationObject.transform = animationObject.transform.rotated(by: CGFloat(M_PI))
                 animationObject.alpha = 0.5
@@ -188,7 +201,13 @@ class MyFeedTableViewCell: UITableViewCell {
                     animationObject.transform = CGAffineTransform(scaleX: 1, y: 1)
                     animationObject.alpha = 1
                 }, completion: {_ in
-                    self.myReaction(reaction: reaction)
+                    if(reaction != 7){
+                        self.myReaction(reaction: reaction)
+                    }
+                    else if (reaction == 7){
+                        self.helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
+                        
+                    }
                 })
             })
         })
@@ -307,7 +326,7 @@ class MyFeedTableViewCell: UITableViewCell {
     
     
     func setFlagCount(postId: String) {
-        self.ref.child("Posts").child(postId).child("flags").observeSingleEvent(of: FIRDataEventType.value, with:{ (snapshot) in
+        self.ref.child("Posts").child(postId).child("flags").observe( FIRDataEventType.value, with:{ (snapshot) in
             if(snapshot.exists()){
                 let flagsData = snapshot.value as! [String : Int]
                 let flagCount: Int =  flagsData["flagCount"]!

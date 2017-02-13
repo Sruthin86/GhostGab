@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import SCLAlertView
 
 class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -30,6 +31,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var cashButton: UIButton!
     
+    @IBOutlet weak var warning_btn: UIButton!
     
     let uid = UserDefaults.standard.object(forKey: fireBaseUid)
     
@@ -93,10 +95,12 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.wrongGuessCounter = Int((postMetrics["wrongGuess"] as AnyObject) as! NSNumber)
         self.displayName = guessPostArray["displayName"]! as! String
         self.cashButton.isEnabled = false
+        
         getCashCount()
         
         if(guessPostArray["useruid"] as! String == uid as! String){
             selfPostFalg = true
+            //self.warning_btn.isHidden = true
         }
         else {
             if(self.oriFrinendsKeyArray.count>=3){
@@ -129,7 +133,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         else if (notenoughFriendsFlag){
             let imageName = "Reaction2_lg.png"
-            let labelText = "you dont have enough friends \nto guess!! "
+            let labelText = "you dont have enough friends to guess!! "
             delay(0.75)  //Here you put time you want to delay
             {
                 
@@ -156,7 +160,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             noDataAvailableLabel.text =  labelText
             noDataAvailableLabel.textAlignment = .center
             noDataAvailableLabel.textColor =  textColor.getColor()
-            noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:14.0)
+            noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:12.0)
             self.tableView.separatorStyle = .none
             var noFriendsView : UIView = UIView( frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height))
             noFriendsView.addSubview(imageView)
@@ -251,7 +255,13 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
         mainTabBarView.selectedIndex = 0
-        self.present(mainTabBarView, animated: true, completion: nil)
+        //trasition from left
+        let transition = CATransition()
+        transition.duration = 0.28
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromLeft
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(mainTabBarView, animated: false, completion: nil)
     }
     
     
@@ -481,4 +491,47 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
+    @IBAction func warningButton(_ sender: Any) {
+        let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Inappropriate Gab", target:self, selector:#selector(GuessViewController.reportGab))
+        alertView.addButton("Offensive Gab", target:self, selector:#selector(GuessViewController.reportGab))
+        alertView.addButton("Gab is targetting someone", target:self, selector:#selector(GuessViewController.reportGab))
+        alertView.addButton("Other", target:self, selector:#selector(GuessViewController.reportGab))
+        alertView.addButton("Report this user", target:self, selector:Selector(("reportUser")))
+        alertView.addButton("Cancel") {
+            
+            print("Second button tapped")
+        }
+        alertView.showSuccess("Report this Gab", subTitle: "" , circleIconImage:errorAletViewImage)
+        
+    }
+    
+    func reportGab(){
+        helperClass.reportPosts(postId: self.postId, userUid: self.uid as! String)
+        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+            let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+            mainTabBarView.selectedIndex = 0
+            //trasition from left
+            let transition = CATransition()
+            transition.duration = 0.28
+            transition.type = kCATransitionMoveIn
+            transition.subtype = kCATransitionFromLeft
+            self.view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+            self.present(mainTabBarView, animated: false, completion: nil)
+            
+        }
+        alertView.showInfo("Thank you", subTitle: "We are immediately looking at your concerns" , circleIconImage:checkAletViewImage)
+    }
+
 }

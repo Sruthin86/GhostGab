@@ -103,7 +103,7 @@ class UserNameAndPhoneNoViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Continue(_ sender: AnyObject) {
         let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
-        
+        self.view.endEditing(true)
         var phNum = self.phoneNumber.text
         phNum = phNum!.replacingOccurrences(of:"(", with: "")
             .replacingOccurrences(of:")", with: "")

@@ -419,6 +419,250 @@
             </objects>
             <point key="canvasLocation" x="3902" y="385"/>
         </scene>
+        <!--Locked View Controller-->
+        <scene sceneID="fYj-OI-Mcd">
+            <objects>
+                <viewController storyboardIdentifier="locked_view" id="K2a-2p-aI8" customClass="LockedViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GL3-dh-SE7"/>
+                        <viewControllerLayoutGuide type="bottom" id="NBi-Wm-XiX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aSi-TS-aLS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rM9-Ub-rUL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="gtR-YK-3wP"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem id="wWT-Qx-g9v"/>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="chB-ox-x6j">
+                                <rect key="frame" x="168" y="20" width="39" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="T2S-A2-uwS"/>
+                                    <constraint firstAttribute="height" constant="41" id="ZPf-Ic-HwV"/>
+                                    <constraint firstAttribute="width" secondItem="chB-ox-x6j" secondAttribute="height" multiplier="39:41" id="rjl-17-8L2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your account has been reported as spam . All your content has been deleted . Please contact us if you want to resolve this" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwj-5g-5US">
+                                <rect key="frame" x="36" y="105" width="303" height="93"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxH-pY-0po">
+                                <rect key="frame" x="128" y="258" width="118" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TxH-pY-0po" secondAttribute="height" multiplier="59:15" id="Jtq-Pf-Ge7"/>
+                                    <constraint firstAttribute="width" constant="118" id="e1w-vD-ZfD"/>
+                                    <constraint firstAttribute="height" constant="30" id="nWz-I1-C9o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Contact Us"/>
+                                <connections>
+                                    <action selector="contact_us:" destination="K2a-2p-aI8" eventType="touchUpInside" id="77J-33-f8J"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYq-XY-nEi">
+                                <rect key="frame" x="15" y="532" width="345" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="345" id="4CW-vz-2Jg"/>
+                                    <constraint firstAttribute="height" constant="55" id="VWN-N6-TaS"/>
+                                    <constraint firstAttribute="width" secondItem="WYq-XY-nEi" secondAttribute="height" multiplier="69:11" id="eBk-jm-PyU"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="LogoutBtn@1x"/>
+                                <connections>
+                                    <action selector="logout:" destination="K2a-2p-aI8" eventType="touchUpInside" id="K57-yc-auQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mwj-5g-5US" firstAttribute="top" secondItem="rM9-Ub-rUL" secondAttribute="bottom" constant="40" id="0Nd-iE-oyf"/>
+                            <constraint firstItem="TxH-pY-0po" firstAttribute="centerX" secondItem="aSi-TS-aLS" secondAttribute="centerX" id="5xr-qr-WFK"/>
+                            <constraint firstAttribute="trailing" secondItem="rM9-Ub-rUL" secondAttribute="trailing" id="8dU-6E-tMS"/>
+                            <constraint firstItem="rM9-Ub-rUL" firstAttribute="centerX" secondItem="aSi-TS-aLS" secondAttribute="centerX" id="AZv-bI-WJw"/>
+                            <constraint firstItem="chB-ox-x6j" firstAttribute="top" secondItem="aSi-TS-aLS" secondAttribute="topMargin" constant="20" id="Abf-dW-Hkz"/>
+                            <constraint firstItem="chB-ox-x6j" firstAttribute="centerX" secondItem="aSi-TS-aLS" secondAttribute="centerX" id="Ci0-3C-sWy"/>
+                            <constraint firstItem="mwj-5g-5US" firstAttribute="centerX" secondItem="aSi-TS-aLS" secondAttribute="centerX" id="M9A-54-GQJ"/>
+                            <constraint firstItem="TxH-pY-0po" firstAttribute="top" secondItem="mwj-5g-5US" secondAttribute="bottom" constant="60" id="b1B-vo-B6w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mwj-5g-5US" secondAttribute="trailing" constant="20" id="cgj-st-dAe"/>
+                            <constraint firstItem="NBi-Wm-XiX" firstAttribute="top" secondItem="WYq-XY-nEi" secondAttribute="bottom" constant="80" id="nJs-eh-QBS"/>
+                            <constraint firstItem="rM9-Ub-rUL" firstAttribute="leading" secondItem="aSi-TS-aLS" secondAttribute="leading" id="qHb-FV-IPv"/>
+                            <constraint firstItem="WYq-XY-nEi" firstAttribute="centerX" secondItem="aSi-TS-aLS" secondAttribute="centerX" id="reX-Iw-2xp"/>
+                            <constraint firstItem="rM9-Ub-rUL" firstAttribute="top" secondItem="aSi-TS-aLS" secondAttribute="top" id="t2q-pc-Dmu"/>
+                            <constraint firstItem="mwj-5g-5US" firstAttribute="leading" secondItem="aSi-TS-aLS" secondAttribute="leadingMargin" constant="20" id="xuj-li-yCS"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KPv-SO-3Yn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4764" y="389.95502248875567"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2ix-L5-vpj">
+            <objects>
+                <viewController storyboardIdentifier="eula_aggrement" id="9fO-eN-lOo" customClass="EULAViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qtx-oS-mtw"/>
+                        <viewControllerLayoutGuide type="bottom" id="fRO-rA-vD0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7pK-gY-bcJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihl-Jm-ryt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="hgV-dZ-T26"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem id="ojg-RP-fM9">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="0Hh-cp-h7Y">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Zqj-76-znc">
+                                                <rect key="frame" x="16" y="31" width="66" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="   " image="BackButton"/>
+                                                <connections>
+                                                    <action selector="back_btn:" destination="9fO-eN-lOo" eventType="touchUpInside" id="0Qr-er-4bI"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Lnx-YR-mOq">
+                                <rect key="frame" x="168" y="20" width="39" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Lnx-YR-mOq" secondAttribute="height" multiplier="39:41" id="Lrt-Zp-LfT"/>
+                                    <constraint firstAttribute="height" constant="41" id="ViZ-kY-7eK"/>
+                                    <constraint firstAttribute="width" constant="39" id="loR-l9-CFV"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcM-v9-cHc">
+                                <rect key="frame" x="21" y="75" width="335" height="457"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="457" id="91G-s7-36X"/>
+                                    <constraint firstAttribute="width" secondItem="XcM-v9-cHc" secondAttribute="height" multiplier="335:457" id="i2P-p0-7qx"/>
+                                    <constraint firstAttribute="width" constant="335" id="q1p-GP-tza"/>
+                                </constraints>
+                                <mutableString key="text">End-User License Agreement ("Agreement")
+Last updated: February 12, 2017
+Please read this End-User License Agreement (&amp;quot;Agreement&amp;quot;) carefully before clicking the &amp;quot;I Agree&amp;quot; button, downloading or using GhostGab ("Application").
+By clicking the "I Agree" button, downloading or using the Application, you are agreeing to be bound by the terms and conditions of this Agreement.
+This Agreement is a legal agreement between you (either an individual or a single entity) and Code Boarders Corporation and it governs your use of the Application made available to you by Code Boarders Corporation.
+If you do not agree to the terms of this Agreement, do not click on the &amp;quot;I Agree&amp;quot; button and do not download or use the Application.
+The Application is licensed, not sold, to you by Code Boarders Corporation for use strictly in accordance with the terms of this Agreement.
+License
+Code Boarders Corporation grants you a revocable, non-exclusive, non-transferable, limited license to download, install and use the Application solely for your personal, non-commercial purposes strictly in accordance with the terms of this Agreement.
+Restrictions
+You agree not to, and you will not permit others to:
+
+license, sell, rent, lease, assign, distribute, transmit, host, outsource, disclose or otherwise commercially exploit the Application or make the Application available to any third party.
+copy or use the Application for any purpose other than as permitted under the above section 'License'.
+modify, make derivative works of, disassemble, decrypt, reverse compile or reverse engineer any part of the Application.
+remove, alter or obscure any proprietary notice (including any notice of copyright or trademark) of Code Boarders Corporation or its affiliates, partners, suppliers or the licensors of the Application.
+
+Intellectual Property
+The Application, including without limitation all copyrights, patents, trademarks, trade secrets and other intellectual property rights are, and shall remain, the sole and exclusive property of Code Boarders Corporation.
+Your Suggestions
+Any feedback, comments, ideas, improvements or suggestions (collectively, &amp;quot;Suggestions&amp;quot;) provided by you to Code Boarders Corporation with respect to the Application shall remain the sole and exclusive property of Code Boarders Corporation.
+Code Boarders Corporation shall be free to use, copy, modify, publish, or redistribute the Suggestions for any purpose and in any way without any credit or any compensation to you.
+Modifications to Application
+Code Boarders Corporation reserves the right to modify, suspend or discontinue, temporarily or permanently, the Application or any service to which it connects, with or without notice and without liability to you.
+Updates to Application
+Code Boarders Corporation may from time to time provide enhancements or improvements to the features/functionality of the Application, which may include patches, bug fixes, updates, upgrades and other modifications (&amp;quot;Updates&amp;quot;).
+Updates may modify or delete certain features and/or functionalities of the Application. You agree that Code Boarders Corporation has no obligation to (i) provide any Updates, or (ii) continue to provide or enable any particular features and/or functionalities of the Application to you.
+You further agree that all Updates will be (i) deemed to constitute an integral part of the Application, and (ii) subject to the terms and conditions of this Agreement.
+Third-Party Services
+The Application may display, include or make available third-party content (including data, information, applications and other products services) or provide links to third-party websites or services (&amp;quot;Third-Party Services&amp;quot;).
+You acknowledge and agree that Code Boarders Corporation shall not be responsible for any Third-Party Services, including their accuracy, completeness, timeliness, validity, copyright compliance, legality, decency, quality or any other aspect thereof. Code Boarders Corporation does not assume and shall not have any liability or responsibility to you or any other person or entity for any Third-Party Services.
+Third-Party Services and links thereto are provided solely as a convenience to you and you access and use them entirely at your own risk and subject to such third parties' terms and conditions.
+Privacy Policy
+Code Boarders Corporation collects, stores, maintains, and shares information about you in accordance with its Privacy Policy, which is available at Privacy Policy Last updated: January 24, 2017 Code Boarders Corporation (&amp;quot;us&amp;quot;, &amp;quot;we&amp;quot;, or &amp;quot;our&amp;quot;) operates the Ghost Gab mobile application (the &amp;quot;Service&amp;quot;). This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service. We will not use or share your information with anyone except as described in this Privacy Policy. We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions. Information Collection And Use While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to, your email address, name, phone number, postal address, other information (&amp;quot;Personal Information&amp;quot;). We collect this information for the purpose of providing the Service, identifying and communicating with you, responding to your requests/inquiries, servicing your purchase orders, and improving our services. Log Data When you access the Service by or through a mobile device, we may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use and other statistics (&amp;quot;Log Data&amp;quot;). In addition, we may use third party services such as Google Analytics that collect, monitor and analyze this type of information in order to increase our Service's functionality. These third party service providers have their own privacy policies addressing how they use such information. Cookies Cookies are files with a small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and transferred to your device. We use cookies to collect information in order to improve our services for you. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. The Help feature on most browsers provide information on how to accept cookies, disable cookies or to notify you when receiving a new cookie. If you do not accept cookies, you may not be able to use some features of our Service and we recommend that you leave them turned on. Behavioral Remarketing Code Boarders Corporation uses remarketing services to advertise on third party web sites to you after you visited our Service. We, and our third party vendors, use cookies to inform, optimize and serve ads based on your past visits to our Service.   Google Google AdWords remarketing service is provided by Google Inc. You can opt-out of Google Analytics for Display Advertising and customize the Google Display Network ads by visiting the Google Ads Settings page: http://www.google.com/settings/ads Google also recommends installing the Google Analytics Opt-out Browser Add-on - https://tools.google.com/dlpage/gaoptout - for your web browser. Google Analytics Opt-out Browser Add-on provides visitors with the ability to prevent their data from being collected and used by Google Analytics. For more information on the privacy practices of Google, please visit the Google Privacy &amp;amp; Terms web page: http://www.google.com/intl/en/policies/privacy/   Twitter Twitter remarketing service is provided by Twitter Inc. You can opt-out from Twitter's interest-based ads by following their instructions: https://support.twitter.com/articles/20170405 You can learn more about the privacy practices and policies of Twitter by visiting their Privacy Policy page: https://twitter.com/privacy   Facebook Facebook remarketing service is provided by Facebook Inc. You can learn more about interest-based advertising from Facebook by visiting this page: https://www.facebook.com/help/164968693837950 To opt-out from Facebook's interest-based ads follow these instructions from Facebook: https://www.facebook.com/about/ads/#568137493302217 Facebook adheres the Self-Regulatory Principles for Online Behavioral Advertising established by the Digital Advertising Alliance. You can also opt-out from Facebook and other participating companies through the Digital Advertising Alliance in the USA http://www.aboutads.info/choices/, the Digital Advertising Alliance of Canada in Canada http://youradchoices.ca/ or the European Interactive Digital Advertising Alliance in Europe http://www.youronlinechoices.eu/, or opt-out using your mobile device settings. For more information on the privacy practices of Facebook, please visit Facebook's Data Policy: https://www.facebook.com/privacy/explanation   Pinterest Pinterest remarketing service is provided by Pinterest Inc. You can opt-out from Pinterest's interest-based ads by enabling the &amp;quot;Do Not Track&amp;quot; functionality of your web browser or by following Pinterest instructions: http://help.pinterest.com/en/articles/personalization-and-data You can learn more about the privacy practices and policies of Pinterest by visiting their Privacy Policy page: https://about.pinterest.com/en/privacy-policy   Do Not Track Disclosure We support Do Not Track (&amp;quot;DNT&amp;quot;). Do Not Track is a preference you can set in your web browser to inform websites that you do not want to be tracked. You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser. Service Providers We may employ third party companies and individuals to facilitate our Service, to provide the Service on our behalf, to perform Service-related services and/or to assist us in analyzing how our Service is used. These third parties have access to your Personal Information only to perform specific tasks on our behalf and are obligated not to disclose or use your information for any other purpose. Communications We may use your Personal Information to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or instructions provided in any email we send. Compliance With Laws We will disclose your Personal Information where required to do so by law or subpoena or if we believe that such action is necessary to comply with the law and the reasonable requests of law enforcement or to protect the security or integrity of our Service. Business Transaction If Code Boarders Corporation is involved in a merger, acquisition or asset sale, your Personal Information may be transferred as a business asset. In such cases, we will provide notice before your Personal Information is transferred and/or becomes subject to a different Privacy Policy. Security The security of your Personal Information is important to us, and we strive to implement and maintain reasonable, commercially acceptable security procedures and practices appropriate to the nature of the information we store, in order to protect it from unauthorized access, destruction, use, modification, or disclosure. However, please be aware that no method of transmission over the internet, or method of electronic storage is 100% secure and we are unable to guarantee the absolute security of the Personal Information we have collected from you. International Transfer Your information, including Personal Information, may be transferred to — and maintained on — computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction. If you are located outside United States and choose to provide information to us, please note that we transfer the information, including Personal Information, to United States and process it there. Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer. Links To Other Sites Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over, and assume no responsibility for the content, privacy policies or practices of any third party sites or services. Children's Privacy Only persons age 18 or older have permission to access our Service. Our Service does not address anyone under the age of 13 (&amp;quot;Children&amp;quot;). We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you learn that your Children have provided us with Personal Information, please contact us. If we become aware that we have collected Personal Information from a children under age 13 without verification of parental consent, we take steps to remove that information from our servers. Changes To This Privacy Policy This Privacy Policy is effective as of January 24, 2017 and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page. We reserve the right to update or change our Privacy Policy at any time and you should check this Privacy Policy periodically. Your continued use of the Service after we post any modifications to the Privacy Policy on this page will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy. If we make any material changes to this Privacy Policy, we will notify you either through the email address you have provided us, or by placing a prominent notice on our website. Contact Us If you have any questions about this Privacy Policy, please contact us.. By accepting this Agreement, you acknowledge that you hereby agree and consent to the terms and conditions of our Privacy Policy.
+Term and Termination
+This Agreement shall remain in effect until terminated by you or Code Boarders Corporation.
+Code Boarders Corporation may, in its sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice.
+This Agreement will terminate immediately, without prior notice from Code Boarders Corporation, in the event that you fail to comply with any provision of this Agreement. You may also terminate this Agreement by deleting the Application and all copies thereof from your mobile device or from your computer.
+Upon termination of this Agreement, you shall cease all use of the Application and delete all copies of the Application from your mobile device or from your computer.
+Termination of this Agreement will not limit any of Code Boarders Corporation's rights or remedies at law or in equity in case of breach by you (during the term of this Agreement) of any of your obligations under the present Agreement.
+Indemnification
+You agree to indemnify and hold Code Boarders Corporation and its parents, subsidiaries, affiliates, officers, employees, agents, partners and licensors (if any) harmless from any claim or demand, including reasonable attorneys' fees, due to or arising out of your: (a) use of the Application; (b) violation of this Agreement or any law or regulation; or (c) violation of any right of a third party.
+No Warranties
+The Application is provided to you &amp;quot;AS IS&amp;quot; and &amp;quot;AS AVAILABLE&amp;quot; and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, Code Boarders Corporation, on its own behalf and on behalf of its affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Application, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, Code Boarders Corporation provides no warranty or undertaking, and makes no representation of any kind that the Application will meet your requirements, achieve any intended results, be compatible or work with any other software, applications, systems or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.
+Without limiting the foregoing, neither Code Boarders Corporation nor any Code Boarders Corporation's provider makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Application, or the information, content, and materials or products included thereon; (ii) that the Application will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Application; or (iv) that the Application, its servers, the content, or e-mails sent from or on behalf of Code Boarders Corporation are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.
+Some jurisdictions do not allow the exclusion of or limitations on implied warranties or the limitations on the applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to you.
+Limitation of Liability
+Notwithstanding any damages that you might incur, the entire liability of Code Boarders Corporation and any of its suppliers under any provision of this Agreement and your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by you for the Application.
+To the maximum extent permitted by applicable law, in no event shall Code Boarders Corporation or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, for loss of data or other information, for business interruption, for personal injury, for loss of privacy arising out of or in any way related to the use of or inability to use the Application, third-party software and/or third-party hardware used with the Application, or otherwise in connection with any provision of this Agreement), even if Code Boarders Corporation or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.
+Some states/jurisdictions do not allow the exclusion or limitation of incidental or consequential damages, so the above limitation or exclusion may not apply to you.
+Severability
+If any provision of this Agreement is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.
+Waiver
+Except as provided herein, the failure to exercise a right or to require performance of an obligation under this Agreement shall not effect a party's ability to exercise such right or require such performance at any time thereafter nor shall be the waiver of a breach constitute waiver of any subsequent breach.
+For U.S. Government End Users
+The Application and related documentation are &amp;quot;Commercial Items&amp;quot;, as that term is defined under 48 C.F.R. §2.101, consisting of &amp;quot;Commercial Computer Software&amp;quot; and &amp;quot;Commercial Computer Software Documentation&amp;quot;, as such terms are used under 48 C.F.R. §12.212 or 48 C.F.R. §227.7202, as applicable. In accordance with 48 C.F.R. §12.212 or 48 C.F.R. §227.7202-1 through 227.7202-4, as applicable, the Commercial Computer Software and Commercial Computer Software Documentation are being licensed to U.S. Government end users (a) only as Commercial Items and (b) with only those rights as are granted to all other end users pursuant to the terms and conditions herein.
+Export Compliance
+You may not export or re-export the Application except as authorized by United States law and the laws of the jurisdiction in which the Application was obtained.
+In particular, but without limitation, the Application may not be exported or re-exported (a) into or to a nation or a resident of any U.S. embargoed countries or (b) to anyone on the U.S. Treasury Department's list of Specially Designated Nationals or the U.S. Department of Commerce Denied Person's List or Entity List.
+By installing or using any component of the Application, you represent and warrant that you are not located in, under control of, or a national or resident of any such country or on any such list.
+Amendments to this Agreement
+Code Boarders Corporation reserves the right, at its sole discretion, to modify or replace this Agreement at any time. If a revision is material we will provide at least 15 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+By continuing to access or use our Application after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Application.
+Governing Law
+The laws of New Jersey, United States, excluding its conflicts of law rules, shall govern this Agreement and your use of the Application. Your use of the Application may also be subject to other local, state, national, or international laws.
+This Agreement shall not be governed by the United Nations Convention on Contracts for the International Sale of Good.
+Contact Information
+If you have any questions about this Agreement, please contact us.
+Entire Agreement
+The Agreement constitutes the entire agreement between you and Code Boarders Corporation regarding your use of the Application and supersedes all prior and contemporaneous written or oral agreements between you and Code Boarders Corporation.
+You may be subject to additional terms and conditions that apply when you use or purchase other Code Boarders Corporation's services, which Code Boarders Corporation will provide to you at the time of such use or purchase.
+</mutableString>
+                                <color key="textColor" red="0.47058823529999999" green="0.47843137250000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fJ-0f-GOw">
+                                <rect key="frame" x="15" y="552" width="345" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8fJ-0f-GOw" secondAttribute="height" multiplier="69:11" id="EJo-fM-ILK"/>
+                                    <constraint firstAttribute="width" constant="345" id="I1t-Bt-zLp"/>
+                                    <constraint firstAttribute="height" constant="55" id="bNy-a9-Z83"/>
+                                </constraints>
+                                <state key="normal" image="Agree"/>
+                                <connections>
+                                    <action selector="agree:" destination="9fO-eN-lOo" eventType="touchUpInside" id="cqb-5v-ocN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XcM-v9-cHc" firstAttribute="centerX" secondItem="7pK-gY-bcJ" secondAttribute="centerX" id="73i-DW-xee"/>
+                            <constraint firstItem="Ihl-Jm-ryt" firstAttribute="leading" secondItem="7pK-gY-bcJ" secondAttribute="leading" id="7gb-T9-wfD"/>
+                            <constraint firstAttribute="trailing" secondItem="Ihl-Jm-ryt" secondAttribute="trailing" id="8QL-Vm-mtk"/>
+                            <constraint firstItem="XcM-v9-cHc" firstAttribute="trailing" secondItem="7pK-gY-bcJ" secondAttribute="trailingMargin" constant="5" id="DPS-Er-uaO"/>
+                            <constraint firstItem="Lnx-YR-mOq" firstAttribute="centerX" secondItem="7pK-gY-bcJ" secondAttribute="centerX" id="J2M-za-YYW"/>
+                            <constraint firstItem="Lnx-YR-mOq" firstAttribute="top" secondItem="Qtx-oS-mtw" secondAttribute="bottom" id="MMw-bd-hcP"/>
+                            <constraint firstItem="8fJ-0f-GOw" firstAttribute="top" secondItem="XcM-v9-cHc" secondAttribute="bottom" constant="20" id="XHe-x7-HVC"/>
+                            <constraint firstItem="XcM-v9-cHc" firstAttribute="top" secondItem="Ihl-Jm-ryt" secondAttribute="bottom" constant="10" id="Zfd-os-aXD"/>
+                            <constraint firstItem="Ihl-Jm-ryt" firstAttribute="top" secondItem="7pK-gY-bcJ" secondAttribute="top" id="hpF-Zh-zpf"/>
+                            <constraint firstItem="Ihl-Jm-ryt" firstAttribute="centerX" secondItem="7pK-gY-bcJ" secondAttribute="centerX" id="lcf-tr-NxK"/>
+                            <constraint firstItem="8fJ-0f-GOw" firstAttribute="centerX" secondItem="7pK-gY-bcJ" secondAttribute="centerX" id="ohc-Co-OMQ"/>
+                            <constraint firstItem="XcM-v9-cHc" firstAttribute="leading" secondItem="7pK-gY-bcJ" secondAttribute="leadingMargin" constant="5" id="wjH-7K-fPd"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8db-g7-nRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5512.8000000000002" y="384.55772113943033"/>
+        </scene>
         <!--MainTabView-->
         <scene sceneID="ym8-nr-rXY">
             <objects>
@@ -870,11 +1114,13 @@
     </scenes>
     <resources>
         <image name="AddAPhoto@1x" width="126" height="126"/>
+        <image name="Agree" width="345" height="55"/>
         <image name="Already_a_member@1x" width="345" height="55"/>
         <image name="BackButton" width="12" height="23"/>
         <image name="ContinueBtn" width="345" height="55"/>
         <image name="Email_btn@1x" width="353" height="54"/>
         <image name="Logo" width="132" height="136"/>
+        <image name="LogoutBtn@1x" width="345" height="55"/>
         <image name="Signup" width="345" height="55"/>
         <image name="VerifyBtn@1x" width="345" height="55"/>
         <image name="fb_button" width="359" height="54"/>

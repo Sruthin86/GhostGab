@@ -80,12 +80,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var SelectedImage: UIImage?
         if case let editedImage as UIImage =  info["UIImagePickerControllerEditedImage"]{
-            print(editedImage.size)
             SelectedImage = editedImage
         }
             
         else if case let originalImage as UIImage =  info["UIImagePickerControllerOriginalImage"]{
-            print(originalImage.size)
             SelectedImage = originalImage
         }
         
@@ -178,7 +176,13 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
         mainTabBarView.selectedIndex = 4
-        self.present(mainTabBarView, animated: true, completion: nil)
+        //trasition from left
+        let transition = CATransition()
+        transition.duration = 0.28
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromLeft
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(mainTabBarView, animated: false, completion: nil)
 
     }
     

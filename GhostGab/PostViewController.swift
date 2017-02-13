@@ -38,9 +38,9 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var tableView: UITableView!
     
-    let KclosedHeight : CGFloat = 144
+    let KclosedHeight : CGFloat = 244
     
-    let KopenHeight :CGFloat = 220
+    let KopenHeight :CGFloat = 320
     
     var selectedInxexPath: NSIndexPath?
     
@@ -53,7 +53,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     var selfPost: Bool =  false
     
-    var scrollingOffset: Int = 144
+    var scrollingOffset: Int = 244
     
     var userIsEditing:Bool = false
     
@@ -78,6 +78,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     let helperClass : HelperFunctions = HelperFunctions()
     
     let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
+    
+    var mutedUserDict: NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,12 +158,10 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         print(postFeed)
         postFeedCell.postId = self.postKeys[indexPath.row]
         postFeedCell.postLabel.text  = postFeed["post"] as? String
+        postFeedCell.setName(type: postFeed["postType"] as! Int, name: postFeed["displayName"] as! String)
         postFeedCell.dateString.text = helperClass.getDifferenceInDates(postDate: (postFeed["date"]as? String)!)
         postFeedCell.setReactionCount(postId: self.postKeys[indexPath.row])
         postFeedCell.setFlagCount(postId: self.postKeys[indexPath.row])
-        print(postFeed["useruid"] as! String)
-        print(postFeed["postType"] as! Int)
-        print(postFeed["userPicUrl"] as! String)
         postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String)
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
         if  (self.openedPostCellKey != nil ) {
@@ -215,7 +215,13 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
             guessView.postId = postIdToPass
             guessView.guessPostArray = postFeed
             guessView.oriFrinendsKeyArray = Array(self.friendsUidArray)
-            self.present(guessView, animated: true, completion: nil)
+            //trasition from right
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionMoveIn
+            transition.subtype = kCATransitionFromRight
+            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+            self.present(guessView, animated: false, completion: nil)
 
         }
         
@@ -224,7 +230,15 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
             let friendPostView  = storybaord.instantiateViewController(withIdentifier: "friendPostController") as! FriendPostViewController
             friendPostView.postId = postIdToPass
             friendPostView.friendPostArray = postFeed
-             self.present(friendPostView, animated: true, completion: nil)
+            //trasition from right
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionMoveIn
+            transition.subtype = kCATransitionFromRight
+            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+            self.present(friendPostView, animated: false, completion: nil)
+            
+            
             
         }
         
@@ -311,8 +325,16 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     func getFriends() {
         self.friendsUidArray.removeAll()
+        self.mutedUserDict = [:]
         ref.child("Users").child(uid as! String).observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
             let snapData =  snapshot.value as! [String:AnyObject]
+            if(snapData["mutedUsers"] != nil){
+                
+                self.mutedUserDict = snapData["mutedUsers"] as! NSDictionary!
+            }else{
+                self.mutedUserDict = ["noMutedUsers":"noMutedUsers"]
+            }
+            
             if(snapData["Friends"] != nil){
                 for friendsUid in snapData["Friends"] as! NSDictionary{
                     if(!self.friendsUidArray.contains(friendsUid.key as! String )){
@@ -336,7 +358,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     func getPosts(){
         
-        ref.child("Posts").queryOrdered(byChild: "TS").observe(FIRDataEventType.value, with: { (snapshot) in
+        ref.child("Posts").queryOrdered(byChild: "TS").observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
             
             if( !snapshot.exists()){
                 self.postsArray.removeAll()
@@ -345,9 +367,9 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                 
             }else {
                 
-                var pModel = postModel(posts: snapshot)
+                var pModel = postModel(posts: snapshot, uid: self.uid as! String)
                 self.oldPostKeysCount = self.postKeys.count
-                self.postsArray = pModel.returnPostsForArray(friendsArray:self.friendsUidArray) as! [String : AnyObject]
+                self.postsArray = pModel.returnPostsForArray(friendsArray:self.friendsUidArray, mutedUsersDict: self.mutedUserDict) as! [String : AnyObject]
                 self.postKeys = pModel.returnPostKeys()
                 self.postKeys = self.postKeys.sorted{ $0 > $1 }
                 self.tableView.reloadData()
@@ -440,11 +462,14 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     func post(typeId: Int){
         
-        if( !((self.PostText.text?.isEmpty)!) || ((self.PostText.text?.characters.count)! > 200) ){
+        if( !((self.PostText.text?.isEmpty)!) && ((self.PostText.text?.characters.count)! < 200) ){
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
             self.saveNewPost(post: (self.PostText?.text)!, uid:self.uid as! String, postType: typeId)
             helperClass.returnFromTextField(textField: self.PostText, PostButtonsView: PostButtonsView, ButtonViewHeight: ButtonViewHeight, TopViewHeight: TopViewHeight)
             userIsEditing = !userIsEditing
             self.selfPost = !self.selfPost
+            let myTimer : Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(PostViewController.loadMyPosts(timer:)), userInfo: nil, repeats: false)
             
         }
         else {
@@ -452,9 +477,16 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         }
     }
     
+    func loadMyPosts(timer : Timer){
+        self.getPosts()
+        
+    }
+    
     func reloadTableData(_ notification: Notification) {
         self.getFriends()
     }
+    
+    
     
     
 }

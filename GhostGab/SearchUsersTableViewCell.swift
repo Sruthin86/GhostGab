@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SearchUsersTableViewCell: UITableViewCell {
     
@@ -39,13 +40,21 @@ class SearchUsersTableViewCell: UITableViewCell {
     }
 
     func setImageData (photoUrl: String) -> Void {
+        
+        
+        
         let fileUrl = NSURL(string: photoUrl)
-        let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
-        self.searchFriendsImageView.image = UIImage(data: profilePicUrl! as Data)
-        self.searchFriendsImageView.layer.cornerRadius  = self.searchFriendsImageView.frame.width/2
-        self.searchFriendsImageView.clipsToBounds = true;
-        let costomization:UICostomization =  UICostomization(color: green.getColor(), width:1)
-        costomization.addRoundedBorder(object: self.searchFriendsImageView)
+        Alamofire.request(photoUrl).responseData { response in
+            if let alamofire_image = response.result.value {
+                
+                self.searchFriendsImageView.image = UIImage(data: alamofire_image as Data)
+                self.searchFriendsImageView.layer.cornerRadius  = self.searchFriendsImageView.frame.width/2
+                self.searchFriendsImageView.clipsToBounds = true;
+                let costomization:UICostomization =  UICostomization(color: self.green.getColor(), width:1)
+                costomization.addRoundedBorder(object: self.searchFriendsImageView)
+            }
+        }
+       
     }
     
     func setBackground(colorValue:String){

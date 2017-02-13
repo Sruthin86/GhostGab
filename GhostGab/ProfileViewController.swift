@@ -24,8 +24,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var cashCount: UILabel!
     
-    let KclosedHeight : CGFloat = 144
-    let KopenHeight :CGFloat = 220
+    let KclosedHeight : CGFloat = 194
+    let KopenHeight :CGFloat = 270
     
     var selectedInxexPath: NSIndexPath?
     var selectedInxexPathsArray :[NSIndexPath] = []
@@ -207,7 +207,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.tableView.reloadData()
             }else {
                 
-                var pModel = postModel(posts: snapshot)
+                var pModel = postModel(posts: snapshot, uid: self.uid as! String)
                 self.oldPostKeysCount = self.postKeys.count
                 self.postsArray = pModel.returnMyPostsForArray() as! [String : AnyObject]
                 self.postKeys = pModel.returnPostKeys()

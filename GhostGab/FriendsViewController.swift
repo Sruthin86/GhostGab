@@ -31,6 +31,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         searchBar.delegate = self
         searchBar.showsCancelButton = true
         searchBar.tintColor = UIColor.white
@@ -124,7 +126,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         if(searching){
             friendsCell.setImageData(photoUrl: self.freindsSearchArray[self.friendsSearchKeyArray[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             friendsCell.displayName.text = self.freindsSearchArray[self.friendsSearchKeyArray[indexPath.row]]!.value(forKey :"displayName")! as? String
-            friendsCell.cashLabel.text = self.freindsSearchArray[self.friendsSearchKeyArray[indexPath.row]]!.value(forKey :"cash")! as? String
             
             friendsCell.removeFriend.tag = indexPath.row
             friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
@@ -134,14 +135,39 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         else {
             friendsCell.setImageData(photoUrl: self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             friendsCell.displayName.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
-            friendsCell.cashLabel.text = self.friendsArray[self.friendsArrayKey[indexPath.row]]!.value(forKey :"cash")! as? String
-            
+                       
             friendsCell.removeFriend.tag = indexPath.row
             friendsCell.removeFriend.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
             friendsCell.setBackground(colorValue: "white")
         }
         return friendsCell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var friendUdidToPass:String?
+        if(searching){
+            let currIndexPath = tableView.indexPathForSelectedRow!
+            friendUdidToPass =  self.friendsSearchKeyArray[currIndexPath.row]
+        }
+        else {
+            let currIndexPath = tableView.indexPathForSelectedRow!
+            friendUdidToPass =  self.friendsArrayKey[currIndexPath.row]
+        }
+        
+        let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+        let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
+        friendDetailsView.friendUdid = friendUdidToPass
+        //trasition from right
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
+        self.present(friendDetailsView, animated: false, completion: nil)
+        
+        
+    }
+    
+    
     
     func removeFriend(sender: AnyObject){
         let removeIndexPath = NSIndexPath(row: sender.tag, section: 0)
@@ -196,7 +222,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searching = true;
+        //searching = true;
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -214,6 +240,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searching = false;
+        self.searchBar.endEditing(true)
     }
     
     
@@ -249,6 +276,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.searchBar.endEditing(true)
     }
     
 }

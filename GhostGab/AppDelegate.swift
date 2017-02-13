@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import OneSignal
 import Fabric
 import TwitterKit
+import Crashlytics
 
 var fireBaseUid: String = "fireBaseUid"
 var displayName: String = "displayName"
@@ -46,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var fullMessage = payload?.title
         }, settings: [kOSSettingsKeyInFocusDisplayOption : OSNotificationDisplayType.notification.rawValue])
         
-        Fabric.with([Twitter.self])
+        Fabric.with([Twitter.self, Crashlytics.self])
         return true
     }
     

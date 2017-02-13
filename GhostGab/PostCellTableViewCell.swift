@@ -10,6 +10,8 @@ import UIKit
 import Foundation
 import Firebase
 import FirebaseDatabase
+import Alamofire
+import SCLAlertView
 
 class PostCellTableViewCell: UITableViewCell {
     
@@ -58,6 +60,10 @@ class PostCellTableViewCell: UITableViewCell {
     @IBOutlet weak var flagLabel: UILabel!
     
     @IBOutlet weak var flagButton: UIButton!
+    
+    @IBOutlet weak var postNameLabel: UILabel!
+    
+    @IBOutlet weak var warning_btn: UIButton!
     
     var postId: String?
     
@@ -114,7 +120,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBAction func ReactionButton(_ sender: AnyObject) {
         
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction1, reaction:1)
         
         
@@ -123,7 +129,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     
     @IBAction func Reaction2Button(_ sender: AnyObject) {
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction2,reaction:2)
         
         
@@ -131,7 +137,7 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     @IBAction func Reaction3Button(_ sender: AnyObject) {
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction3,reaction:3)
         
         
@@ -140,7 +146,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     
     @IBAction func Reaction4Button(_ sender: AnyObject) {
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction4, reaction:4)
         
         
@@ -150,7 +156,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBAction func Reaction5Button(_ sender: AnyObject) {
         
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction5, reaction:5)
         
         
@@ -158,7 +164,7 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBAction func Reaction6Button(_ sender: AnyObject) {
         
-        
+        addHapticMedium()
         animateButton(animationObject: self.reaction6, reaction:6)
         
         
@@ -166,11 +172,20 @@ class PostCellTableViewCell: UITableViewCell {
     
     
     @IBAction func FlagButton(_ sender: AnyObject) {
+        addHapticHeavy()
         animateButton(animationObject: self.flagButton, reaction:7)
         
         
     }
     
+    func addHapticMedium() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    func addHapticHeavy() {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred()
+    }
     func animateButton(animationObject: UIButton, reaction:Int) {
         UIView.animate(withDuration: 0.3, delay:0.1, options:[], animations: {
             animationObject.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -190,6 +205,7 @@ class PostCellTableViewCell: UITableViewCell {
                     }
                     else if (reaction == 7){
                         self.helperClass.updatePostFlag(postId: self.postId!, uid: self.uid as! String)
+                        
                     }
                 })
             })
@@ -226,15 +242,17 @@ class PostCellTableViewCell: UITableViewCell {
     func getImage(userUid: String, userPicUrl:String) {
         
         let fileUrl = NSURL(string: userPicUrl)
-        let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
-        self.cellImage.image = UIImage(data: profilePicUrl! as Data)
         
-        let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 2 )
-        customization.addBorder(object: self.cellImage)
-        imageCache.setObject(UIImage(data: profilePicUrl! as Data)!, forKey: userUid as NSString)
-        self.cellImage.layer.cornerRadius  = self.cellImage.frame.width/2
-        self.cellImage.clipsToBounds = true;
-        
+        Alamofire.request(userPicUrl).responseData { response in
+            if let alamofire_image = response.result.value {
+                
+                self.cellImage.image = UIImage(data: alamofire_image as Data)
+                self.cellImage.layer.cornerRadius  = self.cellImage.frame.width/2
+                self.cellImage.clipsToBounds = true;
+                let costomization:UICostomization =  UICostomization(color: self.green.getColor(), width:1)
+                costomization.addRoundedBorder(object: self.cellImage)
+            }
+        }
         
     }
     
@@ -311,10 +329,10 @@ class PostCellTableViewCell: UITableViewCell {
     
     func setFlagCount(postId: String) {
       
-        self.ref.child("Posts").child(postId).child("flags").observeSingleEvent(of: FIRDataEventType.value, with:{ (snapshot) in
+        self.ref.child("Posts").child(postId).child("flags").observe( FIRDataEventType.value, with:{ (snapshot) in
             if(snapshot.exists()){
                     let flagsData = snapshot.value as! [String : Int]
-                    var flagCount: Int =  flagsData["flagCount"]!
+                    let flagCount: Int =  flagsData["flagCount"]!
                     self.flagLabel.text = String(flagCount)
                     self.flagLabel.textColor = self.grey.getColor()
                     
@@ -356,6 +374,69 @@ class PostCellTableViewCell: UITableViewCell {
         
     }
     
+    func setName(type: Int, name: String){
+        if (type == 1){
+          self.postNameLabel.text = name
+        }
+        else if(type == 2){
+             self.postNameLabel.text = ""
+        }
+        else if(type == 3){
+             self.postNameLabel.text = "Guess Me"
+        }
+        
+    }
     
+    
+    @IBAction func warningButton(_ sender: Any) {
+        
+        let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Inappropriate Gab", target:self, selector:#selector(PostCellTableViewCell.reportGab))
+        alertView.addButton("Offensive Gab", target:self, selector:#selector(PostCellTableViewCell.reportGab))
+        alertView.addButton("Gab is targetting someone", target:self, selector:#selector(PostCellTableViewCell.reportGab))
+        alertView.addButton("Other", target:self, selector:#selector(PostCellTableViewCell.reportGab))
+        alertView.addButton("Report this user", target:self, selector:#selector(PostCellTableViewCell.reportUser))
+        alertView.addButton("Cancel") {
+            
+            print("Second button tapped")
+        }
+        alertView.showSuccess("Report this Gab", subTitle: "" , circleIconImage:errorAletViewImage)
+        
+    }
+    
+    func reportGab(){
+        helperClass.reportPosts(postId: self.postId!, userUid:self.uid as! String)
+        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            
+            print("Second button tapped")
+        }
+        alertView.showInfo("Thank you", subTitle: "We are immediately looking at your concerns" , circleIconImage:checkAletViewImage)
+        
+    }
+    
+    func reportUser(){
+        helperClass.reportUser(_postId: self.postId!)
+        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            
+            print("Second button tapped")
+        }
+        alertView.showInfo("Thank you", subTitle: "This user has been reported. We are immediately looking at your concerns" , circleIconImage:checkAletViewImage)
+        
+    }
     
 }
