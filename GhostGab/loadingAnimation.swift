@@ -63,4 +63,42 @@ struct loadingAnimation {
         imageView.removeFromSuperview()
         overlayView.removeFromSuperview()
     }
+    
+    mutating func showOverlayNew(alphaValue:CGFloat) {
+        
+        
+        overlayView.frame = CGRect(x: 0.0 , y: 65.0, width: senderView.frame.width , height : senderView.frame.height - 110 )
+        overlayView.backgroundColor = UIColor( red: 1, green: 1, blue:1, alpha:alphaValue )
+        
+        
+        imageView.animationImages = [UIImage]()
+        for index in 1 ..< 4 {
+            let frameName = String(format: "loading_new_%05d", index)
+            imageView.animationImages?.append(UIImage(named: frameName)!)
+        }
+        
+        
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: 60, height: 14.66)
+        imageView.center = CGPoint(x:senderView.bounds.width / 2, y:senderView.bounds.height / 2)
+        
+        senderView.addSubview(overlayView)
+        senderView.addSubview(imageView)
+        
+        imageView.animationDuration = 1
+        imageView.startAnimating()
+        
+        
+        
+        //self.view.addSubview(overlayView)
+        
+        
+    }
+    
+    func hideOverlayViewNew() {
+        imageView.stopAnimating()
+        imageView.removeFromSuperview()
+        overlayView.removeFromSuperview()
+    }
+
 }

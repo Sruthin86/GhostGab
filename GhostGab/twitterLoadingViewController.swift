@@ -140,6 +140,7 @@ class twitterLoadingViewController: UIViewController {
                         
                     } catch let jsonError as NSError {
                         print("json error: \(jsonError.localizedDescription)")
+                    
                     }
                     
                     

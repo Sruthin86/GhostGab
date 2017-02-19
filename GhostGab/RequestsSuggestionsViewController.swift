@@ -78,8 +78,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                 if (suggestionsLength > 0){
                     self.tableView.backgroundView = .none
                     self.tableView.separatorStyle = .singleLine
-                    print("suggestionsLength")
-                    print(suggestionsLength)
+                   
                     return suggestionsLength
                 }
                 else {
@@ -147,10 +146,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         cell.setBackground(colorValue: "white")
         
         if (self.suggestionsFlag){
-            print("indexPath.row")
-            print(indexPath.row)
-            print("self.suggestionsArrayKey[indexPath.row]")
-            print(self.suggestionsArrayKey[indexPath.row])
+         
             cell.setImageData(photoUrl: self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             cell.rsLabel.text = self.suggestionsArray[self.suggestionsArrayKey[indexPath.row]]!.value(forKey :"displayName")! as? String
             cell.sendRequestBtn.tag = indexPath.row
@@ -303,6 +299,9 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     @IBAction func suggestions(_ sender: AnyObject) {
         requestsFlag = false;
         suggestionsFlag = true
+        self.requestsArray.removeAll()
+        self.requestsArrayKey.removeAll()
+        self.tableView.reloadData()
         let greenGustomization : UICostomization = UICostomization(color: green.getColor(), width: width )
         greenGustomization.addBackground(object: self.suggestionsBtn)
         self.suggestionsBtn.tintColor = white.getColor()

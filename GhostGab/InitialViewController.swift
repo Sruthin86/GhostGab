@@ -42,6 +42,17 @@ class InitialViewController: UIViewController {
                                     self.present(lockedView, animated: true, completion: nil)
                                 }
                             }
+                            
+                            if (userData["oneSignalId"] == nil){
+                                OneSignal.idsAvailable({ (userId, pushToken) in
+                                    oneSignalId = userId!
+                                    ref.child("Users").child(uid).child("oneSignalId").setValue(oneSignalId)
+                                    if (pushToken != nil) {
+                                        
+                                    }
+                                })
+                                
+                            }
                             if(verified){
                                 let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
                                 let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController

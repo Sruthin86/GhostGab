@@ -58,6 +58,8 @@ class MyFeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var reaction6: UIButton!
     
+    @IBOutlet weak var gabBackBtn: UIButton!
+    
     @IBOutlet weak var flag_btn: UIButton!
     var cellSelected: Bool = false
     

@@ -12,6 +12,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import FBSDKShareKit
+import Alamofire
 
 
 extension Notification.Name {
@@ -45,7 +46,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var scrollingOffset: Int = 144
     
+    var overlayView = UIView()
+    
+    var postIdToPass:String!
+    
+    var spinner:loadingAnimation?
+    
     override func viewDidLoad() {
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        self.spinner?.showOverlayNew(alphaValue: 1)
+        self.getUserDetails()
+        self.getPosts()
+        
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    func getUserDetails() {
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child(self.uid as! String).observe(FIRDataEventType.value, with: { (snapshot) in
             
@@ -53,8 +71,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.fullName.text =  userDetails["displayName"] as? String;
             self.cashCount.text = userDetails["cash"] as? String;
             let fileUrl = NSURL(string: userDetails["highResPhoto"] as! String)
-            let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
-            self.profileImage.image = UIImage(data: profilePicUrl! as Data)
+        
+            Alamofire.request(userDetails["highResPhoto"] as! String).responseData { response in
+                if let alamofire_image = response.result.value {
+                    let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
+                    self.profileImage.image = UIImage(data: profilePicUrl! as Data)
+                    self.spinner?.hideOverlayViewNew()
+                }
+            }
+            
+            
             self.profileImage.layer.cornerRadius  = self.profileImage.frame.width/2
             self.profileImage.clipsToBounds = true;
             let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 5 )
@@ -62,11 +88,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData(_:)), name: .reload, object: nil)
             
         })
-        self.getPosts()
-        
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,6 +115,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let postFeedCell = tableView.dequeueReusableCell(withIdentifier: "MyFeedCell", for: indexPath as IndexPath) as! MyFeedTableViewCell
         postFeedCell.ReactionsContent.isHidden = true
         postFeedCell.reactButton.tag = indexPath.row
+        postFeedCell.gabBackBtn.tag = indexPath.row
         var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[indexPath.row]]! as! [String : AnyObject]
         postFeedCell.postId = self.postKeys[indexPath.row]
         postFeedCell.postLabel.text  = postFeed["post"] as? String
@@ -102,6 +124,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         postFeedCell.setFlagCount(postId: self.postKeys[indexPath.row])
         postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String  )
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
+        postFeedCell.gabBackBtn.addTarget(self, action: #selector(self.gabBack), for: .touchUpInside)
        
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){
@@ -142,6 +165,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
+    }
+    
+    
+    func gabBack(sender: AnyObject) {
+        var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[sender.tag]]! as! [String : AnyObject]
+        postIdToPass =  self.postKeys[sender.tag]
+        
+        let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
+        let commentsView  = storybaord.instantiateViewController(withIdentifier: "comments_view") as! CommentsViewController
+        commentsView.postId = postIdToPass
+        commentsView.thisPostArray = postFeed
+        //trasition from right
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromRight
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(commentsView, animated: false, completion: nil)
     }
     
     func reactionsActions(sender: AnyObject) -> Void {

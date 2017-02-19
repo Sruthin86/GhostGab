@@ -51,6 +51,8 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
     
     var friendsUidArray = Set<String>()
     
+    var postIdToPass:String!
+    
     var oldPostKeysCount : Int = 0
     
     @IBOutlet weak var tableview: UITableView!
@@ -113,10 +115,8 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         let postFeedCell = tableView.dequeueReusableCell(withIdentifier: "FriendPublicPostViewCell", for: indexPath) as! FriendPublicPostsTableViewCell
         postFeedCell.ReactionsContent.isHidden = true
         postFeedCell.reactButton.tag = indexPath.row
+        postFeedCell.gabBack.tag = indexPath.row
         var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[indexPath.row]]! as! [String : AnyObject]
-        print("post id")
-        print(self.postKeys[indexPath.row])
-        print(postFeed["post"] as? String)
         postFeedCell.postId = self.postKeys[indexPath.row]
         postFeedCell.postLabel.text  = postFeed["post"] as? String
         postFeedCell.setName(type: postFeed["postType"] as! Int, name: postFeed["displayName"] as! String)
@@ -125,6 +125,7 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         postFeedCell.setFlagCount(postId: self.postKeys[indexPath.row])
         postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String)
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
+        postFeedCell.gabBack.addTarget(self, action: #selector(self.gabBack), for: .touchUpInside)
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){
                 self.selectedInxexPath = indexPath as NSIndexPath?
@@ -163,6 +164,24 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         }
     }
     
+    
+    
+    func gabBack(sender: AnyObject) {
+        var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[sender.tag]]! as! [String : AnyObject]
+        postIdToPass =  self.postKeys[sender.tag]
+        
+        let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
+        let commentsView  = storybaord.instantiateViewController(withIdentifier: "comments_view") as! CommentsViewController
+        commentsView.postId = postIdToPass
+        commentsView.thisPostArray = postFeed
+        //trasition from right
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromRight
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(commentsView, animated: false, completion: nil)
+    }
     
     
     func reactionsActions(sender: AnyObject) -> Void {

@@ -81,8 +81,16 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     var mutedUserDict: NSDictionary!
     
+    var spinner:loadingAnimation?
+    
+    var overlayView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        
+        self.spinner?.showOverlayNew(alphaValue: 1)
+        
         let lightGrey:Color = Color.lightGrey
         let customization :UICostomization = UICostomization(color:lightGrey.getColor(), width:width)
         customization.addBorder(object: self.PostAsMeView)
@@ -164,6 +172,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         postFeedCell.setFlagCount(postId: self.postKeys[indexPath.row])
         postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String)
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
+        postFeedCell.gabBackBtn.tag = indexPath.row
+        postFeedCell.gabBackBtn.addTarget(self, action: #selector(self.gabBack), for: .touchUpInside)
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){
                 self.selectedInxexPath = indexPath as NSIndexPath?
@@ -244,6 +254,23 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
     }
     
+    
+    func gabBack(sender: AnyObject) {
+        var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[sender.tag]]! as! [String : AnyObject]
+        postIdToPass =  self.postKeys[sender.tag]
+        
+        let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
+        let commentsView  = storybaord.instantiateViewController(withIdentifier: "comments_view") as! CommentsViewController
+        commentsView.postId = postIdToPass
+        commentsView.thisPostArray = postFeed
+        //trasition from right
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromRight
+        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+        self.present(commentsView, animated: false, completion: nil)
+    }
     
     func reactionsActions(sender: AnyObject) -> Void {
         let selectedCellIndexPath = NSIndexPath(row: sender.tag, section: 0)
@@ -366,13 +393,16 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                 self.tableView.reloadData()
                 
             }else {
-                
+                print("insode posts1")
                 var pModel = postModel(posts: snapshot, uid: self.uid as! String)
                 self.oldPostKeysCount = self.postKeys.count
+                print("insode posts2")
                 self.postsArray = pModel.returnPostsForArray(friendsArray:self.friendsUidArray, mutedUsersDict: self.mutedUserDict) as! [String : AnyObject]
+                print("insode posts3")
                 self.postKeys = pModel.returnPostKeys()
                 self.postKeys = self.postKeys.sorted{ $0 > $1 }
                 self.tableView.reloadData()
+                self.spinner?.hideOverlayViewNew()
                 if( self.oldPostKeysCount == 0) {
                     return
                 }

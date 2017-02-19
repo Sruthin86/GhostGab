@@ -35,82 +35,85 @@ struct postModel {
         
         let postData  = posts!.value as! NSDictionary
         let currentuserUid =  self.uid as! String
+        
         for (key , val ) in postData {
-          
-            let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
-           
-            if ((val as AnyObject).value(forKey: "reportedUsers") != nil){
-                let reportedUserstUidDict = (val as AnyObject).value(forKey: "reportedUsers")! as? NSDictionary
-                
-                if(friendsArray.count > 0){
-                    for fUid in friendsArray{
-                        let frinedUID :String = fUid 
-                        if ( (postUid == currentuserUid ||  postUid == frinedUID) && (reportedUserstUidDict?[currentuserUid] == nil)){
-                            if(mutedUsersDict != nil){
-                                if(mutedUsersDict[postUid] != nil){
-                                    //  skip muted user
-                                }
-                                 //  logic to get self and friends posts
-                                else if(!self.postKeys.contains(key as! String)){
+            if((val as AnyObject).value(forKey: "useruid") != nil){
+                let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
+                if ((val as AnyObject).value(forKey: "reportedUsers") != nil){
+                    let reportedUserstUidDict = (val as AnyObject).value(forKey: "reportedUsers")! as? NSDictionary
+                    
+                    if(friendsArray.count > 0){
+                        for fUid in friendsArray{
+                            let frinedUID :String = fUid
+                            if ( (postUid == currentuserUid ||  postUid == frinedUID) && (reportedUserstUidDict?[currentuserUid] == nil)){
+                                if(mutedUsersDict != nil){
+                                    if(mutedUsersDict[postUid] != nil){
+                                        //  skip muted user
+                                    }
+                                        //  logic to get self and friends posts
+                                    else if(!self.postKeys.contains(key as! String)){
                                         self.postsArray[key as! String] = val as AnyObject?
                                         self.postKeys.append(key as! String)
+                                    }
+                                    
                                 }
                                 
                             }
-                          
                         }
-                    }
-                    
-                    
-                }
-                else {
-                    if (postUid == currentuserUid  ){ // logic if the user doesn't have any friends
-                        self.postsArray[key as! String] = val as AnyObject?
-                        self.postKeys.append(key as! String)
+                        
                         
                     }
-                    
-                }
-            }
-            else {
-                if(friendsArray.count > 0){
-                    for fUid in friendsArray{
-                        var frinedUID :String = fUid as! String
-                        if ( (postUid == currentuserUid ||  postUid == frinedUID)){ //  logic to get self and friends posts
-                            if(mutedUsersDict != nil){
-                                if(mutedUsersDict[postUid] != nil){
-                                    //  skip muted user
-                                }
-                                    //  logic to get self and friends posts
-                                else if(!self.postKeys.contains(key as! String)){
-                                    self.postsArray[key as! String] = val as AnyObject?
-                                    self.postKeys.append(key as! String)
-                                }
-                                
-                            }
-
+                    else {
+                        if (postUid == currentuserUid  ){ // logic if the user doesn't have any friends
+                            self.postsArray[key as! String] = val as AnyObject?
+                            self.postKeys.append(key as! String)
                             
                         }
+                        
                     }
-                    
-                    
                 }
                 else {
-                   
-                    if (postUid == currentuserUid  ){ // logic if the user doesn't have any friends
+                    
+                    if(friendsArray.count > 0){
+                        for fUid in friendsArray{
+                            
+                            var frinedUID :String = fUid as! String
+                            if ( (postUid == currentuserUid ||  postUid == frinedUID)){ //  logic to get self and friends posts
+                                if(mutedUsersDict != nil){
+                                    
+                                    if(mutedUsersDict[postUid] != nil){
+                                        //  skip muted user
+                                    }
+                                        //  logic to get self and friends posts
+                                    else if(!self.postKeys.contains(key as! String)){
+                                        self.postsArray[key as! String] = val as AnyObject?
+                                        self.postKeys.append(key as! String)
+                                    }
+                                    
+                                }
+                                
+                                
+                            }
+                        }
                         
-                        self.postsArray[key as! String] = val as AnyObject?
-                        self.postKeys.append(key as! String)
+                        
+                    }
+                    else {
+                        
+                        if (postUid == currentuserUid  ){ // logic if the user doesn't have any friends
+                            
+                            self.postsArray[key as! String] = val as AnyObject?
+                            self.postKeys.append(key as! String)
+                            
+                        }
                         
                     }
                     
+                    
                 }
                 
-                
             }
-            
         }
-        
         return postsArray as NSDictionary
         
         
@@ -122,13 +125,14 @@ struct postModel {
         let postData  = posts!.value as! NSDictionary
         let currentuserUid =  self.uid as! String
         for (key , val ) in postData {
-            
-            let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
-            
-            if (postUid == currentuserUid  ){ // logic if the user doesn't have any friends
-                self.postsArray[key as! String] = val as AnyObject?
-                self.postKeys.append(key as! String)
+            if((val as AnyObject).value(forKey: "useruid") != nil){
+                let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
                 
+                if (postUid == currentuserUid  ){ // logic if the user doesn't have any friends
+                    self.postsArray[key as! String] = val as AnyObject?
+                    self.postKeys.append(key as! String)
+                    
+                }
             }
             
             
@@ -149,20 +153,20 @@ struct postModel {
         let postData  = posts!.value as! NSDictionary
         let currentuserUid =  self.uid as! String
         for (key , val ) in postData {
-            
-            let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
-            
-            if (postUid == self.uid ){ // logic to get friends public posts
-                let postData = val as! NSDictionary
-                if(postData["postType"] as! Int == 1){
-                    self.postsArray[key as! String] = val as AnyObject?
-                    self.postKeys.append(key as! String)
-                print("key")
-                print(key)
-                }
+            if((val as AnyObject).value(forKey: "useruid") != nil){
+                let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
                 
+                if (postUid == self.uid ){ // logic to get friends public posts
+                    let postData = val as! NSDictionary
+                    if(postData["postType"] as! Int == 1){
+                        self.postsArray[key as! String] = val as AnyObject?
+                        self.postKeys.append(key as! String)
+                        print("key")
+                        print(key)
+                    }
+                    
+                }
             }
-            
             
             
             
@@ -174,7 +178,7 @@ struct postModel {
         
         
     }
-
+    
     
     
     func returnPostKeys() -> [String]{

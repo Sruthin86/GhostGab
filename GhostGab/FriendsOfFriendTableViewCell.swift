@@ -1,0 +1,78 @@
+//
+//  FriendsOfFriendTableViewCell.swift
+//  GhostGab
+//
+//  Created by Sruthin Gaddam on 2/14/17.
+//  Copyright © 2017 Sruthin Gaddam. All rights reserved.
+//
+
+import UIKit
+import Alamofire
+
+class FriendsOfFriendTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var friendsImageView: UIImageView!
+    
+    @IBOutlet weak var displayName: UILabel!
+    
+    @IBOutlet weak var addButton: UIButton!
+    
+    
+    let green: Color = Color.green
+    
+    let white: Color = Color.white
+    
+    let lightGreen: Color = Color.lightGreen
+    
+    let lightRed: Color = Color.lightRed
+    
+    let width: Int = 1
+    
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    func setImageData (photoUrl: String) -> Void {
+        
+        let fileUrl = NSURL(string: photoUrl)
+        Alamofire.request(photoUrl).responseData { response in
+            if let alamofire_image = response.result.value {
+                
+                self.friendsImageView.image = UIImage(data: alamofire_image as Data)
+                self.friendsImageView.layer.cornerRadius  = self.friendsImageView.frame.width/2
+                self.friendsImageView.clipsToBounds = true;
+                let costomization:UICostomization =  UICostomization(color: self.green.getColor(), width:3)
+                costomization.addRoundedBorder(object: self.friendsImageView)
+            }
+        }
+        
+        
+    }
+    
+    func setBackground(colorValue:String){
+        switch colorValue {
+        case "lightGreen":
+            let customization: UICostomization = UICostomization (color: lightGreen.getColor(), width:CGFloat(width))
+            customization.addBackground(object: self)
+        case "lightRed":
+            let customization: UICostomization = UICostomization (color: lightRed.getColor(), width:CGFloat(width))
+            customization.addBackground(object: self)
+            
+        default:
+            let customization: UICostomization = UICostomization (color: white.getColor(), width:CGFloat(width))
+            customization.addBackground(object: self)
+            
+        }
+    }
+
+
+}

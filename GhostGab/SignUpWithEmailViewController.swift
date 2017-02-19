@@ -200,7 +200,7 @@ class SignUpWithEmailViewController: UIViewController, UITextFieldDelegate, UIIm
                                                 UserDefaults.standard.set(user?.uid, forKey: fireBaseUid)
                                                 UserDefaults.standard.set(self.name.text, forKey: displayName)
                                                 UserDefaults.standard.set("email", forKey: isUsing)
-                                                let postUserData : [String : AnyObject] = ["displayName": self.name.text! as AnyObject,"photo": highResImagePicUrl as AnyObject, "highResPhoto": highResImagePicUrl as AnyObject,  "email":user!.email! as AnyObject, "userName":user!.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "isUsing":"email" as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"200"as! AnyObject   ]
+                                                let postUserData : [String : AnyObject] = ["displayName": self.name.text! as AnyObject,"photo": highResImagePicUrl as AnyObject, "highResPhoto": highResImagePicUrl as AnyObject,  "email":user!.email! as AnyObject, "userName":user!.uid as AnyObject,  "phoneNumber": "" as AnyObject,"isVerified":false as AnyObject, "isUsing":"email" as AnyObject, "oneSignalId":self.oneSignalId as AnyObject, "cash":"200" as! AnyObject   ]
                                                 databaseRef.child("Users").child((user?.uid)!).setValue(postUserData)
                                                 DispatchQueue.main.async (execute: {
                                                     let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

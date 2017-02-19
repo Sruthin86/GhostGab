@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class GuessTableViewCell: UITableViewCell {
 
@@ -37,13 +38,23 @@ class GuessTableViewCell: UITableViewCell {
     }
     
     func setImageData (photoUrl: String) -> Void {
+        
+        
+        
         let fileUrl = NSURL(string: photoUrl)
-        let profilePicUrl = NSData(contentsOf:  fileUrl! as URL)
-        self.friendsImageView.image = UIImage(data: profilePicUrl! as Data)
-        self.friendsImageView.layer.cornerRadius  = self.friendsImageView.frame.width/2
-        self.friendsImageView.clipsToBounds = true;
-        let costomization:UICostomization =  UICostomization(color: green.getColor(), width:1)
-        costomization.addRoundedBorder(object: self.friendsImageView)
+        Alamofire.request(photoUrl).responseData { response in
+            if let alamofire_image = response.result.value {
+                
+                self.friendsImageView.image = UIImage(data: alamofire_image as Data)
+              
+            }
+            self.friendsImageView.layer.cornerRadius  = self.friendsImageView.frame.width/2
+            self.friendsImageView.clipsToBounds = true;
+            let costomization:UICostomization =  UICostomization(color: self.green.getColor(), width:1)
+            costomization.addRoundedBorder(object: self.friendsImageView)
+        }
+        
+        
     }
     
     func setBackground(colorValue:String){

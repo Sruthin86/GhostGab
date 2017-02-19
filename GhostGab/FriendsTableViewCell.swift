@@ -49,7 +49,7 @@ class FriendsTableViewCell: UITableViewCell {
                 self.friendsImageView.image = UIImage(data: alamofire_image as Data)
                 self.friendsImageView.layer.cornerRadius  = self.friendsImageView.frame.width/2
                 self.friendsImageView.clipsToBounds = true;
-                let costomization:UICostomization =  UICostomization(color: self.green.getColor(), width:1)
+                let costomization:UICostomization =  UICostomization(color: self.green.getColor(), width:3)
                 costomization.addRoundedBorder(object: self.friendsImageView)
             }
         }

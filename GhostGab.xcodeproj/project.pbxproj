@@ -20,6 +20,8 @@
 		561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */; };
 		561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5451DEBA4D000CB266C /* GuessViewController.swift */; };
 		561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */; };
+		566C74981E53FB71000C9FA6 /* FriendsOfFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C74971E53FB71000C9FA6 /* FriendsOfFriendViewController.swift */; };
+		566C749A1E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C74991E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift */; };
 		566C81231E477F7B004700BD /* twitterLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C81221E477F7B004700BD /* twitterLoadingViewController.swift */; };
 		568150FF1E48D5DB000232F7 /* EmailSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568150FE1E48D5DB000232F7 /* EmailSignupViewController.swift */; };
 		568151011E48ECAC000232F7 /* SignUpWithEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568151001E48ECAC000232F7 /* SignUpWithEmailViewController.swift */; };
@@ -69,6 +71,8 @@
 		56BE94601E36F4F70075E8BC /* PrivacyPolocyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */; };
 		56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE94611E36F5080075E8BC /* HelpViewController.swift */; };
 		56BE94641E3BA2A10075E8BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */; };
+		56D0A2CB1E58B0760096D9C4 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0A2CA1E58B0760096D9C4 /* CommentsTableViewCell.swift */; };
+		56D0A2CD1E58B0950096D9C4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0A2CC1E58B0950096D9C4 /* CommentsViewController.swift */; };
 		56DCC95A1E46C91600D3B10E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */; };
 		56E187F21E51329F0059D9A5 /* UnBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E187F11E51329F0059D9A5 /* UnBlockTableViewCell.swift */; };
 		56E187F41E5132B20059D9A5 /* UnBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E187F31E5132B20059D9A5 /* UnBlockViewController.swift */; };
@@ -106,6 +110,8 @@
 		561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersTableViewCell.swift; sourceTree = "<group>"; };
 		561BD5451DEBA4D000CB266C /* GuessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessViewController.swift; sourceTree = "<group>"; };
 		561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessTableViewCell.swift; sourceTree = "<group>"; };
+		566C74971E53FB71000C9FA6 /* FriendsOfFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsOfFriendViewController.swift; sourceTree = "<group>"; };
+		566C74991E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsOfFriendTableViewCell.swift; sourceTree = "<group>"; };
 		566C81221E477F7B004700BD /* twitterLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twitterLoadingViewController.swift; sourceTree = "<group>"; };
 		568150FE1E48D5DB000232F7 /* EmailSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSignupViewController.swift; sourceTree = "<group>"; };
 		568151001E48ECAC000232F7 /* SignUpWithEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpWithEmailViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +168,8 @@
 		56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolocyViewController.swift; sourceTree = "<group>"; };
 		56BE94611E36F5080075E8BC /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56D0A2CA1E58B0760096D9C4 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		56D0A2CC1E58B0950096D9C4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		56E187F11E51329F0059D9A5 /* UnBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnBlockTableViewCell.swift; sourceTree = "<group>"; };
 		56E187F31E5132B20059D9A5 /* UnBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnBlockViewController.swift; sourceTree = "<group>"; };
@@ -262,12 +270,16 @@
 				568772211DE0B7C600129401 /* Search.storyboard */,
 				568771E71DE0B53C00129401 /* AppDelegate.swift */,
 				568772311DE0B95800129401 /* Color.swift */,
+				56D0A2CA1E58B0760096D9C4 /* CommentsTableViewCell.swift */,
+				56D0A2CC1E58B0950096D9C4 /* CommentsViewController.swift */,
 				568151041E496921000232F7 /* EditViewController.swift */,
 				568150FE1E48D5DB000232F7 /* EmailSignupViewController.swift */,
 				56E187F71E51847B0059D9A5 /* EULAViewController.swift */,
 				568772331DE0B97200129401 /* FBLoadingViewController.swift */,
 				56143F021E50C2DF00E3B352 /* FriendDetailsTableViewCell.swift */,
 				56143F001E50C19800E3B352 /* FriendDetailsViewController.swift */,
+				566C74991E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift */,
+				566C74971E53FB71000C9FA6 /* FriendsOfFriendViewController.swift */,
 				568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */,
 				561715E71E50FAB400EFE28E /* FriendPublicPostsTableViewCell.swift */,
 				561715E91E50FAD200EFE28E /* FriendPublicPostsViewController.swift */,
@@ -627,6 +639,8 @@
 				568FCC8B1E07097F0011F037 /* FriendPostViewController.swift in Sources */,
 				568772421DE0BA5000129401 /* PostCellTableViewCell.swift in Sources */,
 				568772541DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift in Sources */,
+				566C749A1E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift in Sources */,
+				56D0A2CB1E58B0760096D9C4 /* CommentsTableViewCell.swift in Sources */,
 				568772381DE0B9A000129401 /* FriendsViewController.swift in Sources */,
 				568151051E496921000232F7 /* EditViewController.swift in Sources */,
 				56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */,
@@ -634,6 +648,7 @@
 				56BE945E1E36F4DF0075E8BC /* TermsAndServicesViewController.swift in Sources */,
 				568150FF1E48D5DB000232F7 /* EmailSignupViewController.swift in Sources */,
 				561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */,
+				566C74981E53FB71000C9FA6 /* FriendsOfFriendViewController.swift in Sources */,
 				561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */,
 				56E187F41E5132B20059D9A5 /* UnBlockViewController.swift in Sources */,
 				56143F011E50C19800E3B352 /* FriendDetailsViewController.swift in Sources */,
@@ -648,6 +663,7 @@
 				5687723C1DE0B9F300129401 /* loadingAnimation.swift in Sources */,
 				561715E81E50FAB400EFE28E /* FriendPublicPostsTableViewCell.swift in Sources */,
 				568151031E48ECC2000232F7 /* LoginWithEmailViewController.swift in Sources */,
+				56D0A2CD1E58B0950096D9C4 /* CommentsViewController.swift in Sources */,
 				56E187F21E51329F0059D9A5 /* UnBlockTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -801,6 +817,7 @@
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
 				);
 				INFOPLIST_FILE = GhostGab/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codeboaders.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -820,6 +837,7 @@
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
 				);
 				INFOPLIST_FILE = GhostGab/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codeboaders.GhostGab;
 				PRODUCT_NAME = "$(TARGET_NAME)";

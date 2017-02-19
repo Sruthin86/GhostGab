@@ -29,8 +29,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     let ref = FIRDatabase.database().reference()
     
+    var spinner:loadingAnimation?
+    
+     var overlayView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        self.spinner?.showOverlayNew(alphaValue: 1)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         searchBar.delegate = self
@@ -152,7 +158,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             let currIndexPath = tableView.indexPathForSelectedRow!
             friendUdidToPass =  self.friendsArrayKey[currIndexPath.row]
         }
-        
+        var overlayView = UIView()
+        var spinner:loadingAnimation = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        spinner.showOverlayNew(alphaValue: 0.5)
         let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
         let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
         friendDetailsView.friendUdid = friendUdidToPass
@@ -163,6 +171,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         transition.subtype = kCATransitionFromRight
         self.view.window!.layer.add(transition, forKey: kCATransitionPush)
         self.present(friendDetailsView, animated: false, completion: nil)
+        spinner.hideOverlayViewNew()
+        
         
         
     }
@@ -202,6 +212,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                             self.friendsArrayKey.append(key as! String)
                             self.friendsArray[key as! String] = data as AnyObject?
                             self.tableView.reloadData()
+                             self.spinner?.hideOverlayViewNew()
                         }
                             
                         else {

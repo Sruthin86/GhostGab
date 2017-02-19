@@ -16,11 +16,16 @@ import SCLAlertView
 class PostCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var FeedView: UIView!
+    
     @IBOutlet weak var reactButton: UIButton!
+    
     @IBOutlet weak var reactionsViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var ReactionsContent: UIView!
+    
     @IBOutlet weak var ReactionsView: UIView!
     
+    @IBOutlet weak var gabBackBtn: UIButton!
     var cellSelected: Bool = false
     
     var width:CGFloat = 0.4

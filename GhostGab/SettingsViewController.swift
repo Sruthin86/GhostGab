@@ -110,15 +110,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             self.present(theGameView, animated: false, completion: nil)
         }
         else if(settingsList[selectedInt] == "Privacy Policy" ){
-            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-            let privacyView  = storybaord.instantiateViewController(withIdentifier: "privacy") as! PrivacyPolocyViewController
-            //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(privacyView, animated: false, completion: nil)
+//            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+//            let privacyView  = storybaord.instantiateViewController(withIdentifier: "privacy") as! PrivacyPolocyViewController
+//            //trasition from right
+//            let transition = CATransition()
+//            
+//            transition.duration = 0.3
+//            
+//            transition.type = kCATransitionPush
+//            transition.subtype = kCATransitionFromRight
+//            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+//            self.present(privacyView, animated: false, completion: nil)
+            
+            
+            let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
+            let privacyView = storyboard.instantiateViewController(withIdentifier: "privacy") as! PrivacyPolocyViewController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            UIView.transition(with: appDelegate.window!, duration: 0.5, options: .transitionFlipFromLeft , animations: { () -> Void in
+                appDelegate.window!.rootViewController = privacyView
+            }, completion:nil)
             
         }
         else if(settingsList[selectedInt] == "Terms Of Service" ){
@@ -180,7 +191,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             mail.mailComposeDelegate = self
             mail.setToRecipients(["Ghostgabsupport@codeboarders.com"])
             mail.setSubject("userid:" + userId)
-            mail.setMessageBody("<p>Please send ys your concerns !</p>", isHTML: true)
+            mail.setMessageBody("<p>Please send us your concerns !</p>", isHTML: true)
             present(mail, animated: true)
         } else {
             // show failure alert

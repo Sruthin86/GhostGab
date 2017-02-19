@@ -142,6 +142,7 @@ class UserNameAndPhoneNoViewController: UIViewController, UITextFieldDelegate {
                     verifyController.verifiction = self.verifiction
                     self.present(verifyController, animated: true, completion: nil)
                     
+                    
                 }
                 else{
                     spinner.hideOverlayView()

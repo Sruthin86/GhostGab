@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import SCLAlertView
+import OneSignal
 
 class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -80,6 +81,9 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var notenoughFriendsFlag:Bool = false
     
     var loaded:Bool = false
+    
+    var guessListCount: Int = 5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
@@ -95,7 +99,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.wrongGuessCounter = Int((postMetrics["wrongGuess"] as AnyObject) as! NSNumber)
         self.displayName = guessPostArray["displayName"]! as! String
         self.cashButton.isEnabled = false
-        
+        print("Inguess")
         getCashCount()
         
         if(guessPostArray["useruid"] as! String == uid as! String){
@@ -103,7 +107,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //self.warning_btn.isHidden = true
         }
         else {
-            if(self.oriFrinendsKeyArray.count>=3){
+            if(self.oriFrinendsKeyArray.count >= self.guessListCount){
                 shuffleOriginalArray ()
                 
             }
@@ -179,7 +183,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.loaded =  true;
             self.tableView.backgroundView = .none
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-            
+           
             
             guessCell.setImageData(photoUrl: self.friendsArray[self.filteredFriendsArray[indexPath.row]]!.value(forKey :"highResPhoto")! as! String)
             
@@ -198,6 +202,9 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 else{
                     if(self.filteredFriendsArray[indexPath.row] == self.selectdUid ){
                         guessCell.setBackground(colorValue: "lightRed")
+                        if(self.cashCountNumber>=15){
+                            self.cashButton.isEnabled = true
+                        }
                     }
                     
                 }
@@ -232,6 +239,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.correctGuessCounter += 1
                 self.rightLable.text = String(self.correctGuessCounter)
                 self.ref.child("Posts").child(self.postId).child("postMetrics").child("correctGuess").setValue(correctGuessCounter)
+                self.sendCorrectGuessNotification()
             }
             else {
                 self.decrementCashCount(count:5)
@@ -239,9 +247,10 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.wrongGuessCounter += 1
                 self.wrongLabel.text = String(self.wrongGuessCounter)
                 self.ref.child("Posts").child(self.postId).child("postMetrics").child("wrongGuess").setValue(wrongGuessCounter)
+                self.sendWrongGuessNotification()
                 
             }
-            let friendsList: [String:String] = ["friend1": self.filteredFriendsArray[0], "friend2": self.filteredFriendsArray[1], "friend3": self.filteredFriendsArray[2]]
+            let friendsList: [String:String] = ["friend1": self.filteredFriendsArray[0], "friend2": self.filteredFriendsArray[1], "friend3": self.filteredFriendsArray[2], "friend4": self.filteredFriendsArray[3], "friend5": self.filteredFriendsArray[4]]
             let guessData : [String : AnyObject] = ["postID": postId as AnyObject,"friendsList": friendsList as AnyObject, "seledtedUid": self.filteredFriendsArray[selectedIndexRow] as AnyObject, "postUid" : guessPostArray["useruid"] as AnyObject ]
             let guessPostData : [String : AnyObject] = [postId as String: guessData as AnyObject]
             ref.child("Users").child(self.uid as! String).child("guess").child(postId).setValue(guessData)
@@ -342,6 +351,8 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.filteredFriendsArray.append(self.friendsArrayKey[0])
         self.filteredFriendsArray.append(self.friendsArrayKey[1])
         self.filteredFriendsArray.append(self.friendsArrayKey[2])
+        self.filteredFriendsArray.append(self.friendsArrayKey[3])
+        self.filteredFriendsArray.append(self.friendsArrayKey[4])
         if(!self.filteredFriendsArray.contains(guessPostArray["useruid"] as! String)){
             self.filteredFriendsArray.removeLast()
             self.filteredFriendsArray.append(guessPostArray["useruid"] as! String)
@@ -393,7 +404,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         self.friendsArrayKey.append(value as! String)
                         self.friendsArray[value as! String] = data as AnyObject?
                     }
-                    if(self.friendsArrayKey.count == 2){
+                    if(self.friendsArrayKey.count == self.guessListCount ){
                         self.ref.child("Users").child( self.guessPostArray["useruid"] as! String).observeSingleEvent(of: .value, with: { snapshot in
                             if(snapshot.childrenCount > 0 ){
                                 let correctdata:NSDictionary  = snapshot.value as! NSDictionary
@@ -424,7 +435,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         })
                         
                     }
-                    else if(self.friendsArrayKey.count < 3){
+                    else if(self.friendsArrayKey.count < self.guessListCount){
                         
                         self.isShuffled = false
                         self.notenoughFriendsFlag = true
@@ -447,6 +458,81 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
+    
+    func sendCorrectGuessNotification(){
+        
+        self.ref.child("Users").child(self.currentUserId).observeSingleEvent(of: .value, with: { snapshot in
+            if(snapshot.exists()){
+                let thisUser : NSDictionary = snapshot.value as! NSDictionary
+                let thisUserOneSignalId = thisUser["oneSignalId"]
+                let thisUserDisplayName = thisUser["displayName"] as! String
+                self.ref.child("Users").child(self.guessPostArray["useruid"] as! String).observeSingleEvent(of: .value, with: { snap in
+                    if(snap.exists()){
+                        let postText : String = (self.guessPostArray["post"] as! String?)!
+                        let correctUser : NSDictionary = snap.value as! NSDictionary
+                        
+                        let correctOneSignalId = correctUser["oneSignalId"] as! String
+                        var CorrectPostText: String = thisUserDisplayName + " guessed correctly on your gab ' " + postText + " ' "
+                        
+                        OneSignal.postNotification(["contents": ["en": CorrectPostText], "include_player_ids": [correctOneSignalId]])
+                        
+                    }
+                })
+            }
+        })
+        
+        
+    }
+    
+    
+    func sendWrongGuessNotification(){
+        
+        self.ref.child("Users").child(self.currentUserId).observeSingleEvent(of: .value, with: { snapshot in
+            if(snapshot.exists()){
+                let thisUser : NSDictionary = snapshot.value as! NSDictionary
+                let thisUserOneSignalId = thisUser["oneSignalId"]
+                let thisUserDisplayName = thisUser["displayName"] as! String
+                self.ref.child("Users").child(self.guessPostArray["useruid"] as! String).observeSingleEvent(of: .value, with: { snap in
+                    if(snap.exists()){
+                        let postText : String = (self.guessPostArray["post"] as! String?)!
+                        let correctUser : NSDictionary = snap.value as! NSDictionary
+                        
+                        let correctOneSignalId = correctUser["oneSignalId"] as! String
+                        var CorrectPostText: String = thisUserDisplayName + " guessed wrong on your gab ' " + postText + " ' "
+                        
+                        OneSignal.postNotification(["contents": ["en": CorrectPostText], "include_player_ids": [correctOneSignalId]])
+                        
+                    }
+                })
+            }
+        })
+        
+        
+    }
+
+    
+    func getFriendsAfterGuessing(){
+        self.isShuffled = true
+        for key in self.filteredFriendsArray {
+            print("in array")
+            print(key)
+            print(self.ref)
+            self.ref.child("Users").child(key).observeSingleEvent(of: FIRDataEventType.value, with: { snapshot in
+                if(snapshot).exists(){
+                     print("in snapshot")
+                    var val : NSDictionary = snapshot.value as! NSDictionary
+                    self.friendsArray[key] =  val as AnyObject?
+                    if(self.friendsArray.count == self.filteredFriendsArray.count){
+                        print("in flitered")
+                        self.tableView.reloadData()
+                    }
+                }
+            })
+            
+        }
+        
+    }
+    
     func checkPost(){
         self.ref.child("Users").child(self.uid! as! String).child("guess").child(self.postId).observeSingleEvent(of: FIRDataEventType.value, with :  { (snapshot) in
             if(snapshot.exists()){
@@ -458,7 +544,9 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.correctUid = (gData["postUid"] as! String?)!
                 self.alreadyGuessed = true
                 self.messageLable.text = "You've already guessed once. \nIt'll cost you 15 points in cash to guess again"
-                self.getFriends()
+                let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (timer) in
+                    self.getFriendsAfterGuessing()
+                }
                 
             }
             else {

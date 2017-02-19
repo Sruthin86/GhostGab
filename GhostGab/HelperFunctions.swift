@@ -233,7 +233,7 @@ class HelperFunctions {
                     flagCount += 1
                     pRef.child("flags").child("flagCount").setValue(flagCount)
                     if(flagCount>=5){
-                       self.deletePost(postId:postId)
+                        self.deletePost(postId:postId)
                     }
                 })
                 
@@ -245,6 +245,46 @@ class HelperFunctions {
         
         
         
+    }
+    
+    func updateCommentFlag(postId:String, uid:String, commentId:String){
+        ref.child("Posts").child(postId).child("Comments").child(commentId).observeSingleEvent(of: FIRDataEventType.value, with:{ (snapshot) in
+            if(snapshot.exists()){
+                let commentsData = snapshot.value as! NSDictionary
+                var flagCount: Int =  commentsData["commentFlags"]! as! Int
+                 if(commentsData["commentFlagUsers"] != nil){
+                    let commentFlaggedUsers = commentsData["commentFlagUsers"] as! NSDictionary
+                    print(commentFlaggedUsers)
+                    if(commentFlaggedUsers[uid] != nil){
+                        self.ref.child("Posts").child(postId).child("Comments").child(commentId).child("commentFlagUsers").child(uid).removeValue()
+                       flagCount -= 1
+                        self.ref.child("Posts").child(postId).child("Comments").child(commentId).child("commentFlags").setValue(flagCount)
+                    }
+                    else {
+                        flagCount += 1
+                        self.ref.child("Posts").child(postId).child("Comments").child(commentId).child("commentFlagUsers").child(uid).setValue(uid)
+                        self.ref.child("Posts").child(postId).child("Comments").child(commentId).child("commentFlags").setValue(flagCount)
+                    }
+                }
+                 else {
+                    flagCount += 1
+                    self.ref.child("Posts").child(postId).child("Comments").child(commentId).child("commentFlagUsers").child(uid).setValue(uid)
+                    self.ref.child("Posts").child(postId).child("Comments").child(commentId).child("commentFlags").setValue(flagCount)
+                }
+                
+                if( flagCount >= 5){
+                  self.deleteComment(postId:postId, commentId:commentId)
+                }
+                
+                
+            }
+            
+        })
+        
+    }
+    
+    func deleteComment(postId:String, commentId:String){
+        self.ref.child("Posts").child(postId).child("Comments").child(commentId).removeValue()
     }
     
     func deletePost(postId:String) {
@@ -293,13 +333,13 @@ class HelperFunctions {
                 
             }
         })
-
+        
     }
     
     
     func reportPosts(postId: String, userUid:String){
         var reported: Int = 0
-       
+        
         self.ref.child("Posts").child(postId).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             if(snapshot.exists()){
                 
@@ -314,15 +354,15 @@ class HelperFunctions {
                             if(snap.exists()){
                                 var notificationText: String = "your post about ' " + postText + " ' has been reported and deleted"
                                 var postedUseroneSignalId = snap.value as! String
-                                 OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [postedUseroneSignalId]])
-                                 self.deletePost(postId: postId)
+                                OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [postedUseroneSignalId]])
+                                self.deletePost(postId: postId)
                             }
                         })
-                      
+                        
                     }
                     else {
-                       self.ref.child("Posts").child(postId).child("Reported").setValue(reported)
-                       self.ref.child("Posts").child(postId).child("reportedUsers").child(userUid).setValue(userUid)
+                        self.ref.child("Posts").child(postId).child("Reported").setValue(reported)
+                        self.ref.child("Posts").child(postId).child("reportedUsers").child(userUid).setValue(userUid)
                     }
                 }
                 else {
@@ -336,7 +376,7 @@ class HelperFunctions {
                 
             }
             else {
-               
+                
             }
         })
     }
