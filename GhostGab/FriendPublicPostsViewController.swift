@@ -119,6 +119,7 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[indexPath.row]]! as! [String : AnyObject]
         postFeedCell.postId = self.postKeys[indexPath.row]
         postFeedCell.postLabel.text  = postFeed["post"] as? String
+        postFeedCell.setRepliesText()
         postFeedCell.setName(type: postFeed["postType"] as! Int, name: postFeed["displayName"] as! String)
         postFeedCell.dateString.text = helperClass.getDifferenceInDates(postDate: (postFeed["date"]as? String)!)
         postFeedCell.setReactionCount(postId: self.postKeys[indexPath.row])

@@ -95,6 +95,11 @@ class FriendPostViewController: UIViewController {
         self.getUserData()
         self.setFlagCount(postId: self.postId)
         self.setReactionCount(postId: self.postId)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(FriendPostViewController.sendToUserDetailsPage))
+        profileImage.addGestureRecognizer(tap)
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -408,4 +413,16 @@ class FriendPostViewController: UIViewController {
         
     }
 
+    func sendToUserDetailsPage(){
+        let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+        let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
+        friendDetailsView.friendUdid = origianlPostUserId
+        //trasition from right
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
+        self.present(friendDetailsView, animated: false, completion: nil)
+    }
 }

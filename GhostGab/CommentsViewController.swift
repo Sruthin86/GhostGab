@@ -76,6 +76,7 @@ class CommentsViewController: UIViewController,  UITableViewDelegate, UITableVie
     
     @IBOutlet weak var commentTextField: UITextField!
     
+    @IBOutlet weak var replyText: UILabel!
     
     let green : Color = Color.green
     
@@ -120,6 +121,7 @@ class CommentsViewController: UIViewController,  UITableViewDelegate, UITableVie
         self.dateLabel.text = helperClass.getDifferenceInDates(postDate: (thisPostArray["date"]as? String)!)
         self.setFlagCount(postId: self.postId)
         self.setReactionCount(postId: self.postId)
+        self.setRepliesText(postId: self.postId)
         self.tableView.separatorStyle = .singleLine
         self.tableView.separatorColor = UIColor.white
         
@@ -230,6 +232,23 @@ class CommentsViewController: UIViewController,  UITableViewDelegate, UITableVie
             }
         })
         
+    }
+    
+    func setRepliesText(postId: String) {
+        self.ref.child("Posts").child(postId).child("Comments").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let commentVal = snapshot.value as! NSDictionary
+                if(commentVal.count > 1){
+                    self.replyText.text = String(commentVal.count) + " Replies"
+                }
+                else {
+                    self.replyText.text = String(commentVal.count) + " Reply"
+                }
+            }
+            else {
+                self.replyText.text = ""
+            }
+        })
     }
     
     

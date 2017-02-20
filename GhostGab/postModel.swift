@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 import Firebase
 import FirebaseDatabase
 
@@ -19,6 +20,7 @@ struct postModel {
     var postsArray = [String : AnyObject]()
     var postKeys = [String]()
     let ref = FIRDatabase.database().reference()
+    var radius = 30
     
     init (posts : FIRDataSnapshot, uid:String){
         self.posts = posts
@@ -158,7 +160,7 @@ struct postModel {
                 
                 if (postUid == self.uid ){ // logic to get friends public posts
                     let postData = val as! NSDictionary
-                    if(postData["postType"] as! Int == 1){
+                    if(postData["postType"] as! Int == 1 || postData["postType"] as! Int == 4){
                         self.postsArray[key as! String] = val as AnyObject?
                         self.postKeys.append(key as! String)
                         print("key")
@@ -180,6 +182,45 @@ struct postModel {
     }
     
     
+    mutating func returnLocationPostsForArray(currentLoaction:CLLocation)  -> NSDictionary {
+        
+        let postData  = posts!.value as! NSDictionary
+        let currentuserUid =  self.uid as! String
+        for (key , val ) in postData {
+            if((val as AnyObject).value(forKey: "useruid") != nil){
+                let postUid = (val as AnyObject).value(forKey: "useruid")! as! String
+                
+                if ((val as AnyObject).value(forKey: "locationData") != nil  ){ // logic to get friends public posts
+                    let postData = val as! NSDictionary
+                    let locationData = postData["locationData"] as! [String: AnyObject]
+                    if(postData["postType"] as! Int == 1 || postData["postType"] as! Int == 2 || postData["postType"] as! Int == 4 ){
+                        let locationData = CLLocation(latitude: locationData["la"] as! CLLocationDegrees, longitude: locationData["lx"] as! CLLocationDegrees)
+                        
+                        let distanceInMeters = locationData.distance(from: currentLoaction)
+                        let distanceInMiles = distanceInMeters/1609.344
+                        if(distanceInMiles <= 30) {
+                            self.postsArray[key as! String] = val as AnyObject?
+                            self.postKeys.append(key as! String)
+                        }
+                        
+                        
+                        
+                    }
+                    
+                }
+            }
+            
+            
+            
+        }
+        
+        
+        
+        return postsArray as NSDictionary
+        
+        
+    }
+
     
     func returnPostKeys() -> [String]{
         return self.postKeys

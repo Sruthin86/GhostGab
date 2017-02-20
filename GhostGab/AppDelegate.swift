@@ -38,13 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         
-        OneSignal.initWithLaunchOptions(launchOptions, appId: "4f88b1b6-4639-450b-9170-c24bba4f5afd", handleNotificationReceived: nil, handleNotificationAction: {
-            (result) in
-            // Do Something with Notification Result
-            let payload = result?.notification.payload
-            let displayType = result?.notification.displayType
-            let messageTitle = "OneSignal Example"
-            var fullMessage = payload?.title
+        OneSignal.initWithLaunchOptions(launchOptions, appId: "4f88b1b6-4639-450b-9170-c24bba4f5afd", handleNotificationReceived: { (notification) in
+            print("Received Notification - \(notification?.payload.notificationID)")
+        }, handleNotificationAction: { (result) in
+            let payload: OSNotificationPayload? = result?.notification.payload
+            
+            var fullMessage: String? = payload?.body
+            if payload?.additionalData != nil {
+                var additionalData: [AnyHashable: Any]? = payload?.additionalData
+                if additionalData!["actionSelected"] != nil {
+                    fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
+                   
+                }
+            }
+            
+            print(fullMessage)
         }, settings: [kOSSettingsKeyInFocusDisplayOption : OSNotificationDisplayType.notification.rawValue])
         
         Fabric.with([Twitter.self, Crashlytics.self])
@@ -68,10 +76,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // user tapped notification while app was in background
         if state == .inactive || state == .background {
             // go to screen relevant to Notification content
+            
+           
         }
         else {
             // App is in UIApplicationStateActive (running in foreground)
             // perhaps show an UIAlertView
+            
         }
     }
     func applicationWillResignActive(_ application: UIApplication) {

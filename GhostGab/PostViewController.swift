@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CoreLocation
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
@@ -18,7 +19,7 @@ extension Notification.Name {
     static let reloadposts = Notification.Name("reloadposts")
 }
 
-class PostViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class PostViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
     @IBOutlet weak var PostText: UITextField!
     
@@ -85,29 +86,82 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     var overlayView = UIView()
     
+    @IBOutlet weak var postLabelView: UILabel!
+    
+    @IBOutlet weak var gabsFromfriends: UIButton!
+    
+    @IBOutlet weak var gabsNearMe: UIButton!
+    
+    let lightgrey :Color = Color.lightGrey
+    
+    let grey :Color = Color.grey
+    
+    let green :Color = Color.green
+    
+    let white :Color = Color.white
+    
+    let lighrGreen :Color = Color.lightGreen
+    
+    var isLocationSelected: Bool = false
+    
+    var isLocationEnabled : Bool = false
+    
+    let locationManager = CLLocationManager()
+    
+    var loaction : CLLocation?
+    
+    var customization : UICostomization?
+    
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
         
         self.spinner?.showOverlayNew(alphaValue: 1)
         
-        let lightGrey:Color = Color.lightGrey
-        let customization :UICostomization = UICostomization(color:lightGrey.getColor(), width:width)
-        customization.addBorder(object: self.PostAsMeView)
-        customization.addBorder(object: self.PostAsGhostView)
-        customization.addBorder(object: self.PostAndGuessView)
-        customization.addBorder(object: self.CancelView)
-        PostText.addTarget(self, action: #selector(PostViewController.textFieldDidChange(textField:)), for: UIControlEvents.allEvents)
-        self.PostButtonsView.isHidden = true
-        self.ButtonViewHeight.constant = 0
-        self.TopViewHeight.constant = 65
+        customization = UICostomization(color: green.getColor(), width: width )
+        
+        customization?.addBorder(object: self.gabsFromfriends)
+        customization?.addBorder(object: self.gabsNearMe)
+        if(!isLocationSelected){
+            customization?.addBackground(object: self.gabsFromfriends)
+            self.gabsFromfriends.tintColor = white.getColor()
+        }
+        
+        
+
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(PostViewController.handlePost))
+        postLabelView.addGestureRecognizer(tap)
         refreshControl.addTarget(self, action: #selector(PostViewController.uiRefreshActionControl), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         getFriends()
          NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData(_:)), name: .reloadposts, object: nil)
         
-        // Do any additional setup after loading the view.
+        
+        
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        if CLLocationManager.locationServicesEnabled()
+        {
+            
+            let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+            if status == CLAuthorizationStatus.notDetermined
+            {
+                isLocationEnabled = true
+                locationManager.requestAlwaysAuthorization()
+                locationManager.requestWhenInUseAuthorization()
+            }
+        } else {
+            
+            print("locationServices disenabled")
+        }
+        locationManager.startUpdatingLocation()
+       
+          // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -115,25 +169,28 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        loaction = locations[0]
+    }
+    
     func uiRefreshActionControl() {
         self.animateTable()
     }
     
-    func textFieldDidChange(textField: UITextField) {
-        if(!userIsEditing){
-            userIsEditing = !userIsEditing
-            self.PostButtonsView.isHidden = false
-            self.ButtonViewHeight.constant = 40
-            self.TopViewHeight.constant = 105
-        }
+    func handlePost(){
+        let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
+        let gabView  = storybaord.instantiateViewController(withIdentifier: "gab_view") as! GabViewController
+        
+        //trasition from right
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
+        self.present(gabView, animated: false, completion: nil)
         
     }
     
-    @IBAction func cancelEditing(_ sender: Any) {
-        helperClass.returnFromTextField(textField: self.PostText, PostButtonsView: PostButtonsView, ButtonViewHeight: ButtonViewHeight, TopViewHeight: TopViewHeight)
-        userIsEditing = !userIsEditing
-
-    }
     
    
     
@@ -143,7 +200,13 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         if(self.postsArray.keys.count == 0){
             let textColor: Color = Color.grey
             let noDataAvailableLabel: UILabel = UILabel(frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height) )
-            noDataAvailableLabel.text =  "Sorry , there is No Activity yet!"
+            if(self.isLocationSelected && !self.isLocationEnabled){
+                noDataAvailableLabel.text =  "Please enable location in your settings"
+            }
+            else {
+              noDataAvailableLabel.text =  "Sorry , there is No Activity yet!"
+            }
+            
             noDataAvailableLabel.textAlignment = .center
             noDataAvailableLabel.textColor =  textColor.getColor()
             noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:14.0)
@@ -163,9 +226,10 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         postFeedCell.ReactionsContent.isHidden = true
         postFeedCell.reactButton.tag = indexPath.row
         var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[indexPath.row]]! as! [String : AnyObject]
-        print(postFeed)
+        postFeedCell.isUsingLocation = isLocationSelected
         postFeedCell.postId = self.postKeys[indexPath.row]
         postFeedCell.postLabel.text  = postFeed["post"] as? String
+        postFeedCell.setRepliesText()
         postFeedCell.setName(type: postFeed["postType"] as! Int, name: postFeed["displayName"] as! String)
         postFeedCell.dateString.text = helperClass.getDifferenceInDates(postDate: (postFeed["date"]as? String)!)
         postFeedCell.setReactionCount(postId: self.postKeys[indexPath.row])
@@ -235,7 +299,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
 
         }
         
-        if(postFeed["postType"] as! Int == 1){
+        if(postFeed["postType"] as! Int == 1 || (postFeed["postType"] as! Int == 4 && !self.isLocationSelected)){
             let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
             let friendPostView  = storybaord.instantiateViewController(withIdentifier: "friendPostController") as! FriendPostViewController
             friendPostView.postId = postIdToPass
@@ -326,7 +390,13 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     
     func animateTable() {
-        getFriends()
+        if(self.isLocationSelected){
+            self.getPostsForLocation()
+        }
+        else {
+            self.getFriends()
+        }
+       
         self.tableView.reloadData()
         let cells = self.tableView.visibleCells
         
@@ -426,6 +496,44 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
     
+    func getPostsForLocation() {
+        
+        if let currentLocation = loaction{
+            ref.child("Posts").queryOrdered(byChild: "TS").observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
+                
+                if( !snapshot.exists()){
+                    self.postsArray.removeAll()
+                    self.postKeys.removeAll()
+                    self.tableView.reloadData()
+                    
+                }else {
+                    var pModel = postModel(posts: snapshot, uid: self.uid as! String)
+                    self.oldPostKeysCount = self.postKeys.count
+                    self.postsArray = pModel.returnLocationPostsForArray(currentLoaction: currentLocation) as! [String : AnyObject]
+                    self.postKeys = pModel.returnPostKeys()
+                    self.postKeys = self.postKeys.sorted{ $0 > $1 }
+                    self.tableView.reloadData()
+                    self.spinner?.hideOverlayViewNew()
+                    if( self.oldPostKeysCount == 0) {
+                        return
+                    }
+                    else if (self.oldPostKeysCount ==  self.postKeys.count){
+                        return
+                    }
+                    else if (self.oldPostKeysCount < self.postKeys.count){
+                        let diff : Int = (self.postKeys.count - self.oldPostKeysCount)
+                        self.updateScrollPosition(diff: diff)
+                        return
+                    }
+                    else {
+                        return
+                    }
+                }
+                
+            })
+        }
+    }
+    
     func updateScrollPosition(diff: Int){
         let contentOffset = self.tableView.contentOffset
         if(self.selfPost){
@@ -445,76 +553,48 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
     }
     
-    func saveNewPost(post:String, uid: String, postType: Int) {
-        
-        let currentDateToString: String = helperClass.returnCurrentDateinString()
-        ref.child("Users").child(uid).observeSingleEvent(of: FIRDataEventType.value, with :{ (snapshot) in
-            let userData =  snapshot.value as! [String:AnyObject]
-            let displayName = userData["displayName"]
-            let picUrl = userData["highResPhoto"]
-            let reactionsData: [String:Int] = ["Reaction1": 0, "Reaction2": 0, "Reaction3": 0, "Reaction4": 0, "Reaction5": 0, "Reaction6": 0]
-            let flags: [String : Int] = ["flagCount": 0]
-            let postMetrics: [String:Int] = ["flag":0, "correctGuess":0, "wrongGuess":0]
-            let postData : [String: AnyObject] = ["post":post as AnyObject , "useruid": uid as AnyObject, "displayName":displayName!, "userPicUrl" : picUrl!, "postType":postType as AnyObject,  "reactionsData":reactionsData as AnyObject, "flags":flags as AnyObject, "postMetrics":postMetrics as AnyObject,"date":currentDateToString as AnyObject]
-            
-            let postDataRef = self.ref.child("Posts").childByAutoId()
-            postDataRef.setValue(postData)
-            let postDataId = postDataRef.key
-            
-            self.ref.child("Users").child(uid).child("posts").child(postDataId).child("posId").setValue(postDataId)
-            // ...
-        })
-        
-        
-        
-        
-        
-    }
     
-    @IBAction func postAsMe(_ sender: AnyObject) {
-        
-        post(typeId: 1)
-        
-        
-    }
-    
-    
-    @IBAction func postAsGhost(_ sender: AnyObject) {
-        post(typeId: 2)
-        
-    }
-    
-    
-    @IBAction func postAndGuess(_ sender: AnyObject) {
-        post(typeId: 3)
-        
-    }
-    
-    func post(typeId: Int){
-        
-        if( !((self.PostText.text?.isEmpty)!) && ((self.PostText.text?.characters.count)! < 200) ){
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.impactOccurred()
-            self.saveNewPost(post: (self.PostText?.text)!, uid:self.uid as! String, postType: typeId)
-            helperClass.returnFromTextField(textField: self.PostText, PostButtonsView: PostButtonsView, ButtonViewHeight: ButtonViewHeight, TopViewHeight: TopViewHeight)
-            userIsEditing = !userIsEditing
-            self.selfPost = !self.selfPost
-            let myTimer : Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(PostViewController.loadMyPosts(timer:)), userInfo: nil, repeats: false)
-            
-        }
-        else {
-            SCLAlertView().showError("Oops !!", subTitle: "Gab about something less than 200 characters  ", circleIconImage:self.errorAletViewImage)
-        }
-    }
-    
-    func loadMyPosts(timer : Timer){
-        self.getPosts()
-        
-    }
+   
     
     func reloadTableData(_ notification: Notification) {
         self.getFriends()
     }
+    
+    
+    @IBAction func gabsFromFriends_btn(_ sender: Any) {
+        self.isLocationSelected = false
+        
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        self.spinner?.showOverlayNew(alphaValue: 1)
+        
+        customization = UICostomization(color: green.getColor(), width: width )
+        customization?.addBackground(object: self.gabsFromfriends)
+        self.gabsFromfriends.tintColor = white.getColor()
+        
+        customization = UICostomization(color: white.getColor(), width: width )
+        customization?.addBackground(object: self.gabsNearMe)
+        self.gabsNearMe.tintColor = green.getColor()
+        self.getFriends()
+    }
+    
+    @IBAction func gabsNearMe_btn(_ sender: Any) {
+        self.isLocationSelected = true
+        
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        self.spinner?.showOverlayNew(alphaValue: 1)
+        
+        customization = UICostomization(color: green.getColor(), width: width )
+        customization?.addBackground(object: self.gabsNearMe)
+        self.gabsNearMe.tintColor = white.getColor()
+        
+        customization = UICostomization(color: white.getColor(), width: width )
+        customization?.addBackground(object: self.gabsFromfriends)
+        self.gabsFromfriends.tintColor = green.getColor()
+        
+        self.getPostsForLocation()
+        
+    }
+    
     
     
     

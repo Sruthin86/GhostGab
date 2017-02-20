@@ -301,6 +301,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         suggestionsFlag = true
         self.requestsArray.removeAll()
         self.requestsArrayKey.removeAll()
+        self.suggestionsArrayKey.removeAll()
+        self.suggestionsArray.removeAll()
         self.tableView.reloadData()
         let greenGustomization : UICostomization = UICostomization(color: green.getColor(), width: width )
         greenGustomization.addBackground(object: self.suggestionsBtn)
@@ -312,7 +314,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             switch CNContactStore.authorizationStatus(for: CNEntityType.contacts){
             case .authorized:
                 self.fetchContacts()
-                self.tableView.reloadData()
+//                self.tableView.reloadData()
                 
             // This is the method we will create
             case .notDetermined:
@@ -337,8 +339,6 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     // to fetch contacts
     
     func fetchContacts() {
-        self.suggestionsArrayKey.removeAll()
-        self.suggestionsArray.removeAll()
         var iteratorKey: Int = 0
         let toFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
         let request = CNContactFetchRequest(keysToFetch: toFetch as [CNKeyDescriptor])

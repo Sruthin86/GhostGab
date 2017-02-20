@@ -73,6 +73,8 @@
 		56BE94641E3BA2A10075E8BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */; };
 		56D0A2CB1E58B0760096D9C4 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0A2CA1E58B0760096D9C4 /* CommentsTableViewCell.swift */; };
 		56D0A2CD1E58B0950096D9C4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0A2CC1E58B0950096D9C4 /* CommentsViewController.swift */; };
+		56D0A2CF1E5A35850096D9C4 /* GabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0A2CE1E5A35850096D9C4 /* GabViewController.swift */; };
+		56D0A2D11E5A59DA0096D9C4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56D0A2D01E5A59DA0096D9C4 /* CoreLocation.framework */; };
 		56DCC95A1E46C91600D3B10E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */; };
 		56E187F21E51329F0059D9A5 /* UnBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E187F11E51329F0059D9A5 /* UnBlockTableViewCell.swift */; };
 		56E187F41E5132B20059D9A5 /* UnBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E187F31E5132B20059D9A5 /* UnBlockViewController.swift */; };
@@ -170,6 +172,8 @@
 		56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56D0A2CA1E58B0760096D9C4 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		56D0A2CC1E58B0950096D9C4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		56D0A2CE1E5A35850096D9C4 /* GabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GabViewController.swift; sourceTree = "<group>"; };
+		56D0A2D01E5A59DA0096D9C4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		56E187F11E51329F0059D9A5 /* UnBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnBlockTableViewCell.swift; sourceTree = "<group>"; };
 		56E187F31E5132B20059D9A5 /* UnBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnBlockViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56D0A2D11E5A59DA0096D9C4 /* CoreLocation.framework in Frameworks */,
 				56DCC95A1E46C91600D3B10E /* FBSDKShareKit.framework in Frameworks */,
 				5687722F1DE0B90C00129401 /* FBSDKCoreKit.framework in Frameworks */,
 				568772301DE0B90C00129401 /* FBSDKLoginKit.framework in Frameworks */,
@@ -220,6 +225,7 @@
 		20C3D9668C804113CCCB5AD0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				56D0A2D01E5A59DA0096D9C4 /* CoreLocation.framework */,
 				56DCC9591E46C91600D3B10E /* FBSDKShareKit.framework */,
 				5687722D1DE0B90C00129401 /* FBSDKCoreKit.framework */,
 				5687722E1DE0B90C00129401 /* FBSDKLoginKit.framework */,
@@ -285,6 +291,7 @@
 				561715E91E50FAD200EFE28E /* FriendPublicPostsViewController.swift */,
 				568772351DE0B99000129401 /* FriendsTableViewCell.swift */,
 				568772371DE0B9A000129401 /* FriendsViewController.swift */,
+				56D0A2CE1E5A35850096D9C4 /* GabViewController.swift */,
 				561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */,
 				561BD5451DEBA4D000CB266C /* GuessViewController.swift */,
 				568772391DE0B9D500129401 /* HelperFunctions.swift */,
@@ -649,6 +656,7 @@
 				568150FF1E48D5DB000232F7 /* EmailSignupViewController.swift in Sources */,
 				561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */,
 				566C74981E53FB71000C9FA6 /* FriendsOfFriendViewController.swift in Sources */,
+				56D0A2CF1E5A35850096D9C4 /* GabViewController.swift in Sources */,
 				561BD5421DE77AC200CB266C /* SearchFriendsViewController.swift in Sources */,
 				56E187F41E5132B20059D9A5 /* UnBlockViewController.swift in Sources */,
 				56143F011E50C19800E3B352 /* FriendDetailsViewController.swift in Sources */,

@@ -70,6 +70,8 @@ class PostCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var warning_btn: UIButton!
     
+    @IBOutlet weak var repliesText: UILabel!
+    
     var postId: String?
     
     var helperClass : HelperFunctions = HelperFunctions()
@@ -87,6 +89,8 @@ class PostCellTableViewCell: UITableViewCell {
     var imageCache = NSCache<NSString, UIImage>();
     
     var redflag : UIImage = UIImage(named: "Flag_red@1x")!
+    
+    var isUsingLocation = false
     //@IBOutlet weak var reaction1: UIButton!
     
     override func awakeFromNib() {
@@ -238,8 +242,28 @@ class PostCellTableViewCell: UITableViewCell {
             
         case 2:
             self.cellImage.image = UIImage(named:  "Logo")
-        default:
+        case 3:
             self.cellImage.image = UIImage(named:  "CrystalBall")
+        case 4:
+            if(isUsingLocation){
+                
+                self.cellImage.image = UIImage(named:  "Logo")
+            }
+            
+            else {
+                if let profileImage :UIImage = (imageCache.object(forKey: userUid as NSString)){
+                    self.cellImage.image = profileImage
+                }
+                else {
+                    self.cellImage.image = UIImage(named:  "PlaceHolder")
+                    //DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+                    self.getImage(userUid: userUid, userPicUrl: userPicUrl)
+                    //})
+                }
+            }
+            
+        default:
+            self.cellImage.image = UIImage(named:  "Logo")
         }
         
     }
@@ -380,7 +404,7 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     func setName(type: Int, name: String){
-        if (type == 1){
+        if (type == 1 ){
           self.postNameLabel.text = name
         }
         else if(type == 2){
@@ -388,6 +412,15 @@ class PostCellTableViewCell: UITableViewCell {
         }
         else if(type == 3){
              self.postNameLabel.text = "Guess Me"
+        }
+        else if (type == 4 ){
+            if(isUsingLocation){
+                self.postNameLabel.text = ""
+            }
+            else {
+                self.postNameLabel.text = name
+            }
+            
         }
         
     }
@@ -444,4 +477,20 @@ class PostCellTableViewCell: UITableViewCell {
         
     }
     
+    func setRepliesText() {
+        self.ref.child("Posts").child(self.postId!).child("Comments").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let commentVal = snapshot.value as! NSDictionary
+                if(commentVal.count > 1){
+                    self.repliesText.text = String(commentVal.count) + " Replies"
+                }
+                else {
+                     self.repliesText.text = String(commentVal.count) + " Reply"
+                }
+            }
+            else {
+               self.repliesText.text = ""
+            }
+        })
+    }
 }

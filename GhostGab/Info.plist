@@ -26,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -67,6 +67,8 @@
 	<true/>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires contacts access to function properly.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Ghost Gab would like to use your location to show gabs near you</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses photos</string>
 	<key>UIBackgroundModes</key>

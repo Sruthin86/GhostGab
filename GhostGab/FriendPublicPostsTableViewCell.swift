@@ -85,6 +85,7 @@ class FriendPublicPostsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var gabBack: UIButton!
     
+    @IBOutlet weak var repliesText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         let customization: UICostomization = UICostomization (color: verylightGrey.getColor(), width:width)
@@ -430,6 +431,23 @@ class FriendPublicPostsTableViewCell: UITableViewCell {
     func reportUser(){
         
         
+    }
+    
+    func setRepliesText() {
+        self.ref.child("Posts").child(self.postId!).child("Comments").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let commentVal = snapshot.value as! NSDictionary
+                if(commentVal.count > 1){
+                    self.repliesText.text = String(commentVal.count) + " Replies"
+                }
+                else {
+                    self.repliesText.text = String(commentVal.count) + " Reply"
+                }
+            }
+            else {
+                self.repliesText.text = ""
+            }
+        })
     }
     
 }
