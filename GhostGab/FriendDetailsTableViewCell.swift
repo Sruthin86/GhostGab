@@ -12,6 +12,7 @@ class FriendDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellLabel: UILabel!
     
+    @IBOutlet weak var cellImage: UIImageView!
     //@IBOutlet weak var cell_image: UIImageView!
     
     

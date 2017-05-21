@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lFD-Lv-sFg">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="t1m-pt-Yha">
+            <objects>
+                <viewController id="7YY-ZQ-KnE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7mA-S8-sZO"/>
+                        <viewControllerLayoutGuide type="bottom" id="SL4-QB-0Zd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mZ2-AH-RCb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oNp-B8-K1K"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
+                        <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </simulatedTabBarMetrics>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MTF-bJ-c5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6400.8000000000002" y="-331.48425787106447"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gzj-ZK-ZGw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lFD-Lv-sFg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="813-eL-BLc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7YY-ZQ-KnE" kind="relationship" relationship="rootViewController" id="Q5E-sd-hi2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dxq-h4-Myd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5461.6000000000004" y="-331.48425787106447"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</document>

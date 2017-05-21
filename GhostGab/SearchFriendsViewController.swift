@@ -40,6 +40,8 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     var labelText = "Search using any User's by ph#"
     
+     var helperClass : HelperFunctions = HelperFunctions()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
@@ -122,7 +124,9 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
             self.ref.child("Users").child(self.currentUserId).child("RequestsSent").child(friendUid).setValue(friendDisplayName)
             self.ref.child("Users").child(friendUid).child("Requests").child(self.currentUserId).setValue(self.currentUser)
+            let dummyPostId: String = self.currentUser
             let notificationText: String = self.currentUser + " sent you a friend request"
+            self.helperClass.saveNotification(notificationType: 2, postId: dummyPostId , notificationText: notificationText, useruid: friendUid as! String )
             OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [friendOneSignalId]])
             highLightedCell.addFriend.isEnabled = false
             self.getSentRequests()
@@ -135,21 +139,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         return 65
     }
    
-    @IBAction func Back(_ sender: Any) {
-     
-            
-        let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-        let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
-        mainTabBarView.selectedIndex = 3
-        let transition = CATransition()
-        transition.duration = 0.4
-        transition.type = kCATransitionMoveIn
-        transition.subtype = kCATransitionFromLeft
-        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-        self.present(mainTabBarView, animated: false, completion: nil)
-       
-
-    }
+   
     
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

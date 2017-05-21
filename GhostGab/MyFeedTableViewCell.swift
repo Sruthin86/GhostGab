@@ -428,7 +428,7 @@ class MyFeedTableViewCell: UITableViewCell {
                 
                 self.ref.child("Users").child(deletePostArray["useruid"] as! String).child("posts").child(self.postId!).removeValue()
                 self.ref.child("Posts").child(self.postId!).removeValue()
-                NotificationCenter.default.post(name: .reload, object: nil)
+               
                 NotificationCenter.default.post(name: .reloadposts, object: nil)
                 
             }

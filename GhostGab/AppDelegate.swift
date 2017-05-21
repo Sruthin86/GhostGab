@@ -48,7 +48,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 var additionalData: [AnyHashable: Any]? = payload?.additionalData
                 if additionalData!["actionSelected"] != nil {
                     fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
-                   
+                    
+                    let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+                    let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+                    mainTabBarView.selectedIndex = 4
+                    self.window?.rootViewController = mainTabBarView
+                    self.window?.makeKeyAndVisible()
+                    
+                    
+//                    self.window = UIWindow(frame: UIScreen.main.bounds)
+//                    let storyBoard = UIStoryboard(name: "Profile", bundle: nil)
+//                   // For setting rootViewController
+//                    
+//                    let viewController = storyBoard.instantiateViewController(withIdentifier: "notification_view") as! NotificationViewController
+//                    self.window?.rootViewController = viewController
+//                    
+//                    self.window?.makeKeyAndVisible()
+                    
+                    
+                    
+                    
+                    
                 }
             }
             

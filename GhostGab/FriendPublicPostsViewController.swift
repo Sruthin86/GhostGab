@@ -70,6 +70,7 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         let lightGrey:Color = Color.lightGrey
         let customization :UICostomization = UICostomization(color:lightGrey.getColor(), width:width)
        
+        self.navigationController?.title = ""
      
         refreshControl.addTarget(self, action: #selector(PostViewController.uiRefreshActionControl), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
@@ -127,6 +128,9 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String)
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
         postFeedCell.gabBack.addTarget(self, action: #selector(self.gabBack), for: .touchUpInside)
+        if (self.friendUdid  != self.uid as! String){
+           postFeedCell.deleteButton.isHidden = true
+        }
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){
                 self.selectedInxexPath = indexPath as NSIndexPath?
@@ -167,7 +171,7 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
     
     
     
-    func gabBack(sender: AnyObject) {
+    func gabBack(sender: AnyObject) { // navigate to commentview
         var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[sender.tag]]! as! [String : AnyObject]
         postIdToPass =  self.postKeys[sender.tag]
         
@@ -175,13 +179,7 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         let commentsView  = storybaord.instantiateViewController(withIdentifier: "comments_view") as! CommentsViewController
         commentsView.postId = postIdToPass
         commentsView.thisPostArray = postFeed
-        //trasition from right
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionMoveIn
-        transition.subtype = kCATransitionFromRight
-        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-        self.present(commentsView, animated: false, completion: nil)
+        self.navigationController?.pushViewController(commentsView, animated:true)
     }
     
     
@@ -284,7 +282,13 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
                 
                 var pModel = postModel(posts: snapshot, uid: self.friendUdid!)
                 self.oldPostKeysCount = self.postKeys.count
-                self.postsArray = pModel.returnFriendsPublicPostsForArray() as! [String : AnyObject]
+                 if (self.friendUdid  == self.uid as! String){
+                     self.postsArray = pModel.returnMyPostsForArray() as! [String : AnyObject]
+                }
+                 else{
+                    self.postsArray = pModel.returnFriendsPublicPostsForArray() as! [String : AnyObject]
+                }
+                
                 self.postKeys = pModel.returnPostKeys()
                 self.postKeys = self.postKeys.sorted{ $0 > $1 }
                 self.tableView.reloadData()
@@ -330,37 +334,14 @@ class FriendPublicPostsViewController: UIViewController , UITableViewDelegate, U
         
     }
     
-    
-        
-        
-        
-        
-        
-    
-    
-    
-    
+ 
     
     func reloadTableData(_ notification: Notification) {
         self.getPosts()
     }
     
     
-    @IBAction func back_btn(_ sender: Any) {
-        let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
-        let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
-        friendDetailsView.friendUdid = self.friendUdid
-        //trasition from right
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromLeft
-        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
-        self.present(friendDetailsView, animated: false, completion: nil)
-
-        
-    }
-    
+       
     @IBAction func all_posts(_ sender: Any) {
         
         let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)

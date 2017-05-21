@@ -23,11 +23,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     let ref = FIRDatabase.database().reference()
     
-    var settingsList :[String] = ["The Game","Privacy Policy","Terms Of Service","Contact Us","Edit Profile" ,"Muted Users", "Blocked Users"]
+    var settingsList :[String] = ["Edit Profile" ,"Ghost Guessing", "Muted Users", "Blocked Users","Contact Us", "Privacy Policy","Terms Of Service"]
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        let logo = UIImage(named: "Logo.png")
+        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 37, height: 39))
+        imageView.contentMode = .scaleAspectFit
+        imageView = UIImageView(image:logo)
+        self.navigationController?.navigationBar.topItem?.titleView = imageView
         
         // Do any additional setup after loading the view.
     }
@@ -97,51 +105,28 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var selectedInt : Int = indexPath.row
-        var settingsList :[String] = ["The Game","Privacy Policy","Terms Of Service","Contact Us","Edit Profile" ,"Muted Users", "Blocked Users"]
-        if(settingsList[selectedInt] == "The Game" ){
+        //var settingsList :[String] = ["The Game","Privacy Policy","Terms Of Service","Contact Us","Edit Profile" ,"Muted Users", "Blocked Users"]
+        if(settingsList[selectedInt] == "Ghost Guessing" ){
             let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
             let theGameView  = storybaord.instantiateViewController(withIdentifier: "game") as! HelpViewController
             //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(theGameView, animated: false, completion: nil)
+            self.navigationController?.pushViewController(theGameView, animated: true)
         }
         else if(settingsList[selectedInt] == "Privacy Policy" ){
-//            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-//            let privacyView  = storybaord.instantiateViewController(withIdentifier: "privacy") as! PrivacyPolocyViewController
-//            //trasition from right
-//            let transition = CATransition()
-//            
-//            transition.duration = 0.3
-//            
-//            transition.type = kCATransitionPush
-//            transition.subtype = kCATransitionFromRight
-//            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-//            self.present(privacyView, animated: false, completion: nil)
+            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+            let privacyView  = storybaord.instantiateViewController(withIdentifier: "privacy") as! PrivacyPolocyViewController
+            //trasition from right
+            self.navigationController?.pushViewController(privacyView, animated: true)
             
             
-            let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
-            let privacyView = storyboard.instantiateViewController(withIdentifier: "privacy") as! PrivacyPolocyViewController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            
-            UIView.transition(with: appDelegate.window!, duration: 0.5, options: .transitionFlipFromLeft , animations: { () -> Void in
-                appDelegate.window!.rootViewController = privacyView
-            }, completion:nil)
+          
             
         }
         else if(settingsList[selectedInt] == "Terms Of Service" ){
             let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
             let termsView  = storybaord.instantiateViewController(withIdentifier: "terms") as! TermsAndServicesViewController
             //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(termsView, animated: false, completion: nil)
+            self.navigationController?.pushViewController(termsView, animated: true)
             
         }
         else if(settingsList[selectedInt] == "Contact Us" ){
@@ -151,35 +136,20 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
             let editView  = storybaord.instantiateViewController(withIdentifier: "edit") as! EditViewController
             //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(editView, animated: false, completion: nil)
+            self.navigationController?.pushViewController(editView, animated: true)
             
         }
         else if(settingsList[selectedInt] == "Muted Users" ){
             let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
             let unMuteView  = storybaord.instantiateViewController(withIdentifier: "unmute") as! UnMuteViewController
             //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(unMuteView, animated: false, completion: nil)
+            self.navigationController?.pushViewController(unMuteView, animated: true)
         }
         else if(settingsList[selectedInt] == "Blocked Users" ){
             let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
             let unBlockView  = storybaord.instantiateViewController(withIdentifier: "unblock") as! UnBlockViewController
             //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(unBlockView, animated: false, completion: nil)
+            self.navigationController?.pushViewController(unBlockView, animated: true)
         }
     }
     

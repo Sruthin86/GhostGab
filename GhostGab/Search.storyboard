@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YjF-Hx-2t6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QNL-CM-SV2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--Requests Suggestions View Controller-->
         <scene sceneID="v5q-Ts-JbD">
             <objects>
                 <viewController storyboardIdentifier="RequestAndSuggest" id="YjF-Hx-2t6" customClass="RequestsSuggestionsViewController" customModule="GhostGab" customModuleProvider="target" sceneMemberID="viewController">
@@ -67,10 +67,10 @@
                                         <rect key="frame" x="0.0" y="55" width="383" height="55"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YL-kk-iGo">
-                                                <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="55"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBL-aH-vyC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Requests"/>
                                                         <connections>
@@ -87,10 +87,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZZ-Kr-LAr">
-                                                <rect key="frame" x="191.5" y="0.0" width="191.5" height="55"/>
+                                                <rect key="frame" x="192" y="0.0" width="191" height="55"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-gR-Um3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="55"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="191" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                         <state key="normal" title="Suggestions"/>
                                                         <connections>
@@ -202,7 +202,7 @@
                             <constraint firstItem="KKj-pb-fUI" firstAttribute="leading" secondItem="4ic-qo-snu" secondAttribute="leadingMargin" constant="-20" id="zLS-Rt-dEp"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Search" image="SearchFriendsIcon@1x" selectedImage="SearchFriendsIcon_inactive@1x" id="vhi-uT-TEM"/>
+                    <navigationItem key="navigationItem" id="zd5-O1-m8l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -216,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N5A-9N-wVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4672" y="-647"/>
+            <point key="canvasLocation" x="5610.3999999999996" y="-647.22638680659679"/>
         </scene>
         <!--Search Friends View Controller-->
         <scene sceneID="Ud2-ri-kdI">
@@ -247,14 +247,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="msV-b6-KZY">
-                                <rect key="frame" x="168" y="20" width="39" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="msV-b6-KZY" secondAttribute="height" multiplier="39:41" id="fb6-iT-jY0"/>
-                                    <constraint firstAttribute="height" constant="41" id="jfa-Td-DnT"/>
-                                    <constraint firstAttribute="width" constant="39" id="lZp-Ii-B6C"/>
-                                </constraints>
-                            </imageView>
                             <searchBar contentMode="redraw" placeholder="Search using Ph#" translatesAutoresizingMaskIntoConstraints="NO" id="Evh-na-Vn5">
                                 <rect key="frame" x="0.0" y="65" width="375" height="44"/>
                                 <color key="barTintColor" red="0.0" green="0.66274509800000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
@@ -334,10 +326,8 @@
                             <constraint firstAttribute="trailing" secondItem="MEA-y2-KR0" secondAttribute="trailing" id="aDo-Sa-8hf"/>
                             <constraint firstItem="Evh-na-Vn5" firstAttribute="top" secondItem="MEA-y2-KR0" secondAttribute="bottom" id="arJ-T6-TrC"/>
                             <constraint firstItem="MEA-y2-KR0" firstAttribute="leading" secondItem="7rP-JL-yXR" secondAttribute="leading" id="ghb-3r-FOP"/>
-                            <constraint firstItem="msV-b6-KZY" firstAttribute="top" secondItem="7rP-JL-yXR" secondAttribute="topMargin" constant="20" id="hfF-iF-TPF"/>
                             <constraint firstItem="uQU-dK-lz4" firstAttribute="top" secondItem="Evh-na-Vn5" secondAttribute="bottom" id="k9d-XU-bL4"/>
                             <constraint firstAttribute="trailing" secondItem="uQU-dK-lz4" secondAttribute="trailing" id="kzU-zr-C4r"/>
-                            <constraint firstItem="msV-b6-KZY" firstAttribute="centerX" secondItem="7rP-JL-yXR" secondAttribute="centerX" id="pi8-fU-QCO"/>
                             <constraint firstItem="MEA-y2-KR0" firstAttribute="centerX" secondItem="7rP-JL-yXR" secondAttribute="centerX" id="yt9-Lo-Ee9"/>
                         </constraints>
                     </view>
@@ -348,16 +338,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0W-ve-S1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5733.6000000000004" y="-643.62818590704649"/>
+            <point key="canvasLocation" x="6672.8000000000002" y="-643.62818590704649"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="OOF-2Q-3AK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QNL-CM-SV2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="Search" image="SearchFriendsIcon@1x" selectedImage="SearchFriendsIcon_inactive@1x" id="vhi-uT-TEM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hfK-46-hKi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.65098041299999998" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YjF-Hx-2t6" kind="relationship" relationship="rootViewController" id="HU9-SQ-dCH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WeQ-OQ-3Pv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4671.1999999999998" y="-647.22638680659679"/>
         </scene>
     </scenes>
     <resources>
         <image name="BackButton" width="12" height="23"/>
-        <image name="Check" width="33" height="33"/>
+        <image name="Check" width="879" height="879"/>
         <image name="GreyCheck" width="19" height="14"/>
-        <image name="Logo" width="132" height="136"/>
-        <image name="Plus" width="33" height="33"/>
-        <image name="Remove Button" width="33" height="33"/>
+        <image name="Logo" width="44" height="46"/>
+        <image name="Plus" width="879" height="879"/>
+        <image name="Remove Button" width="879" height="879"/>
         <image name="SearchFriendsIcon@1x" width="17" height="28"/>
         <image name="SearchFriendsIcon_inactive@1x" width="17" height="28"/>
     </resources>

@@ -35,6 +35,16 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        let logo = UIImage(named: "Logo.png")
+        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 37, height: 39))
+        imageView.contentMode = .scaleAspectFit
+        imageView = UIImageView(image:logo)
+        self.navigationController?.navigationBar.topItem?.titleView = imageView
+        
+        
         self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
         self.spinner?.showOverlayNew(alphaValue: 1)
         self.tableView.delegate = self
@@ -159,19 +169,12 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             friendUdidToPass =  self.friendsArrayKey[currIndexPath.row]
         }
         var overlayView = UIView()
-        var spinner:loadingAnimation = loadingAnimation(overlayView: overlayView, senderView: self.view)
-        spinner.showOverlayNew(alphaValue: 0.5)
         let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
         let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
         friendDetailsView.friendUdid = friendUdidToPass
-        //trasition from right
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromRight
-        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
-        self.present(friendDetailsView, animated: false, completion: nil)
-        spinner.hideOverlayViewNew()
+        self.navigationController?.pushViewController(friendDetailsView, animated:true)
+        
+        
         
         
         
@@ -199,6 +202,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.friendsArray.removeAll()
                 self.friendsArrayKey.removeAll()
                 self.tableView.reloadData()
+                 self.spinner?.hideOverlayViewNew()
             }
             else {
                 self.friendsArray.removeAll()

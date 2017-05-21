@@ -131,7 +131,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         }
         let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
-        mainTabBarView.selectedIndex = 4
+        mainTabBarView.selectedIndex = 2
         self.present(mainTabBarView, animated: true, completion: nil)
         
     }

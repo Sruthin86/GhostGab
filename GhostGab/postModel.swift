@@ -20,7 +20,7 @@ struct postModel {
     var postsArray = [String : AnyObject]()
     var postKeys = [String]()
     let ref = FIRDatabase.database().reference()
-    var radius = 30
+    var radius: Double = 30
     
     init (posts : FIRDataSnapshot, uid:String){
         self.posts = posts
@@ -198,7 +198,7 @@ struct postModel {
                         
                         let distanceInMeters = locationData.distance(from: currentLoaction)
                         let distanceInMiles = distanceInMeters/1609.344
-                        if(distanceInMiles <= 30) {
+                        if(distanceInMiles <= radius) {
                             self.postsArray[key as! String] = val as AnyObject?
                             self.postKeys.append(key as! String)
                         }

@@ -53,6 +53,12 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     let lighrGreen :Color = Color.lightGreen
     
+    var spinner:loadingAnimation?
+    
+    var overlayView = UIView()
+    
+    var helperClass : HelperFunctions = HelperFunctions()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +67,14 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         customization.addBorder(object: self.requestsBtn)
         customization.addBorder(object: self.suggestionsBtn)
         requestsBtn.sendActions(for: .allTouchEvents)
+        
+        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        let logo = UIImage(named: "Logo.png")
+        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 37, height: 39))
+        imageView.contentMode = .scaleAspectFit
+        imageView = UIImageView(image:logo)
+        self.navigationController?.navigationBar.topItem?.titleView = imageView
         
         // Do any additional setup after loading the view.
     }
@@ -223,6 +237,9 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         ref.child("Users").child(currentUserId).child("RequestsSent").child(requestedUserUid).setValue(requestedDisplayName)
         ref.child("Users").child(requestedUserUid).child("Requests").child(currentUserId).setValue(currentUser)
         let notificationText: String = currentUser + " sent you a friend request"
+        let dummyPostId: String = currentUser
+        self.helperClass.saveNotification(notificationType: 2, postId: dummyPostId , notificationText: notificationText, useruid: requestedUserUid as! String )
+        
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [reqOneSignalId]])
         self.fetchContacts()
     }
@@ -237,6 +254,10 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         ref.child("Users").child(currentUserId).child("Requests").child(requestedUserUid).removeValue()
         ref.child("Users").child(requestedUserUid).child("RequestsSent").child(currentUserId).removeValue()
         let notificationText: String = currentUser + " Accepted you'r friend request"
+        
+        let dummyPostId: String = currentUser
+        self.helperClass.saveNotification(notificationType: 0, postId: dummyPostId , notificationText: notificationText, useruid: requestedUserUid as! String )
+        
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [friendOneSignalId]])
     }
     
@@ -244,6 +265,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     
     @IBAction func showRequests(_ sender: Any) {
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        self.spinner?.showOverlayNew(alphaValue: 1)
         let greenGustomization : UICostomization = UICostomization(color: green.getColor(), width: width )
         greenGustomization.addBackground(object: self.requestsBtn)
         self.requestsBtn.tintColor = white.getColor()
@@ -257,7 +280,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         ref.child("Users").child(currentUserId).child("Requests").observe(FIRDataEventType.value, with: { (snapshot) in
             
             if (!snapshot.exists()){
-                
+                self.spinner?.hideOverlayViewNew()
                 self.requestsArray.removeAll()
                 self.requestsArrayKey.removeAll()
                 self.tableView.reloadData()
@@ -277,10 +300,11 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                             self.requestsArrayKey.append(key as! String)
                             self.requestsArray[key as! String] = data as AnyObject?
                             self.tableView.reloadData()
+                             self.spinner?.hideOverlayViewNew()
                         }
                             
                         else {
-                            
+                            self.spinner?.hideOverlayViewNew() 
                             
                         }
                     })
@@ -297,6 +321,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     
     
     @IBAction func suggestions(_ sender: AnyObject) {
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        self.spinner?.showOverlayNew(alphaValue: 1)
         requestsFlag = false;
         suggestionsFlag = true
         self.requestsArray.removeAll()
@@ -320,13 +346,14 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             case .notDetermined:
                 self.contactStore.requestAccess(for: .contacts){succeeded, err in
                     guard err == nil && succeeded else{
+                        self.spinner?.hideOverlayViewNew()
                         let notAuthorizedMessage = "Please Allow Ghost Gossip to access contacts . You can do it in Setting->Privacy->Contacts"
                         return
                     }
                     
                 }
             default:
-                
+                 self.spinner?.hideOverlayViewNew()
                 let notAuthorizedMessage = "Please Allow Ghost Gossip to access contacts . You can do it in Setting->Privacy->Contacts"
             }
         }
@@ -339,6 +366,8 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
     // to fetch contacts
     
     func fetchContacts() {
+        self.suggestionsArrayKey.removeAll()
+        self.suggestionsArray.removeAll()
         var iteratorKey: Int = 0
         let toFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
         let request = CNContactFetchRequest(keysToFetch: toFetch as [CNKeyDescriptor])
@@ -412,18 +441,22 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
                                                 self.suggestionsArrayKey.append(suggestionsData.key as! String)
                                                 self.suggestionsArray[suggestionsData.key as! String] = suggestionsData.value as! NSDictionary
                                             }
+                                            self.spinner?.hideOverlayViewNew()
                                             self.tableView.reloadData()
                                            
                                             
                                         }
                                         
                                     }
+                                    else {
+                                         self.spinner?.hideOverlayViewNew()
+                                    }
                                     
                                 })
                                 
                             }
                             else {
-                                
+                                 self.spinner?.hideOverlayViewNew()
                                 
                             }
                             
@@ -436,6 +469,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
             
             
         } catch let err{
+             self.spinner?.hideOverlayViewNew()
             print(err)
         }
         
@@ -446,13 +480,7 @@ class RequestsSuggestionsViewController: UIViewController , UITableViewDelegate,
         
         let storybaord: UIStoryboard = UIStoryboard(name: "Search", bundle: nil)
         let SearchView  = storybaord.instantiateViewController(withIdentifier: "SearchUser") as! SearchFriendsViewController
-        let transition = CATransition()
-        transition.duration = 0.4
-        transition.type = kCATransitionMoveIn
-        transition.subtype = kCATransitionFromRight
-        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-        self.present(SearchView, animated: false, completion: nil)
-        
+        self.navigationController?.pushViewController(SearchView, animated: true)
     }
     
 }

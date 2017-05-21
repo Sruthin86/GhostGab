@@ -11,6 +11,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "PostViewController.handleNameTap(sender : UITapGestureRecognizer) -&gt; ():PostViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "postIdToPass">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "postModel.returnPostsForArray(friendsArray : [AnyObject]) -&gt; NSDictionary:postModel.swift">
          <PersistentStrings>
             <PersistentString

@@ -98,37 +98,43 @@ class HelperFunctions {
             postRef.observeSingleEvent(of: FIRDataEventType.value , with:{ (snapshot) in
                 let pData = snapshot.value as![String: AnyObject]
                 let reactions = pData["reactionsData"]as![String: AnyObject]
-                
+                let pUid = pData["useruid"]
                 switch Reaction {
                 case 1:
                     var rec1 = reactions["Reaction1"] as! Int
                     rec1 -= 1
                     postRef.child("reactionsData").child("Reaction1").setValue(rec1)
+                    self.updateCash(cashUid: pUid as! String, cash: -2)
                     break
                 case 2:
                     var rec2 = reactions["Reaction2"] as! Int
                     rec2 -= 1
                     postRef.child("reactionsData").child("Reaction2").setValue(rec2)
+                     self.updateCash(cashUid: pUid as! String, cash: 1)
                     break
                 case 3:
                     var rec3 = reactions["Reaction3"] as! Int
                     rec3 -= 1
                     postRef.child("reactionsData").child("Reaction3").setValue(rec3)
+                    self.updateCash(cashUid: pUid as! String, cash: -3)
                     break
                 case 4:
                     var rec4 = reactions["Reaction4"] as! Int
                     rec4 -= 1
                     postRef.child("reactionsData").child("Reaction4").setValue(rec4)
+                    self.updateCash(cashUid: pUid as! String, cash: -3)
                     break
                 case 5:
                     var rec5 = reactions["Reaction5"] as! Int
                     rec5 -= 1
                     postRef.child("reactionsData").child("Reaction5").setValue(rec5)
+                    self.updateCash(cashUid: pUid as! String, cash: -1)
                     break
                 case 6:
                     var rec6 = reactions["Reaction6"] as! Int
                     rec6 -= 1
                     postRef.child("reactionsData").child("Reaction6").setValue(rec6)
+                    self.updateCash(cashUid: pUid as! String, cash: 2)
                     break
                     
                 default:
@@ -142,31 +148,37 @@ class HelperFunctions {
                     var rec1 = reactions["Reaction1"] as! Int
                     rec1 += 1
                     postRef.child("reactionsData").child("Reaction1").setValue(rec1)
+                    self.updateCash(cashUid: pUid as! String, cash: 2)
                     break
                 case 2:
                     var rec2 = reactions["Reaction2"] as! Int
                     rec2 += 1
                     postRef.child("reactionsData").child("Reaction2").setValue(rec2)
+                    self.updateCash(cashUid: pUid as! String, cash: -1)
                     break
                 case 3:
                     var rec3 = reactions["Reaction3"] as! Int
                     rec3 += 1
                     postRef.child("reactionsData").child("Reaction3").setValue(rec3)
+                    self.updateCash(cashUid: pUid as! String, cash: 3)
                     break
                 case 4:
                     var rec4 = reactions["Reaction4"] as! Int
                     rec4 += 1
                     postRef.child("reactionsData").child("Reaction4").setValue(rec4)
+                    self.updateCash(cashUid: pUid as! String, cash: 3)
                     break
                 case 5:
                     var rec5 = reactions["Reaction5"] as! Int
                     rec5 += 1
                     postRef.child("reactionsData").child("Reaction5").setValue(rec5)
+                    self.updateCash(cashUid: pUid as! String, cash: 1)
                     break
                 case 6:
                     var rec6 = reactions["Reaction6"] as! Int
                     rec6 += 1
                     postRef.child("reactionsData").child("Reaction6").setValue(rec6)
+                    self.updateCash(cashUid: pUid as! String, cash: -2)
                     break
                 default:
                     break
@@ -182,6 +194,18 @@ class HelperFunctions {
         }
     }
     
+    
+    func updateCash(cashUid:String, cash:Int) {
+        self.ref.child("Users").child(cashUid).child("cash").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.exists()){
+                var cashCount: String = snapshot.value as! String
+                var count: Int = Int(cashCount)!
+                count =  count + cash
+                cashCount = String(describing: count)
+                self.ref.child("Users").child(cashUid).child("cash").setValue(cashCount)
+            }
+        })
+    }
     
     func updatePostFlag(postId:String, uid:String) {
         
@@ -325,7 +349,7 @@ class HelperFunctions {
                 
                 self.ref.child("Users").child(deletePostArray["useruid"] as! String).child("posts").child(postId).removeValue()
                 self.ref.child("Posts").child(postId).removeValue()
-                NotificationCenter.default.post(name: .reload, object: nil)
+                NotificationCenter.default.post(name: .reloadFriendposts, object: nil)
                 NotificationCenter.default.post(name: .reloadposts, object: nil)
                 
             }
@@ -503,4 +527,22 @@ class HelperFunctions {
         
     }
     
+    func saveNotification(notificationType:Int , postId: String , notificationText:String, useruid:String ) {
+
+        let currentDateToString: String = self.returnCurrentDateinString()
+        
+        let notificationData : [String: AnyObject] = ["notificationText":notificationText as AnyObject , "notificationType": notificationType as AnyObject, "postId":postId as AnyObject,  "notificationDate":currentDateToString as AnyObject, "isOpened": false as Bool as AnyObject ,"timestamp":NSDate().timeIntervalSince1970 as AnyObject]
+        
+        let notificationDataRef = self.ref.child("Users").child(useruid).child("Notifications").childByAutoId()
+        notificationDataRef.setValue(notificationData)
+     
+    }
+    
+    func deleteNotification(notificationId:String, useruid:String){
+        self.ref.child("Users").child(useruid).child("Notifications").child(notificationId).removeValue()
+        NotificationCenter.default.post(name: .reloadNotifications, object: nil)
+        
+    }
+    
+       
 }

@@ -21,6 +21,8 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         var oneSignalId:String?
         super.viewDidLoad()
+        
+      // self.view.backgroundColor = UIColor(patternImage: UIImage(named:"background")!)
 
     }
     

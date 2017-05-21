@@ -24,6 +24,8 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     let green : Color = Color.green
     
+    let white : Color = Color.white
+    
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var displayName: UILabel!
@@ -43,6 +45,7 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     var friendDisplayName: String = ""
     
     var friendDetailsList :[String] = ["View public Gabs", "Friends" ,"Unfriend","Mute User","Block User","Report User"]
+    var friendDetailsIconList :[String] = ["f_view.png", "f_friends.png" ,"f_unfriend.png","f_mute.png","f_block.png","f_report.png"]
     var overlayView = UIView()
     var spinner:loadingAnimation?
     override func viewDidLoad() {
@@ -51,6 +54,7 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
         self.spinner?.showOverlayNew(alphaValue: 1)
         self.getFriendDetails()
+        self.navigationItem.title = ""
 
         
     }
@@ -71,17 +75,13 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         let friendDetailsCell = tableView.dequeueReusableCell(withIdentifier: "friend_details_cell", for: indexPath) as! FriendDetailsTableViewCell
         
         friendDetailsCell.cellLabel.text = friendDetailsList[indexPath.row]
-        //friendDetailsCell.cell_image.isHidden = true
-        if(friendDetailsList[indexPath.row] == "View public Gabs" || friendDetailsList[indexPath.row] == "Friends" ){
-            //friendDetailsCell.cell_image.isHidden = false
-        }
+        friendDetailsCell.cellImage.image = UIImage(named: friendDetailsIconList[indexPath.row])!
+        
         
         return friendDetailsCell
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        //
-    }
+   
     
     
     func getFriendDetails() {
@@ -109,6 +109,7 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
                                     
                                     if(userFriends[self.friendUdid] == nil){
                                         self.friendDetailsList[2] = "Add Friend"
+                                        self.friendDetailsIconList[2] = "f_addfriend"
                                         self.tableView.reloadData()
                                         
                                     }
@@ -124,26 +125,18 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
                 self.profileImage.clipsToBounds = true;
                 self.profileImage.layer.cornerRadius  = self.profileImage.frame.width/2
                 self.profileImage.clipsToBounds = true;
-                let customization: UICostomization  = UICostomization(color:self.green.getColor(), width: 5 )
+                let customization: UICostomization  = UICostomization(color:self.white.getColor(), width: 5 )
                 customization.addBorder(object: self.profileImage)
                 
                 
             }
+            else {
+                
+                print("no record found")
+            }
         })
     }
-    @IBAction func back_btn(_ sender: Any) {
-        
-        let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-        let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
-        mainTabBarView.selectedIndex = 1
-        let transition = CATransition()
-        transition.duration = 0.28
-        transition.type = kCATransitionMoveIn
-        transition.subtype = kCATransitionFromLeft
-        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-        self.present(mainTabBarView, animated: false, completion: nil)
-    }
-    
+   
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let seletedIndex = indexPath.row
@@ -152,24 +145,14 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
             let friendPublicPostView  = storybaord.instantiateViewController(withIdentifier: "friend_public_post") as! FriendPublicPostsViewController
             friendPublicPostView.friendUdid = self.friendUdid
             //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(friendPublicPostView, animated: false, completion: nil)
+            self.navigationController?.pushViewController(friendPublicPostView, animated:true)
         }
         else if(self.friendDetailsList[seletedIndex] == "Friends"){
             let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
             let friendOfFriendView  = storybaord.instantiateViewController(withIdentifier: "FriendsOfFriend") as! FriendsOfFriendViewController
             friendOfFriendView.friendUdid = self.friendUdid
             //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(friendOfFriendView, animated: false, completion: nil)
+            self.navigationController?.pushViewController(friendOfFriendView, animated:true)
         }
         else if(self.friendDetailsList[seletedIndex] == "Unfriend"){
             self.unfriend()
@@ -195,6 +178,8 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         ref.child("Users").child(self.uid as! String).child("RequestsSent").child(self.friendUdid!).setValue(self.friendDisplayName)
         ref.child("Users").child(self.friendUdid!).child("Requests").child(self.uid as! String).setValue(self.currentUserDisplayName)
         let notificationText: String = self.currentUserDisplayName + " sent you a friend request"
+        let dummyPostId: String = self.currentUserDisplayName
+        self.helperClass.saveNotification(notificationType: 2, postId: dummyPostId , notificationText: notificationText, useruid: self.friendUdid! )
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [self.friendOneSignalId]])
         let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
         let appearance = SCLAlertView.SCLAppearance(
@@ -225,17 +210,32 @@ class FriendDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func unfriend() {
-        self.ref.child("Users").child(uid as! String).child("Friends").child(friendUdid!).removeValue()
-        self.ref.child("Users").child(friendUdid!).child("Friends").child(uid as! String).removeValue()
-        let checkAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        
+        let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
         )
         let alertView = SCLAlertView(appearance: appearance)
-        alertView.addButton("Okay") {
+        alertView.addButton("Yes", target:self, selector:Selector("conformUnfriend"))
+        alertView.addButton("No") {
             
+            print("Second button tapped")
         }
-        alertView.showInfo("Unfriended", subTitle: "This user has been removed from your friends list. You will not see their activity in your timeline" , circleIconImage:checkAletViewImage)
+        alertView.showError("Are you sure!!", subTitle: "Do you want to unfriend this user" , circleIconImage:errorAletViewImage)
+        
+        
+    
+    
+        
+      
+        
+    }
+    
+    func conformUnfriend(){
+        self.ref.child("Users").child(uid as! String).child("Friends").child(friendUdid!).removeValue()
+        self.ref.child("Users").child(friendUdid!).child("Friends").child(uid as! String).removeValue()
+        self.getFriendDetails()
     }
     
     func muteUser(){

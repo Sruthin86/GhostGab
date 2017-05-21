@@ -117,6 +117,8 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -202,7 +204,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 else{
                     if(self.filteredFriendsArray[indexPath.row] == self.selectdUid ){
                         guessCell.setBackground(colorValue: "lightRed")
-                        if(self.cashCountNumber>=15){
+                        if(self.cashCountNumber>=5){
                             self.cashButton.isEnabled = true
                         }
                     }
@@ -260,18 +262,6 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    @IBAction func back(_ sender: Any) {
-        let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-        let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
-        mainTabBarView.selectedIndex = 0
-        //trasition from left
-        let transition = CATransition()
-        transition.duration = 0.28
-        transition.type = kCATransitionMoveIn
-        transition.subtype = kCATransitionFromLeft
-        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-        self.present(mainTabBarView, animated: false, completion: nil)
-    }
     
     
     
@@ -305,6 +295,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if(index == count){
                     let cashCountString:String = String(self.cashCountNumber)
                     self.ref.child("Users").child(self.currentUserId).child("cash").setValue(cashCountString)
+                   
                 }
             }
             
@@ -312,8 +303,8 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        if(self.cashCountNumber>=15){
-            self.messageLable.text = "You've already guessed once. \nIt'll cost you 10 points in cash to guess again"
+        if(self.cashCountNumber>=5){
+            self.messageLable.text = "You've already guessed once. \nIt'll cost you 5 points in cash to guess again"
             self.cashButton.isEnabled = true
         }
         else {
@@ -415,7 +406,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     self.isShuffled=true
                                     self.tableView.reloadData()
                                     if(!self.correctGuess){
-                                        if(self.cashCountNumber>=15){
+                                        if(self.cashCountNumber>=5){
                                             self.cashButton.isEnabled = true
                                         }
                                         else {
@@ -473,7 +464,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         let correctOneSignalId = correctUser["oneSignalId"] as! String
                         var CorrectPostText: String = thisUserDisplayName + " guessed correctly on your gab ' " + postText + " ' "
-                        
+                         self.helperClass.saveNotification(notificationType: 0, postId: self.postId, notificationText: CorrectPostText, useruid: self.guessPostArray["useruid"] as! String )
                         OneSignal.postNotification(["contents": ["en": CorrectPostText], "include_player_ids": [correctOneSignalId]])
                         
                     }
@@ -486,7 +477,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func sendWrongGuessNotification(){
-        
+        helperClass.updateCash(cashUid: guessPostArray["useruid"] as! String, cash: 3)
         self.ref.child("Users").child(self.currentUserId).observeSingleEvent(of: .value, with: { snapshot in
             if(snapshot.exists()){
                 let thisUser : NSDictionary = snapshot.value as! NSDictionary
@@ -499,7 +490,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         let correctOneSignalId = correctUser["oneSignalId"] as! String
                         var CorrectPostText: String = thisUserDisplayName + " guessed wrong on your gab ' " + postText + " ' "
-                        
+                        self.helperClass.saveNotification(notificationType: 0, postId: self.postId, notificationText: CorrectPostText, useruid: self.guessPostArray["useruid"] as! String )
                         OneSignal.postNotification(["contents": ["en": CorrectPostText], "include_player_ids": [correctOneSignalId]])
                         
                     }
@@ -543,7 +534,7 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.selectdUid = (gData["seledtedUid"] as! String?)!
                 self.correctUid = (gData["postUid"] as! String?)!
                 self.alreadyGuessed = true
-                self.messageLable.text = "You've already guessed once. \nIt'll cost you 15 points in cash to guess again"
+                self.messageLable.text = "You've already guessed once. \nIt'll cost you 5 points in cash to guess again"
                 let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (timer) in
                     self.getFriendsAfterGuessing()
                 }
@@ -561,8 +552,8 @@ class GuessViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     @IBAction func spendCash(_ sender: Any) {
-        if(cashCountNumber>=15){
-            self.decrementCashCount(count:15)
+        if(cashCountNumber>=5){
+            self.decrementCashCount(count:5)
             let newCashVal:String = String(self.cashCountNumber)
             ref.child("Users").child(currentUserId).child("cash").setValue(newCashVal)
             ref.child("Users").child(currentUserId).child("guess").child(postId).removeValue()

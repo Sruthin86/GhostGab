@@ -129,11 +129,19 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
             self.gabsFromfriends.tintColor = white.getColor()
         }
         
-        
+        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        let logo = UIImage(named: "Logo.png")
+        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 37, height: 39))
+        imageView.contentMode = .scaleAspectFit
+        imageView = UIImageView(image:logo)
+        self.navigationController?.navigationBar.topItem?.titleView = imageView
 
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(PostViewController.handlePost))
         postLabelView.addGestureRecognizer(tap)
+        
+       
         refreshControl.addTarget(self, action: #selector(PostViewController.uiRefreshActionControl), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -198,18 +206,19 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if(self.postsArray.keys.count == 0){
-            let textColor: Color = Color.grey
+            let textColor: Color = Color.lightGrey
             let noDataAvailableLabel: UILabel = UILabel(frame: CGRect(x:0, y:300, width:self.tableView.frame.width, height:self.tableView.frame.height) )
             if(self.isLocationSelected && !self.isLocationEnabled){
-                noDataAvailableLabel.text =  "Please enable location in your settings"
+                noDataAvailableLabel.numberOfLines = 4
+                noDataAvailableLabel.text =  "Sorry , there is No Activity in this location!.\n (Please check if location  is enabled in your settings)"
             }
             else {
-              noDataAvailableLabel.text =  "Sorry , there is No Activity yet!"
+              noDataAvailableLabel.text =  "Sorry , there is no activity yet!"
             }
             
             noDataAvailableLabel.textAlignment = .center
             noDataAvailableLabel.textColor =  textColor.getColor()
-            noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:14.0)
+            noDataAvailableLabel.font = UIFont(name: "Avenir-Next", size:12.0)
             self.tableView.backgroundView = noDataAvailableLabel
         }
         else {
@@ -230,14 +239,27 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         postFeedCell.postId = self.postKeys[indexPath.row]
         postFeedCell.postLabel.text  = postFeed["post"] as? String
         postFeedCell.setRepliesText()
-        postFeedCell.setName(type: postFeed["postType"] as! Int, name: postFeed["displayName"] as! String)
+        var type : Int = postFeed["postType"] as! Int
+        if(self.friendsUidArray.count > 0 ){
+            if(isLocationSelected &&  self.friendsUidArray.contains(postFeed["useruid"] as! String) && type == 4) {
+               type = 1
+            }
+        }
+        if(postFeed["useruid"] as! String == self.uid as! String && type == 4){
+            type = 1
+        }
+        postFeedCell.setName(type: type, name: postFeed["displayName"] as! String)
         postFeedCell.dateString.text = helperClass.getDifferenceInDates(postDate: (postFeed["date"]as? String)!)
         postFeedCell.setReactionCount(postId: self.postKeys[indexPath.row])
         postFeedCell.setFlagCount(postId: self.postKeys[indexPath.row])
-        postFeedCell.configureImage(postFeed["useruid"] as! String, postType: postFeed["postType"] as! Int, userPicUrl: postFeed["userPicUrl"] as! String)
+        postFeedCell.configureImage(postFeed["useruid"] as! String, postType: type, userPicUrl: postFeed["userPicUrl"] as! String)
         postFeedCell.reactButton.addTarget(self, action: #selector(self.reactionsActions), for: .touchUpInside)
         postFeedCell.gabBackBtn.tag = indexPath.row
         postFeedCell.gabBackBtn.addTarget(self, action: #selector(self.gabBack), for: .touchUpInside)
+        
+        let postNameLabelTap = UITapGestureRecognizer(target:self, action:#selector(self.handleNameTap(sender:)))
+        postFeedCell.postNameLabel.addGestureRecognizer(postNameLabelTap)
+        
         if  (self.openedPostCellKey != nil ) {
             if (self.postKeys[indexPath.row] ==  self.openedPostCellKey){
                 self.selectedInxexPath = indexPath as NSIndexPath?
@@ -277,45 +299,28 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currIndexPath = tableView.indexPathForSelectedRow!
-        var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[currIndexPath.row]]! as! [String : AnyObject]
-        postIdToPass =  self.postKeys[currIndexPath.row]
 
-
-        if(postFeed["postType"] as! Int == 3){
-            let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
-            let guessView  = storybaord.instantiateViewController(withIdentifier: "guessController") as! GuessViewController
-            guessView.postId = postIdToPass
-            guessView.guessPostArray = postFeed
-            guessView.oriFrinendsKeyArray = Array(self.friendsUidArray)
-            //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(guessView, animated: false, completion: nil)
-
-        }
+    
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if(postFeed["postType"] as! Int == 1 || (postFeed["postType"] as! Int == 4 && !self.isLocationSelected)){
-            let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
-            let friendPostView  = storybaord.instantiateViewController(withIdentifier: "friendPostController") as! FriendPostViewController
-            friendPostView.postId = postIdToPass
-            friendPostView.friendPostArray = postFeed
-            //trasition from right
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionMoveIn
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-            self.present(friendPostView, animated: false, completion: nil)
+        print("inside segue")
+        if segue.identifier == "display_comment_segue" {
+            let cell = sender as! UITableViewCell
+            if let currIndexPath = tableView.indexPath(for: cell) {
+              
+                var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[currIndexPath.row]]! as! [String : AnyObject]
+                postIdToPass =  self.postKeys[currIndexPath.row]
+                let commentsView  = segue.destination as! CommentsViewController
+                commentsView.postId = postIdToPass
+                commentsView.thisPostArray = postFeed
+                    
+              
+            }
             
             
             
         }
-        
     }
     
     
@@ -328,12 +333,7 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         commentsView.postId = postIdToPass
         commentsView.thisPostArray = postFeed
         //trasition from right
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionMoveIn
-        transition.subtype = kCATransitionFromRight
-        view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
-        self.present(commentsView, animated: false, completion: nil)
+        self.navigationController?.pushViewController(commentsView, animated: true)
     }
     
     func reactionsActions(sender: AnyObject) -> Void {
@@ -390,13 +390,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     
     func animateTable() {
-        if(self.isLocationSelected){
-            self.getPostsForLocation()
-        }
-        else {
-            self.getFriends()
-        }
        
+        self.getFriends()
         self.tableView.reloadData()
         let cells = self.tableView.visibleCells
         
@@ -440,7 +435,12 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
 
                 }
             }
-            self.getPosts()
+            if(self.isLocationSelected){
+                self.getPostsForLocation()
+            }
+            else {
+              self.getPosts()
+            }
             // ...
         })
         
@@ -463,15 +463,17 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                 self.tableView.reloadData()
                 
             }else {
-                print("insode posts1")
+              
                 var pModel = postModel(posts: snapshot, uid: self.uid as! String)
                 self.oldPostKeysCount = self.postKeys.count
-                print("insode posts2")
+                
                 self.postsArray = pModel.returnPostsForArray(friendsArray:self.friendsUidArray, mutedUsersDict: self.mutedUserDict) as! [String : AnyObject]
-                print("insode posts3")
+               
                 self.postKeys = pModel.returnPostKeys()
                 self.postKeys = self.postKeys.sorted{ $0 > $1 }
                 self.tableView.reloadData()
+                let top = NSIndexPath(row: Foundation.NSNotFound, section: 0)
+                self.tableView.scrollToRow(at: top as IndexPath, at: .top, animated: true)
                 self.spinner?.hideOverlayViewNew()
                 if( self.oldPostKeysCount == 0) {
                     return
@@ -480,8 +482,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                     return
                 }
                 else if (self.oldPostKeysCount < self.postKeys.count){
-                    let diff : Int = (self.postKeys.count - self.oldPostKeysCount)
-                    self.updateScrollPosition(diff: diff)
+//                    let diff : Int = (self.postKeys.count - self.oldPostKeysCount)
+//                    self.updateScrollPosition(diff: diff)
                     return
                 }
                 else {
@@ -513,6 +515,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                     self.postKeys = pModel.returnPostKeys()
                     self.postKeys = self.postKeys.sorted{ $0 > $1 }
                     self.tableView.reloadData()
+                    let top = NSIndexPath(row: Foundation.NSNotFound, section: 0)
+                    self.tableView.scrollToRow(at: top as IndexPath, at: .top, animated: true)
                     self.spinner?.hideOverlayViewNew()
                     if( self.oldPostKeysCount == 0) {
                         return
@@ -521,8 +525,8 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
                         return
                     }
                     else if (self.oldPostKeysCount < self.postKeys.count){
-                        let diff : Int = (self.postKeys.count - self.oldPostKeysCount)
-                        self.updateScrollPosition(diff: diff)
+//                        let diff : Int = (self.postKeys.count - self.oldPostKeysCount)
+//                        self.updateScrollPosition(diff: diff)
                         return
                     }
                     else {
@@ -591,11 +595,62 @@ class PostViewController: UIViewController , UITableViewDelegate, UITableViewDat
         customization?.addBackground(object: self.gabsFromfriends)
         self.gabsFromfriends.tintColor = green.getColor()
         
-        self.getPostsForLocation()
+        self.getFriends()
         
     }
     
-    
+    func handleNameTap(sender : UITapGestureRecognizer) {
+        
+        let tapLocation = sender.location(in: self.tableView)
+        
+        //using the tapLocation, we retrieve the corresponding indexPath
+        let currIndexPath = self.tableView.indexPathForRow(at: tapLocation)
+        
+        var postFeed :[String: AnyObject] = self.postsArray[self.postKeys[currIndexPath!.row]]! as! [String : AnyObject]
+        postIdToPass =  self.postKeys[(currIndexPath?.row)!]
+        var type : Int = postFeed["postType"] as! Int
+        if(self.friendsUidArray.count > 0 ){
+            if(isLocationSelected &&  self.friendsUidArray.contains(postFeed["useruid"] as! String) && type == 4) {
+                type = 1
+            }
+        }
+        if(postFeed["useruid"] as! String == self.uid as! String && type == 4){
+            type = 1
+        }
+        
+        if(type == 1){
+            if( postFeed["useruid"] as! String == self.uid as! String ){
+                let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+                let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+                mainTabBarView.selectedIndex = 2
+                //trasition from left
+                let transition = CATransition()
+                transition.duration = 0.3
+                transition.type = kCATransitionPush
+                transition.subtype = kCATransitionFromRight
+                view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+                self.present(mainTabBarView, animated: false, completion: nil)
+            }
+            else {
+                let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+                let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
+                friendDetailsView.friendUdid = postFeed["useruid"] as! String
+                self.navigationController?.pushViewController(friendDetailsView, animated:true)
+            }
+           
+        }
+        else if(type == 3 ){
+            let storybaord: UIStoryboard = UIStoryboard(name: "Posts", bundle: nil)
+            let guessView  = storybaord.instantiateViewController(withIdentifier: "guessController") as! GuessViewController
+            guessView.postId = postIdToPass
+            guessView.guessPostArray = postFeed
+            guessView.oriFrinendsKeyArray = Array(self.friendsUidArray)
+            self.navigationController?.pushViewController(guessView, animated:true)
+        }
+        
+        
+        
+    }
     
     
     

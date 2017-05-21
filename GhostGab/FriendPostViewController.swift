@@ -414,15 +414,31 @@ class FriendPostViewController: UIViewController {
     }
 
     func sendToUserDetailsPage(){
-        let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
-        let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
-        friendDetailsView.friendUdid = origianlPostUserId
-        //trasition from right
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromRight
-        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
-        self.present(friendDetailsView, animated: false, completion: nil)
+        
+        if(origianlPostUserId == self.uid as! String){
+            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+            let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+            mainTabBarView.selectedIndex = 2
+            //trasition from left
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+            self.present(mainTabBarView, animated: false, completion: nil)
+            
+        }
+        else {
+            let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+            let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
+            friendDetailsView.friendUdid = origianlPostUserId
+            //trasition from right
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            self.view.window!.layer.add(transition, forKey: kCATransitionPush)
+            self.present(friendDetailsView, animated: false, completion: nil)
+        }
     }
 }

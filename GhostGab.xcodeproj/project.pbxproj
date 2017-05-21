@@ -20,6 +20,7 @@
 		561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */; };
 		561BD5461DEBA4D000CB266C /* GuessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5451DEBA4D000CB266C /* GuessViewController.swift */; };
 		561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */; };
+		564CFD871E6B1FD700EC7740 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CFD861E6B1FD700EC7740 /* Chat.storyboard */; };
 		566C74981E53FB71000C9FA6 /* FriendsOfFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C74971E53FB71000C9FA6 /* FriendsOfFriendViewController.swift */; };
 		566C749A1E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C74991E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift */; };
 		566C81231E477F7B004700BD /* twitterLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C81221E477F7B004700BD /* twitterLoadingViewController.swift */; };
@@ -34,7 +35,6 @@
 		568771FD1DE0B53D00129401 /* GhostGabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568771FC1DE0B53D00129401 /* GhostGabTests.swift */; };
 		568772081DE0B53D00129401 /* GhostGabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568772071DE0B53D00129401 /* GhostGabUITests.swift */; };
 		568772181DE0B77D00129401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568772171DE0B77D00129401 /* Main.storyboard */; };
-		5687721A1DE0B78900129401 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568772191DE0B78900129401 /* Dashboard.storyboard */; };
 		5687721C1DE0B79200129401 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5687721B1DE0B79200129401 /* Profile.storyboard */; };
 		5687721E1DE0B79C00129401 /* Posts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5687721D1DE0B79C00129401 /* Posts.storyboard */; };
 		568772201DE0B7BE00129401 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5687721F1DE0B7BE00129401 /* Friends.storyboard */; };
@@ -65,8 +65,11 @@
 		568772521DE0BB3300129401 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568772511DE0BB3300129401 /* UserModel.swift */; };
 		568772541DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568772531DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift */; };
 		568772561DE0BB6500129401 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568772551DE0BB6500129401 /* VerificationViewController.swift */; };
+		568B55791E63B0C900AEB9DB /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568B55781E63B0C900AEB9DB /* Dashboard.storyboard */; };
 		568FCC891E0431770011F037 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568FCC881E0431770011F037 /* InitialViewController.swift */; };
 		568FCC8B1E07097F0011F037 /* FriendPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */; };
+		569D23A61E5BBEDC0008AF63 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D23A51E5BBEDC0008AF63 /* NotificationTableViewCell.swift */; };
+		569D23A81E5BBEF00008AF63 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D23A71E5BBEF00008AF63 /* NotificationViewController.swift */; };
 		56BE945E1E36F4DF0075E8BC /* TermsAndServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */; };
 		56BE94601E36F4F70075E8BC /* PrivacyPolocyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */; };
 		56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BE94611E36F5080075E8BC /* HelpViewController.swift */; };
@@ -112,6 +115,7 @@
 		561BD5431DE77B0E00CB266C /* SearchUsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersTableViewCell.swift; sourceTree = "<group>"; };
 		561BD5451DEBA4D000CB266C /* GuessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessViewController.swift; sourceTree = "<group>"; };
 		561BD5471DEBA4DE00CB266C /* GuessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuessTableViewCell.swift; sourceTree = "<group>"; };
+		564CFD861E6B1FD700EC7740 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		566C74971E53FB71000C9FA6 /* FriendsOfFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsOfFriendViewController.swift; sourceTree = "<group>"; };
 		566C74991E53FB83000C9FA6 /* FriendsOfFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsOfFriendTableViewCell.swift; sourceTree = "<group>"; };
 		566C81221E477F7B004700BD /* twitterLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twitterLoadingViewController.swift; sourceTree = "<group>"; };
@@ -132,7 +136,6 @@
 		568772071DE0B53D00129401 /* GhostGabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostGabUITests.swift; sourceTree = "<group>"; };
 		568772091DE0B53D00129401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		568772171DE0B77D00129401 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		568772191DE0B78900129401 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		5687721B1DE0B79200129401 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		5687721D1DE0B79C00129401 /* Posts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Posts.storyboard; sourceTree = "<group>"; };
 		5687721F1DE0B7BE00129401 /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
@@ -164,8 +167,11 @@
 		568772531DE0BB4B00129401 /* UserNameAndPhoneNoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameAndPhoneNoViewController.swift; sourceTree = "<group>"; };
 		568772551DE0BB6500129401 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
 		568772571DE0CAC100129401 /* GhostGab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GhostGab.entitlements; sourceTree = "<group>"; };
+		568B55781E63B0C900AEB9DB /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		568FCC881E0431770011F037 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		568FCC8A1E07097F0011F037 /* FriendPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendPostViewController.swift; sourceTree = "<group>"; };
+		569D23A51E5BBEDC0008AF63 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		569D23A71E5BBEF00008AF63 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		56BE945D1E36F4DF0075E8BC /* TermsAndServicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewController.swift; sourceTree = "<group>"; };
 		56BE945F1E36F4F70075E8BC /* PrivacyPolocyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolocyViewController.swift; sourceTree = "<group>"; };
 		56BE94611E36F5080075E8BC /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
@@ -268,7 +274,8 @@
 				568772571DE0CAC100129401 /* GhostGab.entitlements */,
 				56BE94631E3BA2A10075E8BC /* GoogleService-Info.plist */,
 				568771F31DE0B53C00129401 /* Info.plist */,
-				568772191DE0B78900129401 /* Dashboard.storyboard */,
+				564CFD861E6B1FD700EC7740 /* Chat.storyboard */,
+				568B55781E63B0C900AEB9DB /* Dashboard.storyboard */,
 				5687721F1DE0B7BE00129401 /* Friends.storyboard */,
 				568772171DE0B77D00129401 /* Main.storyboard */,
 				5687721D1DE0B79C00129401 /* Posts.storyboard */,
@@ -302,6 +309,8 @@
 				568151021E48ECC2000232F7 /* LoginWithEmailViewController.swift */,
 				5687723D1DE0BA2000129401 /* MainTabBarViewController.swift */,
 				5687723F1DE0BA3800129401 /* MyFeedTableViewCell.swift */,
+				569D23A51E5BBEDC0008AF63 /* NotificationTableViewCell.swift */,
+				569D23A71E5BBEF00008AF63 /* NotificationViewController.swift */,
 				568772411DE0BA5000129401 /* PostCellTableViewCell.swift */,
 				568772431DE0BA6D00129401 /* postModel.swift */,
 				568772451DE0BA8900129401 /* PostViewController.swift */,
@@ -486,11 +495,12 @@
 				5687721C1DE0B79200129401 /* Profile.storyboard in Resources */,
 				568771F21DE0B53C00129401 /* LaunchScreen.storyboard in Resources */,
 				56BE94641E3BA2A10075E8BC /* GoogleService-Info.plist in Resources */,
-				5687721A1DE0B78900129401 /* Dashboard.storyboard in Resources */,
 				568772221DE0B7C600129401 /* Search.storyboard in Resources */,
 				568772201DE0B7BE00129401 /* Friends.storyboard in Resources */,
 				568771EF1DE0B53C00129401 /* Assets.xcassets in Resources */,
 				568772181DE0B77D00129401 /* Main.storyboard in Resources */,
+				568B55791E63B0C900AEB9DB /* Dashboard.storyboard in Resources */,
+				564CFD871E6B1FD700EC7740 /* Chat.storyboard in Resources */,
 				5687721E1DE0B79C00129401 /* Posts.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,6 +660,7 @@
 				56D0A2CB1E58B0760096D9C4 /* CommentsTableViewCell.swift in Sources */,
 				568772381DE0B9A000129401 /* FriendsViewController.swift in Sources */,
 				568151051E496921000232F7 /* EditViewController.swift in Sources */,
+				569D23A61E5BBEDC0008AF63 /* NotificationTableViewCell.swift in Sources */,
 				56BE94621E36F5080075E8BC /* HelpViewController.swift in Sources */,
 				568772521DE0BB3300129401 /* UserModel.swift in Sources */,
 				56BE945E1E36F4DF0075E8BC /* TermsAndServicesViewController.swift in Sources */,
@@ -666,6 +677,7 @@
 				561BD5441DE77B0E00CB266C /* SearchUsersTableViewCell.swift in Sources */,
 				561715F01E511FA900EFE28E /* UnMuteTableViewCell.swift in Sources */,
 				568772501DE0BB2000129401 /* UICostomization.swift in Sources */,
+				569D23A81E5BBEF00008AF63 /* NotificationViewController.swift in Sources */,
 				568772321DE0B95800129401 /* Color.swift in Sources */,
 				561BD5481DEBA4DE00CB266C /* GuessTableViewCell.swift in Sources */,
 				5687723C1DE0B9F300129401 /* loadingAnimation.swift in Sources */,

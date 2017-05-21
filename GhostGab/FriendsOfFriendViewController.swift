@@ -27,9 +27,18 @@ class FriendsOfFriendViewController: UIViewController, UITableViewDelegate, UITa
     
     var currentUserDisplayName: String?
     
+    var spinner:loadingAnimation?
+    
+    var overlayView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.spinner  = loadingAnimation(overlayView: overlayView, senderView: self.view)
+        
+        self.spinner?.showOverlayNew(alphaValue: 1)
         self.getFriends()
+        
+        self.navigationItem.title = ""
         // Do any additional setup after loading the view.
     }
     
@@ -107,7 +116,7 @@ class FriendsOfFriendViewController: UIViewController, UITableViewDelegate, UITa
             friendsCell.addButton.addTarget(self, action: #selector(self.addFriendButton), for: .touchUpInside)
         }
         
-         friendsCell.setBackground(colorValue: "white")
+        friendsCell.setBackground(colorValue: "white")
         return friendsCell
     }
     
@@ -115,20 +124,30 @@ class FriendsOfFriendViewController: UIViewController, UITableViewDelegate, UITa
         let index = indexPath.row
         let friendUdidToPass =  self.friendsArrayKey[index]
         var overlayView = UIView()
-        var spinner:loadingAnimation = loadingAnimation(overlayView: overlayView, senderView: self.view)
-        spinner.showOverlayNew(alphaValue: 0.5)
-        let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
-        let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
-        friendDetailsView.friendUdid = friendUdidToPass
-        //trasition from right
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromRight
-        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
-        self.present(friendDetailsView, animated: false, completion: nil)
-        spinner.hideOverlayViewNew()
-
+        
+        
+        if(friendUdidToPass == self.currentUserId){
+            let storybaord: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+            let mainTabBarView  = storybaord.instantiateViewController(withIdentifier: "MainTabView") as! MainTabBarViewController
+            mainTabBarView.selectedIndex = 2
+            //trasition from left
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            view.window!.layer.add(transition, forKey: kCATransitionMoveIn)
+            self.present(mainTabBarView, animated: false, completion: nil)
+            
+        }
+            
+        else {
+            let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+            let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
+            friendDetailsView.friendUdid = friendUdidToPass
+            //trasition from right
+             self.navigationController?.pushViewController(friendDetailsView, animated:true)
+        }
+        
     }
     func addFriendButton(sender: AnyObject){
         let OnesignalIndexPath = NSIndexPath(row: sender.tag, section: 0)
@@ -142,34 +161,22 @@ class FriendsOfFriendViewController: UIViewController, UITableViewDelegate, UITa
         ref.child("Users").child(requestedUserUid).child("Requests").child(currentUserId).setValue(self.currentUserDisplayName)
         let notificationText: String = self.currentUserDisplayName! + " sent you a friend request"
         OneSignal.postNotification(["contents": ["en": notificationText], "include_player_ids": [reqOneSignalId]])
-         let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (timer) in
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (timer) in
             highLightedCell.setBackground(colorValue: "white")
         }
         
     }
     
     
-   
-    @IBAction func Back_btn(_ sender: Any) {
-        
-        let storybaord: UIStoryboard = UIStoryboard(name: "Friends", bundle: nil)
-        let friendDetailsView  = storybaord.instantiateViewController(withIdentifier: "friend_details") as! FriendDetailsViewController
-        friendDetailsView.friendUdid = self.friendUdid
-        //trasition from right
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromLeft
-        self.view.window!.layer.add(transition, forKey: kCATransitionPush)
-        self.present(friendDetailsView, animated: false, completion: nil)
-    }
     
-  
+    
+    
     func getFriends() -> Void {
         
         ref.child("Users").child(self.friendUdid!).child("Friends").observe(FIRDataEventType.value, with: {(snapshot) in
             
             if (!snapshot.exists()){
+                self.spinner?.hideOverlayViewNew()
                 self.friendsArray.removeAll()
                 self.friendsArrayKey.removeAll()
                 self.tableView.reloadData()
@@ -202,7 +209,7 @@ class FriendsOfFriendViewController: UIViewController, UITableViewDelegate, UITa
                                         }
                                         
                                     }
-                                     if(userData["Requests"] != nil){
+                                    if(userData["Requests"] != nil){
                                         var reqData = userData["Requests"] as! NSDictionary
                                         if(reqData[key] != nil){
                                             isExists = true
@@ -219,19 +226,20 @@ class FriendsOfFriendViewController: UIViewController, UITableViewDelegate, UITa
                                     if(key == self.currentUserId){
                                         isExists = true
                                     }
-                                   data.setValue(isExists, forKey: "isExists")
+                                    data.setValue(isExists, forKey: "isExists")
                                     self.friendsArrayKey.append(key as! String)
                                     self.friendsArray[key as! String] = data as AnyObject?
-//                                    self.friendsArray[key]?.set(isExists, forKey: "isExists")
-                                
+                                    //                                    self.friendsArray[key]?.set(isExists, forKey: "isExists")
+                                    
                                     self.tableView.reloadData()
+                                    self.spinner?.hideOverlayViewNew()
                                 }
                             })
                         }
                             
                         else {
                             
-                            
+                            self.spinner?.hideOverlayViewNew()
                         }
                     })
                     

@@ -85,6 +85,9 @@ class FriendPublicPostsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var gabBack: UIButton!
     
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    
     @IBOutlet weak var repliesText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -448,6 +451,26 @@ class FriendPublicPostsTableViewCell: UITableViewCell {
                 self.repliesText.text = ""
             }
         })
+    }
+    @IBAction func deletePost(_ sender: Any) {
+        
+        let errorAletViewImage : UIImage = UIImage(named : "Logo.png")!
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Yes", target:self, selector:Selector("deletePostConformation"))
+        alertView.addButton("No") {
+            
+            print("Second button tapped")
+        }
+        alertView.showSuccess("Are you sure!!", subTitle: "Do you want to delete this post" , circleIconImage:errorAletViewImage)
+
+    }
+    
+     func deletePostConformation(){
+        helperClass.deletePost(postId: self.postId!)
     }
     
 }

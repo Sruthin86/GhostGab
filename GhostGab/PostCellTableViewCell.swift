@@ -74,6 +74,10 @@ class PostCellTableViewCell: UITableViewCell {
     
     var postId: String?
     
+    var postUid: String?
+    
+    var postTypeForSegue: Int?
+    
     var helperClass : HelperFunctions = HelperFunctions()
     
     let uid = UserDefaults.standard.object(forKey: fireBaseUid)
@@ -104,6 +108,8 @@ class PostCellTableViewCell: UITableViewCell {
         self.ReactionsContent.isHidden = true
         self.ReactionsView.isHidden = true
         self.selectionStyle = UITableViewCellSelectionStyle.none
+        
+        
         // Initialization code
     }
     
@@ -493,4 +499,7 @@ class PostCellTableViewCell: UITableViewCell {
             }
         })
     }
+    
+    
+    
 }
